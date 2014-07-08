@@ -8,7 +8,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
-public class ParseApplication extends Application
+public class THCApplication extends Application
 {
     @Override
     public void onCreate()
