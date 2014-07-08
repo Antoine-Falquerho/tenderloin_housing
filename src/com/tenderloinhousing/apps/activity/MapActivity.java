@@ -3,14 +3,12 @@ package com.tenderloinhousing.apps.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
-import com.parse.ui.ParseLoginBuilder;
 import com.tenderloinhousing.apps.R;
 
 public class MapActivity extends Activity {
