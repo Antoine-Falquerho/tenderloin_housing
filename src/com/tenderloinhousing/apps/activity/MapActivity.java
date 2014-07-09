@@ -1,6 +1,5 @@
 package com.tenderloinhousing.apps.activity;
 
-import models.Case;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.model.Case;
 
 public class MapActivity extends Activity {
     

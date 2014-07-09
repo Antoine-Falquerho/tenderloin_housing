@@ -1,14 +1,11 @@
 package com.tenderloinhousing.apps.activity;
-import models.Case;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 import com.tenderloinhousing.apps.R;
