@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
-import com.tenderloinhousing.dao.CaseDAO;
+import com.tenderloinhousing.apps.dao.CaseDAO;
 
 public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,

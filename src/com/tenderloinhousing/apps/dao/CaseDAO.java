@@ -1,4 +1,4 @@
-package com.tenderloinhousing.dao;
+package com.tenderloinhousing.apps.dao;
 
 import java.util.List;
 

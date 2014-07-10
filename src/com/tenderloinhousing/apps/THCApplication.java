@@ -47,10 +47,11 @@ public class THCApplication extends Application
 
 
 //    Add a User and a Case
-    ParseUser user = ParseUser.getCurrentUser();
-
-    Case case1 = new Case("5", "My new Case", "address", "unit", "phoneNumber", "email", "languageSpoken", "description", user);      
-	case1.saveInBackground();
+//    Commented for now since we already have content in the database
+//    ParseUser user = ParseUser.getCurrentUser();
+//
+//    Case case1 = new Case("5", "My new Case", "address", "unit", "phoneNumber", "email", "languageSpoken", "description", user);      
+//	case1.saveInBackground();
     	    
 	
 	
