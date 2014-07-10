@@ -1,10 +1,12 @@
 package com.tenderloinhousing.apps;
 
+import com.tenderloinhousing.apps.model.Case;
 import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseObject;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 
@@ -37,5 +39,20 @@ public class THCApplication extends Application
 	// remove this line (and other related ParseTwitterUtils calls)
 	ParseTwitterUtils.initialize(getString(R.string.twitter_consumer_key),
 		getString(R.string.twitter_consumer_secret));
+	
+	
+//	Parse Initialization
+    ParseObject.registerSubclass(Case.class);
+    Parse.initialize(this, "TVqCaEm8N44ScY0fDLx4eCuRhONTALAPbC7P0289", "CNgx7Wf1CNNle26yTVAi7bNGTCxVAIJd5McCxhRe");
+
+
+//    Add a User and a Case
+    ParseUser user = ParseUser.getCurrentUser();
+
+    Case case1 = new Case("5", "My new Case", "address", "unit", "phoneNumber", "email", "languageSpoken", "description", user);      
+	case1.saveInBackground();
+    	    
+	
+	
     }
 }
