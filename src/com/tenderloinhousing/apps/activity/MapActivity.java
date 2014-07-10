@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.dao.CaseDAO;
 
 public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
@@ -44,6 +45,11 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
+		
+		CaseDAO caseDao = new CaseDAO();
+		caseDao.getAll();
+		
+		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
 		setContentView(R.layout.activity_map);

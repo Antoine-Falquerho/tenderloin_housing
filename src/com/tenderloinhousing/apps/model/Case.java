@@ -41,7 +41,6 @@ public class Case extends ParseObject {
 	private void setUser(ParseUser user) {
 		ParseRelation<ParseUser> relation = this.getRelation("user");
 		relation.add(user);
-//		put("userId", user);
 	}
 
 	private void setDescription(String description) {
@@ -75,5 +74,27 @@ public class Case extends ParseObject {
 
 	public void setBuilding(String buildingId) {
 		put("buildingId", buildingId);
-	}	  
+	}
+	public String getBuildingId(){
+		return getString("buildingId");
+	}
+	public String getName(){
+		return getString("name");
+	}
+	public String getUnit(){
+		return getString("unit");
+	}
+	public String getEmail(){
+		return getString("email");
+	}
+	public String getLanguageSpoken(){
+		return getString("languageSpoken");
+	}	
+	public String getDescription(){
+		return getString("description");
+	}	
+	public String getAddress(){
+		return getString("address");
+	}
+	
 }
