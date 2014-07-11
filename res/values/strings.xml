@@ -1,22 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Tenderloin Housing Clinic</string>
-    <string name="login">Log In</string>
-    <string name="hello_world">Hello world!</string>
-    
-      <!-- Application's app ID and keys here -->
-    <string name="parse_app_id">TVqCaEm8N44ScY0fDLx4eCuRhONTALAPbC7P0289</string>
-    <string name="parse_client_key">CNgx7Wf1CNNle26yTVAi7bNGTCxVAIJd5McCxhRe</string>
-    <string name="facebook_app_id">773404239346435</string>
-    <string name="twitter_consumer_key">xStctYyrNHtcxyqftFBmQifAh</string>
-    <string name="twitter_consumer_secret">bfmZu2aR6i2Wr0aE5FCsY88IlQQzGz5F9HvWZZcgjDmjhiYPkE</string>
-
-     <!-- PARSE Login  -->
-    <string name="profile_logo_content_description">Logo</string>
-    <string name="profile_title_logged_in">Your are logged in as</string>
-    <string name="profile_logout_button_label">Log out</string>
-    <string name="profile_title_logged_out">You must be logged in to view your profile</string>
-    <string name="profile_login_button_label">Log in</string>
-
+	<!-- Application's app ID and keys here -->
+	<string name="parse_app_id">TVqCaEm8N44ScY0fDLx4eCuRhONTALAPbC7P0289</string>
+	<string name="parse_client_key">CNgx7Wf1CNNle26yTVAi7bNGTCxVAIJd5McCxhRe</string>
+	<string name="facebook_app_id">773404239346435</string>
+	<string name="twitter_consumer_key">xStctYyrNHtcxyqftFBmQifAh</string>
+	<string name="twitter_consumer_secret">bfmZu2aR6i2Wr0aE5FCsY88IlQQzGz5F9HvWZZcgjDmjhiYPkE</string>
+	<!-- PARSE Login -->
+	<string name="profile_logo_content_description">Logo</string>
+	<string name="profile_title_logged_in">Your are logged in as</string>
+	<string name="profile_logout_button_label">Log out</string>
+	<string name="profile_title_logged_out">You must be logged in to view your profile</string>
+	<string name="profile_login_button_label">Log in</string>
+	<!-- =========================== Labels =========================== -->
+	<string name="app_name">Tenderloin Housing Clinic</string>
+	<!-- Menu -->
+	<string name="login">Log In</string>
+	<string name="logout">Log Out</string>
+	<string name="report">Report</string>
+	<string name="cases">Cases</string>
+	<string name="newCases">New Cases</string>
+	<string name="myCases">My Cases</string>
+	<string name="search">Search</string>
+	<!-- Submit a Case -->
+	<string name="createReport">Create Report</string>
+	<string name="personalInfo">Personal Information</string>
+	<string name="firstName">First Name</string>
+	<string name="lastName">Last Name</string>
+	<string name="email">Email</string>
+	<string name="address">Address</string>
+	<string name="unitNumber">Unit Number</string>
+	<string name="phone">Phone</string>
+	<string name="language">Language Spoken</string>
+	<string name="isMultiUnit">Is Multi-Unit Petition?</string>
+	<string name="issueCategory">Issue Category</string>
+	<string name="caseDesc">Violation Description</string>
+	<string name="addPhotos">Add Photos</string>
+	<string name="caseStatus">Case Status</string>
+	<string name="caseNumber">Case Number</string>
+	<string name="caseManager">Case Manager</string>
+	<!-- Action Buttons -->
+	<string name="submit">Submit</string>
+	<string name="cancel">Cancel</string>
+	<string name="edit">Edit</string>
+	<string name="share">Share</string>
+	<string name="viewDetails">View Violation Details</string>
+	<string name="title_activity_report">ReportActivity</string>
+	<string name="dummy_button">Dummy Button</string>
+	<string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
