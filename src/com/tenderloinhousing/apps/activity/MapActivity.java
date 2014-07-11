@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -30,6 +29,7 @@ import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.ReportActivity;
 import com.tenderloinhousing.apps.dao.CaseDAO;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.model.Case;
@@ -51,9 +51,6 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
-		
-		CaseDAO caseDao = new CaseDAO();
-		caseDao.getAll();
 		
 		geoCodeCases();
 		
@@ -244,19 +241,27 @@ public class MapActivity extends FragmentActivity implements
     {
 	switch (item.getItemId())
 	{
-	case R.id.miLogin:
-	    handleSignIn();
-	    return true;
-	default:
-	    return super.onOptionsItemSelected(item);
+        	case R.id.miLogin:
+        	    doSignIn();
+        	    return true;
+        	case R.id.miReport:
+        	    doReport();
+        	    return true;
+        	default:
+        	    return super.onOptionsItemSelected(item);        	    
 	}
     }
 
-    private void handleSignIn()
+    private void doReport()
+    {
+	Intent intent = new Intent(this, ReportActivity.class);	
+	startActivity(intent);		
+    }
+
+    private void doSignIn()
     {
 	Intent intent = new Intent(this, LoginActivity.class);	
-	startActivity(intent);
-	
+	startActivity(intent);	
     }
     
     public void geoCodeCases() {
@@ -265,10 +270,10 @@ public class MapActivity extends FragmentActivity implements
             public void done(List<Case> caseList, com.parse.ParseException e) {
                 if (e == null) {
                     for (Case inputCase : caseList) {
-                        Log.d("debug", " Case " + inputCase.getAddress());
+                        Log.d("debug", " Case " + inputCase.getBuilding().getAddress());
                         new GeocoderTask(getApplicationContext(),inputCase).execute(inputCase);
                         inputCase.saveInBackground();
-                        Log.d("debug", " CODED " + inputCase.getAddressLocation());
+                        Log.d("debug", " CODED " + inputCase.getGeoLocation());
                     }
                 } else {
                     Log.d("item", "Error: " + e.getMessage());

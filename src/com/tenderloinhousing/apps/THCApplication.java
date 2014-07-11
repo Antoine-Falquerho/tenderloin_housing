@@ -21,7 +21,7 @@ public class THCApplication extends Application
 		getString(R.string.parse_client_key));
 
 
-	ParseUser.enableAutomaticUser();
+	//ParseUser.enableAutomaticUser();
 	ParseACL defaultACL = new ParseACL();
 	// If you would like all objects to be private by default, remove this line.
 	defaultACL.setPublicReadAccess(true);

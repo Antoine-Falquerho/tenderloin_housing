@@ -5,111 +5,136 @@ import android.util.Log;
 import com.parse.ParseClassName;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
-import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 @ParseClassName("Case")
-public class Case extends ParseObject {
-	//	@property (retain) NSString *caseId;
-	//	@property (retain) NSString *buildingId;
-	//	@property (retain) NSString *name;
-	//	@property (retain) NSString *address;
-	//	@property (retain) NSString *unit;
-	//	@property (retain) NSString *phoneNumber;
-	//	@property (retain) NSString *email;
-	//	@property (retain) NSString *languageSpoken;
-	//	@property (retain) NSString *description;
-	//	@property (retain) NSString *userId;
-	//	@property status status;
+public class Case extends ParseObject
+{
+    // Ensure that your subclass has a public default constructor
+    public Case()
+    {
+	super();
+    }
 
-	// Ensure that your subclass has a public default constructor
-	public Case() {
-		super();
-	}
+    // Add a constructor that contains core properties
+    // public Case(String buildingId, String name, String address, String unit, String phoneNumber, String email, String languageSpoken, String description, ParseUser user) {
+    // super();
+    // setBuilding(buildingId);
+    // setName(name);
+    // setAddress(address);
+    // setUnit(unit);
+    // setPhoneNumber(phoneNumber);
+    // setEmail(email);
+    // setLanguageSpoken(languageSpoken);
+    // setDescription(description);
+    // setUser(user);
+    // }
 
-	// Add a constructor that contains core properties
-	public Case(String buildingId, String name, String address, String unit, String phoneNumber, String email, String languageSpoken, String description, ParseUser user) {
-		super();
-		setBuilding(buildingId);
-		setName(name);
-		setAddress(address);
-		setUnit(unit);
-		setPhoneNumber(phoneNumber);
-		setEmail(email);
-		setLanguageSpoken(languageSpoken);
-		setDescription(description);
-		setUser(user);	    
-	}
+    // public void setUser(ParseUser user) {
+    // ParseRelation<ParseUser> relation = this.getRelation("user");
+    // relation.add(user);
+    // }
 
-	private void setUser(ParseUser user) {
-		ParseRelation<ParseUser> relation = this.getRelation("user");
-		relation.add(user);
-	}
+    public String getCaseId()
+    {
+	return getString("objectId");
+    }    
 
-	private void setDescription(String description) {
-		put("description", description);
-	}
+    public String getDescription()
+    {
+	return getString("description");
+    }
 
-	private void setLanguageSpoken(String languageSpoken) {
-		put("languageSpoken", languageSpoken);
-	}
+    public void setDescription(String description)
+    {
+	put("description", description);
+    }
 
-	private void setEmail(String email) {
-		put("email", email);
-	}
+    public String getUnit()
+    {
+	return getString("unit");
+    }
 
-	private void setPhoneNumber(String phoneNumber) {
-		put("phoneNumber", phoneNumber);
+    public void setUnit(String unit)
+    {
+	put("unit", unit);
+    }
 
-	}
+    public void setGeoLocation(Double Latitude, Double Longitude)
+    {
+	ParseGeoPoint point = new ParseGeoPoint(Latitude, Longitude);
+	Log.d("geocode", "insid" + Longitude);
+	put("geoLocation", point);
+	// saveInBackground();
+    }
 
-	private void setUnit(String unit) {
-		put("unit", unit);
-	}
+    public ParseGeoPoint getGeoLocation()
+    {
+	ParseGeoPoint geoLocation = (ParseGeoPoint) get("geoLocation");
+	return geoLocation;
+    }
+    
+    public String getIssueType()
+    {
+	return getString("issueType");
+    }
 
-	private void setAddress(String address) {
-		put("address", address);
-	}
+    public void setIssueType(String issueType)
+    {
+	put("issueType", issueType);
+    }
 
-	private void setName(String name) {
-		put("name", name);
-	}
-	
-	public void setAddressLocation(Double Latitude, Double Longitude){
-		ParseGeoPoint point = new ParseGeoPoint(Latitude, Longitude);
-		Log.d("geocode", "insid"+Longitude);
-		put("addressLocation",point);
-		saveInBackground();
-	}
-	
-	public ParseGeoPoint getAddressLocation(){
-		ParseGeoPoint addressLocation = (ParseGeoPoint) get("addressLocation");
-		return addressLocation;
-	}
+    public Boolean getIsMultiUnitPetition()
+    {
+	return getBoolean("isMultiUnitPetition");
+    }
 
-	public void setBuilding(String buildingId) {
-		put("buildingId", buildingId);
-	}
-	public String getBuildingId(){
-		return getString("buildingId");
-	}
-	public String getName(){
-		return getString("name");
-	}
-	public String getUnit(){
-		return getString("unit");
-	}
-	public String getEmail(){
-		return getString("email");
-	}
-	public String getLanguageSpoken(){
-		return getString("languageSpoken");
-	}	
-	public String getDescription(){
-		return getString("description");
-	}	
-	public String getAddress(){
-		return getString("address");
-	}
-	
+    public void setIsMultiUnitPetition(Boolean isMultiUnitPetition)
+    {
+	put("isMultiUnitPetition", isMultiUnitPetition);
+    }
+
+    public String getCaseStatus()
+    {
+	return getString("caseStatus");
+    }
+
+    public void setCaseStatus(String caseStatus)
+    {
+	put("caseStatus", caseStatus);
+    }
+
+    // One-To-One
+    public void setBuilding(Building building)
+    {
+	put("building", building);
+    }
+
+    public Building getBuilding()
+    {
+	return (Building) getParseObject("building");
+    }
+
+    // One-To-One
+    public ParseUser getTenant()
+    {
+	return getParseUser("tenant");
+    }
+    
+    public void setTenant(ParseUser tenant)
+    {
+	put("tenant", tenant);
+    }
+
+    // One-To-One
+    public ParseUser getStaff()
+    {
+	return getParseUser("staff");
+    }
+
+    public void setStaff(ParseUser staff)
+    {
+	put("staff", staff);
+    }
+
 }

@@ -30,14 +30,14 @@ public class GeocoderTask extends AsyncTask<Object, Void, Address>{
 
         try {
             // Getting a maximum of 3 Address that matches the input text
-            addresses = geocoder.getFromLocationName(processCase.getAddress(), 3);
+            addresses = geocoder.getFromLocationName(processCase.getBuilding().getAddress(), 3);
         } catch (IOException e) {
             e.printStackTrace();
         }
         
         Address address = (Address) addresses.get(0);
         //inputCase.setAddressLocation(address.getLatitude(), address.getLongitude());
-        Log.d("geocode", "Geocoded: " +processCase.getAddress() + "to"+ address.getLatitude()+","+address.getLongitude());
+        Log.d("geocode", "Geocoded: " +processCase.getBuilding().getAddress() + "to"+ address.getLatitude()+","+address.getLongitude());
         return address;
     }
 	
@@ -45,7 +45,7 @@ public class GeocoderTask extends AsyncTask<Object, Void, Address>{
 	protected void onPostExecute(Address result) {
 		// TODO Auto-generated method stub
 		Log.d("geocode", ""+result);
-		processCase.setAddressLocation(result.getLatitude(), result.getLongitude());
+		processCase.setGeoLocation(result.getLatitude(), result.getLongitude());
 		try{
 		processCase.save();
 		} catch (ParseException e) {
