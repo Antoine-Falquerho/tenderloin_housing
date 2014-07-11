@@ -1,9 +1,12 @@
 package com.tenderloinhousing.apps.activity;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -23,10 +26,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.dao.CaseDAO;
+import com.tenderloinhousing.apps.helper.GeocoderTask;
+import com.tenderloinhousing.apps.model.Case;
 
 public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
@@ -49,6 +55,9 @@ public class MapActivity extends FragmentActivity implements
 		CaseDAO caseDao = new CaseDAO();
 		caseDao.getAll();
 		
+		geoCodeCases();
+		
+		
 		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
@@ -68,6 +77,7 @@ public class MapActivity extends FragmentActivity implements
 		} else {
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
+		Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_LONG).show();
 
 	}
 
@@ -248,56 +258,23 @@ public class MapActivity extends FragmentActivity implements
 	startActivity(intent);
 	
     }
-
+    
+    public void geoCodeCases() {
+        CaseDAO.getAll(Case.class, new FindCallback<Case>() {
+            @Override
+            public void done(List<Case> caseList, com.parse.ParseException e) {
+                if (e == null) {
+                    for (Case inputCase : caseList) {
+                        Log.d("debug", " Case " + inputCase.getAddress());
+                        new GeocoderTask(getApplicationContext(),inputCase).execute(inputCase);
+                        inputCase.saveInBackground();
+                        Log.d("debug", " CODED " + inputCase.getAddressLocation());
+                    }
+                } else {
+                    Log.d("item", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
+ 
 }
-
-
-//
-//@Override
-//protected void onActivityResult(int requestCode, int resultCode, Intent data)
-//{		
-//if (resultCode == RESULT_OK)
-//{
-//    user = ParseUser.getCurrentUser();
-//    Log.d("INFO", "User signing in is " + user.getUsername() );
-//}
-//else if (resultCode == RESULT_CANCELED)
-//{
-//    
-//}
-//}
-
-
-//ParseUser user = new ParseUser();
-// // Set core properties
-// user.setUsername("joestevens");
-// user.setPassword("secret123");
-// user.setEmail("email@example.com");
-// // Set custom properties
-// user.put("phone", "650-253-0000");
-// // Invoke signUpInBackground
-// user.signUpInBackground(new SignUpCallback() {
-//	  public void done(ParseException e) {
-//		    if (e == null) {
-//		      // Hooray! Let them use the app now.
-//		    } else {
-//		      // Sign up didn't succeed. Look at the ParseException
-//		      // to figure out what went wrong
-//		    }
-//		  }
-//		});
-
-//ParseQuery<ParseUser> users = ParseUser.getQuery();	    
-//users.findInBackground(new FindCallback<ParseUser>() {
-//  public void done(List<ParseUser> objects, ParseException e) {
-//    if (e == null) {
-//    	Log.d("debug", objects.get(0).toString());
-//    	Log.d("debug", "-------");
-//    	Case case1 = new Case("5", "Name", "address", "unit", "phoneNumber", "email", "languageSpoken", "description", objects.get(0));
-//	    case1.saveInBackground();
-//    } else {
-//        // Something went wrong.
-//    }
-//  }
-//});
-

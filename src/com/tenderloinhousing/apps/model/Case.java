@@ -1,6 +1,9 @@
 package com.tenderloinhousing.apps.model;
 
+import android.util.Log;
+
 import com.parse.ParseClassName;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
@@ -70,6 +73,18 @@ public class Case extends ParseObject {
 
 	private void setName(String name) {
 		put("name", name);
+	}
+	
+	public void setAddressLocation(Double Latitude, Double Longitude){
+		ParseGeoPoint point = new ParseGeoPoint(Latitude, Longitude);
+		Log.d("geocode", "insid"+Longitude);
+		put("addressLocation",point);
+		saveInBackground();
+	}
+	
+	public ParseGeoPoint getAddressLocation(){
+		ParseGeoPoint addressLocation = (ParseGeoPoint) get("addressLocation");
+		return addressLocation;
 	}
 
 	public void setBuilding(String buildingId) {
