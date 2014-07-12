@@ -13,7 +13,7 @@ public class Building extends ParseObject
 
     public String getBuildingId()
     {
-	return getString("objectId");
+	return getObjectId();
     }
     
     

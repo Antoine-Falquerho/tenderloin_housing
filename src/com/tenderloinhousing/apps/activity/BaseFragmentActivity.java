@@ -2,7 +2,7 @@ package com.tenderloinhousing.apps.activity;
 
 import android.support.v4.app.FragmentActivity;
 
-import com.tenderloinhousing.apps.helper.IConstants;
+import com.tenderloinhousing.apps.constant.IConstants;
 
 public class BaseFragmentActivity extends FragmentActivity implements IConstants
 {

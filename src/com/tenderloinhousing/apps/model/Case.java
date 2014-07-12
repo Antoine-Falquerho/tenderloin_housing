@@ -1,8 +1,11 @@
 package com.tenderloinhousing.apps.model;
 
+import java.util.ArrayList;
+
 import android.util.Log;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -16,28 +19,9 @@ public class Case extends ParseObject
 	super();
     }
 
-    // Add a constructor that contains core properties
-    // public Case(String buildingId, String name, String address, String unit, String phoneNumber, String email, String languageSpoken, String description, ParseUser user) {
-    // super();
-    // setBuilding(buildingId);
-    // setName(name);
-    // setAddress(address);
-    // setUnit(unit);
-    // setPhoneNumber(phoneNumber);
-    // setEmail(email);
-    // setLanguageSpoken(languageSpoken);
-    // setDescription(description);
-    // setUser(user);
-    // }
-
-    // public void setUser(ParseUser user) {
-    // ParseRelation<ParseUser> relation = this.getRelation("user");
-    // relation.add(user);
-    // }
-
     public String getCaseId()
     {
-	return getString("objectId");
+	return getObjectId();
     }    
 
     public String getDescription()
@@ -136,5 +120,18 @@ public class Case extends ParseObject
     {
 	put("staff", staff);
     }
+    
+    // One-To-Mange
+    public ArrayList<ParseFile> getPictures()
+    {
+        return (ArrayList<ParseFile>) get("pictures");
+    }
+
+    public void setPictures(ArrayList<ParseFile> pictures)
+    {
+	put("pictures", pictures);
+    }
+    
+    
 
 }

@@ -25,7 +25,7 @@ public class User extends ParseUser
 
     public String getUserId()
     {
-	return getString("objectId");
+	return getObjectId();
     }
 
     public String getPhone()
