@@ -3,12 +3,10 @@ package com.tenderloinhousing.apps.activity;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,7 +16,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,13 +29,14 @@ import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.ReportActivity;
 import com.tenderloinhousing.apps.dao.CaseDAO;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
+import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Case;
 
 public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
 		GooglePlayServicesClient.OnConnectionFailedListener {
 
-    ParseUser user;
+    	ParseUser user;
 	private SupportMapFragment mapFragment;
 	private GoogleMap map;
 	private LocationClient mLocationClient;
@@ -85,10 +83,9 @@ public class MapActivity extends FragmentActivity implements
 	protected void onStart() {
 		super.onStart();
 		// Connect the client.
-		if (isGooglePlayServicesAvailable()) {
+		if (GoogleServiceUtil.isGooglePlayServicesAvailable(this, CONNECTION_FAILURE_RESOLUTION_REQUEST)) {
 			mLocationClient.connect();
 		}
-
 	}
 
 	/*
@@ -122,30 +119,7 @@ public class MapActivity extends FragmentActivity implements
 		}
 	}
 
-	private boolean isGooglePlayServicesAvailable() {
-		// Check that Google Play services is available
-		int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-		// If Google Play services is available
-		if (ConnectionResult.SUCCESS == resultCode) {
-			// In debug mode, log the status
-			Log.d("Location Updates", "Google Play services is available.");
-			return true;
-		} else {
-			// Get the error dialog from Google Play services
-			Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-					CONNECTION_FAILURE_RESOLUTION_REQUEST);
-
-			// If Google Play services can provide an error dialog
-			if (errorDialog != null) {
-				// Create a new DialogFragment for the error dialog
-				ErrorDialogFragment errorFragment = new ErrorDialogFragment();
-				errorFragment.setDialog(errorDialog);
-				errorFragment.show(getSupportFragmentManager(), "Location Updates");
-			}
-
-			return false;
-		}
-	}
+	
 
 	/*
 	 * Called by Location Services when the request to connect the client
@@ -205,29 +179,7 @@ public class MapActivity extends FragmentActivity implements
 		}
 	}
 
-	// Define a DialogFragment that displays the error dialog
-	public static class ErrorDialogFragment extends DialogFragment {
-
-		// Global field to contain the error dialog
-		private Dialog mDialog;
-
-		// Default constructor. Sets the dialog field to null
-		public ErrorDialogFragment() {
-			super();
-			mDialog = null;
-		}
-
-		// Set the dialog to display
-		public void setDialog(Dialog dialog) {
-			mDialog = dialog;
-		}
-
-		// Return a Dialog to the DialogFragment.
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			return mDialog;
-		}
-	}
+	
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu)
