@@ -1,7 +1,6 @@
 package com.tenderloinhousing.apps;
 
 import android.app.Application;
-import android.graphics.drawable.Drawable;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -9,10 +8,8 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
-import com.tenderloinhousing.apps.dao.CaseDAO;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
-import com.tenderloinhousing.apps.model.Picture;
 import com.tenderloinhousing.apps.model.User;
 
 public class THCApplication extends Application
@@ -23,7 +20,6 @@ public class THCApplication extends Application
 	super.onCreate();
 
 	ParseObject.registerSubclass(Building.class);
-	ParseObject.registerSubclass(Picture.class);
 	ParseObject.registerSubclass(User.class);
 	ParseObject.registerSubclass(Case.class);
 
@@ -39,9 +35,12 @@ public class THCApplication extends Application
 
 	Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
-	//CaseDAO.getCaseById();
-	Drawable img = getResources().getDrawable(R.drawable.background);
-	CaseDAO.createCase(img);
+	
+	
+	
+//	CaseDAO.getCaseById();
+//	Drawable img = getResources().getDrawable(R.drawable.background);
+//	CaseDAO.createCase(img);
 	
     }
 }
