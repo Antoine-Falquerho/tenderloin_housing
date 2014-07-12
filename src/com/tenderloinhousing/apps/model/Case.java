@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
@@ -132,6 +133,13 @@ public class Case extends ParseObject
 	put("pictures", pictures);
     }
     
+	public LatLng getlatLng(){
+		 ParseGeoPoint point = getGeoLocation();
+		 if (point !=null){
+			 return new LatLng(point.getLatitude(), point.getLongitude());
+		 }else{
+			 return null;
+		 }
+     }
     
-
 }
