@@ -1,6 +1,7 @@
 package com.tenderloinhousing.apps;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -42,10 +43,9 @@ public class THCApplication extends Application
 
 	BuildingList buildingList = BuildingList.getInstance();
 
-//	if (buildingList != null)
-//	{
-//	    String id = buildingList.getBuildingIdByName("Vincent Hotel");
-//	    Log.d("DEBUG", id);
-//	}
+	
+	//    String id = buildingList.getBuildingIdByName("Vincent Hotel");
+	//    Log.d("DEBUG", id);
+	
     }
 }

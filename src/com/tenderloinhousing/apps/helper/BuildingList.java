@@ -10,17 +10,17 @@ import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.model.Building;
 
-public final class BuildingList extends ArrayList<Building> implements IConstants
+public final class BuildingList<T> extends ArrayList<T> implements IConstants
 {
-    private static BuildingList instance;
+    private static BuildingList<Building> instance = new BuildingList<Building>();
 
     private BuildingList()
     {
     }
 
-    public static BuildingList getInstance()
+    public static BuildingList<Building> getInstance()
     {
-	if (instance == null)
+	if (instance.isEmpty())
 	{
 	    ParseDAO.getAll(Building.class, new FindCallback<Building>()
 	    {
@@ -46,11 +46,15 @@ public final class BuildingList extends ArrayList<Building> implements IConstant
     public static String getBuildingIdByAddress(String address)
     {
 	String buildingId = null;
-
-	for (Building building : getInstance())
+	
+	List<Building> buildingList = getInstance();
+	if (!buildingList.isEmpty())
 	{
-	    if (building.getAddress().equals(address)) // TODO Will visit this later. Should do a "like" kind of matching
-		buildingId = building.getBuildingId();
+	    for (Building building : buildingList)
+	    {
+		if (building.getAddress().equals(address)) // TODO Will visit this later. Should do a "like" kind of matching
+		    buildingId = building.getBuildingId();
+	    }
 	}
 
 	return buildingId;
@@ -59,11 +63,15 @@ public final class BuildingList extends ArrayList<Building> implements IConstant
     public static String getBuildingIdByName(String name)
     {
 	String buildingId = null;
-
-	for (Building building : getInstance())
+	
+	List<Building> buildingList = getInstance();
+	if (!buildingList.isEmpty())
 	{
-	    if (building.getName().equals(name))
-		buildingId = building.getBuildingId();
+	    for (Building building : buildingList)
+	    {
+		if (building.getName().equals(name))
+		    buildingId = building.getBuildingId();
+	    }
 	}
 
 	return buildingId;

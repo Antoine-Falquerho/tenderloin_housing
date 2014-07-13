@@ -70,10 +70,6 @@ public class CaseFragment extends Fragment implements IConstants
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
-	// itemAdapter = new TweetArrayAdapter(getActivity(), tweetList);
-
-	// boolean isNetworkAvaialble = getArguments().getBoolean(NETWORK_ON_FLAG);
-	// populateTimeline();
     }
 
     @Override
