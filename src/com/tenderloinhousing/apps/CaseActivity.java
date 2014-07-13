@@ -58,6 +58,8 @@ public class CaseActivity extends BaseFragmentActivity
     {    	
     	String case_id = getIntent().getStringExtra("case_id");
     	
+//    	String case_id = "MbHt8dslg3";
+    	
     	// Define the class we would like to query
     	ParseQuery<Case> query = ParseQuery.getQuery(Case.class);
     	// Define our query conditions
