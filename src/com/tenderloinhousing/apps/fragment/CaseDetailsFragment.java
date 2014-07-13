@@ -1,6 +1,12 @@
 package com.tenderloinhousing.apps.fragment;
 
+import java.util.ArrayList;
+
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.model.Case;
+import com.tenderloinhousing.apps.model.User;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,11 +17,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class CaseDetailsFragment extends Fragment {
+	private static Case myCase;
+	private ParseUser user;
+	private TextView tvFullName;
+	private TextView tvLanguageSpoken;
+	private TextView tvEmail;
+	private TextView tvPhone;
+	private TextView tvDesc;
 
-	@Override
+	
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.d("DEBUG", "onCreateView View !!!!!");
 		super.onCreate(savedInstanceState);
 
 	}
@@ -24,18 +36,27 @@ public class CaseDetailsFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_case_details, container, false);
-		TextView tvFullName = (TextView)container.findViewById(R.id.tvFullName);
-		TextView tvLanguageSpoken = (TextView)container.findViewById(R.id.tvLanguageSpoken);
-		TextView tvEmail = (TextView)container.findViewById(R.id.tvEmail_);
-		TextView tvPhone = (TextView)container.findViewById(R.id.tvPhone);
-		TextView tvDesc = (TextView)container.findViewById(R.id.tvViolDesc);
-		 Log.d("DEBUG", "CaseDetailsFragment#onCreateView View");
+		user = myCase.getTenant();
+		tvFullName = (TextView)view.findViewById(R.id.tvFullName);		
+//		tvFullName.setText(user.getUsername());
+		tvLanguageSpoken = (TextView)view.findViewById(R.id.tvLanguageSpoken);
+//		tvLanguageSpoken.setText(user.getLanguage());
+		tvEmail = (TextView)view.findViewById(R.id.tvEmail_);
+//		tvEmail.setText(user.getEmail());
+		tvPhone = (TextView)view.findViewById(R.id.tvPhone);
+//		tvPhone.setText(user.getPhone());
+		tvDesc = (TextView)view.findViewById(R.id.tvViolDesc);
+		tvDesc.setText(myCase.getDescription());
+		ArrayList<ParseFile> pictures = myCase.getPictures();
+		
+		
 		return view;
 	}
 
-	public static CaseDetailsFragment newInstance(Bundle args) {
+	public static CaseDetailsFragment newInstance(Bundle args, Case myCaseArg) {		
 		CaseDetailsFragment fragment = new CaseDetailsFragment();   	
 	   	fragment.setArguments(args);
+	   	myCase = myCaseArg;	   	
 
 	   	return fragment;
 	}

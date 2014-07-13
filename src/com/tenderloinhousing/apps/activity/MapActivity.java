@@ -9,6 +9,7 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.dao.ParseDAO;
+import com.tenderloinhousing.apps.fragment.CaseDetailsFragment;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
@@ -279,8 +281,12 @@ public class MapActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
-		// TODO Auto-generated method stub
-		Toast.makeText(this, "Open Detail view of case id" + caseMarkerMap.get(marker), Toast.LENGTH_LONG).show();
+		Intent intent = new Intent(this, CaseActivity.class);
+		intent.putExtra("case_id", caseMarkerMap.get(marker));
+		intent.putExtra("method", "10");
+
+		startActivity(intent);	
+		
 		return true;
 	}
  
