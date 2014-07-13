@@ -68,7 +68,7 @@
 			android:name="com.google.android.gms.version"
 			android:value="@integer/google_play_services_version" />
 		<activity
-			android:name="com.tenderloinhousing.apps.ReportActivity"
+			android:name="com.tenderloinhousing.apps.CaseActivity"
 			android:configChanges="orientation|keyboardHidden|screenSize"
 			android:label="@string/title_activity_report"
 			android:theme="@style/FullscreenTheme" >

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="issueType_array">
+		<item></item>
+		<item>mold</item>
+		<item>pests (mice)</item>
+		<item>pests (roaches)</item>
+		<item>pests (bed bugs)</item>
+		<item>no working heater</item>
+		<item>non-functioning elevator</item>
+		<item>no hot water</item>
+		<item>broken windows/doors/walls</item>
+		<item>obstruction of egress</item>
+		<item>general maintenance</item>
+		<item>security</item>
+		<item>fire detector</item>
+		<item>carbon monoxide detector</item>
+		<item>other</item>
+	</string-array>
+</resources>

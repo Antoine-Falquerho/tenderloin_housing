@@ -1,0 +1,211 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context="${packageName}.${activityClass}" >
+	
+	
+	<!--  <TextView
+		android:id="@+id/fullscreen_content"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:keepScreenOn="true"
+		android:text="something"
+		android:textColor="#33b5e5"
+		android:textSize="16sp"
+		android:textStyle="bold" />
+		-->
+	
+	<!-- Issue Type -->
+	<TextView
+        android:id="@+id/tvIssueType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/issueType"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<Spinner
+		android:id="@+id/spIssueType"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/tvIssueType"
+        android:layout_toRightOf="@+id/tvIssueType"
+		android:entries="@array/issueType_array"
+		android:gravity="right"
+		android:prompt="@string/issueType"
+		android:textSize="12sp" />
+	
+	<!-- Description -->
+	<TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvIssueType"
+        android:text="@string/caseDesc"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<EditText
+		android:id="@+id/etDescription"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/tvIssueType"
+        android:layout_toRightOf="@+id/tvDescription"
+		android:ems="10"
+		android:inputType="textMultiLine" >
+	<requestFocus />
+	
+	<!-- Building -->
+	<TextView
+        android:id="@+id/tvBuilding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvDescription"
+        android:text="@string/building"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<Spinner
+			android:id="@+id/spBuilding"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBottom="@+id/tvBuilding"
+	        android:layout_below="@+id/etDescription"
+	        android:layout_toRightOf="@+id/tvBuilding"
+			android:entries="@array/building_array"
+			android:gravity="right"
+			android:prompt="@string/building"
+			android:textSize="12sp" />
+	
+	<!-- Unit -->
+	<TextView
+        android:id="@+id/tvUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvBuilding"
+        android:text="@string/unitNumber"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<EditText
+			android:id="@+id/etUnit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:ems="10"
+			android:inputType="number" />
+	
+	<!-- Full Name -->
+	<TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSearchOptions"
+        android:text="@string/fullName"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<EditText
+			android:id="@+id/etName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignBottom="@+id/tvColor"
+	        android:layout_below="@+id/spSize"
+	        android:layout_toRightOf="@+id/tvColor"
+			android:ems="10"
+			android:inputType="textPersonName" />
+	
+	<!-- Phone -->
+	<TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSearchOptions"
+        android:text="@string/phone"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<EditText
+			android:id="@+id/etPhone"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBottom="@+id/tvColor"
+	        android:layout_below="@+id/spSize"
+	        android:layout_toRightOf="@+id/tvColor"
+			android:layout_weight="1"
+			android:ems="10"
+			android:inputType="phone" />
+	</EditText>
+	
+	<!-- Email -->
+	<TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSearchOptions"
+        android:layout_marginTop="20dp"
+        android:text="@string/email"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+	<EditText
+		android:id="@+id/etEmail"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/tvColor"
+        android:layout_below="@+id/spSize"
+        android:layout_toRightOf="@+id/tvColor"
+		android:layout_weight="1"
+		android:ems="10"
+		android:inputType="textEmailAddress" />
+	
+	<!-- Photo -->
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvSearchOptions"
+        android:layout_marginTop="20dp"
+        android:text="@string/phone"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+	<LinearLayout
+		android:id="@+id/llButtonContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@+id/btnSave"
+        android:layout_alignBaseline="@+id/btnSave"
+        android:layout_alignBottom="@+id/btnSave"
+        android:gravity="center_horizontal|right"
+		android:orientation="horizontal" >
+		<Button
+			android:id="@+id/btnSubmit"
+			android:layout_width="60dp"
+			android:layout_height="30dp"
+			android:layout_marginBottom="130dp"
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="16dp"
+			android:background="@drawable/button_shape"
+			android:onClick="onSubmit"
+			android:shadowColor="#33b5fa"
+			android:shadowDx="0"
+			android:shadowDy="0"
+			android:shadowRadius="5"
+			android:text="@string/submit"
+			android:textAlignment="center"
+			android:textColor="#FFFFFF"
+			android:textSize="14sp" />
+		<Button
+			android:id="@+id/btnCancel"
+			android:layout_width="60dp"
+			android:layout_height="30dp"
+			android:background="@drawable/button_shape"
+			android:onClick="onCancel"
+			android:shadowColor="#33b5fa"
+			android:shadowDx="0"
+			android:shadowDy="0"
+			android:shadowRadius="5"
+			android:text="@string/cancel"
+			android:textAlignment="center"
+			android:textColor="#FFFFFF"
+			android:textSize="14sp" />
+	</LinearLayout>
+</RelativeLayout>

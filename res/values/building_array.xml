@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="building_array">
+		<item></item>
+		<item>Allstar Hotel</item>
+		<item>Boyd Hotel</item>
+		<item>Caldrake Hotel</item>
+		<item>Edgeworth Hotel</item>
+		<item>Elk Hotel</item>
+		<item>Galvin Apartments</item>
+		<item>Graystone Hotel</item>
+		<item>Hartland Hotel</item>
+		<item>Hotel Union</item>
+		<item>Jefferson Hotel</item>
+		<item>Mayfair Hotel</item>
+		<item>Mission Hotel</item>
+		<item>Pierre Hotel</item>
+		<item>Raman Hotel</item>
+		<item>Royan Hotel</item>
+		<item>Seneca Hotel</item>
+		<item>Vincent Hotel</item>
+	</string-array>
+</resources>

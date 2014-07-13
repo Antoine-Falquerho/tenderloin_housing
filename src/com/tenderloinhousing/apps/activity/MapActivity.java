@@ -26,7 +26,7 @@ import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
-import com.tenderloinhousing.apps.ReportActivity;
+import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.dao.CaseDAO;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
@@ -206,7 +206,7 @@ public class MapActivity extends FragmentActivity implements
 
     private void doReport()
     {
-	Intent intent = new Intent(this, ReportActivity.class);	
+	Intent intent = new Intent(this, CaseActivity.class);	
 	startActivity(intent);		
     }
 

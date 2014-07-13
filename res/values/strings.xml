@@ -19,6 +19,7 @@
 	
 	<string name="app_name">Tenderloin Housing Clinic</string>
 	<string name="title_activity_report">Report Violation</string>
+
 	
 	<!-- Menu -->
 	<string name="login">Log In</string>
@@ -32,8 +33,9 @@
 		<!-- Submit a Case -->
 	<string name="createReport">Create Report</string>
 	<string name="personalInfo">Personal Information</string>
-	<string name="firstName">First Name</string>
-	<string name="lastName">Last Name</string>
+	<string name="issueType">Issue Type</string>
+    <string name="building">Building</string>
+	<string name="fullName">Full Name</string>
 	<string name="email">Email</string>
 	<string name="address">Address</string>
 	<string name="unitNumber">Unit Number</string>
