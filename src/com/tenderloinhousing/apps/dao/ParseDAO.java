@@ -18,15 +18,15 @@ import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
-public class CaseDAO implements IConstants
+public class ParseDAO implements IConstants
 {
-    public static <T extends ParseObject> void getAll(Class<T> classObj, FindCallback<T> callback)
-    {
-	ParseQuery<T> query = ParseQuery.getQuery(classObj);
-	query.include("tenant");
-	// query.include("pictures");
-	query.include("building");
-	query.findInBackground(callback);
+    public static <T extends ParseObject> void getAll(Class<T> classObj, FindCallback<T> callback){
+		ParseQuery<T> query = ParseQuery.getQuery(classObj);
+		if(classObj.getName().equals(Case.class.getName())){    	    
+		   	query.include("tenant");
+		   	query.include("building");
+		}
+		query.findInBackground(callback);
     }
     
     public static void getCaseById(final String caseId, GetCallback<Case> callBack)

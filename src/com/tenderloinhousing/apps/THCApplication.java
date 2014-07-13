@@ -8,7 +8,6 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
-import com.tenderloinhousing.apps.dao.CaseDAO;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
@@ -35,13 +34,6 @@ public class THCApplication extends Application
 	ParseACL.setDefaultACL(defaultACL, true);
 
 	Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
-
-	
-	
-	
-//	CaseDAO.getCaseById("MbHt8dslg3", null);
-//	Drawable img = getResources().getDrawable(R.drawable.background);
-//	CaseDAO.createCase(img);
 	
     }
 }

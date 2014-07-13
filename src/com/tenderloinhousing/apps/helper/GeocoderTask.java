@@ -9,35 +9,37 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 
 // An AsyncTask class for accessing the GeoCoding Web Service
 public class GeocoderTask extends AsyncTask<Object, Void, Address>{
 	
 	private Context mContext;
-	private Case processCase;
+	private Building building;
 	
-	public GeocoderTask(Context context, Case inputCase) {
+	public GeocoderTask(Context context, Building inputBuilding) {
 	        mContext = context;
-	        processCase= processCase;
+	        building= inputBuilding;
 	    } 
 	@Override
     protected Address doInBackground(Object... inputCases) {
         // Creating an instance of Geocoder class
         Geocoder geocoder = new Geocoder(mContext);
         List<Address> addresses = null;
-        processCase = (Case) inputCases[0];
+        building = (Building) inputCases[0];
 
         try {
             // Getting a maximum of 3 Address that matches the input text
-            addresses = geocoder.getFromLocationName(processCase.getBuilding().getAddress(), 3);
+            addresses = geocoder.getFromLocationName(building.getAddress(), 3);
         } catch (IOException e) {
             e.printStackTrace();
         }
         
         Address address = (Address) addresses.get(0);
         //inputCase.setAddressLocation(address.getLatitude(), address.getLongitude());
-        Log.d("geocode", "Geocoded: " +processCase.getBuilding().getAddress() + "to"+ address.getLatitude()+","+address.getLongitude());
+        Log.d("geocode", "Geocoded: " +building.getAddress() + "to"+ address.getLatitude()+","+address.getLongitude());
         return address;
     }
 	
@@ -45,9 +47,10 @@ public class GeocoderTask extends AsyncTask<Object, Void, Address>{
 	protected void onPostExecute(Address result) {
 		// TODO Auto-generated method stub
 		Log.d("geocode", ""+result);
-		processCase.setGeoLocation(result.getLatitude(), result.getLongitude());
+		ParseGeoPoint point = new ParseGeoPoint(result.getLatitude(), result.getLongitude());
+		building.setGeoLocation(point);
 		try{
-		processCase.save();
+			building.save();
 		} catch (ParseException e) {
             e.printStackTrace();
         }
