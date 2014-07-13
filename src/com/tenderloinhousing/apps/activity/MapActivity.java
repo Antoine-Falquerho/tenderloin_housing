@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps.activity;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -20,8 +21,11 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
@@ -34,12 +38,15 @@ import com.tenderloinhousing.apps.model.Case;
 
 public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
-		GooglePlayServicesClient.OnConnectionFailedListener {
+		GooglePlayServicesClient.OnConnectionFailedListener,
+		OnMarkerClickListener{
 
     	ParseUser user;
 	private SupportMapFragment mapFragment;
 	private GoogleMap map;
 	private LocationClient mLocationClient;
+	private HashMap<Marker, String> caseMarkerMap;
+
 	/*
 	 * Define a request code to send to Google Play services This code is
 	 * returned in Activity.onActivityResult
@@ -49,8 +56,10 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
-		
+		caseMarkerMap = new HashMap<Marker, String>();
+
 		geoCodeCases();
+		
 		
 		
 		
@@ -73,7 +82,7 @@ public class MapActivity extends FragmentActivity implements
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
 		Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_LONG).show();
-
+		map.setOnMarkerClickListener(this);
 	}
 
 	/*
@@ -203,7 +212,7 @@ public class MapActivity extends FragmentActivity implements
         	    return super.onOptionsItemSelected(item);        	    
 	}
     }
-
+    
     private void doReport()
     {
 	Intent intent = new Intent(this, CaseActivity.class);	
@@ -214,6 +223,21 @@ public class MapActivity extends FragmentActivity implements
     {
 	Intent intent = new Intent(this, LoginActivity.class);	
 	startActivity(intent);	
+    }
+    
+    
+    public void addMarkers(List <Case> caseList ){
+    	for (Case inputCase : caseList) {
+    		MarkerOptions markerOptions = new MarkerOptions();
+    		if (inputCase.getlatLng()!=null){
+    			 markerOptions.position(inputCase.getlatLng());
+    	         markerOptions.title(inputCase.getCaseStatus());
+    	         Marker m = map.addMarker(markerOptions);	
+    	    	 caseMarkerMap.put(m,inputCase.getCaseId());
+    		}
+           
+    	}
+    	
     }
     
     public void geoCodeCases() {
@@ -227,11 +251,19 @@ public class MapActivity extends FragmentActivity implements
                         inputCase.saveInBackground();
                         Log.d("debug", " CODED " + inputCase.getGeoLocation());
                     }
+                    addMarkers(caseList);
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
                 }
             }
         });
     }
+
+	@Override
+	public boolean onMarkerClick(final Marker marker) {
+		// TODO Auto-generated method stub
+		Toast.makeText(this, "Open Detail view of case id" + caseMarkerMap.get(marker), Toast.LENGTH_LONG).show();
+		return true;
+	}
  
 }
