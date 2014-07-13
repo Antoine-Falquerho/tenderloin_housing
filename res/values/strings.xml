@@ -19,6 +19,8 @@
 	
 	<string name="app_name">Tenderloin Housing Clinic</string>
 	<string name="title_activity_report">Violation Report</string>
+	<string name="title_activity_map">Explore</string>
+	
 
 	
 	<!-- Menu -->
