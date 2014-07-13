@@ -35,16 +35,16 @@ public class ParseDAO implements IConstants
     
     public static void getCaseById(final String caseId, GetCallback<Case> callBack)
     {
-	ParseQuery<Case> query = ParseQuery.getQuery("Case");
-	query.include("tenant");
-	query.include("building");
-
-	query.getInBackground(caseId, callBack);
+		ParseQuery<Case> query = ParseQuery.getQuery("Case");
+		query.include("tenant");
+		query.include("building");
+	
+		query.getInBackground(caseId, callBack);
     }
     
     public static void createCase(Case newCase, SaveCallback callback)
     {
-	newCase.saveInBackground(callback);
+		newCase.saveInBackground(callback);
     }
         
     
@@ -52,26 +52,26 @@ public class ParseDAO implements IConstants
     //================ Testing code snippet ======================
     public static void createCase(Drawable img)
     {
-	Case newCase = new Case();
-	newCase.setUnit("22");
-	newCase.setCaseStatus("In Progress");
-	newCase.setDescription("This is a test 3");
-	newCase.setIsMultiUnitPetition(true);
-	newCase.setGeoLocation(0.55, 0.66);
-	newCase.setIssueType(IssueType.PESTS_BED_BUGS.toString());
-
-	// Building
-	Building building = (Building) ParseObject.createWithoutData("Building", "eC53xf5qDw");
-	newCase.setBuilding(building);
-
-	// Tenant
-	newCase.setTenant(ParseUser.getCurrentUser());
-
-	// Pictures
-	newCase.setPictures(createPicture(img));
-	newCase.saveInBackground();
-
-	getCaseById(newCase.getObjectId(), null);
+		Case newCase = new Case();
+		newCase.setUnit("22");
+		newCase.setCaseStatus("In Progress");
+		newCase.setDescription("This is a test 3");
+		newCase.setIsMultiUnitPetition(true);
+		newCase.setGeoLocation(0.55, 0.66);
+		newCase.setIssueType(IssueType.PESTS_BED_BUGS.toString());
+	
+		// Building
+		Building building = (Building) ParseObject.createWithoutData("Building", "eC53xf5qDw");
+		newCase.setBuilding(building);
+	
+		// Tenant
+		newCase.setTenant(ParseUser.getCurrentUser());
+	
+		// Pictures
+		newCase.setPictures(createPicture(img));
+		newCase.saveInBackground();
+	
+		getCaseById(newCase.getObjectId(), null);
 
     }
 
