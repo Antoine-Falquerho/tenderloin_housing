@@ -35,6 +35,7 @@ import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.fragment.CaseDetailsFragment;
+import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
@@ -285,8 +286,7 @@ public class MapActivity extends FragmentActivity implements
 		intent.putExtra("case_id", caseMarkerMap.get(marker));
 		intent.putExtra("method", "10");
 
-		startActivity(intent);	
-		
+		startActivity(intent);
 		return true;
 	}
  
