@@ -1,14 +1,13 @@
 package com.tenderloinhousing.apps.helper;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.util.Log;
 
 import com.parse.FindCallback;
 import com.tenderloinhousing.apps.constant.IConstants;
-import com.tenderloinhousing.apps.dao.CaseDAO;
+import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.model.Building;
 
 public final class BuildingList extends ArrayList<Building> implements IConstants
@@ -23,7 +22,7 @@ public final class BuildingList extends ArrayList<Building> implements IConstant
     {
 	if (instance == null)
 	{
-	    CaseDAO.getAll(Building.class, new FindCallback<Building>()
+	    ParseDAO.getAll(Building.class, new FindCallback<Building>()
 	    {
 		@Override
 		public void done(List<Building> buildingList, com.parse.ParseException e)

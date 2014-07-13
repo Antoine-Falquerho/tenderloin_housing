@@ -34,7 +34,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.constant.IConstants;
-import com.tenderloinhousing.apps.dao.CaseDAO;
+import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.CommonUtil;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
@@ -131,7 +131,7 @@ public class CaseFragment extends Fragment implements IConstants
 	newCase.saveInBackground();
 
 	// Save the post and return
-	CaseDAO.createCase(newCase, new SaveCallback()
+	ParseDAO.createCase(newCase, new SaveCallback()
 	{
 	    @Override
 	    public void done(ParseException e)
