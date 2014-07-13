@@ -137,7 +137,7 @@
 	
 	<!-- Email -->
 	<TextView
-        android:id="@+id/tvEmail"
+        android:id="@+id/tvEmail_"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

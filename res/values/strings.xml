@@ -44,7 +44,8 @@
 	<string name="isMultiUnit">Is Multi-Unit Petition?</string>
 	<string name="issueCategory">Issue Category</string>
 	<string name="caseDesc">Violation Description</string>
-	<string name="addPhotos">Add Photos</string>
+	<string name="addPhotos">Add Photos</string>	
+	<string name="photos">Photos</string>
 	<string name="caseStatus">Case Status</string>
 	<string name="caseNumber">Case Number</string>
 	<string name="caseManager">Case Manager</string>
