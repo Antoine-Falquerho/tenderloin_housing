@@ -59,6 +59,7 @@ public class MapActivity extends FragmentActivity implements
 	private LatLngBounds.Builder bounds;
 	private MenuItem searchItem;
 	private SearchView mSearchView;
+	private List<Case> mapCases;
 
 	/*
 	 * Define a request code to send to Google Play services This code is
@@ -90,7 +91,6 @@ public class MapActivity extends FragmentActivity implements
 		} else {
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
-		Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_LONG).show();
 		map.setOnMarkerClickListener(this);
 	}
 
@@ -151,8 +151,8 @@ public class MapActivity extends FragmentActivity implements
 		if (location != null) {
 			Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
 			LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
-			map.animateCamera(cameraUpdate);
+//			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+//			map.animateCamera(cameraUpdate);
 		} else {
 			Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
 		}
@@ -298,7 +298,8 @@ public class MapActivity extends FragmentActivity implements
 	                    for (Case inputCase : caseList) {
 	                        Log.d("debug", " Obtained Building geo " + inputCase.getBuilding().getAddress());
 	                    }
-	                    addMarkers(caseList);
+	                    mapCases = caseList;
+	                    addMarkers(mapCases);
 	                } else {
 	                    Log.d("item", "Error: " + e.getMessage());
 	                }
