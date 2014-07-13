@@ -1,211 +1,221 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    tools:context="${packageName}.${activityClass}" >
-	
-	
-	<!--  <TextView
-		android:id="@+id/fullscreen_content"
-		android:layout_width="wrap_content"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+	android:layout_height="match_parent"
+	tools:context="${packageName}.${activityClass}" >
+	<RelativeLayout
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:gravity="center"
-		android:keepScreenOn="true"
-		android:text="something"
-		android:textColor="#33b5e5"
-		android:textSize="16sp"
-		android:textStyle="bold" />
-		-->
-	
-	<!-- Issue Type -->
-	<TextView
-        android:id="@+id/tvIssueType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/issueType"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	<Spinner
-		android:id="@+id/spIssueType"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignBottom="@+id/tvIssueType"
-        android:layout_toRightOf="@+id/tvIssueType"
-		android:entries="@array/issueType_array"
-		android:gravity="right"
-		android:prompt="@string/issueType"
-		android:textSize="12sp" />
-	
-	<!-- Description -->
-	<TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvIssueType"
-        android:text="@string/caseDesc"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	<EditText
-		android:id="@+id/etDescription"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignBottom="@+id/tvIssueType"
-        android:layout_toRightOf="@+id/tvDescription"
-		android:ems="10"
-		android:inputType="textMultiLine" >
-	<requestFocus />
-	
-	<!-- Building -->
-	<TextView
-        android:id="@+id/tvBuilding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvDescription"
-        android:text="@string/building"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	<Spinner
-			android:id="@+id/spBuilding"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/tvBuilding"
-	        android:layout_below="@+id/etDescription"
-	        android:layout_toRightOf="@+id/tvBuilding"
-			android:entries="@array/building_array"
-			android:gravity="right"
-			android:prompt="@string/building"
-			android:textSize="12sp" />
-	
-	<!-- Unit -->
-	<TextView
-        android:id="@+id/tvUnit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvBuilding"
-        android:text="@string/unitNumber"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	<EditText
-			android:id="@+id/etUnit"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:ems="10"
-			android:inputType="number" />
-	
-	<!-- Full Name -->
-	<TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSearchOptions"
-        android:text="@string/fullName"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	<EditText
+		android:layout_margin="10dp" >
+		
+		<!-- Full Name -->
+		<EditText
 			android:id="@+id/etName"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/tvColor"
-	        android:layout_below="@+id/spSize"
-	        android:layout_toRightOf="@+id/tvColor"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentTop="true"
+			android:layout_marginTop="20dp"
 			android:ems="10"
+			android:hint="@string/fullName"
 			android:inputType="textPersonName" />
-	
-	<!-- Phone -->
-	<TextView
-        android:id="@+id/tvPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSearchOptions"
-        android:text="@string/phone"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	<EditText
+		
+		<!-- Language -->
+		<EditText
+			android:id="@+id/etLanguage"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/etName"
+			android:layout_marginTop="20dp"
+			android:ems="10"
+			android:hint="@string/language"
+			android:inputType="text" />
+		
+		<LinearLayout
+			android:id="@+id/llhotel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/etLanguage"
+			android:gravity="center"
+			android:layout_marginTop="20dp"
+			android:orientation="horizontal" >
+			<!-- Building/Hotel -->
+			<Spinner
+				android:id="@+id/spBuilding"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:entries="@array/building_array"				
+				android:prompt="@string/building"
+				android:textSize="12sp" />
+			<!-- Unit -->
+			<EditText
+				android:id="@+id/etUnit"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginTop="20dp"
+				android:ems="10"
+				android:hint="@string/unitNumber"
+				android:inputType="number" />
+		</LinearLayout>
+		
+		<!-- Address -->
+		<EditText
+			android:id="@+id/etAddress"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/llhotel"
+			android:layout_marginTop="20dp"
+			android:ems="10"
+			android:hint="@string/address"
+			android:inputType="text" />
+		
+		<!-- Is Multi unit -->
+		<CheckBox
+			android:id="@+id/cbMultiUnit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/etAddress"
+			android:layout_marginTop="20dp"
+			android:checked="false"
+			android:ems="10"
+			android:hint="@string/isMultiUnit"
+			android:padding="10dp" />
+		
+		<!-- Phone -->
+		<EditText
 			android:id="@+id/etPhone"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignBottom="@+id/tvColor"
-	        android:layout_below="@+id/spSize"
-	        android:layout_toRightOf="@+id/tvColor"
-			android:layout_weight="1"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/cbMultiUnit"
+			android:layout_marginTop="20dp"
 			android:ems="10"
+			android:hint="@string/phone"
 			android:inputType="phone" />
-	</EditText>
-	
-	<!-- Email -->
-	<TextView
-        android:id="@+id/tvEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSearchOptions"
-        android:layout_marginTop="20dp"
-        android:text="@string/email"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-	<EditText
-		android:id="@+id/etEmail"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignBottom="@+id/tvColor"
-        android:layout_below="@+id/spSize"
-        android:layout_toRightOf="@+id/tvColor"
-		android:layout_weight="1"
-		android:ems="10"
-		android:inputType="textEmailAddress" />
-	
-	<!-- Photo -->
-    <TextView
-        android:id="@+id/tvPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvSearchOptions"
-        android:layout_marginTop="20dp"
-        android:text="@string/phone"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-	<LinearLayout
-		android:id="@+id/llButtonContainer"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_toRightOf="@+id/btnSave"
-        android:layout_alignBaseline="@+id/btnSave"
-        android:layout_alignBottom="@+id/btnSave"
-        android:gravity="center_horizontal|right"
-		android:orientation="horizontal" >
-		<Button
-			android:id="@+id/btnSubmit"
-			android:layout_width="60dp"
-			android:layout_height="30dp"
-			android:layout_marginBottom="130dp"
-			android:layout_marginLeft="20dp"
-			android:layout_marginRight="16dp"
-			android:background="@drawable/button_shape"
-			android:onClick="onSubmit"
-			android:shadowColor="#33b5fa"
-			android:shadowDx="0"
-			android:shadowDy="0"
-			android:shadowRadius="5"
-			android:text="@string/submit"
-			android:textAlignment="center"
-			android:textColor="#FFFFFF"
-			android:textSize="14sp" />
-		<Button
-			android:id="@+id/btnCancel"
-			android:layout_width="60dp"
-			android:layout_height="30dp"
-			android:background="@drawable/button_shape"
-			android:onClick="onCancel"
-			android:shadowColor="#33b5fa"
-			android:shadowDx="0"
-			android:shadowDy="0"
-			android:shadowRadius="5"
-			android:text="@string/cancel"
-			android:textAlignment="center"
-			android:textColor="#FFFFFF"
-			android:textSize="14sp" />
-	</LinearLayout>
-</RelativeLayout>
+		
+		<!-- Email -->
+		<EditText
+			android:id="@+id/etEmail"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/etPhone"
+			android:layout_marginTop="20dp"
+			android:ems="10"
+			android:hint="@string/email"
+			android:inputType="textEmailAddress" />
+		
+		<!-- Issue Type -->
+		<Spinner
+			android:id="@+id/spIssueType"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/etEmail"
+			android:entries="@array/issueType_array"
+			android:gravity="right"
+			android:prompt="@string/issueType"
+			android:textSize="12sp" />
+		
+		<!-- Description -->
+		<EditText
+			android:id="@+id/etDescription"
+			android:layout_width="wrap_content"
+			android:layout_height="150dp"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/spIssueType"
+			android:ems="10"
+			android:hint="@string/caseDesc"
+			android:inputType="textMultiLine" />
+		<requestFocus />
+		
+		<!-- Photo -->
+		<TextView
+			android:id="@+id/tvPhoto"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/etDescription"
+			android:layout_marginTop="20dp"
+			android:text="@string/addPhotos"
+			android:textAppearance="?android:attr/textAppearanceMedium" />
+		<HorizontalScrollView
+			android:id="@+id/hvPhotoScroll"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/tvPhoto"
+			android:layout_marginTop="20dp" >
+			<LinearLayout
+				android:id="@+id/photoContainer"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal" >
+				<ImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/photo_placeholder" />
+			</LinearLayout>
+		</HorizontalScrollView>
+		
+		<!-- Action Buttons -->
+		<LinearLayout
+			android:id="@+id/llButtonContainer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignParentRight="true"
+			android:layout_below="@+id/hvPhotoScroll"
+			android:layout_marginTop="20dp"
+			android:gravity="center"
+			android:orientation="horizontal" >
+			<Button
+				android:id="@+id/btnSubmit"
+				android:layout_width="60dp"
+				android:layout_height="30dp"
+				android:layout_marginLeft="20dp"
+				android:layout_marginRight="20dp"
+				android:background="@drawable/button_shape"
+				android:onClick="onSubmit"
+				android:shadowColor="#33b5fa"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:shadowRadius="5"
+				android:text="@string/submit"
+				android:textAlignment="center"
+				android:textColor="#FFFFFF"
+				android:textSize="14sp" />
+			<Button
+				android:id="@+id/btnCancel"
+				android:layout_width="60dp"
+				android:layout_height="30dp"
+				android:background="@drawable/button_shape"
+				android:onClick="onCancel"
+				android:shadowColor="#33b5fa"
+				android:shadowDx="0"
+				android:shadowDy="0"
+				android:shadowRadius="5"
+				android:text="@string/cancel"
+				android:textAlignment="center"
+				android:textColor="#FFFFFF"
+				android:textSize="14sp" />
+		</LinearLayout>
+	</RelativeLayout>
+</ScrollView>

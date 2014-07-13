@@ -9,6 +9,11 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class CommonUtil
 {
@@ -57,5 +62,43 @@ public class CommonUtil
 	    e.printStackTrace();
 	}
 	return msg;
+    }
+    
+    //Methods for Spinner
+    public static OnItemSelectedListener getOnItemSelectedListener()
+    {
+	return new OnItemSelectedListener()
+	{
+	    @Override
+	    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+	    {
+		//String value = parent.getItemAtPosition(position).toString();
+		String value =((Spinner) parent).getSelectedItem().toString();
+		setSpinnerToValue(((Spinner) parent), value);
+	    }
+
+	    @Override
+	    public void onNothingSelected(AdapterView<?> parent)
+	    {
+		// TODO Auto-generated method stub
+
+	    }
+
+	};
+    }
+    
+    //Methods for Spinner
+    public static void setSpinnerToValue(Spinner spinner, String value)
+    {
+	int index = 0;
+	SpinnerAdapter adapter = spinner.getAdapter();
+	for (int i = 0; i < adapter.getCount(); i++)
+	{
+	    if (adapter.getItem(i).equals(value))
+	    {
+		index = i;
+	    }
+	}
+	spinner.setSelection(index);
     }
 }

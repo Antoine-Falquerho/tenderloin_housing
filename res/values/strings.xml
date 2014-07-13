@@ -18,7 +18,7 @@
 	<!-- =========================== Labels =========================== -->
 	
 	<string name="app_name">Tenderloin Housing Clinic</string>
-	<string name="title_activity_report">Report Violation</string>
+	<string name="title_activity_report">Violation Report</string>
 
 	
 	<!-- Menu -->
@@ -32,22 +32,22 @@
 
 		<!-- Submit a Case -->
 	<string name="createReport">Create Report</string>
+	<string name="violationDetails">Violation Details</string>
 	<string name="personalInfo">Personal Information</string>
-	<string name="issueType">Issue Type</string>
-    <string name="building">Building</string>
-	<string name="fullName">Full Name</string>
-	<string name="email">Email</string>
-	<string name="address">Address</string>
-	<string name="unitNumber">Unit Number</string>
-	<string name="phone">Phone</string>
+	<string name="issueType">Issue Type </string>
+    <string name="building">Hotel </string>
+	<string name="fullName">Full Name </string>
+	<string name="email">Email(Optional) </string>
+	<string name="address">Address </string>
+	<string name="unitNumber">Unit </string>
+	<string name="phone">Phone </string>
 	<string name="language">Language Spoken</string>
 	<string name="isMultiUnit">Is Multi-Unit Petition?</string>
-	<string name="issueCategory">Issue Category</string>
 	<string name="caseDesc">Violation Description</string>
-	<string name="addPhotos">Add Photos</string>
+	<string name="addPhotos">Violation Pictures (Optional)</string>
 	<string name="caseStatus">Case Status</string>
-	<string name="caseNumber">Case Number</string>
-	<string name="caseManager">Case Manager</string>
+	<string name="caseNumber">Case Number </string>
+	<string name="caseManager">Case Manager </string>
 
 	<!-- Action Buttons -->
 	<string name="submit">Submit</string>

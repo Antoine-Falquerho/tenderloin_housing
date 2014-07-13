@@ -8,7 +8,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
-import com.tenderloinhousing.apps.dao.CaseDAO;
+import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
@@ -24,7 +24,7 @@ public class THCApplication extends Application
 	ParseObject.registerSubclass(User.class);
 	ParseObject.registerSubclass(Case.class);
 
-	Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));	
+	Parse.initialize(this, getString(R.string.parse_app_id), getString(R.string.parse_client_key));
 	ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
 	ParseTwitterUtils.initialize(getString(R.string.twitter_consumer_key), getString(R.string.twitter_consumer_secret));
 
@@ -36,12 +36,16 @@ public class THCApplication extends Application
 
 	Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
-	
-	
-	
-//	CaseDAO.getCaseById("MbHt8dslg3", null);
-//	Drawable img = getResources().getDrawable(R.drawable.background);
-//	CaseDAO.createCase(img);
-	
+	// CaseDAO.getCaseById("MbHt8dslg3", null);
+	// Drawable img = getResources().getDrawable(R.drawable.background);
+	// CaseDAO.createCase(img);
+
+	BuildingList buildingList = BuildingList.getInstance();
+
+//	if (buildingList != null)
+//	{
+//	    String id = buildingList.getBuildingIdByName("Vincent Hotel");
+//	    Log.d("DEBUG", id);
+//	}
     }
 }

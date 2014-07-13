@@ -12,29 +12,22 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.constant.IssueType;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
-public class CaseDAO implements IConstants
+public class BuildingDAO implements IConstants
 {
     public static <T extends ParseObject> void getAll(Class<T> classObj, FindCallback<T> callback)
     {
 	ParseQuery<T> query = ParseQuery.getQuery(classObj);
-	
-	if(classObj.getName().equals(Case.class.getName()))
-	{    	    
-        	query.include("tenant");
-        	query.include("building");
-	}
-	
+	query.include("tenant");
+	// query.include("pictures");
+	query.include("building");
 	query.findInBackground(callback);
     }
-    
-    
     
     public static void getCaseById(final String caseId, GetCallback<Case> callBack)
     {
@@ -45,14 +38,6 @@ public class CaseDAO implements IConstants
 	query.getInBackground(caseId, callBack);
     }
     
-    public static void createCase(Case newCase, SaveCallback callback)
-    {
-	newCase.saveInBackground(callback);
-    }
-        
-    
-    
-    //================ Testing code snippet ======================
     public static void createCase(Drawable img)
     {
 	Case newCase = new Case();
@@ -78,6 +63,7 @@ public class CaseDAO implements IConstants
 
     }
 
+    //This is for testing purpose
     private static GetCallback<Case> getCallBack()
     {
 	return new GetCallback<Case>()
