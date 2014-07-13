@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
@@ -31,9 +32,10 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.CaseActivity;
-import com.tenderloinhousing.apps.dao.CaseDAO;
+import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
+import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 
 public class MapActivity extends FragmentActivity implements
@@ -46,6 +48,7 @@ public class MapActivity extends FragmentActivity implements
 	private GoogleMap map;
 	private LocationClient mLocationClient;
 	private HashMap<Marker, String> caseMarkerMap;
+	private LatLngBounds.Builder bounds;
 
 	/*
 	 * Define a request code to send to Google Play services This code is
@@ -57,12 +60,8 @@ public class MapActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 		caseMarkerMap = new HashMap<Marker, String>();
-
+		//geoCodeBuildings();
 		geoCodeCases();
-		
-		
-		
-		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
 		setContentView(R.layout.activity_map);
@@ -227,37 +226,55 @@ public class MapActivity extends FragmentActivity implements
     
     
     public void addMarkers(List <Case> caseList ){
+    	bounds = new LatLngBounds.Builder(); 
     	for (Case inputCase : caseList) {
     		MarkerOptions markerOptions = new MarkerOptions();
     		if (inputCase.getlatLng()!=null){
-    			 markerOptions.position(inputCase.getlatLng());
+    			 markerOptions.position(inputCase.getBuilding().getlatLng());
     	         markerOptions.title(inputCase.getCaseStatus());
     	         Marker m = map.addMarker(markerOptions);	
     	    	 caseMarkerMap.put(m,inputCase.getCaseId());
+    	    	 bounds.include(inputCase.getBuilding().getlatLng());
     		}
            
     	}
+    	map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 100));
     	
     }
     
-    public void geoCodeCases() {
-        CaseDAO.getAll(Case.class, new FindCallback<Case>() {
+    public void geoCodeBuildings() {
+        ParseDAO.getAll(Building.class, new FindCallback<Building>() {
             @Override
-            public void done(List<Case> caseList, com.parse.ParseException e) {
+            public void done(List<Building> buildingList, com.parse.ParseException e) {
                 if (e == null) {
-                    for (Case inputCase : caseList) {
-                        Log.d("debug", " Case " + inputCase.getBuilding().getAddress());
-                        new GeocoderTask(getApplicationContext(),inputCase).execute(inputCase);
-                        inputCase.saveInBackground();
-                        Log.d("debug", " CODED " + inputCase.getGeoLocation());
+                    for (Building building : buildingList) {
+                        Log.d("debug", " Building" + building.getAddress());
+                        new GeocoderTask(getApplicationContext(),building).execute(building);
+                        Log.d("debug", " CODED " + building.getGeoLocation());
                     }
-                    addMarkers(caseList);
                 } else {
                     Log.d("item", "Error: " + e.getMessage());
                 }
             }
         });
     }
+    
+   public void geoCodeCases() {
+	   ParseDAO.getAll(Case.class, new FindCallback<Case>() {
+	            @Override
+	            public void done(List<Case> caseList, com.parse.ParseException e) {
+	                if (e == null) {
+	                    for (Case inputCase : caseList) {
+	                        Log.d("debug", " Obtained Building geo " + inputCase.getBuilding().getAddress());
+	                    }
+	                    addMarkers(caseList);
+	                } else {
+	                    Log.d("item", "Error: " + e.getMessage());
+	                }
+	            }
+	        });
+	    }
+    
 
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
