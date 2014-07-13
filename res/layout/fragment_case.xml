@@ -1,12 +1,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="fill_parent"
 	android:layout_height="match_parent"
-	tools:context="${packageName}.${activityClass}" >
+	android:layout_margin="10dp" >
+	
 	<RelativeLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_margin="10dp" >
+		android:layout_height="wrap_content">
 		
 		<!-- Full Name -->
 		<EditText
@@ -18,6 +17,7 @@
 			android:layout_alignParentTop="true"
 			android:layout_marginTop="20dp"
 			android:ems="10"
+			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
 			android:hint="@string/fullName"
 			android:inputType="textPersonName" />
@@ -32,6 +32,7 @@
 			android:layout_below="@+id/etName"
 			android:layout_marginTop="20dp"
 			android:ems="10"
+			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
 			android:hint="@string/language"
 			android:inputType="text" />
@@ -43,6 +44,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etLanguage"
+			android:divider="?android:dividerVertical"
 			android:gravity="center"
 			android:layout_marginTop="20dp"
 			android:orientation="horizontal" >
@@ -52,6 +54,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
+				style="?android:attr/listSeparatorTextViewStyle"
 				android:entries="@array/building_array"				
 				android:prompt="@string/building"
 				android:textColor="#000000"
@@ -63,6 +66,7 @@
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
 				android:ems="10"
+				style="?android:attr/listSeparatorTextViewStyle"
 				android:textColor="#000000"
 				android:hint="@string/unitNumber"
 				android:inputType="number" />
@@ -78,23 +82,37 @@
 			android:layout_below="@+id/llhotel"
 			android:layout_marginTop="20dp"
 			android:ems="10"
+			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
 			android:hint="@string/address"
 			android:inputType="text" />
 		
 		<!-- Is Multi unit -->
-		<CheckBox
-			android:id="@+id/cbMultiUnit"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true"
-			android:layout_below="@+id/etAddress"
-			android:layout_marginTop="20dp"
-			android:checked="false"
-			android:ems="10"
-			android:hint="@string/isMultiUnit"
-			android:padding="10dp" />
+		<RelativeLayout 
+			android:id="@+id/checkboxContainer"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/etAddress"
+            android:layout_marginTop="20dp">
+		    <TextView
+		        android:id="@+id/tvMultiUnit" 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        style="?android:attr/listSeparatorTextViewStyle"
+		        android:text="@string/isMultiUnit" 
+		        android:textColor="#7e7e7e"/>
+		    <CheckBox
+		        android:id="@+id/cbMultiUnit" 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/tvMultiUnit"
+		        style="?android:attr/listSeparatorTextViewStyle"
+		        android:checked="false"
+		        android:paddingLeft="30dp" />
+		</RelativeLayout>
+		
 		
 		<!-- Phone -->
 		<EditText
@@ -103,9 +121,10 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
-			android:layout_below="@+id/cbMultiUnit"
+			android:layout_below="@+id/checkboxContainer"
 			android:layout_marginTop="20dp"
 			android:ems="10"
+			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
 			android:hint="@string/phone"
 			android:inputType="phone" />
@@ -120,6 +139,7 @@
 			android:layout_below="@+id/etPhone"
 			android:layout_marginTop="20dp"
 			android:ems="10"
+			style="?android:attr/listSeparatorTextViewStyle"
 			android:hint="@string/email"
 			android:inputType="textEmailAddress" />
 		
@@ -131,24 +151,28 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etEmail"
+			android:layout_marginTop="20dp"
+			style="?android:attr/listSeparatorTextViewStyle"
 			android:entries="@array/issueType_array"
 			android:gravity="right"
 			android:prompt="@string/issueType"
 			android:textSize="12sp" 
-			android:textColor="#000000"/>
+			android:textColor="#7e7e7e"/>
 		
 		<!-- Description -->
 		<EditText
 			android:id="@+id/etDescription"
 			android:layout_width="wrap_content"
-			android:layout_height="150dp"
+			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/spIssueType"
 			android:ems="10"
+			android:layout_marginTop="20dp"
+			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
 			android:hint="@string/caseDesc"
-			android:inputType="textMultiLine" />
+			android:inputType="text" />
 		<requestFocus />
 		
 		<!-- Photo -->
@@ -160,15 +184,17 @@
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etDescription"
 			android:layout_marginTop="20dp"
+			android:layout_marginLeft="10dp"
 			android:text="@string/addPhotos"
-			android:textColor="#000000"
-			android:textAppearance="?android:attr/textAppearanceMedium" />
+			android:textColor="#7e7e7e"
+			android:textAppearance="?android:attr/textAppearanceSmall" />
 		<HorizontalScrollView
 			android:id="@+id/hvPhotoScroll"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@+id/tvPhoto"
-			android:layout_marginTop="20dp" >
+			android:layout_marginTop="20dp" 
+			android:layout_marginLeft="10dp">
 			<LinearLayout
 				android:id="@+id/photoContainer"
 				android:layout_width="wrap_content"
