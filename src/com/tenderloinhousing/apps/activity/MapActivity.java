@@ -33,6 +33,7 @@ import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.dao.ParseDAO;
+import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
@@ -280,7 +281,9 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
 		// TODO Auto-generated method stub
-		Toast.makeText(this, "Open Detail view of case id" + caseMarkerMap.get(marker), Toast.LENGTH_LONG).show();
+		
+		//    Log.d("DEBUG", id);
+		Toast.makeText(this, "Open Detail view of case id" +caseMarkerMap.get(marker), Toast.LENGTH_LONG).show();
 		return true;
 	}
  

@@ -37,13 +37,6 @@ public class THCApplication extends Application
 
 	Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
-	// CaseDAO.getCaseById("MbHt8dslg3", null);
-	// Drawable img = getResources().getDrawable(R.drawable.background);
-	// CaseDAO.createCase(img);
-
-	BuildingList buildingList = BuildingList.getInstance();
-
-	
 	//    String id = buildingList.getBuildingIdByName("Vincent Hotel");
 	//    Log.d("DEBUG", id);
 	
