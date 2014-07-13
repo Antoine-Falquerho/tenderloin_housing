@@ -93,17 +93,33 @@ public class CaseFragment extends Fragment implements IConstants
 	etLanguage = (EditText) view.findViewById(R.id.etLanguage);
 	etAddress = (EditText) view.findViewById(R.id.etAddress);
 	ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
-
+	
 	spIssueType.setOnItemSelectedListener(getOnItemSelectedListener());
 	spIssueType.setSelection(0);  //default to the first item hint
 	spBuilding.setOnItemSelectedListener(getOnItemSelectedListener());
 	spBuilding.setSelection(0);  //default to the first item hint
 	ivPhoto.setOnClickListener(getOnClickListener());
+	submitButton.setOnClickListener(getOnSubmitListener());
+	cancelButton.setOnClickListener(getOnCancelListener());
 
 	return view;
     }
 
-    private void onSubmit(View v)
+    public OnClickListener getOnSubmitListener()
+    {
+	return new OnClickListener()
+	   {
+	             @Override
+	             public void onClick(View v)
+	             {
+	        	 submitCase();
+	        	 getActivity().setResult(Activity.RESULT_CANCELED);
+	        	 getActivity().finish();
+	             } 
+	   }; 
+    }
+    
+    public void submitCase()
     {
 	// When the user clicks "Save," upload the post to Parse
 	// Create the Post object
@@ -140,8 +156,8 @@ public class CaseFragment extends Fragment implements IConstants
 		{
 		    Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
 
-		    // setResult(Activity.RESULT_OK);
-		    // finish();
+		//    getActivity().setResult(Activity.RESULT_OK);
+		    getActivity().finish();
 		}
 		else
 		{
@@ -318,10 +334,17 @@ public class CaseFragment extends Fragment implements IConstants
     }
     
     
-    private void onCancel(View v)
+    private OnClickListener getOnCancelListener()
     {
-	// setResult(Activity.RESULT_CANCELED);
-	// finish();
+	return new OnClickListener()
+	   {
+	             @Override
+	             public void onClick(View v)
+	             {
+	        	getActivity().setResult(Activity.RESULT_CANCELED);
+	        	getActivity().finish();
+	             } 
+	   }; 
     }
 
     public static CaseFragment newInstance(Bundle args)

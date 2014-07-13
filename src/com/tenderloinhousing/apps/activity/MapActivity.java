@@ -10,7 +10,6 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -35,11 +33,10 @@ import com.parse.GetCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.CaseActivity;
+import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
-import com.tenderloinhousing.apps.fragment.CaseDetailsFragment;
-import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
@@ -49,7 +46,7 @@ public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
 		GooglePlayServicesClient.OnConnectionFailedListener,
 		SearchView.OnQueryTextListener,
-		OnMarkerClickListener{
+		OnMarkerClickListener, IConstants{
 
     	ParseUser user;
 	private SupportMapFragment mapFragment;
@@ -242,6 +239,7 @@ public class MapActivity extends FragmentActivity implements
     private void doReport()
     {
 	Intent intent = new Intent(this, CaseActivity.class);	
+	intent.putExtra(METHOD_KEY, METHOD_CODE_CREATE);
 	startActivity(intent);		
     }
 
@@ -279,12 +277,12 @@ public class MapActivity extends FragmentActivity implements
             public void done(List<Building> buildingList, com.parse.ParseException e) {
                 if (e == null) {
                     for (Building building : buildingList) {
-                        Log.d("debug", " Building" + building.getAddress());
+                        Log.d(DEBUG, " Building" + building.getAddress());
                         new GeocoderTask(getApplicationContext(),building).execute(building);
-                        Log.d("debug", " CODED " + building.getGeoLocation());
+                        Log.d(DEBUG, " CODED " + building.getGeoLocation());
                     }
                 } else {
-                    Log.d("item", "Error: " + e.getMessage());
+                    Log.d(ERROR, "Error: " + e.getMessage());
                 }
             }
         });
@@ -296,7 +294,7 @@ public class MapActivity extends FragmentActivity implements
 	            public void done(List<Case> caseList, com.parse.ParseException e) {
 	                if (e == null) {
 	                    for (Case inputCase : caseList) {
-	                        Log.d("debug", " Obtained Building geo " + inputCase.getBuilding().getAddress());
+	                        Log.d(DEBUG, " Obtained Building geo " + inputCase.getBuilding().getAddress());
 	                    }
 	                    mapCases = caseList;
 	                    addMarkers(mapCases);
@@ -311,8 +309,8 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
 		Intent intent = new Intent(this, CaseActivity.class);
-		intent.putExtra("case_id", caseMarkerMap.get(marker));
-		intent.putExtra("method", "10");
+		intent.putExtra(CASE_ID_KEY, caseMarkerMap.get(marker));
+		intent.putExtra(METHOD_KEY, METHOD_CODE_DETAIL);
 
 		startActivity(intent);
 		// TODO Auto-generated method stub
@@ -327,7 +325,7 @@ public class MapActivity extends FragmentActivity implements
 				public void done(Case foundCase, ParseException e) {
 					if (e == null) {
 	                    if (foundCase!=null){
-		                    Log.d("debug", " foundCase " + foundCase.getBuilding().getAddress());
+		                    Log.d(DEBUG, " foundCase " + foundCase.getBuilding().getAddress());
 	                    	List<Case> caseList = new ArrayList<Case>();
 	                    	caseList.add(foundCase);
 	                    	clearMarkers();
@@ -335,7 +333,7 @@ public class MapActivity extends FragmentActivity implements
 	                    }
 	                } else {
                     	Toast.makeText(getApplicationContext(), "No case with that id",Toast.LENGTH_LONG).show();
-	                    Log.d("item", "Error: " + e.getMessage());
+	                    Log.d(ERROR, "Error: " + e.getMessage());
 	                }
 					
 				}

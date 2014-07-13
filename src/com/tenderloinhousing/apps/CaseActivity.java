@@ -24,22 +24,22 @@ public class CaseActivity extends BaseFragmentActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_case);
 	
-		String method = getIntent().getStringExtra("method");		
+		String method = getIntent().getStringExtra(METHOD_KEY);			
 		
 		switch (method)
 		{
-	        	case "10":
+	        	case METHOD_CODE_DETAIL:
 	        		showCaseDetailFragment();	        	    
-	        	case "20":
-	        		showCaseFragment();	        	    
+	        	case METHOD_CODE_CREATE:
+	        		showCreateCaseFragment();	        	    
 	        	default:
-	        		showCaseFragment();        	    
+	        		showCreateCaseFragment();        	    
 		}
 
 
     }
 
-    private void showCaseFragment()
+    private void showCreateCaseFragment()
     {
 	FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
