@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,7 +31,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.CaseActivity;
@@ -44,6 +48,7 @@ import com.tenderloinhousing.apps.model.Case;
 public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
 		GooglePlayServicesClient.OnConnectionFailedListener,
+		SearchView.OnQueryTextListener,
 		OnMarkerClickListener{
 
     	ParseUser user;
@@ -52,6 +57,8 @@ public class MapActivity extends FragmentActivity implements
 	private LocationClient mLocationClient;
 	private HashMap<Marker, String> caseMarkerMap;
 	private LatLngBounds.Builder bounds;
+	private MenuItem searchItem;
+	private SearchView mSearchView;
 
 	/*
 	 * Define a request code to send to Google Play services This code is
@@ -195,10 +202,26 @@ public class MapActivity extends FragmentActivity implements
 	@Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+    getMenuInflater().inflate(R.menu.menu_search, menu);
+    MenuItem searchItem = menu.findItem(R.id.menu_search);
+    mSearchView = (SearchView) searchItem.getActionView();
+    setupSearchView(searchItem);
 	getMenuInflater().inflate(R.menu.menu_login, menu);
 	getMenuInflater().inflate(R.menu.menu_report, menu);
 	return true;
     }
+	
+	 private void setupSearchView(MenuItem searchItem) {
+	    	if (isAlwaysExpanded()) {
+	            mSearchView.setIconifiedByDefault(false);
+	        } else {
+	            searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
+	                    | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+	        }
+	    	
+	    	 mSearchView.setOnQueryTextListener(this);
+	    	
+	    }
 
     // Respond to ActionBar icon click
     public boolean onOptionsItemSelected(MenuItem item)
@@ -228,6 +251,10 @@ public class MapActivity extends FragmentActivity implements
 	startActivity(intent);	
     }
     
+    public void clearMarkers(){
+    	map.clear();
+    }
+    
     
     public void addMarkers(List <Case> caseList ){
     	bounds = new LatLngBounds.Builder(); 
@@ -242,7 +269,7 @@ public class MapActivity extends FragmentActivity implements
     		}
            
     	}
-    	map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 100));
+    	map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 300));
     	
     }
     
@@ -287,7 +314,43 @@ public class MapActivity extends FragmentActivity implements
 		intent.putExtra("method", "10");
 
 		startActivity(intent);
+		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		// TODO Auto-generated method stub
+		 ParseDAO.getCaseById(query, new GetCallback<Case>() {
+	           @Override
+				public void done(Case foundCase, ParseException e) {
+					if (e == null) {
+	                    if (foundCase!=null){
+		                    Log.d("debug", " foundCase " + foundCase.getBuilding().getAddress());
+	                    	List<Case> caseList = new ArrayList<Case>();
+	                    	caseList.add(foundCase);
+	                    	clearMarkers();
+	                    	addMarkers(caseList);	
+	                    }
+	                } else {
+                    	Toast.makeText(getApplicationContext(), "No case with that id",Toast.LENGTH_LONG).show();
+	                    Log.d("item", "Error: " + e.getMessage());
+	                }
+					
+				}
+	        });
+	
+		return true;
+	}
+
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	protected boolean isAlwaysExpanded() {
+	      return false;
 	}
  
 }
