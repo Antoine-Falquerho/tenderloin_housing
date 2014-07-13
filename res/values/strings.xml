@@ -34,7 +34,7 @@
 	<string name="createReport">Create Report</string>
 	<string name="violationDetails">Violation Details</string>
 	<string name="personalInfo">Personal Information</string>
-	<string name="issueType">Issue Type </string>
+	<string name="issueType">Violation Type </string>
     <string name="building">Hotel </string>
 	<string name="fullName">Full Name </string>
 	<string name="email">Email(Optional) </string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string-array name="issueType_array">
-		<item></item>
+		<item>[Select Violation Type]</item>
 		<item>mold</item>
 		<item>pests (mice)</item>
 		<item>pests (roaches)</item>

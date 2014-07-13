@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string-array name="building_array">
-		<item></item>
+		<item>[Select Hotel]</item>
 		<item>Allstar Hotel</item>
 		<item>Boyd Hotel</item>
 		<item>Caldrake Hotel</item>

@@ -19,13 +19,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -92,8 +95,10 @@ public class CaseFragment extends Fragment implements IConstants
 	etAddress = (EditText) view.findViewById(R.id.etAddress);
 	ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
 
-	spIssueType.setOnItemSelectedListener(CommonUtil.getOnItemSelectedListener());
-	spBuilding.setOnItemSelectedListener(CommonUtil.getOnItemSelectedListener());
+	spIssueType.setOnItemSelectedListener(getOnItemSelectedListener());
+	spIssueType.setSelection(0);  //default to the first item hint
+	spBuilding.setOnItemSelectedListener(getOnItemSelectedListener());
+	spBuilding.setSelection(0);  //default to the first item hint
 	ivPhoto.setOnClickListener(getOnClickListener());
 
 	return view;
@@ -275,6 +280,43 @@ public class CaseFragment extends Fragment implements IConstants
     // ===================== Camera END =====================================
 
     
+    //Methods for Spinner
+    public OnItemSelectedListener getOnItemSelectedListener()
+    {
+	return new OnItemSelectedListener()
+	{
+	    @Override
+	    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+	    {
+		//String value = parent.getItemAtPosition(position).toString();
+		String value =((Spinner) parent).getSelectedItem().toString();
+		setSpinnerToValue(((Spinner) parent), value);
+	    }
+
+	    @Override
+	    public void onNothingSelected(AdapterView<?> parent)
+	    {
+		// TODO Auto-generated method stub
+
+	    }
+
+	};
+    }
+    
+    //Methods for Spinner
+    public void setSpinnerToValue(Spinner spinner, String value)
+    {
+	int index = 0;
+	SpinnerAdapter adapter = spinner.getAdapter();
+	for (int i = 0; i < adapter.getCount(); i++)
+	{
+	    if (adapter.getItem(i).equals(value))
+	    {
+		index = i;
+	    }
+	}
+	spinner.setSelection(index);
+    }
     
     
     private void onCancel(View v)
