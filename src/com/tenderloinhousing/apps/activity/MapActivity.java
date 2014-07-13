@@ -193,6 +193,7 @@ public class MapActivity extends FragmentActivity implements
     public boolean onCreateOptionsMenu(Menu menu)
     {
 	getMenuInflater().inflate(R.menu.menu_login, menu);
+	getMenuInflater().inflate(R.menu.menu_report, menu);
 	return true;
     }
 
