@@ -22,7 +22,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
-import android.widget.CheckedTextView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,7 +50,7 @@ public class CaseFragment extends Fragment implements IConstants
     private EditText etDescription;
     private Spinner spBuilding;
     private EditText etUnit;
-    private CheckedTextView cbMultiUnit;
+    private CheckBox cbMultiUnit;
     private EditText etName;
     private EditText etPhone;
     private EditText etEmail;
@@ -86,7 +86,7 @@ public class CaseFragment extends Fragment implements IConstants
 	etDescription = (EditText) view.findViewById(R.id.etDescription);
 	spBuilding = (Spinner) view.findViewById(R.id.spBuilding);
 	etUnit = (EditText) view.findViewById(R.id.etUnit);
-	cbMultiUnit = (CheckedTextView) view.findViewById(R.id.cbMultiUnit);
+	cbMultiUnit = (CheckBox) view.findViewById(R.id.cbMultiUnit);
 	etName = (EditText) view.findViewById(R.id.etName);
 	etPhone = (EditText) view.findViewById(R.id.etPhone);
 	etEmail = (EditText) view.findViewById(R.id.etEmail);

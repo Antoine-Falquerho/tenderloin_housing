@@ -88,23 +88,30 @@
 			android:inputType="text" />
 		
 		<!-- Is Multi unit -->
-		<CheckedTextView
-			android:id="@+id/cbMultiUnit"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true"
-			android:layout_below="@+id/etAddress"
-			android:layout_marginTop="20dp"
-			android:checked="false"
-			android:ems="10"
-			style="?android:attr/listSeparatorTextViewStyle"
-			android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-			android:hint="@string/isMultiUnit"
-			android:text="@string/isMultiUnit"
-            android:textColor="#7e7e7e"
-			android:padding="10dp" />
-		
+		<RelativeLayout 
+			android:id="@+id/checkboxContainer"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/etAddress"
+            android:layout_marginTop="20dp">
+		    <TextView
+		        android:id="@+id/tvMultiUnit" 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        style="?android:attr/listSeparatorTextViewStyle"
+		        android:text="@string/isMultiUnit" 
+		        android:textColor="#7e7e7e"/>
+		    <CheckBox
+		        android:id="@+id/cbMultiUnit" 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_toRightOf="@+id/tvMultiUnit"
+		        style="?android:attr/listSeparatorTextViewStyle"
+		        android:checked="false"
+		        android:paddingLeft="30dp" />
+		</RelativeLayout>
 		
 		
 		<!-- Phone -->
@@ -114,7 +121,7 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
-			android:layout_below="@+id/cbMultiUnit"
+			android:layout_below="@+id/checkboxContainer"
 			android:layout_marginTop="20dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
