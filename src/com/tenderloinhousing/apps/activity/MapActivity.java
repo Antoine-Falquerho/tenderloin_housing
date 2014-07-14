@@ -10,10 +10,16 @@ import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -33,10 +39,12 @@ import com.parse.GetCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.tenderloinhousing.apps.CaseActivity;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
+import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
@@ -46,9 +54,20 @@ public class MapActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
 		GooglePlayServicesClient.OnConnectionFailedListener,
 		SearchView.OnQueryTextListener,
-		OnMarkerClickListener, IConstants{
+		IConstants,
+		SlidingUpPanelLayout.PanelSlideListener,
+		OnMarkerClickListener{
 
     	ParseUser user;
+    
+	private ListView mListView;
+    private SlidingUpPanelLayout mSlidingUpPanelLayout;
+
+    private View mTransparentHeaderView;
+    private View mTransparentView;
+    private View mSpaceView;
+
+    	
 	private SupportMapFragment mapFragment;
 	private GoogleMap map;
 	private LocationClient mLocationClient;
@@ -57,6 +76,8 @@ public class MapActivity extends FragmentActivity implements
 	private MenuItem searchItem;
 	private SearchView mSearchView;
 	private List<Case> mapCases;
+	ArrayList<String> testData;
+	ArrayAdapter<String> listAdapter;
 
 	/*
 	 * Define a request code to send to Google Play services This code is
@@ -69,14 +90,66 @@ public class MapActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		caseMarkerMap = new HashMap<Marker, String>();
 		//geoCodeBuildings();
-		geoCodeCases();
+		BuildingList buildingList = BuildingList.getInstance();
+		
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
 		setContentView(R.layout.activity_map);
 		ParseAnalytics.trackAppOpened(getIntent());
+		
+		 mListView = (ListView) findViewById(R.id.list);
+	        mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
+
+	        mSlidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingLayout);
+	        mSlidingUpPanelLayout.setEnableDragViewTouchEvents(true);
+
+	        int mapHeight = getResources().getDimensionPixelSize(R.dimen.map_height);
+	        mSlidingUpPanelLayout.setPanelHeight(mapHeight); // you can use different height here
+	        mSlidingUpPanelLayout.setScrollableView(mListView, mapHeight);
+
+	        mSlidingUpPanelLayout.setPanelSlideListener(this);
+
+	        // transparent view at the top of ListView
+	        mTransparentView = findViewById(R.id.transparentView);
+
+	        // init header view for ListView
+	        mTransparentHeaderView = LayoutInflater.from(this).inflate(R.layout.transparent_header_view, null, false);
+	        mSpaceView = mTransparentHeaderView.findViewById(R.id.space);
+
+//	        testData = new ArrayList<String>(100);
+	        testData = new ArrayList<String>(100);
+	        for (int i = 0; i < 100; i++) {
+	            testData.add("Item " + i);
+	        }
+
+	        mListView.addHeaderView(mTransparentHeaderView);
+	        listAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item, testData);
+	        mListView.setAdapter(listAdapter);
+	        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+	            @Override
+	            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	                mSlidingUpPanelLayout.collapsePane();
+	            }
+	        });
+		
+		mapFragment = SupportMapFragment.newInstance();
+	        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+	        fragmentTransaction.add(R.id.mapContainer, mapFragment, "map");
+	        fragmentTransaction.commit();
 
 		mLocationClient = new LocationClient(this, this, this);
-		mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
+	}
+	
+	/*
+	 * Called when the Activity becomes visible.
+	 */
+	@Override
+	protected void onStart() {
+		super.onStart();
+		// Connect the client.
+		if (GoogleServiceUtil.isGooglePlayServicesAvailable(this, CONNECTION_FAILURE_RESOLUTION_REQUEST)) {
+			mLocationClient.connect();
+		}
 		if (mapFragment != null) {
 			map = mapFragment.getMap();
 			if (map != null) {
@@ -88,21 +161,16 @@ public class MapActivity extends FragmentActivity implements
 		} else {
 			Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onStart();
+		geoCodeCases();
 		map.setOnMarkerClickListener(this);
 	}
-
-	/*
-	 * Called when the Activity becomes visible.
-	 */
-	@Override
-	protected void onStart() {
-		super.onStart();
-		// Connect the client.
-		if (GoogleServiceUtil.isGooglePlayServicesAvailable(this, CONNECTION_FAILURE_RESOLUTION_REQUEST)) {
-			mLocationClient.connect();
-		}
-	}
-
+	
+	
 	/*
 	 * Called when the Activity is no longer visible.
 	 */
@@ -133,8 +201,6 @@ public class MapActivity extends FragmentActivity implements
 
 		}
 	}
-
-	
 
 	/*
 	 * Called by Location Services when the request to connect the client
@@ -193,7 +259,6 @@ public class MapActivity extends FragmentActivity implements
 					"Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
 		}
 	}
-
 	
 	
 	@Override
@@ -253,6 +318,16 @@ public class MapActivity extends FragmentActivity implements
     	map.clear();
     }
     
+    public void addCasestoList(List <Case> caseList){
+    	testData.clear();
+    	for (Case inputCase : caseList) {
+    		String s = "Case " + inputCase.getCaseId() + " Status " + inputCase.getCaseStatus();
+    		testData.add(s);
+    		listAdapter.notifyDataSetChanged();
+    	}
+    	
+    }
+    
     
     public void addMarkers(List <Case> caseList ){
     	bounds = new LatLngBounds.Builder(); 
@@ -297,7 +372,9 @@ public class MapActivity extends FragmentActivity implements
 //	                        Log.d(DEBUG, " Obtained Building geo " + inputCase.getBuilding().getAddress());
 	                    }
 	                    mapCases = caseList;
-	                    addMarkers(mapCases);
+	                    addMarkers(caseList); 
+	                    addCasestoList(caseList);
+	                    
 	                } else {
 	                    Log.d("item", "Error: " + e.getMessage());
 	                }
@@ -342,6 +419,16 @@ public class MapActivity extends FragmentActivity implements
 		return true;
 	}
 
+	 private void collapseMap() {
+	        mSpaceView.setVisibility(View.VISIBLE);
+	        mTransparentView.setVisibility(View.GONE);
+	    }
+
+	    private void expandMap() {
+	        mSpaceView.setVisibility(View.GONE);
+	        mTransparentView.setVisibility(View.INVISIBLE);
+	    }
+	
 	@Override
 	public boolean onQueryTextChange(String newText) {
 		// TODO Auto-generated method stub
@@ -350,6 +437,30 @@ public class MapActivity extends FragmentActivity implements
 	
 	protected boolean isAlwaysExpanded() {
 	      return false;
+	}
+
+	@Override
+	public void onPanelSlide(View panel, float slideOffset) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPanelCollapsed(View panel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPanelExpanded(View panel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPanelAnchored(View panel) {
+		// TODO Auto-generated method stub
+		
 	}
  
 }
