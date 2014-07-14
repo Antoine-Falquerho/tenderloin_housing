@@ -42,6 +42,7 @@ import com.parse.ParseUser;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.adapter.MapCaseAdapter;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.BuildingList;
@@ -76,8 +77,8 @@ public class MapActivity extends FragmentActivity implements
 	private MenuItem searchItem;
 	private SearchView mSearchView;
 	private List<Case> mapCases;
-	ArrayList<String> testData;
-	ArrayAdapter<String> listAdapter;
+	private ArrayList<Case> caseList;
+	private MapCaseAdapter caseListAdapter;
 
 	private LatLng latLng;
 	/*
@@ -117,15 +118,11 @@ public class MapActivity extends FragmentActivity implements
 	        mTransparentHeaderView = LayoutInflater.from(this).inflate(R.layout.transparent_header_view, null, false);
 	        mSpaceView = mTransparentHeaderView.findViewById(R.id.space);
 
-//	        testData = new ArrayList<String>(100);
-	        testData = new ArrayList<String>(100);
-	        for (int i = 0; i < 100; i++) {
-	            testData.add("Item " + i);
-	        }
 
 	        mListView.addHeaderView(mTransparentHeaderView);
-	        listAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item, testData);
-	        mListView.setAdapter(listAdapter);
+	        caseList = new ArrayList <Case>();
+	        caseListAdapter = new MapCaseAdapter(this,caseList);
+	        mListView.setAdapter(caseListAdapter);
 	        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	            @Override
 	            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -325,12 +322,13 @@ public class MapActivity extends FragmentActivity implements
     }
     
     public void addCasestoList(List <Case> caseList){
-    	testData.clear();
-    	for (Case inputCase : caseList) {
-    		String s = "Case " + inputCase.getCaseId() + " Status " + inputCase.getCaseStatus();
-    		testData.add(s);
-    		listAdapter.notifyDataSetChanged();
-    	}
+    	caseListAdapter.clear();
+//    	for (Case inputCase : caseList) {
+////    		String s = "Case " + inputCase.getCaseId() + " Status " + inputCase.getCaseStatus();
+////    		testData.add(s);
+////    		listAdapter.notifyDataSetChanged();
+//    	}
+    	caseListAdapter.addAll(caseList);
     	
     }
     
