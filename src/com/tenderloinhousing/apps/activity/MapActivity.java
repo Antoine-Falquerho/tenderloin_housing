@@ -201,8 +201,6 @@ public class MapActivity extends FragmentActivity implements
 		}
 	}
 
-	
-
 	/*
 	 * Called by Location Services when the request to connect the client
 	 * finishes successfully. At this point, you can request the current
@@ -260,9 +258,7 @@ public class MapActivity extends FragmentActivity implements
 					"Sorry. Location services not available to you", Toast.LENGTH_LONG).show();
 		}
 	}
-	
-	
-	
+		
 	@Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -322,7 +318,7 @@ public class MapActivity extends FragmentActivity implements
     	map.clear();
     }
     
-    public void addCasestoList(List <Case> caseList){
+    public void repopulateCasestoList(List <Case> caseList){
     	caseListAdapter.clear();
     	caseListAdapter.addAll(caseList);
     	caseListAdapter.notifyDataSetChanged();
@@ -376,7 +372,7 @@ public class MapActivity extends FragmentActivity implements
 	                    }
 	                    mapCases = caseList;
 	                    addMarkers(caseList); 
-	                    addCasestoList(caseList);
+	                    repopulateCasestoList(caseList);
 	                    
 	                } else {
 	                    Log.d("item", "Error: " + e.getMessage());
@@ -388,7 +384,9 @@ public class MapActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
-		openCaseDetailIntent(caseMarkerMap.get(marker));
+		populateCasebyId(caseMarkerMap.get(marker));
+//		openCaseDetailIntent(caseMarkerMap.get(marker));
+		mSlidingUpPanelLayout.collapsePane();
 		return true;
 	}
 
@@ -402,8 +400,12 @@ public class MapActivity extends FragmentActivity implements
 	
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		// TODO Auto-generated method stub
-		 ParseDAO.getCaseById(query, new GetCallback<Case>() {
+		populateCasebyId(query);
+		return true;
+	}
+
+	private void populateCasebyId(String caseId){
+		 ParseDAO.getCaseById(caseId, new GetCallback<Case>() {
 	           @Override
 				public void done(Case foundCase, ParseException e) {
 					if (e == null) {
@@ -412,19 +414,18 @@ public class MapActivity extends FragmentActivity implements
 	                    	List<Case> caseList = new ArrayList<Case>();
 	                    	caseList.add(foundCase);
 	                    	clearMarkers();
-	                    	addMarkers(caseList);	
+	                    	addMarkers(caseList);
+	                    	repopulateCasestoList(caseList);
 	                    }
 	                } else {
-                    	Toast.makeText(getApplicationContext(), "No case with that id",Toast.LENGTH_LONG).show();
+                  	Toast.makeText(getApplicationContext(), "No case with that id",Toast.LENGTH_LONG).show();
 	                    Log.d(ERROR, "Error: " + e.getMessage());
 	                }
 					
 				}
 	        });
-	
-		return true;
 	}
-
+	
 	 private void collapseMap() {
 	        mSpaceView.setVisibility(View.VISIBLE);
 	        mTransparentView.setVisibility(View.GONE);
