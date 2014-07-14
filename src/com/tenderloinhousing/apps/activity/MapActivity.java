@@ -57,7 +57,7 @@ public class MapActivity extends FragmentActivity implements
 	private MenuItem searchItem;
 	private SearchView mSearchView;
 	private List<Case> mapCases;
-
+	private LatLng latLng;
 	/*
 	 * Define a request code to send to Google Play services This code is
 	 * returned in Activity.onActivityResult
@@ -147,7 +147,7 @@ public class MapActivity extends FragmentActivity implements
 		Location location = mLocationClient.getLastLocation();
 		if (location != null) {
 			Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
-			LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+			latLng = new LatLng(location.getLatitude(), location.getLongitude());
 //			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
 //			map.animateCamera(cameraUpdate);
 		} else {
@@ -199,16 +199,17 @@ public class MapActivity extends FragmentActivity implements
 	@Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-    getMenuInflater().inflate(R.menu.menu_search, menu);
-    MenuItem searchItem = menu.findItem(R.id.menu_search);
-    mSearchView = (SearchView) searchItem.getActionView();
-    setupSearchView(searchItem);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        mSearchView = (SearchView) searchItem.getActionView();
+        setupSearchView(searchItem);
+        
 	getMenuInflater().inflate(R.menu.menu_login, menu);
 	getMenuInflater().inflate(R.menu.menu_report, menu);
 	return true;
     }
 	
-	 private void setupSearchView(MenuItem searchItem) {
+    private void setupSearchView(MenuItem searchItem) {
 	    	if (isAlwaysExpanded()) {
 	            mSearchView.setIconifiedByDefault(false);
 	        } else {
@@ -240,6 +241,7 @@ public class MapActivity extends FragmentActivity implements
     {
 	Intent intent = new Intent(this, CaseActivity.class);	
 	intent.putExtra(METHOD_KEY, METHOD_CODE_CREATE);
+	intent.putExtra(LATLNG_KEY, latLng);
 	startActivity(intent);		
     }
 

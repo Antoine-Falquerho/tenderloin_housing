@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps.fragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -7,7 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -38,6 +39,7 @@ import com.parse.SaveCallback;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
+import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
@@ -56,10 +58,11 @@ public class CaseFragment extends Fragment implements IConstants
     private EditText etEmail;
     private EditText etLanguage;
     private LinearLayout photoContainer;
-    private EditText etAddress; 
-    private ImageView ivPhoto; 
-    
+    private EditText etAddress;
+    private ImageView ivPhoto;
+    LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
+    private String photoFileName;
 
     @Override
     public void onAttach(Activity activity)
@@ -77,6 +80,8 @@ public class CaseFragment extends Fragment implements IConstants
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
     {
+	laglng = getArguments().getParcelable(LATLNG_KEY);
+
 	View view = inflater.inflate(R.layout.fragment_case, parent, false);
 
 	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
@@ -93,11 +98,11 @@ public class CaseFragment extends Fragment implements IConstants
 	etLanguage = (EditText) view.findViewById(R.id.etLanguage);
 	etAddress = (EditText) view.findViewById(R.id.etAddress);
 	ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
-	
+
 	spIssueType.setOnItemSelectedListener(getOnItemSelectedListener());
-	spIssueType.setSelection(0);  //default to the first item hint
+	spIssueType.setSelection(0); // default to the first item hint
 	spBuilding.setOnItemSelectedListener(getOnItemSelectedListener());
-	spBuilding.setSelection(0);  //default to the first item hint
+	spBuilding.setSelection(0); // default to the first item hint
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
@@ -108,27 +113,25 @@ public class CaseFragment extends Fragment implements IConstants
     public OnClickListener getOnSubmitListener()
     {
 	return new OnClickListener()
-	   {
-	             @Override
-	             public void onClick(View v)
-	             {
-	        	 submitCase();
-	        	 getActivity().setResult(Activity.RESULT_CANCELED);
-	        	 getActivity().finish();
-	             } 
-	   }; 
+	{
+	    @Override
+	    public void onClick(View v)
+	    {
+		submitCase();
+		getActivity().setResult(Activity.RESULT_CANCELED);
+		getActivity().finish();
+	    }
+	};
     }
-    
+
     public void submitCase()
     {
-	// When the user clicks "Save," upload the post to Parse
-	// Create the Post object
 	Case newCase = new Case();
 	newCase.setIssueType(spIssueType.getSelectedItem().toString());
 	newCase.setDescription(etDescription.getText().toString());
 	newCase.setUnit(etUnit.getText().toString());
 	newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
-	//newCase.setGeoLocation();
+	newCase.setGeoLocation(laglng.latitude, laglng.longitude);
 
 	// Tenant
 	User user = (User) ParseUser.getCurrentUser();
@@ -139,8 +142,10 @@ public class CaseFragment extends Fragment implements IConstants
 	newCase.setTenant(user);
 
 	// Building
-	Building building = (Building) ParseObject.createWithoutData("Building", "eC53xf5qDw");
-	newCase.setBuilding(building);
+	Building buildingObj = getBuilding();
+	if (buildingObj == null)
+	    return;
+	newCase.setBuilding(buildingObj);
 
 	// Pictures
 	newCase.setPictures(pictureList);
@@ -155,8 +160,6 @@ public class CaseFragment extends Fragment implements IConstants
 		if (e == null)
 		{
 		    Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
-
-		//    getActivity().setResult(Activity.RESULT_OK);
 		    getActivity().finish();
 		}
 		else
@@ -169,26 +172,37 @@ public class CaseFragment extends Fragment implements IConstants
 	});
     }
 
-    public ArrayList<ParseFile> createPicture(Drawable img)
+    private Building getBuilding()
     {
-	byte[] imgData = (img.toString()).getBytes();
-	
-	ParseFile imgFile = new ParseFile("background.png", imgData);
-	imgFile.saveInBackground();
+	Building building = null;
+	String buildingName = spBuilding.getSelectedItem().toString();
+	if (buildingName == null || buildingName.startsWith(SPINNER_HINT_PREFIX))
+	{
+	    Toast.makeText(getActivity(), "Please select a building. ", Toast.LENGTH_SHORT).show();
+	}
+	else
+	{
+	    String buildingId = BuildingList.getInstance().getBuildingIdByName(buildingName);
+	    building = (Building) ParseObject.createWithoutData("Building", buildingId);
+	}
+	return building;
+    }
 
+    public ArrayList<ParseFile> addToParseFileList(Bitmap bitmap)
+    {
+	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+	byte[] imgData = stream.toByteArray();
+
+	ParseFile imgFile = new ParseFile(photoFileName, imgData);
+	imgFile.saveInBackground();
 	pictureList.add(imgFile);
+	
 	return pictureList;
     }
 
-    
-    
-    
     // ===================== Camera START =====================================
-    public final String APP_TAG = "THCApp";
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
-
-    //Respond to image placeholder to launch camera
+    // Respond to image placeholder to launch camera
     private OnClickListener getOnClickListener()
     {
 	return new OnClickListener()
@@ -198,6 +212,7 @@ public class CaseFragment extends Fragment implements IConstants
 	    {
 		// create Intent to take a picture and return control to the calling application
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		photoFileName = System.currentTimeMillis() + PHOTO_NAME_SUFIX;
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName)); // set the image file name
 		// Start the image capture intent to take photo
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
@@ -213,10 +228,11 @@ public class CaseFragment extends Fragment implements IConstants
 	    if (resultCode == Activity.RESULT_OK)
 	    {
 		Uri takenPhotoUri = getPhotoFileUri(photoFileName);
-		
+
 		// by this point we have the camera photo on disk
 		Bitmap takenImage = decodeSampledBitmapFromUri(takenPhotoUri.getPath(), 220, 220);
 
+		//Add image to srolling view
 		ImageView imageView = new ImageView(getActivity().getApplicationContext());
 		imageView.setLayoutParams(new LayoutParams(220, 220));
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -224,9 +240,8 @@ public class CaseFragment extends Fragment implements IConstants
 
 		photoContainer.addView(imageView);
 
-		// Load the taken image into a preview
-		// ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-		// ivPreview.setImageBitmap(takenImage);
+		//Add to Parse
+		addToParseFileList(takenImage);
 	    }
 	    else
 	    { // Result was a failure
@@ -294,8 +309,7 @@ public class CaseFragment extends Fragment implements IConstants
 
     // ===================== Camera END =====================================
 
-    
-    //Methods for Spinner
+    // Methods for Spinner
     public OnItemSelectedListener getOnItemSelectedListener()
     {
 	return new OnItemSelectedListener()
@@ -303,8 +317,8 @@ public class CaseFragment extends Fragment implements IConstants
 	    @Override
 	    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
 	    {
-		//String value = parent.getItemAtPosition(position).toString();
-		String value =((Spinner) parent).getSelectedItem().toString();
+		// String value = parent.getItemAtPosition(position).toString();
+		String value = ((Spinner) parent).getSelectedItem().toString();
 		setSpinnerToValue(((Spinner) parent), value);
 	    }
 
@@ -317,8 +331,8 @@ public class CaseFragment extends Fragment implements IConstants
 
 	};
     }
-    
-    //Methods for Spinner
+
+    // Methods for Spinner
     public void setSpinnerToValue(Spinner spinner, String value)
     {
 	int index = 0;
@@ -332,19 +346,18 @@ public class CaseFragment extends Fragment implements IConstants
 	}
 	spinner.setSelection(index);
     }
-    
-    
+
     private OnClickListener getOnCancelListener()
     {
 	return new OnClickListener()
-	   {
-	             @Override
-	             public void onClick(View v)
-	             {
-	        	getActivity().setResult(Activity.RESULT_CANCELED);
-	        	getActivity().finish();
-	             } 
-	   }; 
+	{
+	    @Override
+	    public void onClick(View v)
+	    {
+		getActivity().setResult(Activity.RESULT_CANCELED);
+		getActivity().finish();
+	    }
+	};
     }
 
     public static CaseFragment newInstance(Bundle args)

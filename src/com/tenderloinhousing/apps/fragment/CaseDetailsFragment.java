@@ -6,7 +6,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
-import com.tenderloinhousing.apps.adapter.CasePictureAdatper;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
@@ -28,7 +27,7 @@ public class CaseDetailsFragment extends Fragment {
 	private TextView tvPhone;
 	private TextView tvDesc;
 	private TextView tvUnit;
-	private CasePictureAdatper casePictureAdapter;
+//	private CasePictureAdatper casePictureAdapter;
 
 	
 	public void onCreate(Bundle savedInstanceState) {
