@@ -127,6 +127,7 @@ public class MapActivity extends FragmentActivity implements
 	            @Override
 	            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	                mSlidingUpPanelLayout.collapsePane();
+	                openCaseDetailIntent(caseList.get(position).getCaseId());
 	            }
 	        });
 		
@@ -323,13 +324,7 @@ public class MapActivity extends FragmentActivity implements
     
     public void addCasestoList(List <Case> caseList){
     	caseListAdapter.clear();
-//    	for (Case inputCase : caseList) {
-////    		String s = "Case " + inputCase.getCaseId() + " Status " + inputCase.getCaseStatus();
-////    		testData.add(s);
-////    		listAdapter.notifyDataSetChanged();
-//    	}
     	caseListAdapter.addAll(caseList);
-    	
     }
     
     
@@ -389,15 +384,18 @@ public class MapActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
-		Intent intent = new Intent(this, CaseActivity.class);
-		intent.putExtra(CASE_ID_KEY, caseMarkerMap.get(marker));
-		intent.putExtra(METHOD_KEY, METHOD_CODE_DETAIL);
-
-		startActivity(intent);
-		// TODO Auto-generated method stub
+		openCaseDetailIntent(caseMarkerMap.get(marker));
 		return true;
 	}
 
+	private void openCaseDetailIntent(String caseId){
+		Intent intent = new Intent(this, CaseActivity.class);
+		intent.putExtra(CASE_ID_KEY, caseId);
+		intent.putExtra(METHOD_KEY, METHOD_CODE_DETAIL);
+
+		startActivity(intent);
+	}
+	
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		// TODO Auto-generated method stub

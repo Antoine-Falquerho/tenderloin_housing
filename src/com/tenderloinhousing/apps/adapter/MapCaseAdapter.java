@@ -37,7 +37,7 @@ public class MapCaseAdapter extends ArrayAdapter<Case> {
 //		TextView tvIssueType = (TextView) v.findViewById(R.id.tvIssueType);
 		
 
-		ivProfileImg.setImageResource(android.R.color.transparent);
+//		ivProfileImg.setImageResource(android.R.color.transparent);
 		
 		tvCaseId.setText(inputCase.getCaseId());
 		tvCaseStatus.setText(inputCase.getCaseId());
