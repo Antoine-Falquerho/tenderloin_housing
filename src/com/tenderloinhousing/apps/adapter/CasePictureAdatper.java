@@ -22,7 +22,7 @@ import android.widget.ImageView;
 
 public class CasePictureAdatper extends BaseAdapter {
 
-	ArrayList<ParseFile> pictures = new ArrayList<>();
+	ArrayList<ParseFile> pictures;
 	LayoutInflater li;
 	
 	public CasePictureAdatper(Activity activity, ArrayList<ParseFile> pictures) {
@@ -32,6 +32,9 @@ public class CasePictureAdatper extends BaseAdapter {
 	
 	@Override
 	public int getCount() {
+		if (pictures==null) {
+			return 0;
+		}
 		return pictures.size();
 	}
 
