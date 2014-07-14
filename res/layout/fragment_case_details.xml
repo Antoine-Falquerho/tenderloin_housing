@@ -139,7 +139,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/gallery"	    	    
-	    android:text="Button" />	
+	    android:text="Share" />	
     
 </RelativeLayout>
 </ScrollView>
