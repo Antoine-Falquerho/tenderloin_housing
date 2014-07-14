@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.tenderloinhousing.apps.activity.BaseFragmentActivity;
+import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.fragment.CaseDetailsFragment;
 import com.tenderloinhousing.apps.fragment.CaseFragment;
 import com.tenderloinhousing.apps.model.Case;
@@ -67,36 +70,64 @@ public class CaseActivity extends BaseFragmentActivity
     	
     	String case_id = "LJ40s6IuTh";
     	
-    	// Define the class we would like to query
-    	ParseQuery<Case> query = ParseQuery.getQuery(Case.class);
-    	// Define our query conditions
-    	query.whereEqualTo("objectId", case_id);
-    	// Execute the find asynchronously
-    	query.findInBackground(new FindCallback<Case>() {
-    	    public void done(List<Case> itemList, ParseException e) {
-    	        if (e == null) {
-    	            // Access the array of results here
-    	            Case myCase = itemList.get(0);
-    	            
-    	            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    	ParseDAO.getCaseById(case_id, new GetCallback<Case>() {
+	           @Override
+				public void done(Case foundCase, ParseException e) {
+					if (e == null) {
+	                    if (foundCase!=null){
+	                    	Case myCase = foundCase;
+	        	            
+	        	            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-    	    		Bundle bundle = new Bundle();
-    	    		//TODO populate case details into Bundle here
-    	    		// bundle.putString(SCREEN_NAME_KEY, screenName);
-    	    		
-    	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle, myCase);
-    	    		
-    	    		transaction.replace(R.id.flCase, detailsFragment);
-    	    	
-    	    		transaction.commit();
-    	    		
-    	            Toast.makeText(CaseActivity.this, myCase.getDescription(), Toast.LENGTH_SHORT).show();
-    	        } else {
-    	            Log.d("item", "Error: " + e.getMessage());
-    	        }
-    	    }
-
-    	});
+	        	    		Bundle bundle = new Bundle();
+	        	    		//TODO populate case details into Bundle here
+	        	    		// bundle.putString(SCREEN_NAME_KEY, screenName);
+	        	    		
+	        	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle, myCase);
+	        	    		
+	        	    		transaction.replace(R.id.flCase, detailsFragment);
+	        	    	
+	        	    		transaction.commit();
+	                    }
+	                } else {
+                 	Toast.makeText(getApplicationContext(), "No case with that id",Toast.LENGTH_LONG).show();
+	                    Log.d(ERROR, "Error: " + e.getMessage());
+	                }
+					
+				}
+	        });
+//    	
+//    	
+//    	// Define the class we would like to query
+//    	ParseQuery<Case> query = ParseQuery.getQuery(Case.class);
+//    	// Define our query conditions
+//    	query.whereEqualTo("objectId", case_id);
+//    	// Execute the find asynchronously
+//    	query.findInBackground(new FindCallback<Case>() {
+//    	    public void done(List<Case> itemList, ParseException e) {
+//    	        if (e == null) {
+//    	            // Access the array of results here
+//    	            Case myCase = itemList.get(0);
+//    	            
+//    	            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//
+//    	    		Bundle bundle = new Bundle();
+//    	    		//TODO populate case details into Bundle here
+//    	    		// bundle.putString(SCREEN_NAME_KEY, screenName);
+//    	    		
+//    	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle, myCase);
+//    	    		
+//    	    		transaction.replace(R.id.flCase, detailsFragment);
+//    	    	
+//    	    		transaction.commit();
+//    	    		
+//    	            Toast.makeText(CaseActivity.this, myCase.getDescription(), Toast.LENGTH_SHORT).show();
+//    	        } else {
+//    	            Log.d("item", "Error: " + e.getMessage());
+//    	        }
+//    	    }
+//
+//    	});
 
     	
     }
