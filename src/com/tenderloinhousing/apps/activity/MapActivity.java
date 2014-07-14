@@ -40,8 +40,9 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.CaseActivity;
+import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.adapter.MapCaseAdapter;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.BuildingList;
@@ -76,9 +77,10 @@ public class MapActivity extends FragmentActivity implements
 	private MenuItem searchItem;
 	private SearchView mSearchView;
 	private List<Case> mapCases;
-	ArrayList<String> testData;
-	ArrayAdapter<String> listAdapter;
+	private ArrayList<Case> caseList;
+	private MapCaseAdapter caseListAdapter;
 
+	private LatLng latLng;
 	/*
 	 * Define a request code to send to Google Play services This code is
 	 * returned in Activity.onActivityResult
@@ -116,19 +118,16 @@ public class MapActivity extends FragmentActivity implements
 	        mTransparentHeaderView = LayoutInflater.from(this).inflate(R.layout.transparent_header_view, null, false);
 	        mSpaceView = mTransparentHeaderView.findViewById(R.id.space);
 
-//	        testData = new ArrayList<String>(100);
-	        testData = new ArrayList<String>(100);
-	        for (int i = 0; i < 100; i++) {
-	            testData.add("Item " + i);
-	        }
 
 	        mListView.addHeaderView(mTransparentHeaderView);
-	        listAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item, testData);
-	        mListView.setAdapter(listAdapter);
+	        caseList = new ArrayList <Case>();
+	        caseListAdapter = new MapCaseAdapter(this,caseList);
+	        mListView.setAdapter(caseListAdapter);
 	        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 	            @Override
 	            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	                mSlidingUpPanelLayout.collapsePane();
+	                openCaseDetailIntent(caseList.get(position).getCaseId());
 	            }
 	        });
 		
@@ -202,6 +201,8 @@ public class MapActivity extends FragmentActivity implements
 		}
 	}
 
+	
+
 	/*
 	 * Called by Location Services when the request to connect the client
 	 * finishes successfully. At this point, you can request the current
@@ -213,7 +214,7 @@ public class MapActivity extends FragmentActivity implements
 		Location location = mLocationClient.getLastLocation();
 		if (location != null) {
 			Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
-			LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+			latLng = new LatLng(location.getLatitude(), location.getLongitude());
 //			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
 //			map.animateCamera(cameraUpdate);
 		} else {
@@ -261,6 +262,7 @@ public class MapActivity extends FragmentActivity implements
 	}
 	
 	
+	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -268,6 +270,7 @@ public class MapActivity extends FragmentActivity implements
     MenuItem searchItem = menu.findItem(R.id.menu_search);
     mSearchView = (SearchView) searchItem.getActionView();
     setupSearchView(searchItem);
+        
 	getMenuInflater().inflate(R.menu.menu_login, menu);
 	getMenuInflater().inflate(R.menu.menu_report, menu);
 	return true;
@@ -305,6 +308,7 @@ public class MapActivity extends FragmentActivity implements
     {
 	Intent intent = new Intent(this, CaseActivity.class);	
 	intent.putExtra(METHOD_KEY, METHOD_CODE_CREATE);
+	intent.putExtra(LATLNG_KEY, latLng);
 	startActivity(intent);		
     }
 
@@ -319,13 +323,8 @@ public class MapActivity extends FragmentActivity implements
     }
     
     public void addCasestoList(List <Case> caseList){
-    	testData.clear();
-    	for (Case inputCase : caseList) {
-    		String s = "Case " + inputCase.getCaseId() + " Status " + inputCase.getCaseStatus();
-    		testData.add(s);
-    		listAdapter.notifyDataSetChanged();
-    	}
-    	
+    	caseListAdapter.clear();
+    	caseListAdapter.addAll(caseList);
     }
     
     
@@ -385,15 +384,18 @@ public class MapActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
-		Intent intent = new Intent(this, CaseActivity.class);
-		intent.putExtra(CASE_ID_KEY, caseMarkerMap.get(marker));
-		intent.putExtra(METHOD_KEY, METHOD_CODE_DETAIL);
-
-		startActivity(intent);
-		// TODO Auto-generated method stub
+		openCaseDetailIntent(caseMarkerMap.get(marker));
 		return true;
 	}
 
+	private void openCaseDetailIntent(String caseId){
+		Intent intent = new Intent(this, CaseActivity.class);
+		intent.putExtra(CASE_ID_KEY, caseId);
+		intent.putExtra(METHOD_KEY, METHOD_CODE_DETAIL);
+
+		startActivity(intent);
+	}
+	
 	@Override
 	public boolean onQueryTextSubmit(String query) {
 		// TODO Auto-generated method stub

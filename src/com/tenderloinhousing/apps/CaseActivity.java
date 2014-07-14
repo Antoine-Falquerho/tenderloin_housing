@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -17,7 +18,8 @@ import com.tenderloinhousing.apps.model.Case;
 
 public class CaseActivity extends BaseFragmentActivity
 {
-
+    LatLng laglng;
+    
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -25,6 +27,7 @@ public class CaseActivity extends BaseFragmentActivity
 		setContentView(R.layout.activity_case);
 	
 		String method = getIntent().getStringExtra(METHOD_KEY);			
+		laglng = getIntent().getParcelableExtra(LATLNG_KEY);
 		
 		switch (method)
 		{
@@ -51,19 +54,16 @@ public class CaseActivity extends BaseFragmentActivity
 	FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 	Bundle bundle = new Bundle();
-	//TODO populate case details into Bundle here
-	// bundle.putString(SCREEN_NAME_KEY, screenName);
-	
-	CaseFragment caseFragment = CaseFragment.newInstance(bundle);
-	
+	bundle.putParcelable(LATLNG_KEY, laglng);	
+	CaseFragment caseFragment = CaseFragment.newInstance(bundle);	
 	transaction.replace(R.id.flCase, caseFragment);
-
+	
 	transaction.commit();
     }
     
     private void showCaseDetailFragment()
     {    	
-//    	String case_id = getIntent().getStringExtra("case_id");
+//    	String case_id = getIntent().getStringExtra(CASE_ID_KEY);
     	
     	String case_id = "LJ40s6IuTh";
     	
