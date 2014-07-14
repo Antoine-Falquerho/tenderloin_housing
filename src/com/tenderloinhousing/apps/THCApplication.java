@@ -9,6 +9,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
+import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
@@ -37,8 +38,7 @@ public class THCApplication extends Application
 
 	Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
-	//    String id = buildingList.getBuildingIdByName("Vincent Hotel");
-	//    Log.d("DEBUG", id);
+	//ParseDAO.getCaseById("LJ40s6IuTh", null);
 	
     }
 }

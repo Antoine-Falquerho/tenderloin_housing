@@ -76,4 +76,22 @@ public final class BuildingList<T> extends ArrayList<T> implements IConstants
 
 	return buildingId;
     }
+    
+    public static String getBuildingAddressByName(String name)
+    {
+	String address = null;
+	
+	List<Building> buildingList = getInstance();
+	if (!buildingList.isEmpty())
+	{
+	    for (Building building : buildingList)
+	    {
+		if (building.getName().equals(name)) // TODO Will visit this later. Should do a "like" kind of matching
+		    address = building.getAddress();
+	    }
+	}
+
+	return address;
+    }
+
 }

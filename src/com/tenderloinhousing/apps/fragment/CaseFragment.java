@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -62,7 +64,7 @@ public class CaseFragment extends Fragment implements IConstants
     private ImageView ivPhoto;
     LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
-    private String photoFileName;
+    String photoFileName;
 
     @Override
     public void onAttach(Activity activity)
@@ -118,67 +120,115 @@ public class CaseFragment extends Fragment implements IConstants
 	    public void onClick(View v)
 	    {
 		submitCase();
-		getActivity().setResult(Activity.RESULT_CANCELED);
-		getActivity().finish();
 	    }
 	};
     }
 
     public void submitCase()
     {
-	Case newCase = new Case();
-	newCase.setIssueType(spIssueType.getSelectedItem().toString());
-	newCase.setDescription(etDescription.getText().toString());
-	newCase.setUnit(etUnit.getText().toString());
-	newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
-	newCase.setGeoLocation(laglng.latitude, laglng.longitude);
+	boolean isOk = true;
+
+	Case newCase = buildCase(isOk);
 
 	// Tenant
-	User user = (User) ParseUser.getCurrentUser();
-	user.setName(etName.getText().toString());
-	user.setEmail(etEmail.getText().toString());
-	user.setPhone(etPhone.getText().toString());
-	user.setLanguage(etLanguage.getText().toString());
-	newCase.setTenant(user);
+	newCase.setTenant(buildUser(isOk));
 
 	// Building
-	Building buildingObj = getBuilding();
-	if (buildingObj == null)
-	    return;
-	newCase.setBuilding(buildingObj);
+	Building buildingObj = buildBuilding(isOk);
+	if(buildingObj != null)
+	    newCase.setBuilding(buildingObj);
 
 	// Pictures
-	newCase.setPictures(pictureList);
-	newCase.saveInBackground();
+	if (!pictureList.isEmpty())
+	    newCase.setPictures(pictureList); 
 
-	// Save the post and return
-	ParseDAO.createCase(newCase, new SaveCallback()
+	if (isOk)
 	{
-	    @Override
-	    public void done(ParseException e)
+	    // Save the post and return
+	    ParseDAO.createCase(newCase, new SaveCallback()
 	    {
-		if (e == null)
+		@Override
+		public void done(ParseException e)
 		{
-		    Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
-		    getActivity().finish();
+		    if (e == null)
+		    {
+			Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
+			getActivity().finish();
+		    }
+		    else
+		    {
+			Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
+			Log.d(ERROR, "createCase failure : " + e.getMessage());
+		    }
 		}
-		else
-		{
-		    Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
-		    Log.d(ERROR, "createCase failure : " + e.getMessage());
-		}
-	    }
-
-	});
+	    });
+	}
     }
 
-    private Building getBuilding()
+    private Case buildCase(boolean isOk)
+    {
+	Case newCase = new Case();
+
+	String issueType = spIssueType.getSelectedItem().toString();
+	if (issueType == null || issueType.startsWith(SPINNER_HINT_PREFIX))
+	{
+	    Toast.makeText(getActivity(), "Please select a Violation Type. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
+	}
+	else
+	{
+	    newCase.setIssueType(issueType);
+	    newCase.setDescription(etDescription.getText().toString());
+	    newCase.setUnit(etUnit.getText().toString());
+	    newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
+	    newCase.setGeoLocation(laglng.latitude, laglng.longitude);
+	}
+	return newCase;
+    }
+
+    private User buildUser(boolean isOk)
+    {
+	User user = (User) ParseUser.getCurrentUser();
+
+	// Name
+	String name = etName.getText().toString();
+	if (StringUtils.isEmpty(name))
+	{
+	    Toast.makeText(getActivity(), "Please enter your full name. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
+	}
+	else
+	{
+	    user.setName(name);
+	}
+
+	// Email
+	user.setEmail(etEmail.getText().toString());
+
+	// Phone
+	String phone = etPhone.getText().toString();
+	if (StringUtils.isEmpty(phone))
+	{
+	    Toast.makeText(getActivity(), "Please enter your phone. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
+	}
+	else
+	    user.setPhone(phone);
+
+	// Lanuage
+	user.setLanguage(etLanguage.getText().toString());
+
+	return user;
+    }
+
+    private Building buildBuilding(boolean isOk)
     {
 	Building building = null;
 	String buildingName = spBuilding.getSelectedItem().toString();
 	if (buildingName == null || buildingName.startsWith(SPINNER_HINT_PREFIX))
 	{
 	    Toast.makeText(getActivity(), "Please select a building. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
 	}
 	else
 	{
@@ -197,7 +247,7 @@ public class CaseFragment extends Fragment implements IConstants
 	ParseFile imgFile = new ParseFile(photoFileName, imgData);
 	imgFile.saveInBackground();
 	pictureList.add(imgFile);
-	
+
 	return pictureList;
     }
 
@@ -232,7 +282,7 @@ public class CaseFragment extends Fragment implements IConstants
 		// by this point we have the camera photo on disk
 		Bitmap takenImage = decodeSampledBitmapFromUri(takenPhotoUri.getPath(), 220, 220);
 
-		//Add image to srolling view
+		// Add image to srolling view
 		ImageView imageView = new ImageView(getActivity().getApplicationContext());
 		imageView.setLayoutParams(new LayoutParams(220, 220));
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -240,7 +290,7 @@ public class CaseFragment extends Fragment implements IConstants
 
 		photoContainer.addView(imageView);
 
-		//Add to Parse
+		// Add to Parse
 		addToParseFileList(takenImage);
 	    }
 	    else
@@ -320,6 +370,9 @@ public class CaseFragment extends Fragment implements IConstants
 		// String value = parent.getItemAtPosition(position).toString();
 		String value = ((Spinner) parent).getSelectedItem().toString();
 		setSpinnerToValue(((Spinner) parent), value);
+		
+		if(((Spinner) parent)== spBuilding)
+		   etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value)); 		
 	    }
 
 	    @Override
