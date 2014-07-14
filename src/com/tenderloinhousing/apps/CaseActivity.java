@@ -32,11 +32,14 @@ public class CaseActivity extends BaseFragmentActivity
 		switch (method)
 		{
 	        	case METHOD_CODE_DETAIL:
-	        		showCaseDetailFragment();	        	    
+	        		showCaseDetailFragment();	
+	        		break;
 	        	case METHOD_CODE_CREATE:
 	        		showCreateCaseFragment();	        	    
+	        		break;
 	        	default:
 	        		showCreateCaseFragment();        	    
+	        		break;
 		}
 
 
@@ -44,6 +47,10 @@ public class CaseActivity extends BaseFragmentActivity
 
     private void showCreateCaseFragment()
     {
+    	
+   Log.d("showCreateCaseFragment", "##");
+    	
+    	
 	FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 	Bundle bundle = new Bundle();
@@ -58,7 +65,7 @@ public class CaseActivity extends BaseFragmentActivity
     {    	
     	String case_id = getIntent().getStringExtra(CASE_ID_KEY);
     	
-//    	String case_id = "MbHt8dslg3";
+//    	String case_id = "PSG5oTjcvS";
     	
     	// Define the class we would like to query
     	ParseQuery<Case> query = ParseQuery.getQuery(Case.class);
