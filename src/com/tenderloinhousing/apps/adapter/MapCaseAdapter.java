@@ -1,11 +1,18 @@
 package com.tenderloinhousing.apps.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.R;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,18 +38,26 @@ public class MapCaseAdapter extends ArrayAdapter<Case> {
 			v = inflator.inflate(R.layout.case_list_item, parent, false);
 		}
 
-		ImageView ivProfileImg = (ImageView) v.findViewById(R.id.ivCaseImg);
 		TextView tvCaseId = (TextView) v.findViewById(R.id.tvCaseId);
 		TextView tvCaseStatus = (TextView) v.findViewById(R.id.tvCaseStatus);
-//		TextView tvIssueType = (TextView) v.findViewById(R.id.tvIssueType);
-		
-
-//		ivProfileImg.setImageResource(android.R.color.transparent);
 		
 		tvCaseId.setText(inputCase.getCaseId());
 		tvCaseStatus.setText(inputCase.getCaseId());
-//		tvIssueType.setText(inputCase.getIssueType());
-//		tvDescription.setText(inputCase.getDescription());
+
+		ArrayList<ParseFile> pictureList = inputCase.getPictures();
+		if (pictureList!=null){
+		
+		ParseFile picture = pictureList.get(0);
+			ParseImageView caseImage = (ParseImageView) v.findViewById(R.id.ivCaseImg);
+		    if (picture != null) {
+		    	caseImage.setParseFile(picture);
+		    	caseImage.loadInBackground(new GetDataCallback() {
+		            @Override
+		            public void done(byte[] data, ParseException e) {
+		            }
+		        });
+		    }
+		}
 
 		return v;
 	}

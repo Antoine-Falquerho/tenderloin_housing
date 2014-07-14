@@ -325,6 +325,7 @@ public class MapActivity extends FragmentActivity implements
     public void addCasestoList(List <Case> caseList){
     	caseListAdapter.clear();
     	caseListAdapter.addAll(caseList);
+    	caseListAdapter.notifyDataSetChanged();
     }
     
     
@@ -341,7 +342,10 @@ public class MapActivity extends FragmentActivity implements
     		}
            
     	}
-    	map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 300));
+    	
+    	if (caseList.size() > 0){
+    	  map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 300));
+    	}
     	
     }
     
