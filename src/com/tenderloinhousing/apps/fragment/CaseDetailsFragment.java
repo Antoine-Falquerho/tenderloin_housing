@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
 
 public class CaseDetailsFragment extends Fragment {
@@ -28,6 +29,8 @@ public class CaseDetailsFragment extends Fragment {
 	private TextView tvPhone;
 	private TextView tvDesc;
 	private TextView tvUnit;
+	private GridView gdView;
+	
 	private CasePictureAdatper casePictureAdapter;
 
 	
@@ -62,7 +65,12 @@ public class CaseDetailsFragment extends Fragment {
 		tvDesc.setText(myCase.getDescription());
 		tvUnit = (TextView)view.findViewById(R.id.tvUnit);
 		tvUnit.setText(myCase.getUnit());
+		gdView = (GridView)view.findViewById(R.id.gridview);
+		
 		ArrayList<ParseFile> pictures = myCase.getPictures();
+		
+		casePictureAdapter = new CasePictureAdatper(getActivity(), pictures);
+		gdView.setAdapter(casePictureAdapter);
 		
 		return view;
 	}

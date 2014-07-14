@@ -294,7 +294,7 @@ public class MapActivity extends FragmentActivity implements
 	            public void done(List<Case> caseList, com.parse.ParseException e) {
 	                if (e == null) {
 	                    for (Case inputCase : caseList) {
-	                        Log.d(DEBUG, " Obtained Building geo " + inputCase.getBuilding().getAddress());
+//	                        Log.d(DEBUG, " Obtained Building geo " + inputCase.getBuilding().getAddress());
 	                    }
 	                    mapCases = caseList;
 	                    addMarkers(mapCases);
