@@ -101,7 +101,11 @@ public class CaseDetailsFragment extends Fragment {
 			public void onClick(View v) {
 				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
 				sharingIntent.setType("text/html");
-				sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>This is the text shared.</p>"));
+				sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
+						Html.fromHtml("<h1> Case id #" + myCase.getCaseId() + "</h1>" +								
+								"<p>Unit" + myCase.getUnit() + "</p>" +
+								"<p>Issue type" + myCase.getIssueType() + "</p>" +
+								"<p>" + myCase.getDescription() + "</p>"));
 				startActivity(Intent.createChooser(sharingIntent,"Share using"));
 				
 			}
