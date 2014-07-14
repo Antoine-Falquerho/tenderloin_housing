@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.squareup.picasso.Picasso;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.fragment.CaseDetailsFragment;
 import com.tenderloinhousing.apps.model.Case;
@@ -24,10 +25,12 @@ public class CasePictureAdatper extends BaseAdapter {
 
 	ArrayList<ParseFile> pictures;
 	LayoutInflater li;
+	Context context;
 	
 	public CasePictureAdatper(Activity activity, ArrayList<ParseFile> pictures) {
 		this.pictures = pictures;
 		this.li = activity.getLayoutInflater();
+		this.context = activity;
 	}
 	
 	@Override
@@ -59,16 +62,12 @@ public class CasePictureAdatper extends BaseAdapter {
 		
 		
 		ParseFile currentParseFile = pictures.get(position);
-		
-		byte[] byteArray;
-
-		try {
-			byteArray = currentParseFile.getData();
-			Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-			((ImageView)view.findViewById(R.id.imageView1)).setImageBitmap(bmp);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		String image = currentParseFile.getUrl();
+			
+//		String image = "http://i.imgur.com/DvpvklR.png";
+		Picasso.with(context).load(image).into((ImageView)view.findViewById(R.id.imageView1));
+			
+			
 		
 		return view;
 	}

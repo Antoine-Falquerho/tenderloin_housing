@@ -114,7 +114,7 @@
         android:layout_alignParentRight="true"
         android:text="@string/language" />
 
-	<GridView 
+<!-- 	<GridView 
 	    android:id="@+id/gridview"
 	    android:layout_below="@id/tvViolDesc"
 	    android:layout_width="match_parent" 
@@ -125,9 +125,21 @@
 	    android:horizontalSpacing="10dp"
 	    android:stretchMode="columnWidth"
 	    android:gravity="center"
-	    android:background="#99344566"
 	/>
+	 -->
+	 <Gallery
+        android:id="@+id/gallery"
+        android:layout_below="@+id/tvViolDesc"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp" />
+	
 
+	<Button
+	    android:id="@+id/btnShare"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/gallery"	    	    
+	    android:text="Button" />	
     
 </RelativeLayout>
 </ScrollView>
