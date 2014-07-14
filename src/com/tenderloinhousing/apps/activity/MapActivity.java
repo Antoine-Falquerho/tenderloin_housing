@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -127,7 +128,8 @@ public class MapActivity extends FragmentActivity implements
 	            @Override
 	            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	                mSlidingUpPanelLayout.collapsePane();
-	                openCaseDetailIntent(caseList.get(position).getCaseId());
+	                String caseId = ((TextView) view.findViewById(R.id.tvCaseId)).getText().toString();
+	                openCaseDetailIntent(caseId);
 	            }
 	        });
 		
@@ -367,9 +369,6 @@ public class MapActivity extends FragmentActivity implements
 	            @Override
 	            public void done(List<Case> caseList, com.parse.ParseException e) {
 	                if (e == null) {
-	                    for (Case inputCase : caseList) {
-//	                        Log.d(DEBUG, " Obtained Building geo " + inputCase.getBuilding().getAddress());
-	                    }
 	                    mapCases = caseList;
 	                    addMarkers(caseList); 
 	                    repopulateCasestoList(caseList);
@@ -385,7 +384,6 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	public boolean onMarkerClick(final Marker marker) {
 		populateCasebyId(caseMarkerMap.get(marker));
-//		openCaseDetailIntent(caseMarkerMap.get(marker));
 		mSlidingUpPanelLayout.collapsePane();
 		return true;
 	}
