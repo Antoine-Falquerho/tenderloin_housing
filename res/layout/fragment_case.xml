@@ -219,6 +219,7 @@
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/hvPhotoScroll"
 			android:layout_marginTop="20dp"
+			android:layout_marginBottom="20dp"
 			android:gravity="center"
 			android:orientation="horizontal" >
 			<Button

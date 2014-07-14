@@ -39,6 +39,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.constant.CaseStatus;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.BuildingList;
@@ -182,6 +183,7 @@ public class CaseFragment extends Fragment implements IConstants
 	    newCase.setUnit(etUnit.getText().toString());
 	    newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
 	    newCase.setGeoLocation(laglng.latitude, laglng.longitude);
+	    newCase.setCaseStatus(CaseStatus.SUBMITTED.toString());
 	}
 	return newCase;
     }
