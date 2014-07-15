@@ -1,153 +1,438 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
-<RelativeLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp"
-    tools:context="${packageName}.${activityClass}" >
-
-    <TextView
-        android:id="@+id/tvFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvFullName"
-        android:layout_marginTop="20dp"
-        android:text="Unit"/>
-
-    <TextView
-        android:id="@+id/tvUnit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:textColor="#000"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/tvLanguageSpoken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvUnit"
-        android:layout_alignBottom="@+id/tvUnit"
-        android:layout_alignLeft="@+id/textView2"
-        android:textColor="#000"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvUnit"
-        android:layout_marginTop="20dp"
-        android:text="@string/email" />
-
-    <TextView
-        android:id="@+id/tvEmail_"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
-        android:textColor="#000"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvPhone"
-        android:layout_marginTop="20dp"
-        android:text="@string/caseDesc" />
-
-    <TextView
-        android:id="@+id/tvViolDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView5"
-        android:textColor="#000"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tvEmail_"
-        android:layout_marginTop="20dp"
-        android:text="@string/phone" />
-
-    <TextView
-        android:id="@+id/tvPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView4"
-        android:textColor="#000"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignParentRight="true"
-        android:text="@string/language" />
-
-<!-- 	<GridView 
-	    android:id="@+id/gridview"
-	    android:layout_below="@id/tvViolDesc"
-	    android:layout_width="match_parent" 
-	    android:layout_height="300dp"
-	    android:columnWidth="90dp"
-	    android:numColumns="auto_fit"
-	    android:verticalSpacing="10dp"
-	    android:horizontalSpacing="10dp"
-	    android:stretchMode="columnWidth"
-	    android:gravity="center"
-	/>
-	 -->
-	 <Gallery
-        android:id="@+id/gallery"
-        android:layout_below="@+id/tvViolDesc"
-        android:layout_width="fill_parent"
-        android:layout_height="300dp" />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:layout_margin="10dp" >	
 	
-
-	<Button
-	    android:id="@+id/btnShare"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@id/gallery"	    	    
-	    android:text="Share" />
-
-	<Button
-	    android:id="@+id/btnEdit"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_alignParentRight="true"
-	    android:text="Edit" />
-    
-</RelativeLayout>
+	<!-- List View -->
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:divider="@drawable/divider"
+		android:orientation="vertical" >		
+		  
+    <!--  ============================== Row ===  Header (Building Profile) ==================================== -->
+       <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <ImageView
+            android:id="@+id/ivBuildingImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/photo_placeholder" />
+        <TextView
+            android:id="@+id/tvBuildingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivBuildingImage"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:text="Hotel Name"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBuildingName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Address"
+            android:textSize="12sp" />
+        </RelativeLayout>
+        
+		<!--  ============================== Row === Case Number / Is Multi-Unit ==================================== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:divider="@drawable/divider"
+            android:gravity="center"
+            android:orientation="horizontal" 
+            android:baselineAligned="false">
+            
+            <!-- Left Box -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:layout_weight="1">
+                <!-- Case Number -->
+                <TextView
+                    android:id="@+id/labelCaseId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/caseNumber"
+                    android:textColor="#7e7e7e"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvCaseNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/labelCaseId"
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:text="@string/caseNumber"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            
+            <!-- Right Box -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/labelMulti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
+                    android:text="@string/isMultiUnit"
+                    android:textColor="#7e7e7e"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvMulti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"                    
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:gravity="left"
+                    android:layout_below="@+id/labelMulti"
+                    android:text="No"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </LinearLayout>
+        
+		<!--  ============================== Row ====>  Name / Language ==================================== -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginTop="20dp"
+			android:divider="@drawable/divider"
+			android:gravity="center"
+			android:orientation="horizontal" 
+			android:baselineAligned="false">
+			
+			<!-- Left Box -->
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" 
+				android:layout_weight="1">
+				<!-- Full Name -->
+				<TextView
+					android:id="@+id/labelL"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:text="@string/fullName"
+					android:textColor="#7e7e7e"
+					android:textSize="12sp" />
+				<TextView
+					android:id="@+id/tvFullName"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"                    
+                    style="?android:attr/listSeparatorTextViewStyle"					
+					android:layout_below="@+id/labelL"
+					android:text="@string/fullName"
+					android:textColor="#000000"
+					android:textSize="14sp" />
+			</RelativeLayout>
+			
+			<!-- Right Box -->
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" 
+				android:layout_weight="1">
+				<!-- Language -->
+				<TextView
+					android:id="@+id/labelR"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:gravity="left"
+					android:text="@string/language"
+					android:textColor="#7e7e7e"
+					android:textSize="12sp" />
+				<TextView
+					android:id="@+id/tvLanguageSpoken"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"                    
+                    style="?android:attr/listSeparatorTextViewStyle"					
+                    android:gravity="left"
+					android:layout_below="@+id/labelR"
+					android:text="English"
+					android:textColor="#000000"
+					android:textSize="14sp" />
+			</RelativeLayout>
+		</LinearLayout>
+		
+        <!--  ============================== Row ===>  Phone / Email ==================================== -->
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:divider="@drawable/divider"
+            android:gravity="center"
+            android:orientation="horizontal" 
+            android:baselineAligned="false">
+            
+            <!-- Left Box -->
+	        <RelativeLayout
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content" 
+	                 android:layout_weight="1">
+	                <TextView
+	                    android:id="@+id/labelPhone"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentLeft="true"
+	                    android:text="@string/phone"
+	                    android:textColor="#7e7e7e"
+	                    android:textSize="12sp" />
+	                <TextView
+	                    android:id="@+id/tvPhone"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"                    
+                        style="?android:attr/listSeparatorTextViewStyle"	                    
+	                    android:layout_below="@+id/labelPhone"
+	                    android:text="@string/phone"
+	                    android:textColor="#000000"
+	                    android:textSize="14sp" />
+	       </RelativeLayout>
+	 
+	       <RelativeLayout
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content" 
+	                 android:layout_weight="1" >
+	                <TextView
+	                    android:id="@+id/labelEmail"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentLeft="true"
+	                    android:gravity="left"
+	                    android:text="@string/email"
+	                    android:textColor="#7e7e7e"
+	                    android:textSize="12sp" />
+	                <TextView
+	                    android:id="@+id/tvEmail"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"                    
+                     style="?android:attr/listSeparatorTextViewStyle"	                    
+	                    android:gravity="left"
+	                    android:layout_below="@+id/labelEmail"
+	                    android:text="@string/email"
+	                    android:textColor="#000000"
+	                    android:textSize="14sp" />
+	       </RelativeLayout>
+        </LinearLayout>
+       <!--  ============================== Row ===> Hotel / Unit ==================================== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:divider="@drawable/divider"
+            android:gravity="center"
+            android:orientation="horizontal" 
+           android:baselineAligned="false">
+            
+            <!-- Left Box -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:layout_weight="1">
+                <!-- Hotel -->
+                <TextView
+                    android:id="@+id/labelHotel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/building"
+                    android:textColor="#7e7e7e"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvHotel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"                    
+                    style="?android:attr/listSeparatorTextViewStyle"                    
+                    android:layout_below="@+id/labelHotel"
+                    android:text="@string/building"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+            
+            <!-- Right Box -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:layout_weight="1">
+                <!-- Unit -->
+                <TextView
+                    android:id="@+id/labelUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
+                    android:text="@string/unitNumber"
+                    android:textColor="#7e7e7e"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                     android:layout_alignParentRight="true"                    
+                    style="?android:attr/listSeparatorTextViewStyle"                   
+                    android:gravity="left"
+                    android:layout_below="@+id/labelUnit"
+                    android:text="@string/unitNumber"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </LinearLayout>
+            
+            <!--  ============================== Row ===>  Violation Type ==================================== -->      
+       <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="20dp" >
+                <TextView
+                    android:id="@+id/labelType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
+                    android:text="@string/issueType"
+                    android:textColor="#7e7e7e"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvViolationType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"                    
+                    style="?android:attr/listSeparatorTextViewStyle"                    
+                    android:gravity="left"
+                    android:layout_below="@+id/labelType"
+                    android:text="@string/issueType"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+       </RelativeLayout>
+         
+         <!--  ============================== Row ===> Description ==================================== -->
+       <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                 android:layout_marginTop="20dp">
+                <!-- Phone -->
+                <TextView
+                    android:id="@+id/labelDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/caseDesc"
+                    android:textColor="#7e7e7e"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvViolDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"                    
+                    style="?android:attr/listSeparatorTextViewStyle"                    
+                    android:layout_below="@+id/labelDesc"
+                    android:text="@string/caseDesc"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+       </RelativeLayout>
+	
+      <!--  ============================== Row ===> Photos ==================================== -->
+            
+      <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                 android:layout_marginTop="20dp">
+	        <TextView
+	            android:id="@+id/tvPhoto"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:text="@string/addPhotos"
+	            android:textColor="#7e7e7e"
+	            android:textSize="12sp" />
+	        
+	        <HorizontalScrollView
+	            android:id="@+id/hvPhotoScroll"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/tvPhoto"
+	            android:layout_marginLeft="10dp">
+	            <LinearLayout
+	                android:id="@+id/photoContainer"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:orientation="horizontal" >
+	            </LinearLayout>
+	        </HorizontalScrollView>
+    </RelativeLayout>
+         
+           <!--  ============================== Row ===> Action Buttons ==================================== --> 
+        <LinearLayout
+            android:id="@+id/llButtonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_shape"
+                android:shadowColor="#33b5fa"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="@string/edit"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+            <Button
+                android:id="@+id/btnShare"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:background="@drawable/button_shape"
+                android:shadowColor="#33b5fa"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="@string/share"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout> 	
+        
+   
+		
+	</LinearLayout><!-- List View End -->
 </ScrollView>

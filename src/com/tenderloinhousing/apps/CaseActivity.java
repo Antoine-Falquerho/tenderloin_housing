@@ -63,9 +63,9 @@ public class CaseActivity extends BaseFragmentActivity
     
     private void showCaseDetailFragment()
     {    	
-//    	String case_id = getIntent().getStringExtra(CASE_ID_KEY);
+    	String case_id = getIntent().getStringExtra(CASE_ID_KEY);
     	
-    	String case_id = "LJ40s6IuTh";
+    	// case_id = "BJE0Ob2lg8";
     	
     	ParseDAO.getCaseById(case_id, new GetCallback<Case>() {
 	           @Override

@@ -2,8 +2,9 @@ package com.tenderloinhousing.apps.fragment;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,14 +14,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.CasePictureAdatper;
 import com.tenderloinhousing.apps.constant.IConstants;
@@ -29,15 +31,21 @@ import com.tenderloinhousing.apps.model.User;
 
 public class CaseDetailsFragment extends Fragment implements IConstants {
 	private Case myCase;
-	private ParseUser user;
+	private User user;
 	private TextView tvFullName;
 	private TextView tvLanguageSpoken;
 	private TextView tvEmail;
 	private TextView tvPhone;
 	private TextView tvDesc;
+	private TextView tvViolationType;
+	private TextView tvMulti;
 	private TextView tvUnit;
-//	private GridView gdView;
-	private Gallery glyView;
+	private ImageView ivBuildingImage;
+	private TextView tvBuildingName;
+	private TextView tvAddress;
+	private TextView tvCaseNumber;
+	private ImageView ivPhoto;
+	private LinearLayout photoContainer;
 	
 	private Button btnShare;
 	private Button btnEdit;
@@ -55,7 +63,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_case_details, container, false);
-		user = myCase.getTenant();		
+		user = (User) myCase.getTenant();		
 		try {
 			user.fetchIfNeeded();
 		} catch (ParseException e) {
@@ -65,40 +73,63 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 		
 		Log.d("DEBUG", myCase.getCaseId() + "------");
 		tvFullName = (TextView)view.findViewById(R.id.tvFullName);		
-		tvFullName.setText(user.getUsername());
+		tvFullName.setText(user.getName());
+		
 		tvLanguageSpoken = (TextView)view.findViewById(R.id.tvLanguageSpoken);
 		tvLanguageSpoken.setText(((User) user).getLanguage());
-		tvEmail = (TextView)view.findViewById(R.id.tvEmail_);
+		
+		tvEmail = (TextView)view.findViewById(R.id.tvEmail);
 		tvEmail.setText(user.getEmail());
+		
 		tvPhone = (TextView)view.findViewById(R.id.tvPhone);
 		tvPhone.setText(((User) user).getPhone());
+		
 		tvDesc = (TextView)view.findViewById(R.id.tvViolDesc);
 		tvDesc.setText(myCase.getDescription());
+		
 		tvUnit = (TextView)view.findViewById(R.id.tvUnit);
 		tvUnit.setText(myCase.getUnit());
-//		gdView = (GridView)view.findViewById(R.id.gridview);
-		glyView = (Gallery) view.findViewById(R.id.gallery);
+		
+		tvViolationType = (TextView) view.findViewById(R.id.tvViolationType);
+		tvViolationType.setText(myCase.getIssueType());
+		
+		tvMulti = (TextView) view.findViewById(R.id.tvMulti);			
+		tvMulti.setText(myCase.getIsMultiUnitPetition()? "Yes" : "No");		
+		
+		tvBuildingName = (TextView) view.findViewById(R.id.tvBuildingName);			
+		tvBuildingName.setText(myCase.getBuilding().getName());	
+		
+		tvAddress = (TextView) view.findViewById(R.id.tvAddress);			
+		tvAddress.setText(myCase.getBuilding().getAddress());	
+		
+		tvCaseNumber = (TextView) view.findViewById(R.id.tvCaseNumber);			
+		tvCaseNumber.setText(myCase.getCaseId());	
 		
 		
-		ArrayList<ParseFile> pictures = myCase.getPictures();
+		ivBuildingImage = (ImageView) view.findViewById(R.id.ivBuildingImage);			
+		//ivBuildingImage.setText(myCase.get);	  //TODO
+				
+		photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
+		setPictures();
+//		
+//		ArrayList<ParseFile> pictures = myCase.getPictures();
+//		
+//		if (pictures!=null) {
+//			Log.d("parse file", "## size:" + pictures.size());			
+//			if (pictures.size() != 0) {
+//				Log.d("parse file", "## pictures:" + pictures.get(0).toString());			
+//			}
+//			
+//		} else {
+//			Log.d("parse file", "## pictures null");
+//		}
 		
-		if (pictures!=null) {
-			Log.d("parse file", "## size:" + pictures.size());			
-			if (pictures.size() != 0) {
-				Log.d("parse file", "## pictures:" + pictures.get(0).toString());			
-			}
-			
-		} else {
-			Log.d("parse file", "## pictures null");
-		}
 		
+//		casePictureAdapter = new CasePictureAdatper(getActivity(), pictures);
+//		glyView.setAdapter(casePictureAdapter);
 		
-		casePictureAdapter = new CasePictureAdatper(getActivity(), pictures);
-//		gdView.setAdapter(casePictureAdapter);
-		
-//		casePicturePageAdapter = new CasePicturePageAdatper(getActivity(), pictures);
-		glyView.setAdapter(casePictureAdapter);
-		
+    		
+		//Action Buttons
 		btnShare = (Button)view.findViewById(R.id.btnShare);
 		btnShare.setOnClickListener(new OnClickListener() {
 			
@@ -138,6 +169,37 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 		
 		return view;
 	}
+
+    private void setPictures()
+    {
+	try
+	{
+	    // Convert pictures to Bitmap
+	    ArrayList<ParseFile> pictureList = myCase.getPictures();
+	    if (pictureList != null && !pictureList.isEmpty())
+		for (ParseFile picture : pictureList)
+		{
+		    byte[] byteArray;
+
+		    byteArray = picture.getData();
+
+		    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+		    // Add image to srolling view
+		    ImageView imageView = new ImageView(getActivity().getApplicationContext());
+		    imageView.setLayoutParams(new LayoutParams(220, 220));
+		    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		    imageView.setImageBitmap(bmp);
+
+		    photoContainer.addView(imageView);
+		}
+	}
+	catch (ParseException e)
+	{
+	    e.printStackTrace();
+	    Log.d(ERROR, "createCase failure : " + e.getMessage());
+	}
+    }
 
 	public static CaseDetailsFragment newInstance(Bundle args) {		
 		CaseDetailsFragment fragment = new CaseDetailsFragment();   	

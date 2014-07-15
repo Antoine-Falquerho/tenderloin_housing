@@ -39,7 +39,9 @@
 	<string name="issueType">Violation Type </string>
     <string name="building">Hotel </string>
 	<string name="fullName">Full Name </string>
-	<string name="email">Email(Optional) </string>
+	<string name="tenantName">Tenant Name </string>
+	<string name="emailOptional">Email(Optional) </string>
+	<string name="email">Email </string>
 	<string name="address">Address </string>
 	<string name="unitNumber">Unit </string>
 	<string name="phone">Phone </string>
