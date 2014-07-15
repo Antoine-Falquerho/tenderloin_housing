@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.CasePictureAdatper;
 import com.tenderloinhousing.apps.constant.IConstants;
@@ -54,7 +53,6 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 
 	
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		myCase = (Case) getArguments().getSerializable(CASE_KEY);
 	}
@@ -111,7 +109,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 				
 		photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
 		setPictures();
-//		
+		
 //		ArrayList<ParseFile> pictures = myCase.getPictures();
 //		
 //		if (pictures!=null) {
@@ -122,54 +120,50 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 //			
 //		} else {
 //			Log.d("parse file", "## pictures null");
-//		}
-		
-		
+//		}	
 //		casePictureAdapter = new CasePictureAdatper(getActivity(), pictures);
 //		glyView.setAdapter(casePictureAdapter);
 		
     		
 		//Action Buttons
 		btnShare = (Button)view.findViewById(R.id.btnShare);
-		btnShare.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-				sharingIntent.setType("text/html");
-				sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
-						Html.fromHtml("<h1> Case id #" + myCase.getCaseId() + "</h1>" +								
-								"<p>Unit" + myCase.getUnit() + "</p>" +
-								"<p>Issue type" + myCase.getIssueType() + "</p>" +
-								"<p>" + myCase.getDescription() + "</p>"));
-				startActivity(Intent.createChooser(sharingIntent,"Share using"));
-				
-			}
-		});
-		
 		btnEdit = (Button)view.findViewById(R.id.btnEdit);
-		btnEdit.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {				
-				FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-	    		Bundle bundle = new Bundle();
-	    		//TODO populate case details into Bundle here
-	    		bundle.putSerializable(CASE_KEY, myCase);
-	    		
-	    		CaseFragment caseFragment = CaseFragment.newInstance(bundle);
-	    		
-	    		transaction.replace(R.id.flCase, caseFragment);
-	    	
-	    		transaction.commit();
-				
-			}
-		});
 		
 		return view;
 	}
 
+   private void setButtons()
+   {
+	btnShare.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+			sharingIntent.setType("text/html");
+			sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
+					Html.fromHtml("<h1> Case id #" + myCase.getCaseId() + "</h1>" +								
+							"<p>Unit" + myCase.getUnit() + "</p>" +
+							"<p>Issue type" + myCase.getIssueType() + "</p>" +
+							"<p>" + myCase.getDescription() + "</p>"));
+			startActivity(Intent.createChooser(sharingIntent,"Share using"));			
+		}
+	});
+	
+	btnEdit.setOnClickListener(new OnClickListener() {		
+		@Override
+		public void onClick(View v) {				
+        		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        
+        		Bundle bundle = new Bundle();
+        		bundle.putSerializable(CASE_KEY, myCase);		
+        		CaseFragment caseFragment = CaseFragment.newInstance(bundle);	
+        		
+        		transaction.replace(R.id.flCase, caseFragment);	
+        		transaction.commit();			
+		}
+	});	
+   }
+   
     private void setPictures()
     {
 	try
@@ -179,10 +173,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	    if (pictureList != null && !pictureList.isEmpty())
 		for (ParseFile picture : pictureList)
 		{
-		    byte[] byteArray;
-
-		    byteArray = picture.getData();
-
+		    byte[] byteArray = picture.getData();
 		    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
 		    // Add image to srolling view
