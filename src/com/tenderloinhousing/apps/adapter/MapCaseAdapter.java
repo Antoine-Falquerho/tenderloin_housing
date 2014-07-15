@@ -41,8 +41,8 @@ public class MapCaseAdapter extends ArrayAdapter<Case> {
 		TextView tvCaseId = (TextView) v.findViewById(R.id.tvCaseId);
 		TextView tvCaseStatus = (TextView) v.findViewById(R.id.tvCaseStatus);
 		
-		tvCaseId.setText(inputCase.getCaseId());
-		tvCaseStatus.setText(inputCase.getCaseId());
+		tvCaseId.setText(inputCase.getBuilding().getName());
+		tvCaseStatus.setText(inputCase.getIssueType());
 
 		ArrayList<ParseFile> pictureList = inputCase.getPictures();
 		if (pictureList!=null){

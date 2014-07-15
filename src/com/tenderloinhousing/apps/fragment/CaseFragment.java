@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,6 +39,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.constant.CaseStatus;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.BuildingList;
@@ -62,7 +65,7 @@ public class CaseFragment extends Fragment implements IConstants
     private ImageView ivPhoto;
     LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
-    private String photoFileName;
+    String photoFileName;
     private static Case myCase;
 
     @Override
@@ -107,15 +110,6 @@ public class CaseFragment extends Fragment implements IConstants
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
-	
-	if(myCase != null){
-		ParseUser user = myCase.getTenant();
-		etName.setText(user.getUsername());
-		etLanguage.setText(((User) user).getLanguage());
-		etDescription.setText(myCase.getDescription());
-		
-	}
-	
 
 	return view;
     }
@@ -128,79 +122,116 @@ public class CaseFragment extends Fragment implements IConstants
 	    public void onClick(View v)
 	    {
 		submitCase();
-		getActivity().setResult(Activity.RESULT_CANCELED);
-		getActivity().finish();
 	    }
 	};
     }
 
     public void submitCase()
     {
-    	Case newCase;
-    	User user;
-    	if(myCase != null){    		
-    		newCase = myCase;
-//    		user = (User) myCase.getTenant();
-    		user = (User) ParseUser.getCurrentUser();
-    	}else{
-    		 newCase = new Case();
-    		 user = (User) ParseUser.getCurrentUser();
-//    		 newCase.setGeoLocation(laglng.latitude, laglng.longitude);
-    	}
-		
-		newCase.setIssueType(spIssueType.getSelectedItem().toString());
-		newCase.setDescription(etDescription.getText().toString());
-		newCase.setUnit(etUnit.getText().toString());
-		newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());		
-	
-		// Tenant
-		
-		user.setName(etName.getText().toString());
-		user.setEmail(etEmail.getText().toString());
-		user.setPhone(etPhone.getText().toString());
-		user.setLanguage(etLanguage.getText().toString());
-		newCase.setTenant(user);
-	
-		// Building
-		Building buildingObj = getBuilding();
-		if (buildingObj == null)
-		    return;
-		newCase.setBuilding(buildingObj);
-	
-		// Pictures
-		newCase.setPictures(pictureList);
-		newCase.saveInBackground();
-		Log.d("DEBUG", newCase.getDescription());
-		Log.d("DEBUG", "------");
-	
-		// Save the post and return
-		ParseDAO.createCase(newCase, new SaveCallback()
+	boolean isOk = true;
+
+	Case newCase = buildCase(isOk);
+
+	// Tenant
+	newCase.setTenant(buildUser(isOk));
+
+	// Building
+	Building buildingObj = buildBuilding(isOk);
+	if(buildingObj != null)
+	    newCase.setBuilding(buildingObj);
+
+	// Pictures
+	if (!pictureList.isEmpty())
+	    newCase.setPictures(pictureList); 
+
+	if (isOk)
+	{
+	    // Save the post and return
+	    ParseDAO.createCase(newCase, new SaveCallback()
+	    {
+		@Override
+		public void done(ParseException e)
 		{
-		    @Override
-		    public void done(ParseException e)
+		    if (e == null)
 		    {
-			if (e == null)
-			{
-			    Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
-			    getActivity().finish();
-			}
-			else
-			{
-			    Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
-			    Log.d(ERROR, "createCase failure : " + e.getMessage());
-			}
+			Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
+			getActivity().finish();
 		    }
-	
-		});
+		    else
+		    {
+			Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
+			Log.d(ERROR, "createCase failure : " + e.getMessage());
+		    }
+		}
+	    });
+	}
     }
 
-    private Building getBuilding()
+    private Case buildCase(boolean isOk)
+    {
+	Case newCase = new Case();
+
+	String issueType = spIssueType.getSelectedItem().toString();
+	if (issueType == null || issueType.startsWith(SPINNER_HINT_PREFIX))
+	{
+	    Toast.makeText(getActivity(), "Please select a Violation Type. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
+	}
+	else
+	{
+	    newCase.setIssueType(issueType);
+	    newCase.setDescription(etDescription.getText().toString());
+	    newCase.setUnit(etUnit.getText().toString());
+	    newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
+	    newCase.setGeoLocation(laglng.latitude, laglng.longitude);
+	    newCase.setCaseStatus(CaseStatus.SUBMITTED.toString());
+	}
+	return newCase;
+    }
+
+    private User buildUser(boolean isOk)
+    {
+	User user = (User) ParseUser.getCurrentUser();
+
+	// Name
+	String name = etName.getText().toString();
+	if (StringUtils.isEmpty(name))
+	{
+	    Toast.makeText(getActivity(), "Please enter your full name. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
+	}
+	else
+	{
+	    user.setName(name);
+	}
+
+	// Email
+	user.setEmail(etEmail.getText().toString());
+
+	// Phone
+	String phone = etPhone.getText().toString();
+	if (StringUtils.isEmpty(phone))
+	{
+	    Toast.makeText(getActivity(), "Please enter your phone. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
+	}
+	else
+	    user.setPhone(phone);
+
+	// Lanuage
+	user.setLanguage(etLanguage.getText().toString());
+
+	return user;
+    }
+
+    private Building buildBuilding(boolean isOk)
     {
 	Building building = null;
 	String buildingName = spBuilding.getSelectedItem().toString();
 	if (buildingName == null || buildingName.startsWith(SPINNER_HINT_PREFIX))
 	{
 	    Toast.makeText(getActivity(), "Please select a building. ", Toast.LENGTH_SHORT).show();
+	    isOk = false;
 	}
 	else
 	{
@@ -219,7 +250,7 @@ public class CaseFragment extends Fragment implements IConstants
 	ParseFile imgFile = new ParseFile(photoFileName, imgData);
 	imgFile.saveInBackground();
 	pictureList.add(imgFile);
-	
+
 	return pictureList;
     }
 
@@ -254,7 +285,7 @@ public class CaseFragment extends Fragment implements IConstants
 		// by this point we have the camera photo on disk
 		Bitmap takenImage = decodeSampledBitmapFromUri(takenPhotoUri.getPath(), 220, 220);
 
-		//Add image to srolling view
+		// Add image to srolling view
 		ImageView imageView = new ImageView(getActivity().getApplicationContext());
 		imageView.setLayoutParams(new LayoutParams(220, 220));
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -262,7 +293,7 @@ public class CaseFragment extends Fragment implements IConstants
 
 		photoContainer.addView(imageView);
 
-		//Add to Parse
+		// Add to Parse
 		addToParseFileList(takenImage);
 	    }
 	    else
@@ -342,6 +373,9 @@ public class CaseFragment extends Fragment implements IConstants
 		// String value = parent.getItemAtPosition(position).toString();
 		String value = ((Spinner) parent).getSelectedItem().toString();
 		setSpinnerToValue(((Spinner) parent), value);
+		
+		if(((Spinner) parent)== spBuilding)
+		   etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value)); 		
 	    }
 
 	    @Override
@@ -386,7 +420,6 @@ public class CaseFragment extends Fragment implements IConstants
     {
 	CaseFragment fragment = new CaseFragment();
 	fragment.setArguments(args);
-	myCase = null;
 
 	return fragment;
     }
@@ -398,6 +431,5 @@ public class CaseFragment extends Fragment implements IConstants
 
     	return fragment;
 	}
-	
 
 }
