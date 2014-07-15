@@ -28,7 +28,7 @@ import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
 public class CaseDetailsFragment extends Fragment implements IConstants {
-	private static Case myCase;
+	private Case myCase;
 	private ParseUser user;
 	private TextView tvFullName;
 	private TextView tvLanguageSpoken;
@@ -48,7 +48,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
+		myCase = (Case) getArguments().getSerializable(CASE_KEY);
 	}
 
 	@Override
@@ -125,9 +125,9 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 
 	    		Bundle bundle = new Bundle();
 	    		//TODO populate case details into Bundle here
-//	    		bundle.putString("case_id", myCase.getCaseId());
+	    		bundle.putSerializable(CASE_KEY, myCase);
 	    		
-	    		CaseFragment caseFragment = CaseFragment.newInstance(bundle, myCase);
+	    		CaseFragment caseFragment = CaseFragment.newInstance(bundle);
 	    		
 	    		transaction.replace(R.id.flCase, caseFragment);
 	    	
@@ -139,11 +139,9 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 		return view;
 	}
 
-	public static CaseDetailsFragment newInstance(Bundle args, Case myCaseArg) {		
+	public static CaseDetailsFragment newInstance(Bundle args) {		
 		CaseDetailsFragment fragment = new CaseDetailsFragment();   	
 	   	fragment.setArguments(args);
-	   	myCase = myCaseArg;	   	
-
 	   	return fragment;
 	}
 	

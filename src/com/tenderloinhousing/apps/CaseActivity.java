@@ -72,15 +72,12 @@ public class CaseActivity extends BaseFragmentActivity
 				public void done(Case foundCase, ParseException e) {
 					if (e == null) {
 	                    if (foundCase!=null){
-	                    	Case myCase = foundCase;
-	        	            
+	                    	     
 	        	            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
 	        	    		Bundle bundle = new Bundle();
-	        	    		//TODO populate case details into Bundle here
-	        	    		// bundle.putString(SCREEN_NAME_KEY, screenName);
-	        	    		
-	        	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle, myCase);
+	        	    		bundle.putSerializable(CASE_KEY, foundCase);	        	    		
+	        	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle);
 	        	    		
 	        	    		transaction.replace(R.id.flCase, detailsFragment);
 	        	    	

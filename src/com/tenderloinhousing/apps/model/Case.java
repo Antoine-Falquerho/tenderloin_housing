@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.util.Log;
@@ -12,7 +13,7 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 @ParseClassName("Case")
-public class Case extends ParseObject
+public class Case extends ParseObject implements Serializable
 {
     // Ensure that your subclass has a public default constructor
     public Case()

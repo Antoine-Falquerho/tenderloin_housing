@@ -66,7 +66,7 @@ public class CaseFragment extends Fragment implements IConstants
     LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
     String photoFileName;
-    private static Case myCase;
+    private  Case myCase;
 
     @Override
     public void onAttach(Activity activity)
@@ -79,13 +79,15 @@ public class CaseFragment extends Fragment implements IConstants
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
+	laglng = getArguments().getParcelable(LATLNG_KEY);
+	myCase = (Case) getArguments().getSerializable(CASE_KEY);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
     {
-	laglng = getArguments().getParcelable(LATLNG_KEY);
-
+	
 	View view = inflater.inflate(R.layout.fragment_case, parent, false);
 
 	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
@@ -110,6 +112,10 @@ public class CaseFragment extends Fragment implements IConstants
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
+	
+	if(myCase!=null) {
+	    etDescription.setText(myCase.getDescription());
+	}
 
 	return view;
     }
@@ -130,7 +136,14 @@ public class CaseFragment extends Fragment implements IConstants
     {
 	boolean isOk = true;
 
-	Case newCase = buildCase(isOk);
+	Case newCase = null;
+	
+	if(myCase!=null) {
+	    newCase = myCase;
+	}else
+	{
+	    newCase = buildCase(isOk);
+	}
 
 	// Tenant
 	newCase.setTenant(buildUser(isOk));
@@ -427,7 +440,7 @@ public class CaseFragment extends Fragment implements IConstants
     public static CaseFragment newInstance(Bundle bundle, Case myCaseArg) {
     	CaseFragment fragment = new CaseFragment();
     	fragment.setArguments(bundle);    	
-    	myCase = myCaseArg;
+    	//myCase = myCaseArg;
 
     	return fragment;
 	}
