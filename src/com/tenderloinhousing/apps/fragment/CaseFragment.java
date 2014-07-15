@@ -63,6 +63,7 @@ public class CaseFragment extends Fragment implements IConstants
     LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
     private String photoFileName;
+    private static Case myCase;
 
     @Override
     public void onAttach(Activity activity)
@@ -106,6 +107,15 @@ public class CaseFragment extends Fragment implements IConstants
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
+	
+	if(myCase != null){
+		ParseUser user = myCase.getTenant();
+		etName.setText(user.getUsername());
+		etLanguage.setText(((User) user).getLanguage());
+		etDescription.setText(myCase.getDescription());
+		
+	}
+	
 
 	return view;
     }
@@ -126,50 +136,62 @@ public class CaseFragment extends Fragment implements IConstants
 
     public void submitCase()
     {
-	Case newCase = new Case();
-	newCase.setIssueType(spIssueType.getSelectedItem().toString());
-	newCase.setDescription(etDescription.getText().toString());
-	newCase.setUnit(etUnit.getText().toString());
-	newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
-	newCase.setGeoLocation(laglng.latitude, laglng.longitude);
-
-	// Tenant
-	User user = (User) ParseUser.getCurrentUser();
-	user.setName(etName.getText().toString());
-	user.setEmail(etEmail.getText().toString());
-	user.setPhone(etPhone.getText().toString());
-	user.setLanguage(etLanguage.getText().toString());
-	newCase.setTenant(user);
-
-	// Building
-	Building buildingObj = getBuilding();
-	if (buildingObj == null)
-	    return;
-	newCase.setBuilding(buildingObj);
-
-	// Pictures
-	newCase.setPictures(pictureList);
-	newCase.saveInBackground();
-
-	// Save the post and return
-	ParseDAO.createCase(newCase, new SaveCallback()
-	{
-	    @Override
-	    public void done(ParseException e)
-	    {
-		if (e == null)
+    	Case newCase;
+    	User user;
+    	if(myCase != null){    		
+    		newCase = myCase;
+//    		user = (User) myCase.getTenant();
+    		user = (User) ParseUser.getCurrentUser();
+    	}else{
+    		 newCase = new Case();
+    		 user = (User) ParseUser.getCurrentUser();
+//    		 newCase.setGeoLocation(laglng.latitude, laglng.longitude);
+    	}
+		
+		newCase.setIssueType(spIssueType.getSelectedItem().toString());
+		newCase.setDescription(etDescription.getText().toString());
+		newCase.setUnit(etUnit.getText().toString());
+		newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());		
+	
+		// Tenant
+		
+		user.setName(etName.getText().toString());
+		user.setEmail(etEmail.getText().toString());
+		user.setPhone(etPhone.getText().toString());
+		user.setLanguage(etLanguage.getText().toString());
+		newCase.setTenant(user);
+	
+		// Building
+		Building buildingObj = getBuilding();
+		if (buildingObj == null)
+		    return;
+		newCase.setBuilding(buildingObj);
+	
+		// Pictures
+		newCase.setPictures(pictureList);
+		newCase.saveInBackground();
+		Log.d("DEBUG", newCase.getDescription());
+		Log.d("DEBUG", "------");
+	
+		// Save the post and return
+		ParseDAO.createCase(newCase, new SaveCallback()
 		{
-		    Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
-		    getActivity().finish();
-		}
-		else
-		{
-		    Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
-		    Log.d(ERROR, "createCase failure : " + e.getMessage());
-		}
-	    }
-
-	});
+		    @Override
+		    public void done(ParseException e)
+		    {
+			if (e == null)
+			{
+			    Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
+			    getActivity().finish();
+			}
+			else
+			{
+			    Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
+			    Log.d(ERROR, "createCase failure : " + e.getMessage());
+			}
+		    }
+	
+		});
     }
 
     private Building getBuilding()
@@ -364,8 +386,18 @@ public class CaseFragment extends Fragment implements IConstants
     {
 	CaseFragment fragment = new CaseFragment();
 	fragment.setArguments(args);
+	myCase = null;
 
 	return fragment;
     }
+    
+    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg) {
+    	CaseFragment fragment = new CaseFragment();
+    	fragment.setArguments(bundle);    	
+    	myCase = myCaseArg;
+
+    	return fragment;
+	}
+	
 
 }

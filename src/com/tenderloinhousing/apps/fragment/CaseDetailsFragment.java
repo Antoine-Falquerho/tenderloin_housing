@@ -2,9 +2,11 @@ package com.tenderloinhousing.apps.fragment;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,12 +20,14 @@ import android.widget.TextView;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.CasePictureAdatper;
+import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
-public class CaseDetailsFragment extends Fragment {
+public class CaseDetailsFragment extends Fragment implements IConstants {
 	private static Case myCase;
 	private ParseUser user;
 	private TextView tvFullName;
@@ -36,6 +40,7 @@ public class CaseDetailsFragment extends Fragment {
 	private Gallery glyView;
 	
 	private Button btnShare;
+	private Button btnEdit;
 	
 	private CasePictureAdatper casePictureAdapter;
 
@@ -107,6 +112,26 @@ public class CaseDetailsFragment extends Fragment {
 								"<p>Issue type" + myCase.getIssueType() + "</p>" +
 								"<p>" + myCase.getDescription() + "</p>"));
 				startActivity(Intent.createChooser(sharingIntent,"Share using"));
+				
+			}
+		});
+		
+		btnEdit = (Button)view.findViewById(R.id.btnEdit);
+		btnEdit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {				
+				FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+	    		Bundle bundle = new Bundle();
+	    		//TODO populate case details into Bundle here
+//	    		bundle.putString("case_id", myCase.getCaseId());
+	    		
+	    		CaseFragment caseFragment = CaseFragment.newInstance(bundle, myCase);
+	    		
+	    		transaction.replace(R.id.flCase, caseFragment);
+	    	
+	    		transaction.commit();
 				
 			}
 		});

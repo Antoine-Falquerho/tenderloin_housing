@@ -139,7 +139,15 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@id/gallery"	    	    
-	    android:text="Share" />	
+	    android:text="Share" />
+
+	<Button
+	    android:id="@+id/btnEdit"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentRight="true"
+	    android:text="Edit" />
     
 </RelativeLayout>
 </ScrollView>
