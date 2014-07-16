@@ -15,7 +15,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_alignParentTop="true"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
@@ -30,7 +30,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etName"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
@@ -46,7 +46,7 @@
 			android:layout_below="@+id/etLanguage"
 			android:divider="@drawable/divider"
 			android:gravity="center"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:orientation="horizontal" >
 			<!-- Building/Hotel -->
 			<Spinner
@@ -81,7 +81,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/llhotel"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
@@ -96,7 +96,7 @@
 		    android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/etAddress"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="15dp">
 		    <TextView
 		        android:id="@+id/tvMultiUnit" 
 		        android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/checkboxContainer"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
@@ -138,7 +138,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etPhone"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
 			android:hint="@string/emailOptional"
@@ -152,7 +152,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etEmail"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			style="?android:attr/listSeparatorTextViewStyle"
 			android:entries="@array/issueType_array"
 			android:gravity="right"
@@ -169,7 +169,7 @@
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/spIssueType"
 			android:ems="10"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			style="?android:attr/listSeparatorTextViewStyle"
 			android:textColor="#000000"
 			android:hint="@string/caseDesc"
@@ -184,7 +184,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etDescription"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="15dp"
 			android:layout_marginLeft="10dp"
 			android:text="@string/addPhotos"
 			android:textColor="#7e7e7e"
@@ -194,7 +194,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@+id/tvPhoto"
-			android:layout_marginTop="20dp" 
+			android:layout_marginTop="15dp" 
 			android:layout_marginLeft="10dp">
 			<LinearLayout
 				android:id="@+id/photoContainer"
@@ -218,8 +218,8 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/hvPhotoScroll"
-			android:layout_marginTop="20dp"
-			android:layout_marginBottom="20dp"
+			android:layout_marginTop="15dp"
+			android:layout_marginBottom="15dp"
 			android:gravity="center"
 			android:orientation="horizontal" >
 			<Button

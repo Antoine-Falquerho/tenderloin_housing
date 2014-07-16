@@ -43,12 +43,11 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	private TextView tvBuildingName;
 	private TextView tvAddress;
 	private TextView tvCaseNumber;
+	private TextView tvCaseStatus;
 	private ImageView ivPhoto;
 	private LinearLayout photoContainer;
-	
 	private Button btnShare;
-	private Button btnEdit;
-	
+	private Button btnEdit;	
 	private CasePictureAdatper casePictureAdapter;
 
 	
@@ -101,7 +100,10 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 		tvAddress.setText(myCase.getBuilding().getAddress());	
 		
 		tvCaseNumber = (TextView) view.findViewById(R.id.tvCaseNumber);			
-		tvCaseNumber.setText(myCase.getCaseId());	
+		tvCaseNumber.setText(myCase.getCaseId());
+		
+		tvCaseStatus = (TextView) view.findViewById(R.id.tvCaseStatus);			
+		tvCaseStatus.setText(myCase.getCaseStatus());
 		
 		
 		ivBuildingImage = (ImageView) view.findViewById(R.id.ivBuildingImage);			

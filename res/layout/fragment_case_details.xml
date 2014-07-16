@@ -45,11 +45,11 @@
             android:textSize="12sp" />
         </RelativeLayout>
         
-		<!--  ============================== Row === Case Number / Is Multi-Unit ==================================== -->
+		<!--  ============================== Row === Case Number / Case Status ==================================== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:divider="@drawable/divider"
             android:gravity="center"
             android:orientation="horizontal" 
@@ -63,59 +63,57 @@
                 <!-- Case Number -->
                 <TextView
                     android:id="@+id/labelCaseId"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
                     android:text="@string/caseNumber"
                     android:textColor="#7e7e7e"
                     android:textSize="12sp" />
                 <TextView
                     android:id="@+id/tvCaseNumber"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
+                    android:gravity="left"
                     android:layout_below="@+id/labelCaseId"
+                    android:layout_marginTop="5dp"
                     style="?android:attr/listSeparatorTextViewStyle"
                     android:text="@string/caseNumber"
                     android:textColor="#000000"
                     android:textSize="14sp" />
             </RelativeLayout>
             
-            <!-- Right Box -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" 
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/labelMulti"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="left"
-                    android:text="@string/isMultiUnit"
-                    android:textColor="#7e7e7e"
-                    android:textSize="12sp" />
-                <TextView
-                    android:id="@+id/tvMulti"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"                    
-                    style="?android:attr/listSeparatorTextViewStyle"
-                    android:gravity="left"
-                    android:layout_below="@+id/labelMulti"
-                    android:text="No"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+            <!-- Right Box -->   <!-- Case Status -->
+    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" 
+                     android:layout_weight="1" >
+                    <TextView
+                        android:id="@+id/labelCaseStatus"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/caseStatus"
+                        android:textColor="#7e7e7e"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tvCaseStatus"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"                 
+                        style="?android:attr/listSeparatorTextViewStyle"                       
+                        android:gravity="left"
+                        android:layout_below="@+id/labelCaseStatus"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/caseStatus"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+           </RelativeLayout>
         </LinearLayout>
         
 		<!--  ============================== Row ====>  Name / Language ==================================== -->
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:layout_marginTop="20dp"
+			android:layout_marginTop="10dp"
 			android:divider="@drawable/divider"
 			android:gravity="center"
 			android:orientation="horizontal" 
@@ -129,20 +127,20 @@
 				<!-- Full Name -->
 				<TextView
 					android:id="@+id/labelL"
-					android:layout_width="wrap_content"
+					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
-					android:layout_alignParentLeft="true"
+					android:gravity="left"
 					android:text="@string/fullName"
 					android:textColor="#7e7e7e"
 					android:textSize="12sp" />
 				<TextView
 					android:id="@+id/tvFullName"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"                    
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"  
+					android:gravity="left"               
                     style="?android:attr/listSeparatorTextViewStyle"					
 					android:layout_below="@+id/labelL"
+					android:layout_marginTop="5dp"
 					android:text="@string/fullName"
 					android:textColor="#000000"
 					android:textSize="14sp" />
@@ -156,22 +154,20 @@
 				<!-- Language -->
 				<TextView
 					android:id="@+id/labelR"
-					android:layout_width="wrap_content"
+					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
-					android:layout_alignParentLeft="true"
 					android:gravity="left"
 					android:text="@string/language"
 					android:textColor="#7e7e7e"
 					android:textSize="12sp" />
 				<TextView
 					android:id="@+id/tvLanguageSpoken"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"                    
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"                 
                     style="?android:attr/listSeparatorTextViewStyle"					
                     android:gravity="left"
 					android:layout_below="@+id/labelR"
+					android:layout_marginTop="5dp"
 					android:text="English"
 					android:textColor="#000000"
 					android:textSize="14sp" />
@@ -182,7 +178,7 @@
        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:divider="@drawable/divider"
             android:gravity="center"
             android:orientation="horizontal" 
@@ -195,20 +191,20 @@
 	                 android:layout_weight="1">
 	                <TextView
 	                    android:id="@+id/labelPhone"
-	                    android:layout_width="wrap_content"
+	                    android:layout_width="fill_parent"
 	                    android:layout_height="wrap_content"
-	                    android:layout_alignParentLeft="true"
+	                    android:gravity="left"
 	                    android:text="@string/phone"
 	                    android:textColor="#7e7e7e"
 	                    android:textSize="12sp" />
 	                <TextView
 	                    android:id="@+id/tvPhone"
-	                    android:layout_width="wrap_content"
+	                    android:layout_width="fill_parent"
 	                    android:layout_height="wrap_content"
-	                    android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="true"                    
+	                    android:gravity="left"             
                         style="?android:attr/listSeparatorTextViewStyle"	                    
 	                    android:layout_below="@+id/labelPhone"
+	                    android:layout_marginTop="5dp"
 	                    android:text="@string/phone"
 	                    android:textColor="#000000"
 	                    android:textSize="14sp" />
@@ -220,22 +216,20 @@
 	                 android:layout_weight="1" >
 	                <TextView
 	                    android:id="@+id/labelEmail"
-	                    android:layout_width="wrap_content"
+	                    android:layout_width="fill_parent"
 	                    android:layout_height="wrap_content"
-	                    android:layout_alignParentLeft="true"
 	                    android:gravity="left"
 	                    android:text="@string/email"
 	                    android:textColor="#7e7e7e"
 	                    android:textSize="12sp" />
 	                <TextView
 	                    android:id="@+id/tvEmail"
-	                    android:layout_width="wrap_content"
+	                    android:layout_width="fill_parent"
 	                    android:layout_height="wrap_content"
-	                    android:layout_alignParentLeft="true"
-                        android:layout_alignParentRight="true"                    
-                     style="?android:attr/listSeparatorTextViewStyle"	                    
-	                    android:gravity="left"
+	                    android:gravity="left"                  
+                        style="?android:attr/listSeparatorTextViewStyle"	   
 	                    android:layout_below="@+id/labelEmail"
+	                    android:layout_marginTop="5dp"
 	                    android:text="@string/email"
 	                    android:textColor="#000000"
 	                    android:textSize="14sp" />
@@ -245,7 +239,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:divider="@drawable/divider"
             android:gravity="center"
             android:orientation="horizontal" 
@@ -259,20 +253,20 @@
                 <!-- Hotel -->
                 <TextView
                     android:id="@+id/labelHotel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
                     android:text="@string/building"
                     android:textColor="#7e7e7e"
                     android:textSize="12sp" />
                 <TextView
                     android:id="@+id/tvHotel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"                    
+                    android:gravity="left"               
                     style="?android:attr/listSeparatorTextViewStyle"                    
                     android:layout_below="@+id/labelHotel"
+                    android:layout_marginTop="5dp"
                     android:text="@string/building"
                     android:textColor="#000000"
                     android:textSize="14sp" />
@@ -286,51 +280,73 @@
                 <!-- Unit -->
                 <TextView
                     android:id="@+id/labelUnit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:gravity="left"
                     android:text="@string/unitNumber"
                     android:textColor="#7e7e7e"
                     android:textSize="12sp" />
                 <TextView
                     android:id="@+id/tvUnit"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                     android:layout_alignParentRight="true"                    
-                    style="?android:attr/listSeparatorTextViewStyle"                   
-                    android:gravity="left"
+                    android:gravity="left"           
+                    style="?android:attr/listSeparatorTextViewStyle"    
                     android:layout_below="@+id/labelUnit"
+                    android:layout_marginTop="5dp"
                     android:text="@string/unitNumber"
                     android:textColor="#000000"
                     android:textSize="14sp" />
             </RelativeLayout>
         </LinearLayout>
-            
-            <!--  ============================== Row ===>  Violation Type ==================================== -->      
+          
+         <!--  ============================== Row ===>  Multi-Unit ==================================== -->     
+         <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                 android:layout_marginTop="10dp" >
+                <TextView
+                    android:id="@+id/labelMulti"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/isMultiUnit"
+                    android:textColor="#7e7e7e"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tvMulti"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"                   
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_below="@+id/labelMulti"
+                    android:layout_marginTop="5dp"
+                    android:text="No"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+      </RelativeLayout>
+      
+      <!--  ============================== Row ===>  Violation Type ==================================== -->      
        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
-                android:layout_marginTop="20dp" >
+                android:layout_marginTop="10dp" >
                 <TextView
                     android:id="@+id/labelType"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:gravity="left"
                     android:text="@string/issueType"
                     android:textColor="#7e7e7e"
                     android:textSize="12sp" />
                 <TextView
                     android:id="@+id/tvViolationType"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"                    
-                    style="?android:attr/listSeparatorTextViewStyle"                    
-                    android:gravity="left"
+                    android:gravity="left"                  
+                    style="?android:attr/listSeparatorTextViewStyle"     
                     android:layout_below="@+id/labelType"
+                    android:layout_marginTop="5dp"
                     android:text="@string/issueType"
                     android:textColor="#000000"
                     android:textSize="14sp" />
@@ -340,24 +356,24 @@
        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
-                 android:layout_marginTop="20dp">
+                 android:layout_marginTop="10dp">
                 <!-- Phone -->
                 <TextView
                     android:id="@+id/labelDesc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
                     android:text="@string/caseDesc"
                     android:textColor="#7e7e7e"
                     android:textSize="12sp" />
                 <TextView
                     android:id="@+id/tvViolDesc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"                    
+                    android:gravity="left"              
                     style="?android:attr/listSeparatorTextViewStyle"                    
                     android:layout_below="@+id/labelDesc"
+                    android:layout_marginTop="5dp"
                     android:text="@string/caseDesc"
                     android:textColor="#000000"
                     android:textSize="14sp" />
@@ -368,12 +384,13 @@
       <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
-                 android:layout_marginTop="20dp">
+                 android:layout_marginTop="10dp">
 	        <TextView
 	            android:id="@+id/tvPhoto"
-	            android:layout_width="wrap_content"
+	            android:layout_width="fill_parent"
 	            android:layout_height="wrap_content"
-	            android:layout_alignParentLeft="true"
+	           android:gravity="left"
+	            style="?android:attr/listSeparatorTextViewStyle"  
 	            android:text="@string/addPhotos"
 	            android:textColor="#7e7e7e"
 	            android:textSize="12sp" />
@@ -383,6 +400,7 @@
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:layout_below="@+id/tvPhoto"
+	            android:layout_marginTop="5dp"
 	            android:layout_marginLeft="10dp">
 	            <LinearLayout
 	                android:id="@+id/photoContainer"
@@ -398,8 +416,8 @@
             android:id="@+id/llButtonContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:orientation="horizontal" >
             <Button

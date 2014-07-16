@@ -106,9 +106,9 @@ public class CaseFragment extends Fragment implements IConstants
 	ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
 
 	spIssueType.setOnItemSelectedListener(getOnItemSelectedListener());
-	spIssueType.setSelection(0); // default to the first item hint
+	//spIssueType.setSelection(0); // default to the first item hint
 	spBuilding.setOnItemSelectedListener(getOnItemSelectedListener());
-	spBuilding.setSelection(0); // default to the first item hint
+	//spBuilding.setSelection(0); // default to the first item hint
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
