@@ -43,6 +43,28 @@
             android:layout_marginRight="10dp"
             android:text="Address"
             android:textSize="12sp" />
+        
+        <!-- Submitted Date -->
+         <TextView
+            android:id="@+id/labelSubmitDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/tvSubmitDate"            
+            android:layout_alignBottom="@+id/tvSubmitDate"
+            android:text="@string/submitDate"
+            android:textSize="12sp" />
+         
+         <TextView
+            android:id="@+id/tvSubmitDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvAddress"     
+            android:layout_marginTop="10dp"       
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="@string/submitDate"
+            android:textSize="12sp" />
         </RelativeLayout>
         
 		<!--  ============================== Row === Case Number / Case Status ==================================== -->
@@ -130,7 +152,7 @@
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:gravity="left"
-					android:text="@string/fullName"
+					android:text="@string/tenantName"
 					android:textColor="#7e7e7e"
 					android:textSize="12sp" />
 				<TextView
@@ -141,7 +163,7 @@
                     style="?android:attr/listSeparatorTextViewStyle"					
 					android:layout_below="@+id/labelL"
 					android:layout_marginTop="5dp"
-					android:text="@string/fullName"
+					android:text="@string/tenantName"
 					android:textColor="#000000"
 					android:textSize="14sp" />
 			</RelativeLayout>
@@ -194,7 +216,7 @@
 	                    android:layout_width="fill_parent"
 	                    android:layout_height="wrap_content"
 	                    android:gravity="left"
-	                    android:text="@string/phone"
+	                    android:text="@string/tenantPhone"
 	                    android:textColor="#7e7e7e"
 	                    android:textSize="12sp" />
 	                <TextView
@@ -205,7 +227,7 @@
                         style="?android:attr/listSeparatorTextViewStyle"	                    
 	                    android:layout_below="@+id/labelPhone"
 	                    android:layout_marginTop="5dp"
-	                    android:text="@string/phone"
+	                    android:text="@string/tenantPhone"
 	                    android:textColor="#000000"
 	                    android:textSize="14sp" />
 	       </RelativeLayout>
@@ -219,7 +241,7 @@
 	                    android:layout_width="fill_parent"
 	                    android:layout_height="wrap_content"
 	                    android:gravity="left"
-	                    android:text="@string/email"
+	                    android:text="@string/tenentEmail"
 	                    android:textColor="#7e7e7e"
 	                    android:textSize="12sp" />
 	                <TextView
@@ -230,7 +252,7 @@
                         style="?android:attr/listSeparatorTextViewStyle"	   
 	                    android:layout_below="@+id/labelEmail"
 	                    android:layout_marginTop="5dp"
-	                    android:text="@string/email"
+	                    android:text="@string/tenentEmail"
 	                    android:textColor="#000000"
 	                    android:textSize="14sp" />
 	       </RelativeLayout>
@@ -357,7 +379,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" 
                  android:layout_marginTop="10dp">
-                <!-- Phone -->
                 <TextView
                     android:id="@+id/labelDesc"
                     android:layout_width="fill_parent"

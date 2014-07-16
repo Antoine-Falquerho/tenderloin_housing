@@ -44,9 +44,40 @@ public class ParseDAO implements IConstants
 	query.getInBackground(caseId, callBack);
     }
 
+    public static void getCaseByBuilding(final Building building, FindCallback<Case> callBack)
+    {
+	ParseQuery<Case> query = ParseQuery.getQuery("Case");
+	query.whereEqualTo("building", building);
+	query.include("tenant");
+	query.include("building");
+
+	query.findInBackground(callBack);
+    }
+
+    public static void getCaseByTenant(final User tenant, FindCallback<Case> callBack)
+    {
+	ParseQuery<Case> query = ParseQuery.getQuery("Case");
+	query.whereEqualTo("tenant", tenant);
+	query.include("tenant");
+	query.include("building");
+
+	query.findInBackground(callBack);
+    }
+
+    public static void getCaseByStaff(final User staff, FindCallback<Case> callBack)
+    {
+	ParseQuery<Case> query = ParseQuery.getQuery("Case");
+	query.whereEqualTo("staff", staff);
+	query.include("staff");
+	query.include("tenant");
+	query.include("building");
+
+	query.findInBackground(callBack);
+    }
+
     public static void createCase(Case newCase, SaveCallback callback)
     {
-	newCase.saveInBackground(callback);
+	newCase.saveEventually(callback);
     }
 
     // ================ Testing code snippet ======================
@@ -123,12 +154,10 @@ public class ParseDAO implements IConstants
 	    // Convert pictures to Bitmap
 	    ArrayList<ParseFile> pictureList = htcCase.getPictures();
 	    ParseFile picture = pictureList.get(0);
-
 	    byte[] byteArray;
 	    byteArray = picture.getData();
-	    Log.d(DEBUG, picture.getName() + ",   " + byteArray);
-
 	    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+	    Log.d(DEBUG, picture.getName() + ",   " + byteArray);
 	}
 	catch (ParseException e)
 	{
