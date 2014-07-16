@@ -66,7 +66,7 @@ public class CaseFragment extends Fragment implements IConstants
     LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
     String photoFileName;
-    private  Case myCase;
+    private Case myCase;
 
     @Override
     public void onAttach(Activity activity)
@@ -87,7 +87,7 @@ public class CaseFragment extends Fragment implements IConstants
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
     {
-	
+
 	View view = inflater.inflate(R.layout.fragment_case, parent, false);
 
 	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
@@ -106,14 +106,15 @@ public class CaseFragment extends Fragment implements IConstants
 	ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
 
 	spIssueType.setOnItemSelectedListener(getOnItemSelectedListener());
-	//spIssueType.setSelection(0); // default to the first item hint
+	// spIssueType.setSelection(0); // default to the first item hint
 	spBuilding.setOnItemSelectedListener(getOnItemSelectedListener());
-	//spBuilding.setSelection(0); // default to the first item hint
+	// spBuilding.setSelection(0); // default to the first item hint
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
-	
-	if(myCase!=null) {
+
+	if (myCase != null)
+	{
 	    etDescription.setText(myCase.getDescription());
 	}
 
@@ -137,10 +138,12 @@ public class CaseFragment extends Fragment implements IConstants
 	boolean isOk = true;
 
 	Case newCase = null;
-	
-	if(myCase!=null) {
+
+	if (myCase != null)
+	{
 	    newCase = myCase;
-	}else
+	}
+	else
 	{
 	    newCase = buildCase(isOk);
 	}
@@ -150,12 +153,12 @@ public class CaseFragment extends Fragment implements IConstants
 
 	// Building
 	Building buildingObj = buildBuilding(isOk);
-	if(buildingObj != null)
+	if (buildingObj != null)
 	    newCase.setBuilding(buildingObj);
 
 	// Pictures
 	if (!pictureList.isEmpty())
-	    newCase.setPictures(pictureList); 
+	    newCase.setPictures(pictureList);
 
 	if (isOk)
 	{
@@ -386,9 +389,9 @@ public class CaseFragment extends Fragment implements IConstants
 		// String value = parent.getItemAtPosition(position).toString();
 		String value = ((Spinner) parent).getSelectedItem().toString();
 		setSpinnerToValue(((Spinner) parent), value);
-		
-		if(((Spinner) parent)== spBuilding)
-		   etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value)); 		
+
+		if (((Spinner) parent) == spBuilding)
+		    etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value));
 	    }
 
 	    @Override
@@ -436,13 +439,14 @@ public class CaseFragment extends Fragment implements IConstants
 
 	return fragment;
     }
-    
-    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg) {
-    	CaseFragment fragment = new CaseFragment();
-    	fragment.setArguments(bundle);    	
-    	//myCase = myCaseArg;
 
-    	return fragment;
-	}
+    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg)
+    {
+	CaseFragment fragment = new CaseFragment();
+	fragment.setArguments(bundle);
+	// myCase = myCaseArg;
+
+	return fragment;
+    }
 
 }
