@@ -153,8 +153,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	
 	btnEdit.setOnClickListener(new OnClickListener() {		
 		@Override
-		public void onClick(View v) {	
-			Log.d("DEBUG", "sjdl onclikc");
+		public void onClick(View v) {			
         		FragmentTransaction transaction = getFragmentManager().beginTransaction();
         
         		Bundle bundle = new Bundle();
