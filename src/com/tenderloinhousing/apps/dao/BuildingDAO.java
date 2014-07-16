@@ -28,7 +28,7 @@ public class BuildingDAO implements IConstants
 	query.include("building");
 	query.findInBackground(callback);
     }
-    
+
     public static void getCaseById(final String caseId, GetCallback<Case> callBack)
     {
 	ParseQuery<Case> query = ParseQuery.getQuery("Case");
@@ -37,7 +37,7 @@ public class BuildingDAO implements IConstants
 
 	query.getInBackground(caseId, callBack);
     }
-    
+
     public static void createCase(Drawable img)
     {
 	Case newCase = new Case();
@@ -63,26 +63,26 @@ public class BuildingDAO implements IConstants
 
     }
 
-    //This is for testing purpose
+    // This is for testing purpose
     private static GetCallback<Case> getCallBack()
     {
 	return new GetCallback<Case>()
+	{
+	    public void done(Case htcCase, ParseException e)
+	    {
+		if (e == null)
 		{
-		    public void done(Case htcCase, ParseException e)
-		    {
-			if (e == null)
-			{
-			    printData(htcCase);
-			}
-			else
-			{
-			    Log.d(DEBUG, "Error in CaseDAO.getCaseById()");
-			}
-		    }
-		};
+		    printData(htcCase);
+		}
+		else
+		{
+		    Log.d(DEBUG, "Error in CaseDAO.getCaseById()");
+		}
+	    }
+	};
     }
-    
-    //This is for testing purpose
+
+    // This is for testing purpose
     private static void printData(Case htcCase)
     {
 	Log.d(DEBUG, htcCase.getCaseId() + ",   " +

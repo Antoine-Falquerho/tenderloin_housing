@@ -25,6 +25,7 @@ import com.parse.ParseFile;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.CasePictureAdatper;
 import com.tenderloinhousing.apps.constant.IConstants;
+import com.tenderloinhousing.apps.helper.CommonUtil;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
@@ -49,6 +50,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	private Button btnShare;
 	private Button btnEdit;	
 	private CasePictureAdatper casePictureAdapter;
+	private TextView tvSubmitDate;
 
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,97 +70,99 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 			e.printStackTrace();
 		}
 		
-		Log.d("DEBUG", myCase.getCaseId() + "------");
-		tvFullName = (TextView)view.findViewById(R.id.tvFullName);		
-		tvFullName.setText(user.getName());
-		
-		tvLanguageSpoken = (TextView)view.findViewById(R.id.tvLanguageSpoken);
-		tvLanguageSpoken.setText(((User) user).getLanguage());
-		
-		tvEmail = (TextView)view.findViewById(R.id.tvEmail);
-		tvEmail.setText(user.getEmail());
-		
-		tvPhone = (TextView)view.findViewById(R.id.tvPhone);
-		tvPhone.setText(((User) user).getPhone());
-		
-		tvDesc = (TextView)view.findViewById(R.id.tvViolDesc);
-		tvDesc.setText(myCase.getDescription());
-		
-		tvUnit = (TextView)view.findViewById(R.id.tvUnit);
-		tvUnit.setText(myCase.getUnit());
-		
-		tvViolationType = (TextView) view.findViewById(R.id.tvViolationType);
-		tvViolationType.setText(myCase.getIssueType());
-		
-		tvMulti = (TextView) view.findViewById(R.id.tvMulti);			
-		tvMulti.setText(myCase.getIsMultiUnitPetition()? "Yes" : "No");		
-		
-		tvBuildingName = (TextView) view.findViewById(R.id.tvBuildingName);			
-		tvBuildingName.setText(myCase.getBuilding().getName());	
-		
-		tvAddress = (TextView) view.findViewById(R.id.tvAddress);			
-		tvAddress.setText(myCase.getBuilding().getAddress());	
-		
-		tvCaseNumber = (TextView) view.findViewById(R.id.tvCaseNumber);			
-		tvCaseNumber.setText(myCase.getCaseId());
-		
-		tvCaseStatus = (TextView) view.findViewById(R.id.tvCaseStatus);			
-		tvCaseStatus.setText(myCase.getCaseStatus());
-		
-		
-		ivBuildingImage = (ImageView) view.findViewById(R.id.ivBuildingImage);			
-		//ivBuildingImage.setText(myCase.get);	  //TODO
-				
-		photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
-		setPictures();
-		
-//		ArrayList<ParseFile> pictures = myCase.getPictures();
-//		
-//		if (pictures!=null) {
-//			Log.d("parse file", "## size:" + pictures.size());			
-//			if (pictures.size() != 0) {
-//				Log.d("parse file", "## pictures:" + pictures.get(0).toString());			
-//			}
-//			
-//		} else {
-//			Log.d("parse file", "## pictures null");
-//		}	
-//		casePictureAdapter = new CasePictureAdatper(getActivity(), pictures);
-//		glyView.setAdapter(casePictureAdapter);
-		
+	Log.d("DEBUG", myCase.getCaseId() + "------");
+	tvFullName = (TextView) view.findViewById(R.id.tvFullName);
+	tvFullName.setText(user.getName());
+
+	tvLanguageSpoken = (TextView) view.findViewById(R.id.tvLanguageSpoken);
+	tvLanguageSpoken.setText(((User) user).getLanguage());
+
+	tvEmail = (TextView) view.findViewById(R.id.tvEmail);
+	tvEmail.setText(user.getEmail());
+
+	tvPhone = (TextView) view.findViewById(R.id.tvPhone);
+	tvPhone.setText(((User) user).getPhone());
+
+	tvDesc = (TextView) view.findViewById(R.id.tvViolDesc);
+	tvDesc.setText(myCase.getDescription());
+
+	tvUnit = (TextView) view.findViewById(R.id.tvUnit);
+	tvUnit.setText(myCase.getUnit());
+
+	tvViolationType = (TextView) view.findViewById(R.id.tvViolationType);
+	tvViolationType.setText(myCase.getIssueType());
+
+	tvMulti = (TextView) view.findViewById(R.id.tvMulti);
+	tvMulti.setText(myCase.getIsMultiUnitPetition() ? "Yes" : "No");
+
+	tvBuildingName = (TextView) view.findViewById(R.id.tvBuildingName);
+	tvBuildingName.setText(myCase.getBuilding().getName());
+
+	tvAddress = (TextView) view.findViewById(R.id.tvAddress);
+	tvAddress.setText(myCase.getBuilding().getAddress());
+
+	tvCaseNumber = (TextView) view.findViewById(R.id.tvCaseNumber);
+	tvCaseNumber.setText(myCase.getCaseId());
+
+	tvCaseStatus = (TextView) view.findViewById(R.id.tvCaseStatus);
+	tvCaseStatus.setText(myCase.getCaseStatus());
+
+	tvSubmitDate = (TextView) view.findViewById(R.id.tvSubmitDate);
+	tvSubmitDate.setText(CommonUtil.getStringFromDate(myCase.getCreatedAt()));
+
+	ivBuildingImage = (ImageView) view.findViewById(R.id.ivBuildingImage);
+	// ivBuildingImage.setText(myCase.get); //TODO
+
+	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
+	setPictures();
+
+	// ArrayList<ParseFile> pictures = myCase.getPictures();
+	//
+	// if (pictures!=null) {
+	// Log.d("parse file", "## size:" + pictures.size());
+	// if (pictures.size() != 0) {
+	// Log.d("parse file", "## pictures:" + pictures.get(0).toString());
+	// }
+	//
+	// } else {
+	// Log.d("parse file", "## pictures null");
+	// }
+	// casePictureAdapter = new CasePictureAdatper(getActivity(), pictures);
+	// glyView.setAdapter(casePictureAdapter);
+
     		
-		//Action Buttons
-		btnShare = (Button)view.findViewById(R.id.btnShare);
-		btnEdit = (Button)view.findViewById(R.id.btnEdit);
-		setButtons();
-		return view;
-	}
+	// Action Buttons
+	btnShare = (Button) view.findViewById(R.id.btnShare);
+	btnEdit = (Button) view.findViewById(R.id.btnEdit);
+	setButtons();
+	return view;
+    }
 
    private void setButtons()
    {
 	btnShare.setOnClickListener(new OnClickListener() {
-		
-		@Override
+
+	    @Override
 		public void onClick(View v) {
-			Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-			sharingIntent.setType("text/html");
-			sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, 
-					Html.fromHtml("<h1> Case id #" + myCase.getCaseId() + "</h1>" +								
-							"<p>Unit" + myCase.getUnit() + "</p>" +
-							"<p>Issue type" + myCase.getIssueType() + "</p>" +
-							"<p>" + myCase.getDescription() + "</p>"));
-			startActivity(Intent.createChooser(sharingIntent,"Share using"));			
-		}
+		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+		sharingIntent.setType("text/html");
+		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,
+			Html.fromHtml("<h1> Case id #" + myCase.getCaseId() + "</h1>" +
+				"<p>Unit" + myCase.getUnit() + "</p>" +
+				"<p>Issue type" + myCase.getIssueType() + "</p>" +
+				"<p>" + myCase.getDescription() + "</p>"));
+		startActivity(Intent.createChooser(sharingIntent, "Share using"));
+	    }
 	});
-	
+
 	btnEdit.setOnClickListener(new OnClickListener() {		
-		@Override
+	    @Override
 		public void onClick(View v) {			
-        		FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        
-        		Bundle bundle = new Bundle();
-        		bundle.putSerializable(CASE_KEY, myCase);		
-        		CaseFragment caseFragment = CaseFragment.newInstance(bundle);	
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(CASE_KEY, myCase);
+		CaseFragment caseFragment = CaseFragment.newInstance(bundle);
         		
         		transaction.replace(R.id.flCase, caseFragment);	
         		transaction.commit();			

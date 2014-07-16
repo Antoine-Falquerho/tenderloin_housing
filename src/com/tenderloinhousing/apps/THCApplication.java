@@ -38,7 +38,7 @@ public class THCApplication extends Application
 
 	Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
-	//ParseDAO.getCaseById("LJ40s6IuTh", null);
-	
+	// ParseDAO.getCaseById("LJ40s6IuTh", null);
+
     }
 }

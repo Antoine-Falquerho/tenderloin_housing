@@ -9,18 +9,14 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class CommonUtil
 {
-   public static SimpleDateFormat sf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
-    
+    public static SimpleDateFormat sf = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy");
+    public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy");
+
     public static Date getDateFromString(String dateString)
-    {	
+    {
 	sf.setLenient(true);
 	Date date = null;
 	try
@@ -34,12 +30,11 @@ public class CommonUtil
 
 	return date;
     }
-    
+
     public static String getStringFromDate(Date date)
     {
-	return sf.format(date);
+	return DATE_FORMAT.format(date);
     }
-
 
     public static boolean isNetworkConnected(Context context)
     {
@@ -47,10 +42,10 @@ public class CommonUtil
 	return (cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
-    public static String getJsonErrorMsg(JSONObject  errorResponse)
+    public static String getJsonErrorMsg(JSONObject errorResponse)
     {
-	String msg ="";
-	
+	String msg = "";
+
 	try
 	{
 	    JSONObject jsonObject = (JSONObject) errorResponse.getJSONArray("errors").get(0);
@@ -63,6 +58,5 @@ public class CommonUtil
 	}
 	return msg;
     }
-    
-   
+
 }

@@ -46,7 +46,7 @@ public final class BuildingList<T> extends ArrayList<T> implements IConstants
     public static String getBuildingIdByAddress(String address)
     {
 	String buildingId = null;
-	
+
 	List<Building> buildingList = getInstance();
 	if (!buildingList.isEmpty())
 	{
@@ -63,7 +63,7 @@ public final class BuildingList<T> extends ArrayList<T> implements IConstants
     public static String getBuildingIdByName(String name)
     {
 	String buildingId = null;
-	
+
 	List<Building> buildingList = getInstance();
 	if (!buildingList.isEmpty())
 	{
@@ -76,11 +76,11 @@ public final class BuildingList<T> extends ArrayList<T> implements IConstants
 
 	return buildingId;
     }
-    
+
     public static String getBuildingAddressByName(String name)
     {
 	String address = null;
-	
+
 	List<Building> buildingList = getInstance();
 	if (!buildingList.isEmpty())
 	{
