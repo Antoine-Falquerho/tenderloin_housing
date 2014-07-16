@@ -87,7 +87,7 @@ public class CaseFragment extends Fragment implements IConstants
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
     {
-
+	
 	View view = inflater.inflate(R.layout.fragment_case, parent, false);
 
 	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
@@ -106,16 +106,19 @@ public class CaseFragment extends Fragment implements IConstants
 	ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
 
 	spIssueType.setOnItemSelectedListener(getOnItemSelectedListener());
-	// spIssueType.setSelection(0); // default to the first item hint
+	//spIssueType.setSelection(0); // default to the first item hint
 	spBuilding.setOnItemSelectedListener(getOnItemSelectedListener());
-	// spBuilding.setSelection(0); // default to the first item hint
+	//spBuilding.setSelection(0); // default to the first item hint
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
-
-	if (myCase != null)
-	{
+	
+	if(myCase!=null) {
+		User user = (User) myCase.getTenant();
+		etName.setText(user.getName());
 	    etDescription.setText(myCase.getDescription());
+	    etEmail.setText(user.getEmail());
+	    etPhone.setText(user.getPhone());
 	}
 
 	return view;
@@ -138,12 +141,11 @@ public class CaseFragment extends Fragment implements IConstants
 	boolean isOk = true;
 
 	Case newCase = null;
-
-	if (myCase != null)
-	{
+	
+	if(myCase!=null) {
 	    newCase = myCase;
-	}
-	else
+	    
+	}else
 	{
 	    newCase = buildCase(isOk);
 	}
@@ -153,12 +155,14 @@ public class CaseFragment extends Fragment implements IConstants
 
 	// Building
 	Building buildingObj = buildBuilding(isOk);
-	if (buildingObj != null)
+	if(buildingObj != null)
 	    newCase.setBuilding(buildingObj);
+	
+	Log.d("DEBUG", myCase.getCaseId());
 
 	// Pictures
 	if (!pictureList.isEmpty())
-	    newCase.setPictures(pictureList);
+	    newCase.setPictures(pictureList); 
 
 	if (isOk)
 	{
@@ -174,7 +178,7 @@ public class CaseFragment extends Fragment implements IConstants
 			getActivity().finish();
 		    }
 		    else
-		    {
+		    {		    	
 			Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
 			Log.d(ERROR, "createCase failure : " + e.getMessage());
 		    }
@@ -389,9 +393,9 @@ public class CaseFragment extends Fragment implements IConstants
 		// String value = parent.getItemAtPosition(position).toString();
 		String value = ((Spinner) parent).getSelectedItem().toString();
 		setSpinnerToValue(((Spinner) parent), value);
-
-		if (((Spinner) parent) == spBuilding)
-		    etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value));
+		
+		if(((Spinner) parent)== spBuilding)
+		   etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value)); 		
 	    }
 
 	    @Override
@@ -439,14 +443,13 @@ public class CaseFragment extends Fragment implements IConstants
 
 	return fragment;
     }
+    
+    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg) {
+    	CaseFragment fragment = new CaseFragment();
+    	fragment.setArguments(bundle);    	
+    	//myCase = myCaseArg;
 
-    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg)
-    {
-	CaseFragment fragment = new CaseFragment();
-	fragment.setArguments(bundle);
-	// myCase = myCaseArg;
-
-	return fragment;
-    }
+    	return fragment;
+	}
 
 }
