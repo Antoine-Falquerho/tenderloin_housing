@@ -130,7 +130,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 		//Action Buttons
 		btnShare = (Button)view.findViewById(R.id.btnShare);
 		btnEdit = (Button)view.findViewById(R.id.btnEdit);
-		
+		setButtons();
 		return view;
 	}
 
@@ -153,7 +153,8 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	
 	btnEdit.setOnClickListener(new OnClickListener() {		
 		@Override
-		public void onClick(View v) {				
+		public void onClick(View v) {	
+			Log.d("DEBUG", "sjdl onclikc");
         		FragmentTransaction transaction = getFragmentManager().beginTransaction();
         
         		Bundle bundle = new Bundle();

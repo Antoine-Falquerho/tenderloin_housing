@@ -64,6 +64,7 @@ public class CaseActivity extends BaseFragmentActivity
     private void showCaseDetailFragment()
     {    	
     	String case_id = getIntent().getStringExtra(CASE_ID_KEY);
+//    	Log.d("DEBUG", "1 --  " + case_id);
     	
     	// case_id = "BJE0Ob2lg8";
     	

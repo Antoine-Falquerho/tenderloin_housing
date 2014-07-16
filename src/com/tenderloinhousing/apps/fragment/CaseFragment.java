@@ -66,7 +66,7 @@ public class CaseFragment extends Fragment implements IConstants
     LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
     String photoFileName;
-    private  Case myCase;
+    private Case myCase;
 
     @Override
     public void onAttach(Activity activity)
@@ -114,7 +114,11 @@ public class CaseFragment extends Fragment implements IConstants
 	cancelButton.setOnClickListener(getOnCancelListener());
 	
 	if(myCase!=null) {
+		User user = (User) myCase.getTenant();
+		etName.setText(user.getName());
 	    etDescription.setText(myCase.getDescription());
+	    etEmail.setText(user.getEmail());
+	    etPhone.setText(user.getPhone());
 	}
 
 	return view;
@@ -140,6 +144,7 @@ public class CaseFragment extends Fragment implements IConstants
 	
 	if(myCase!=null) {
 	    newCase = myCase;
+	    
 	}else
 	{
 	    newCase = buildCase(isOk);
@@ -152,6 +157,8 @@ public class CaseFragment extends Fragment implements IConstants
 	Building buildingObj = buildBuilding(isOk);
 	if(buildingObj != null)
 	    newCase.setBuilding(buildingObj);
+	
+	Log.d("DEBUG", myCase.getCaseId());
 
 	// Pictures
 	if (!pictureList.isEmpty())
@@ -171,7 +178,7 @@ public class CaseFragment extends Fragment implements IConstants
 			getActivity().finish();
 		    }
 		    else
-		    {
+		    {		    	
 			Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
 			Log.d(ERROR, "createCase failure : " + e.getMessage());
 		    }
