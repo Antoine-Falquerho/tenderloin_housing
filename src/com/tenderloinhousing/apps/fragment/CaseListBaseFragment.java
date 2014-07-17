@@ -52,7 +52,6 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	super.onCreate(savedInstanceState);
 	caseListAdapter = new CaseArrayAdapter(getActivity(), caseList);
 	loadCases(getFindCallBack());
-
     }
 
     private OnItemClickListener getOnItemClickListener()

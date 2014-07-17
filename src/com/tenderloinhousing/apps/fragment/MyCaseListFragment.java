@@ -9,19 +9,23 @@ import com.tenderloinhousing.apps.model.User;
 
 public class MyCaseListFragment extends CaseListBaseFragment
 {
-    User tenant;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
-	tenant = (User) getArguments().getSerializable(TENANT_OBJ_KEY);
+	
     }
 
     @Override
     public void loadCases(FindCallback<Case> callback)
     {
-	ParseDAO.getCaseByTenant(tenant, callback);
+	ParseDAO.getCaseByTenant(getTenant(), callback);
+    }
+    
+    private User getTenant()
+    {
+	return (User) getArguments().getSerializable(TENANT_OBJ_KEY);
     }
 
     public static MyCaseListFragment newInstance(User tenant)
