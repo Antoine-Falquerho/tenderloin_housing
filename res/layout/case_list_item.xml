@@ -31,7 +31,7 @@
             android:id="@+id/tvBuildingName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/address"
+            android:text="@string/building"
             android:layout_marginLeft="10dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="bold"
@@ -41,22 +41,21 @@
             android:id="@+id/tvCaseId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="@string/caseNumber"
             android:layout_marginLeft="10dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/darker_gray"
             android:fontFamily="sans-serif-bold"/>
 
         <TextView
-            android:id="@+id/tvCaseStatus"
+            android:id="@+id/tvIssueType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
+            android:text="@string/issueType"
             android:layout_marginLeft="10dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/darker_gray"
             android:fontFamily="sans-serif"/>
-    
         
 	</LinearLayout>
 

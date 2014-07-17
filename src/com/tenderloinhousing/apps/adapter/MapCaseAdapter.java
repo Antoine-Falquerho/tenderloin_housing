@@ -3,22 +3,19 @@ package com.tenderloinhousing.apps.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseImageView;
-import com.tenderloinhousing.apps.model.Case;
-import com.tenderloinhousing.apps.R;
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
+import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.model.Case;
 
 public class MapCaseAdapter extends ArrayAdapter<Case> {
 	
@@ -40,11 +37,11 @@ public class MapCaseAdapter extends ArrayAdapter<Case> {
 
 		TextView tvCaseId = (TextView) v.findViewById(R.id.tvCaseId);
 		TextView tvBuildingName = (TextView) v.findViewById(R.id.tvBuildingName);
-		TextView tvCaseStatus = (TextView) v.findViewById(R.id.tvCaseStatus);
+		TextView tvIssueType = (TextView) v.findViewById(R.id.tvIssueType);
 		
 		tvCaseId.setText(inputCase.getCaseId());
 		tvBuildingName.setText(inputCase.getBuilding().getName());
-		tvCaseStatus.setText(inputCase.getIssueType());
+		tvIssueType.setText(inputCase.getIssueType());
 
 		ArrayList<ParseFile> pictureList = inputCase.getPictures();
 		if (pictureList!=null){

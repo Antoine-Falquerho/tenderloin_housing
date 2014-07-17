@@ -1,37 +1,37 @@
 package com.tenderloinhousing.apps.fragment;
 
-import java.util.List;
-
 import android.os.Bundle;
 
 import com.parse.FindCallback;
-import com.parse.ParseUser;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
 public class MyCaseListFragment extends CaseListBaseFragment
 {
-   @Override
+    User tenant;
+
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
-	super.onCreate(savedInstanceState);	
-    }  
-   
-   @Override
-   public List<Case> getSavedItems()
-   {
-	//return ParseDAO.getCaseByTenant((User) ParseUser.getCurrentUser(), new FindCallback<Case>());
-       return null;
-   }
-   
-  
-//   
-//   public static AllCaseListFragment newInstance(boolean isNetworkAvailable)
-//   {
-//       AllCaseListFragment fragment = new AllCaseListFragment();	
-//	fragment.setArguments(getBundle(isNetworkAvailable));
-//
-//	return fragment;
-//   }
+	super.onCreate(savedInstanceState);
+	tenant = (User) getArguments().getSerializable(TENANT_OBJ_KEY);
+    }
+
+    @Override
+    public void loadCases(FindCallback<Case> callback)
+    {
+	ParseDAO.getCaseByTenant(tenant, callback);
+    }
+
+    public static MyCaseListFragment newInstance(User tenant)
+    {
+	MyCaseListFragment fragment = new MyCaseListFragment();
+	Bundle bundle = new Bundle();
+	bundle.putSerializable(TENANT_OBJ_KEY, tenant);
+	fragment.setArguments(bundle);
+
+	return fragment;
+    }
+
 }

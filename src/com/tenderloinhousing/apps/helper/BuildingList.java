@@ -93,5 +93,22 @@ public final class BuildingList<T> extends ArrayList<T> implements IConstants
 
 	return address;
     }
+    
+    public static Building getBuildingById(String buildingId)
+    {
+	Building result = null;
+
+	List<Building> buildingList = getInstance();
+	if (!buildingList.isEmpty())
+	{
+	    for (Building building : buildingList)
+	    {
+		if (building.getBuildingId().equals(buildingId)) 
+		     result = building;
+	    }
+	}
+
+	return result;
+    }
 
 }

@@ -1,10 +1,12 @@
 package com.tenderloinhousing.apps.model;
 
+import java.io.Serializable;
+
 import com.parse.ParseClassName;
 import com.parse.ParseUser;
 
 @ParseClassName("_User")
-public class User extends ParseUser
+public class User extends ParseUser implements Serializable
 {
 
     // Ensure that your subclass has a public default constructor

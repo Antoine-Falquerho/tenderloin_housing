@@ -344,7 +344,8 @@ public class MapActivity extends FragmentActivity implements
 
     private void doSignIn()
     {
-	Intent intent = new Intent(this, LoginActivity.class);
+	//Intent intent = new Intent(this, LoginActivity.class);
+	Intent intent = new Intent(this, BuildingActivity.class);
 	startActivity(intent);
     }
 

@@ -10,13 +10,15 @@
         android:id="@+id/rlHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-        <ImageView
+        
+        <com.parse.ParseImageView
             android:id="@+id/ivBuildingImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:src="@drawable/photo_placeholder" />
         <TextView
             android:id="@+id/tvBuildingName"
@@ -49,13 +51,14 @@
             android:layout_below="@+id/tvAddress"     
             android:layout_marginTop="10dp"       
             android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:text="30 violations"
+            android:layout_marginRight="5dp"
+            android:text="30 Violations"
             android:textSize="12sp" />
         </RelativeLayout>
-	<FrameLayout
-		android:id="@+id/listContainer"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-	</FrameLayout>
+        
+		<FrameLayout
+			android:id="@+id/listContainer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+		</FrameLayout>
 </LinearLayout>

@@ -158,14 +158,15 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	btnEdit.setOnClickListener(new OnClickListener() {		
 	    @Override
 		public void onClick(View v) {			
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+		FragmentTransaction transaction = getFragmentManager().beginTransaction();		
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(CASE_KEY, myCase);
 		CaseFragment caseFragment = CaseFragment.newInstance(bundle);
-        		
-        		transaction.replace(R.id.flCase, caseFragment);	
-        		transaction.commit();			
+		
+		transaction.setCustomAnimations(R.anim.slide_down_in, R.anim.slide_down_out);
+		transaction.replace(R.id.flCase, caseFragment);	
+		transaction.commit();			
 		}
 	});	
    }

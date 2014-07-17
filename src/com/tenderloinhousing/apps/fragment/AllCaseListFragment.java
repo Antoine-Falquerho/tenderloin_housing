@@ -1,9 +1,9 @@
 package com.tenderloinhousing.apps.fragment;
 
-import java.util.List;
-
 import android.os.Bundle;
 
+import com.parse.FindCallback;
+import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.model.Case;
 
 public class AllCaseListFragment extends CaseListBaseFragment
@@ -15,18 +15,9 @@ public class AllCaseListFragment extends CaseListBaseFragment
     }  
    
    @Override
-   public List<Case> getSavedItems()
+   public void loadCases(FindCallback<Case> callback)
    {
-	//return ParseDAO.getCaseByTenant((User) ParseUser.getCurrentUser(), new FindCallback<Case>());
-       return null;
+       ParseDAO.getAll(Case.class, callback);     
    }
-   
-//   
-//   public static AllCaseListFragment newInstance(boolean isNetworkAvailable)
-//   {
-//       AllCaseListFragment fragment = new AllCaseListFragment();	
-//	fragment.setArguments(getBundle(isNetworkAvailable));
-//
-//	return fragment;
-//   }
+      
 }

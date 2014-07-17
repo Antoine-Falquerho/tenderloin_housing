@@ -1,12 +1,15 @@
 package com.tenderloinhousing.apps.model;
 
+import java.io.Serializable;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 
 @ParseClassName("Building")
-public class Building extends ParseObject
+public class Building extends ParseObject implements Serializable
 {
     public Building()
     {
@@ -37,6 +40,16 @@ public class Building extends ParseObject
     public void setName(String buildingName)
     {
 	  put("buildingName", buildingName);
+    }
+    
+    public ParseFile getImage()
+    {
+	return getParseFile("image");
+    }
+
+    public void setImage(ParseFile buildingName)
+    {
+	  put("image", buildingName);
     }
     
     public void setGeoLocation(ParseGeoPoint point){
