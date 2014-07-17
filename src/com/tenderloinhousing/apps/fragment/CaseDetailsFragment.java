@@ -164,7 +164,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 		bundle.putSerializable(CASE_KEY, myCase);
 		CaseFragment caseFragment = CaseFragment.newInstance(bundle);
 		
-		transaction.setCustomAnimations(android.R.anim.fade_out, R.anim.slide_down);
+		transaction.setCustomAnimations(R.anim.slide_down, R.anim.slide_down);
 		transaction.replace(R.id.flCase, caseFragment);	
 		transaction.commit();			
 		}
