@@ -1,7 +1,4 @@
-package com.tenderloinhousing.apps;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.tenderloinhousing.apps.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -9,11 +6,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.tenderloinhousing.apps.activity.BaseFragmentActivity;
+import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.fragment.CaseDetailsFragment;
 import com.tenderloinhousing.apps.fragment.CaseFragment;

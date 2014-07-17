@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="#FFFFFF"
+	android:orientation="vertical" 
+	tools:context="${packageName}.${activityClass}" >
+	    <!--  ============================== Row ===  Header (Building Profile) ==================================== -->
+       <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <ImageView
+            android:id="@+id/ivBuildingImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/photo_placeholder" />
+        <TextView
+            android:id="@+id/tvBuildingName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivBuildingImage"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:text="Hotel Name"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBuildingName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Address"
+            android:textSize="12sp" />
+        
+        <!-- Violation Count --> 
+         
+         <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvAddress"     
+            android:layout_marginTop="10dp"       
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="30 violations"
+            android:textSize="12sp" />
+        </RelativeLayout>
+	<FrameLayout
+		android:id="@+id/listContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+	</FrameLayout>
+</LinearLayout>

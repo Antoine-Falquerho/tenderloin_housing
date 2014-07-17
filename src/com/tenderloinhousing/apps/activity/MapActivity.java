@@ -40,7 +40,6 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.tenderloinhousing.apps.CaseActivity;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.MapCaseAdapter;
 import com.tenderloinhousing.apps.constant.IConstants;
@@ -330,8 +329,8 @@ public class MapActivity extends FragmentActivity implements
 
     private void doCases()
     {
-	//Intent intent = new Intent(this, CaseListActivity.class);
-	//startActivity(intent);
+	Intent intent = new Intent(this, ManageCaseActivity.class);
+	startActivity(intent);
 
     }
 

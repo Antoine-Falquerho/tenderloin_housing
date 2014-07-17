@@ -15,7 +15,9 @@
 	<!-- =========================== Labels =========================== -->
 	<string name="app_name">Tenderloin Housing Clinic</string>
 	<string name="title_activity_report">Violation Report</string>
-	<string name="title_activity_map">Explore</string>
+	<string name="title_activity_map">Explore Violations</string>
+	   <string name="title_activity_building">Hotel Violations </string>
+	
 	<!-- Menu -->
 	<string name="login">Log In</string>
 	<string name="logout">Log Out</string>
