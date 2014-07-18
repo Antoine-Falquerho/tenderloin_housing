@@ -43,21 +43,28 @@ public class MapCaseAdapter extends ArrayAdapter<Case> {
 		tvBuildingName.setText(inputCase.getBuilding().getName());
 		tvIssueType.setText(inputCase.getIssueType());
 
-		ArrayList<ParseFile> pictureList = inputCase.getPictures();
-		if (pictureList!=null){
+//		ArrayList<ParseFile> pictureList = inputCase.getPictures();
+//		if (pictureList!=null){
+//		
+//		ParseFile picture = pictureList.get(0);
+//			ParseImageView caseImage = (ParseImageView) v.findViewById(R.id.ivCaseImg);
+//		    if (picture != null) {
+//		    	caseImage.setParseFile(picture);
+//		    	caseImage.loadInBackground(new GetDataCallback() {
+//		            @Override
+//		            public void done(byte[] data, ParseException e) {
+//		            }
+//		        });
+//		    }
+//		}
 		
-		ParseFile picture = pictureList.get(0);
-			ParseImageView caseImage = (ParseImageView) v.findViewById(R.id.ivCaseImg);
-		    if (picture != null) {
-		    	caseImage.setParseFile(picture);
-		    	caseImage.loadInBackground(new GetDataCallback() {
-		            @Override
-		            public void done(byte[] data, ParseException e) {
-		            }
-		        });
-		    }
+		ParseImageView caseImage = (ParseImageView) v.findViewById(R.id.ivCaseImg);
+		ParseFile picture = inputCase.getBuilding().getImage(); 
+		if (picture != null)
+		{
+		    caseImage.setParseFile(picture);
+		    caseImage.loadInBackground();
 		}
-
 		return v;
 	}
 

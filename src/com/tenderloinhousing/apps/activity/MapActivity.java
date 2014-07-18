@@ -109,6 +109,7 @@ public class MapActivity extends FragmentActivity implements
 	mSlidingUpPanelLayout.setScrollableView(mListView, mapHeight);
 
 	mSlidingUpPanelLayout.setPanelSlideListener(this);
+	mSlidingUpPanelLayout.collapsePane();
 
 	// transparent view at the top of ListView
 	mTransparentView = findViewById(R.id.transparentView);
