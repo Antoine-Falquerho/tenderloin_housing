@@ -333,14 +333,16 @@ public class MapActivity extends FragmentActivity implements
 
     private void doCases()
     {
-	Intent intent = new Intent(this, ManageCaseActivity.class);
+	Intent intent = new Intent(this, ManageCaseDispatchActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);
 	startActivity(intent);
-
     }
 
     private void doReport()
     {
-	Intent intent = new Intent(this, CaseActivity.class);
+	//Use DispatchActivity to guard the gate to CaseActivity and prompt for sign in
+	Intent intent = new Intent(this, CreateCaseDispatchActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);
 	intent.putExtra(METHOD_KEY, METHOD_CODE_CREATE);
 	intent.putExtra(LATLNG_KEY, latLng);
 	startActivity(intent);
@@ -351,7 +353,7 @@ public class MapActivity extends FragmentActivity implements
 	Intent intent = new Intent(this, LoginActivity.class);
 	startActivity(intent);
     }
-    
+
     private void doCasesByBuilding()
     {
 	Intent intent = new Intent(this, BuildingActivity.class);
