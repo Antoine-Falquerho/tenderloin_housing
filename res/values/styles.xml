@@ -33,6 +33,9 @@
 	    <item name="android:textColor">#fff</item>
 	  </style>
     
+    <style name="THCBackgroundColor" >
+        <item name="android:background">#6fa844</item>
+    </style>
 	
     <style name="StyledIndicators" parent="@android:style/Theme.Light">
         <item name="vpiCirclePageIndicatorStyle">@style/CustomCirclePageIndicator</item>
