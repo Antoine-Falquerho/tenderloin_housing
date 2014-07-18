@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.CasePictureAdatper;
 import com.tenderloinhousing.apps.constant.IConstants;
@@ -40,7 +41,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	private TextView tvViolationType;
 	private TextView tvMulti;
 	private TextView tvUnit;
-	private ImageView ivBuildingImage;
+	private ParseImageView ivBuildingImage;
 	private TextView tvBuildingName;
 	private TextView tvAddress;
 	private TextView tvCaseNumber;
@@ -63,12 +64,6 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_case_details, container, false);
 		user = (User) myCase.getTenant();		
-		try {
-			user.fetchIfNeeded();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	Log.d("DEBUG", myCase.getCaseId() + "------");
 	tvFullName = (TextView) view.findViewById(R.id.tvFullName);
@@ -110,26 +105,12 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	tvSubmitDate = (TextView) view.findViewById(R.id.tvSubmitDate);
 	tvSubmitDate.setText(CommonUtil.getStringFromDate(myCase.getCreatedAt()));
 
-	ivBuildingImage = (ImageView) view.findViewById(R.id.ivBuildingImage);
-	// ivBuildingImage.setText(myCase.get); //TODO
+	ivBuildingImage = (ParseImageView) view.findViewById(R.id.ivBuildingImage);
+	ivBuildingImage.setParseFile(myCase.getBuilding().getImage());
+	ivBuildingImage.loadInBackground();	  
 
 	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
 	setPictures();
-
-	// ArrayList<ParseFile> pictures = myCase.getPictures();
-	//
-	// if (pictures!=null) {
-	// Log.d("parse file", "## size:" + pictures.size());
-	// if (pictures.size() != 0) {
-	// Log.d("parse file", "## pictures:" + pictures.get(0).toString());
-	// }
-	//
-	// } else {
-	// Log.d("parse file", "## pictures null");
-	// }
-	// casePictureAdapter = new CasePictureAdatper(getActivity(), pictures);
-	// glyView.setAdapter(casePictureAdapter);
-
     		
 	// Action Buttons
 	btnShare = (Button) view.findViewById(R.id.btnShare);

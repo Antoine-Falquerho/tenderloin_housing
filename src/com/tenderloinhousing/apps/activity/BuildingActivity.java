@@ -5,20 +5,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.fragment.BuildingCaseListFragment;
 import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.model.Building;
 
-public class BuildingActivity extends BaseFragmentActivity
+public class BuildingActivity extends BaseFragmentActivity implements BuildingCaseListFragment.OnCaseLoadedListener
 {
     BuildingCaseListFragment caseListFragment;
     private ParseImageView ivBuildingImage;
     private TextView tvBuildingName;
     private TextView tvAddress;
+    private TextView tvCount;
     Building building;
     
     @Override
@@ -51,17 +50,23 @@ public class BuildingActivity extends BaseFragmentActivity
 	ivBuildingImage = (ParseImageView) findViewById(R.id.ivBuildingImage);
 	
 	ivBuildingImage.setParseFile(building.getImage());
-	ivBuildingImage.loadInBackground(new GetDataCallback() {
-	            @Override
-	            public void done(byte[] data, ParseException e) {	        	
-	            }
-	        });	   
+	ivBuildingImage.loadInBackground();	   
 
 	tvBuildingName = (TextView) findViewById(R.id.tvBuildingName);
 	tvBuildingName.setText(building.getName());
 
 	tvAddress = (TextView) findViewById(R.id.tvAddress);
 	tvAddress.setText(building.getAddress());
+	
+	tvCount = (TextView) findViewById(R.id.tvCount);
+	
+    }
+
+    @Override
+    public void onCaseLoaded(int caseCount)
+    {
+	tvCount.setText(caseCount +" Violoations");
+	
     }
 
 }

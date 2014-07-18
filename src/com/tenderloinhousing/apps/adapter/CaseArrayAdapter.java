@@ -11,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.R;
@@ -78,11 +76,7 @@ public class CaseArrayAdapter extends ArrayAdapter<Case> implements IConstants
 	if (picture != null)
 	{
 	    caseImage.setParseFile(picture);
-	    caseImage.loadInBackground(new GetDataCallback()
-                                	    {
-                                		@Override
-                                		public void done(byte[] data, ParseException e){}
-                                	    });
+	    caseImage.loadInBackground();
 	}
     }  
 }

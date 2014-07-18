@@ -15,14 +15,16 @@
         android:id="@+id/rlHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-        <ImageView
+        
+        <com.parse.ParseImageView
             android:id="@+id/ivBuildingImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
+            android:scaleType="fitXY"
             android:src="@drawable/photo_placeholder" />
+        
         <TextView
             android:id="@+id/tvBuildingName"
             android:layout_width="wrap_content"

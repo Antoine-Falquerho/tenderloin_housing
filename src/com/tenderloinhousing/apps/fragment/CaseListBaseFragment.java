@@ -106,6 +106,7 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 			Log.d(DEBUG, " foundCase " + foundCase.getBuilding().getAddress());
 			
 			List<Case> caseList = new ArrayList<Case>();
+			
 			caseList.add(foundCase);
 			caseListAdapter.clear();
 			caseListAdapter.addAll(caseList);

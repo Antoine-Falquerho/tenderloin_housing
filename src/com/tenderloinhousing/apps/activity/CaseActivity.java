@@ -59,30 +59,27 @@ public class CaseActivity extends BaseFragmentActivity
     private void showCaseDetailFragment()
     {    	
     	String case_id = getIntent().getStringExtra(CASE_ID_KEY);
-//    	Log.d("DEBUG", "1 --  " + case_id);
-    	
-    	// case_id = "BJE0Ob2lg8";
     	
     	ParseDAO.getCaseById(case_id, new GetCallback<Case>() {
 	           @Override
 				public void done(Case foundCase, ParseException e) {
 					if (e == null) {
-	                    if (foundCase!=null){
-	                    	     
-	        	            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-	        	    		Bundle bundle = new Bundle();
-	        	    		bundle.putSerializable(CASE_KEY, foundCase);	        	    		
-	        	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle);
-	        	    		
-	        	    		transaction.replace(R.id.flCase, detailsFragment);
-	        	    	
-	        	    		transaction.commit();
-	                    }
-	                } else {
-                 	Toast.makeText(getApplicationContext(), "No case with that id",Toast.LENGTH_LONG).show();
-	                    Log.d(ERROR, "Error: " + e.getMessage());
-	                }
+                                	                    if (foundCase!=null){
+                                	                    	     
+                                	        	            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                                
+                                	        	    		Bundle bundle = new Bundle();
+                                	        	    		bundle.putSerializable(CASE_KEY, foundCase);	        	    		
+                                	        	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle);
+                                	        	    		
+                                	        	    		transaction.replace(R.id.flCase, detailsFragment);
+                                	        	    	
+                                	        	    		transaction.commit();
+                                	                    }
+                                	                } else {
+                                                         	Toast.makeText(getApplicationContext(), "No case with that id",Toast.LENGTH_LONG).show();
+                                        	                    Log.d(ERROR, "Error in getCaseByID: " + e.getMessage());
+                                        	                }
 					
 				}
 	        });
