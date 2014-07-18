@@ -59,6 +59,6 @@
 	<string name="share">Share</string>
 	<string name="viewDetails">View Violation Details</string>
 	<string name="title_activity_case_list">Browse Cases</string>
-	<string name="hello_world">Hello world!</string>
-	<string name="action_settings">Settings</string>
+	<string name="searchById">Enter Case Number to search</string>
+
 </resources>
