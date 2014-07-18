@@ -26,6 +26,9 @@
 	<string name="newCases">New Cases</string>
 	<string name="myCases">My Cases</string>
 	<string name="search">Search</string>
+	<string name="caseByBuilding">Cases By Building</string>
+	
+	
 	<!-- Submit a Case -->
 	<string name="createReport">Create Report</string>
 	<string name="violationDetails">Violation Details</string>
@@ -48,6 +51,7 @@
 	<string name="caseNumber">Case Number </string>
 	<string name="caseManager">Case Manager </string>
 	<string name="submitDate">Submitted</string>
+	
 	<!-- Action Buttons -->
 	<string name="submit">Submit</string>
 	<string name="cancel">Cancel</string>

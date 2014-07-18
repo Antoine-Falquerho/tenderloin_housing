@@ -289,6 +289,7 @@ public class MapActivity extends FragmentActivity implements
 	getMenuInflater().inflate(R.menu.menu_login, menu);
 	getMenuInflater().inflate(R.menu.menu_report, menu);
 	getMenuInflater().inflate(R.menu.menu_case, menu);
+	getMenuInflater().inflate(R.menu.menu_building_cases, menu);
 	return true;
     }
 
@@ -322,6 +323,9 @@ public class MapActivity extends FragmentActivity implements
 	case R.id.miCase:
 	    doCases();
 	    return true;
+	case R.id.miCaseByBuilding:
+	    doCasesByBuilding();
+	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
@@ -344,7 +348,12 @@ public class MapActivity extends FragmentActivity implements
 
     private void doSignIn()
     {
-	//Intent intent = new Intent(this, LoginActivity.class);
+	Intent intent = new Intent(this, LoginActivity.class);
+	startActivity(intent);
+    }
+    
+    private void doCasesByBuilding()
+    {
 	Intent intent = new Intent(this, BuildingActivity.class);
 	startActivity(intent);
     }
