@@ -32,8 +32,6 @@ import com.tenderloinhousing.apps.model.Case;
 
 public abstract class CaseListBaseFragment extends Fragment implements IConstants
 {
-    protected long maxId = 0;
-    protected long sinceId = 0;
     protected ListView lvCaseList;
     protected ArrayList<Case> caseList = new ArrayList<Case>();
     protected ArrayAdapter<Case> caseListAdapter;

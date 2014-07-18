@@ -8,13 +8,11 @@ import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
 
 public class MyCaseListFragment extends CaseListBaseFragment
-{
-
+{    
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
-	
     }
 
     @Override
@@ -38,4 +36,5 @@ public class MyCaseListFragment extends CaseListBaseFragment
 	return fragment;
     }
 
+    
 }
