@@ -223,33 +223,23 @@
 			android:gravity="center"
 			android:orientation="horizontal" >
 			<Button
-				android:id="@+id/btnSubmit"
-				android:layout_width="60dp"
-				android:layout_height="30dp"
-				android:layout_marginLeft="20dp"
-				android:layout_marginRight="20dp"
-				android:background="@drawable/button_shape"
-				android:shadowColor="#33b5fa"
-				android:shadowDx="0"
-				android:shadowDy="0"
-				android:shadowRadius="5"
-				android:text="@string/submit"
-				android:textAlignment="center"
-				android:textColor="#FFFFFF"
-				android:textSize="14sp" />
+				android:id="@+id/btnSubmit"				
+				android:layout_height="match_parent"
+				android:layout_width="100dp"
+                android:background="@drawable/green_button"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:layout_marginRight="20dp"
+				android:text="@string/submit" />
 			<Button
-				android:id="@+id/btnCancel"
-				android:layout_width="60dp"
-				android:layout_height="30dp"
-				android:background="@drawable/button_shape"
-				android:shadowColor="#33b5fa"
-				android:shadowDx="0"
-				android:shadowDy="0"
-				android:shadowRadius="5"
+				android:id="@+id/btnCancel"				
+				android:layout_height="match_parent"
+				android:layout_width="100dp"
+                android:background="@drawable/green_button"
+                android:textStyle="bold"
+                android:textColor="#fff"
 				android:text="@string/cancel"
-				android:textAlignment="center"
-				android:textColor="#FFFFFF"
-				android:textSize="14sp" />
+				 />
 		</LinearLayout>
 	</RelativeLayout>
 </ScrollView>
