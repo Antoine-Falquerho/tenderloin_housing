@@ -15,33 +15,32 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 
-public class MapCaseAdapter extends ArrayAdapter<Case> {
+public class MapBuildingAdapter extends ArrayAdapter<Building> {
 	
-	public MapCaseAdapter(Context context, List<Case> cases) {
-		super(context, 0, cases);
+	public MapBuildingAdapter(Context context, List<Building> buildings) {
+		super(context, 0, buildings);
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Case inputCase = getItem(position);
+		Building building = getItem(position);
 
 		View v;
 		if (convertView != null) {
 			v = convertView;
 		} else {
 			LayoutInflater inflator = LayoutInflater.from(getContext());
-			v = inflator.inflate(R.layout.case_list_item, parent, false);
+			v = inflator.inflate(R.layout.building_list_item, parent, false);
 		}
 
-		TextView tvCaseId = (TextView) v.findViewById(R.id.tvCaseId);
 		TextView tvBuildingName = (TextView) v.findViewById(R.id.tvBuildingName);
-		TextView tvIssueType = (TextView) v.findViewById(R.id.tvIssueType);
+		TextView tvBuildingAddress = (TextView) v.findViewById(R.id.tvBuildingAddress);
 		
-		tvCaseId.setText(inputCase.getCaseId());
-		tvBuildingName.setText(inputCase.getBuilding().getName());
-		tvIssueType.setText(inputCase.getIssueType());
+		tvBuildingName.setText(building.getName());
+		tvBuildingAddress.setText(building.getAddress());
 
 //		ArrayList<ParseFile> pictureList = inputCase.getPictures();
 //		if (pictureList!=null){
@@ -58,13 +57,14 @@ public class MapCaseAdapter extends ArrayAdapter<Case> {
 //		    }
 //		}
 		
-		ParseImageView caseImage = (ParseImageView) v.findViewById(R.id.ivCaseImg);
-		ParseFile picture = inputCase.getBuilding().getImage(); 
+		ParseImageView buildingImage = (ParseImageView) v.findViewById(R.id.ivBuildingImg);
+		ParseFile picture = building.getImage(); 
 		if (picture != null)
 		{
-		    caseImage.setParseFile(picture);
-		    caseImage.loadInBackground();
+			buildingImage.setParseFile(picture);
+			buildingImage.loadInBackground();
 		}
+		v.setTag(building.getBuildingId());
 		return v;
 	}
 
