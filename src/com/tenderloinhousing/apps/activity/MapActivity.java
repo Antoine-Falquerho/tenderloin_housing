@@ -29,6 +29,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -377,6 +378,7 @@ public class MapActivity extends FragmentActivity implements
 	    {
 		markerOptions.position(building.getlatLng());
 		markerOptions.title(building.getName());
+		markerOptions.icon(BitmapDescriptorFactory.defaultMarker(92f));
 		Marker m = map.addMarker(markerOptions);
 		buildingMarkerMap.put(m, building.getBuildingId());
 		bounds.include(building.getlatLng());
