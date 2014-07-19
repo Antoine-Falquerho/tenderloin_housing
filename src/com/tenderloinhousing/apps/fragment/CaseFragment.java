@@ -214,7 +214,8 @@ public class CaseFragment extends Fragment implements IConstants
 
 	if (isOk)
 	{
-	    final Case savedCase = caseToSave;
+	    //Have to make a "final" case
+	    final Case caseToSaveFinal = caseToSave;
 	    // Save the post and return
 	    ParseDAO.createCase(caseToSave, new SaveCallback()
 	    {
@@ -227,7 +228,7 @@ public class CaseFragment extends Fragment implements IConstants
 //			getActivity().finish();
 			
 			
-			ParseDAO.getCaseById(caseToSave.getCaseId(), new GetCallback<Case>() {
+			ParseDAO.getCaseById(caseToSaveFinal.getCaseId(), new GetCallback<Case>() {
 		           @Override
 					public void done(Case foundCase, ParseException e) {
 						if (e == null) {
