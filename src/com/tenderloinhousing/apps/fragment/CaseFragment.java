@@ -66,7 +66,7 @@ public class CaseFragment extends Fragment implements IConstants
     LatLng laglng;
     ArrayList<ParseFile> pictureList = new ArrayList<ParseFile>();
     String photoFileName;
-    private Case myCase;
+    private Case caseForEdit;
 
     @Override
     public void onAttach(Activity activity)
@@ -80,14 +80,14 @@ public class CaseFragment extends Fragment implements IConstants
     {
 	super.onCreate(savedInstanceState);
 	laglng = getArguments().getParcelable(LATLNG_KEY);
-	myCase = (Case) getArguments().getSerializable(CASE_KEY);
+	caseForEdit = (Case) getArguments().getSerializable(CASE_KEY);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
     {
-	
+
 	View view = inflater.inflate(R.layout.fragment_case, parent, false);
 
 	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
@@ -106,22 +106,64 @@ public class CaseFragment extends Fragment implements IConstants
 	ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
 
 	spIssueType.setOnItemSelectedListener(getOnItemSelectedListener());
-	//spIssueType.setSelection(0); // default to the first item hint
+	// spIssueType.setSelection(0); // default to the first item hint
 	spBuilding.setOnItemSelectedListener(getOnItemSelectedListener());
-	//spBuilding.setSelection(0); // default to the first item hint
+	// spBuilding.setSelection(0); // default to the first item hint
 	ivPhoto.setOnClickListener(getOnClickListener());
 	submitButton.setOnClickListener(getOnSubmitListener());
 	cancelButton.setOnClickListener(getOnCancelListener());
-	
-	if(myCase!=null) {
-		User user = (User) myCase.getTenant();
-		etName.setText(user.getName());
-	    etDescription.setText(myCase.getDescription());
+
+	if (caseForEdit != null)
+	{
+	    User user = (User) caseForEdit.getTenant();
+	    etName.setText(user.getName());
+
 	    etEmail.setText(user.getEmail());
 	    etPhone.setText(user.getPhone());
+	    etLanguage.setText(user.getLanguage());
+
+	    setSpinnerToValue(spIssueType, caseForEdit.getIssueType());
+	    etDescription.setText(caseForEdit.getDescription());
+	    setSpinnerToValue(spIssueType, caseForEdit.getBuilding().getName());
+	    etAddress.setText(caseForEdit.getBuilding().getAddress());
+
+	    etUnit.setText(caseForEdit.getUnit());
+	    cbMultiUnit.setChecked(caseForEdit.getIsMultiUnitPetition());
+
+	    setPictures();
 	}
 
 	return view;
+    }
+
+    private void setPictures()
+    {
+	try
+	{
+	    // Convert pictures to Bitmap
+	    ArrayList<ParseFile> pictureList = caseForEdit.getPictures();
+	    if (pictureList != null && !pictureList.isEmpty())
+		for (ParseFile picture : pictureList)
+		{
+		    byte[] byteArray = picture.getData();
+		    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+		    // Add image to srolling view
+		    ImageView imageView = new ImageView(getActivity().getApplicationContext());
+		    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(220, 220);
+		    layoutParams.setMargins(8, 5, 8, 5);
+		    imageView.setLayoutParams(layoutParams);
+		    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		    imageView.setImageBitmap(bmp);
+
+		    photoContainer.addView(imageView);
+		}
+	}
+	catch (ParseException e)
+	{
+	    e.printStackTrace();
+	    Log.d(ERROR, "failed on loading pictures into view : " + e.getMessage());
+	}
     }
 
     public OnClickListener getOnSubmitListener()
@@ -141,11 +183,13 @@ public class CaseFragment extends Fragment implements IConstants
 	boolean isOk = true;
 
 	Case newCase = null;
-	
-	if(myCase!=null) {
-	    newCase = myCase;
-	    
-	}else
+
+	if (caseForEdit != null)
+	{
+	    newCase = caseForEdit;
+
+	}
+	else
 	{
 	    newCase = buildCase(isOk);
 	}
@@ -155,14 +199,14 @@ public class CaseFragment extends Fragment implements IConstants
 
 	// Building
 	Building buildingObj = buildBuilding(isOk);
-	if(buildingObj != null)
+	if (buildingObj != null)
 	    newCase.setBuilding(buildingObj);
-	
-	Log.d("DEBUG", myCase.getCaseId());
+
+	Log.d("DEBUG", caseForEdit.getCaseId());
 
 	// Pictures
 	if (!pictureList.isEmpty())
-	    newCase.setPictures(pictureList); 
+	    newCase.setPictures(pictureList);
 
 	if (isOk)
 	{
@@ -178,7 +222,7 @@ public class CaseFragment extends Fragment implements IConstants
 			getActivity().finish();
 		    }
 		    else
-		    {		    	
+		    {
 			Toast.makeText(getActivity(), "Remote server call failed. " + e.getMessage(), Toast.LENGTH_SHORT).show();
 			Log.d(ERROR, "createCase failure : " + e.getMessage());
 		    }
@@ -393,9 +437,9 @@ public class CaseFragment extends Fragment implements IConstants
 		// String value = parent.getItemAtPosition(position).toString();
 		String value = ((Spinner) parent).getSelectedItem().toString();
 		setSpinnerToValue(((Spinner) parent), value);
-		
-		if(((Spinner) parent)== spBuilding)
-		   etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value)); 		
+
+		if (((Spinner) parent) == spBuilding)
+		    etAddress.setText(BuildingList.getInstance().getBuildingAddressByName(value));
 	    }
 
 	    @Override
@@ -443,13 +487,14 @@ public class CaseFragment extends Fragment implements IConstants
 
 	return fragment;
     }
-    
-    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg) {
-    	CaseFragment fragment = new CaseFragment();
-    	fragment.setArguments(bundle);    	
-    	//myCase = myCaseArg;
 
-    	return fragment;
-	}
+    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg)
+    {
+	CaseFragment fragment = new CaseFragment();
+	fragment.setArguments(bundle);
+	// caseForEdit = myCaseArg;
+
+	return fragment;
+    }
 
 }

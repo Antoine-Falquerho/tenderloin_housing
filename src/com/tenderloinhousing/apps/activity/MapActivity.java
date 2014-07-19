@@ -342,8 +342,9 @@ public class MapActivity extends FragmentActivity implements
     private void doReport()
     {
 	//Use DispatchActivity to guard the gate to CaseActivity and prompt for sign in
-	Intent intent = new Intent(this, CreateCaseDispatchActivity.class);
-	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);
+	//Intent intent = new Intent(this, CreateCaseDispatchActivity.class);
+	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);
+	Intent intent = new Intent(this, CaseActivity.class);
 	intent.putExtra(METHOD_KEY, METHOD_CODE_CREATE);
 	intent.putExtra(LATLNG_KEY, latLng);
 	startActivity(intent);

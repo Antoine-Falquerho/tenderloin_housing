@@ -166,7 +166,9 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 
 		    // Add image to srolling view
 		    ImageView imageView = new ImageView(getActivity().getApplicationContext());
-		    imageView.setLayoutParams(new LayoutParams(220, 220));
+		    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(220, 220);
+		    layoutParams.setMargins(8, 5, 8, 5);
+		    imageView.setLayoutParams(layoutParams);
 		    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		    imageView.setImageBitmap(bmp);
 
@@ -176,7 +178,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	catch (ParseException e)
 	{
 	    e.printStackTrace();
-	    Log.d(ERROR, "createCase failure : " + e.getMessage());
+	    Log.d(ERROR, "load image failure : " + e.getMessage());
 	}
     }
 
