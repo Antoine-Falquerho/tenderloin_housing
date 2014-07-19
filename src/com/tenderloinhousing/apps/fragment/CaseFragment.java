@@ -221,7 +221,7 @@ public class CaseFragment extends Fragment implements IConstants
 //				FragmentTransaction transaction = getFragmentManager().beginTransaction();		
 //	
 //				Bundle bundle = new Bundle();
-//				bundle.putSerializable(CASE_KEY, caseToSave);
+//				bundle.putSerializable(CASE_KEY, caseForEdit);
 //				CaseDetailsFragment caseDetailsFragment = CaseDetailsFragment.newInstance(bundle);
 //								
 //				transaction.setCustomAnimations(R.anim.slide_up_in, R.anim.slide_up_out);
