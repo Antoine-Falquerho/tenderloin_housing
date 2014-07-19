@@ -179,37 +179,39 @@ public class CaseFragment extends Fragment implements IConstants
     {
 	boolean isOk = true;
 
-	Case newCase = null;
+	Case caseToSave = null;
 
 	if (caseForEdit != null)
 	{
-	    newCase = caseForEdit;
+	    caseToSave = caseForEdit;
 
 	}
 	else
 	{
-	    newCase = buildCase(isOk);
+	    caseToSave = new Case();	    
 	}
 
+	//populate case related info
+	buildCase(caseToSave, isOk);
+	
 	// Tenant
-	newCase.setTenant(buildUser(isOk));
+	if (caseForEdit == null)
+	    caseToSave.setTenant(buildUser(isOk));
 
 	// Building
-	Building buildingObj = buildBuilding(isOk);
+	Building buildingObj = buildBuilding(caseToSave, isOk);
 	if (buildingObj != null)
-	    newCase.setBuilding(buildingObj);
-
-	
+	    caseToSave.setBuilding(buildingObj);
 
 	// Pictures
 	if (!pictureList.isEmpty())
-	    newCase.setPictures(pictureList);
+	    caseToSave.setPictures(pictureList);
 
 	if (isOk)
 	{
-	    final Case caseToSave = newCase;
+	    final Case savedCase = caseToSave;
 	    // Save the post and return
-	    ParseDAO.createCase(newCase, new SaveCallback()
+	    ParseDAO.createCase(caseToSave, new SaveCallback()
 	    {
 		@Override
 		public void done(ParseException e)
@@ -238,9 +240,9 @@ public class CaseFragment extends Fragment implements IConstants
 	}
     }
 
-    private Case buildCase(boolean isOk)
+    private void buildCase(Case newCase, boolean isOk)
     {
-	Case newCase = new Case();
+	//Case newCase = new Case();
 
 	String issueType = spIssueType.getSelectedItem().toString();
 	if (issueType == null || issueType.startsWith(SPINNER_HINT_PREFIX))
@@ -257,7 +259,7 @@ public class CaseFragment extends Fragment implements IConstants
 	    //newCase.setGeoLocation(laglng.latitude, laglng.longitude);
 	    newCase.setCaseStatus(CaseStatus.SUBMITTED.toString());
 	}
-	return newCase;
+	//return newCase;
     }
 
     private User buildUser(boolean isOk)
@@ -295,20 +297,30 @@ public class CaseFragment extends Fragment implements IConstants
 	return user;
     }
 
-    private Building buildBuilding(boolean isOk)
-    {
+    private Building buildBuilding(Case newCase, boolean isOk)
+    {   
 	Building building = null;
-	String buildingName = spBuilding.getSelectedItem().toString();
-	if (buildingName == null || buildingName.startsWith(SPINNER_HINT_PREFIX))
-	{
-	    Toast.makeText(getActivity(), "Please select a building. ", Toast.LENGTH_SHORT).show();
-	    isOk = false;
-	}
-	else
-	{
-	    String buildingId = BuildingList.getInstance().getBuildingIdByName(buildingName);
-	    building = (Building) ParseObject.createWithoutData("Building", buildingId);
-	}
+//		
+//	if(newCase.getBuilding()!=null)
+//	{
+//	    String buildingId = newCase.getBuilding().getBuildingId();
+//	    building = (Building) ParseObject.createWithoutData("Building", buildingId);
+//	}
+//	else
+//	{
+        	
+        	String buildingName = spBuilding.getSelectedItem().toString();
+        	if (buildingName == null || buildingName.startsWith(SPINNER_HINT_PREFIX))
+        	{
+        	    Toast.makeText(getActivity(), "Please select a building. ", Toast.LENGTH_SHORT).show();
+        	    isOk = false;
+        	}
+        	else
+        	{
+        	    String buildingId = BuildingList.getInstance().getBuildingIdByName(buildingName);
+        	    building = (Building) ParseObject.createWithoutData("Building", buildingId);
+        	}
+	//}
 	return building;
     }
 
