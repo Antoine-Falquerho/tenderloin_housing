@@ -118,16 +118,12 @@ public class CaseFragment extends Fragment implements IConstants
 	{
 	    User user = (User) caseForEdit.getTenant();
 	    etName.setText(user.getName());
-
-	    etEmail.setText(user.getEmail());
 	    etPhone.setText(user.getPhone());
 	    etLanguage.setText(user.getLanguage());
-
 	    setSpinnerToValue(spIssueType, caseForEdit.getIssueType());
 	    etDescription.setText(caseForEdit.getDescription());
-	    setSpinnerToValue(spIssueType, caseForEdit.getBuilding().getName());
+	    setSpinnerToValue(spBuilding, caseForEdit.getBuilding().getName());
 	    etAddress.setText(caseForEdit.getBuilding().getAddress());
-
 	    etUnit.setText(caseForEdit.getUnit());
 	    cbMultiUnit.setChecked(caseForEdit.getIsMultiUnitPetition());
 
@@ -203,7 +199,7 @@ public class CaseFragment extends Fragment implements IConstants
 	if (buildingObj != null)
 	    newCase.setBuilding(buildingObj);
 
-	Log.d("DEBUG", caseForEdit.getCaseId());
+	
 
 	// Pictures
 	if (!pictureList.isEmpty())
@@ -211,6 +207,7 @@ public class CaseFragment extends Fragment implements IConstants
 
 	if (isOk)
 	{
+	    final Case caseToSave = newCase;
 	    // Save the post and return
 	    ParseDAO.createCase(newCase, new SaveCallback()
 	    {
@@ -220,16 +217,16 @@ public class CaseFragment extends Fragment implements IConstants
 		    if (e == null)
 		    {
 			Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
-//			getActivity().finish();
-				FragmentTransaction transaction = getFragmentManager().beginTransaction();		
-	
-				Bundle bundle = new Bundle();
-				bundle.putSerializable(CASE_KEY, myCase);
-				CaseDetailsFragment caseDetailsFragment = CaseDetailsFragment.newInstance(bundle);
-								
-				transaction.setCustomAnimations(R.anim.slide_up_in, R.anim.slide_up_out);
-				transaction.replace(R.id.flCase, caseDetailsFragment);	
-				transaction.commit();
+			getActivity().finish();
+//				FragmentTransaction transaction = getFragmentManager().beginTransaction();		
+//	
+//				Bundle bundle = new Bundle();
+//				bundle.putSerializable(CASE_KEY, caseToSave);
+//				CaseDetailsFragment caseDetailsFragment = CaseDetailsFragment.newInstance(bundle);
+//								
+//				transaction.setCustomAnimations(R.anim.slide_up_in, R.anim.slide_up_out);
+//				transaction.replace(R.id.flCase, caseDetailsFragment);	
+//				transaction.commit();
 		    }
 		    else
 		    {
@@ -257,7 +254,7 @@ public class CaseFragment extends Fragment implements IConstants
 	    newCase.setDescription(etDescription.getText().toString());
 	    newCase.setUnit(etUnit.getText().toString());
 	    newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
-	    newCase.setGeoLocation(laglng.latitude, laglng.longitude);
+	    //newCase.setGeoLocation(laglng.latitude, laglng.longitude);
 	    newCase.setCaseStatus(CaseStatus.SUBMITTED.toString());
 	}
 	return newCase;
@@ -494,15 +491,6 @@ public class CaseFragment extends Fragment implements IConstants
     {
 	CaseFragment fragment = new CaseFragment();
 	fragment.setArguments(args);
-
-	return fragment;
-    }
-
-    public static CaseFragment newInstance(Bundle bundle, Case myCaseArg)
-    {
-	CaseFragment fragment = new CaseFragment();
-	fragment.setArguments(bundle);
-	// caseForEdit = myCaseArg;
 
 	return fragment;
     }
