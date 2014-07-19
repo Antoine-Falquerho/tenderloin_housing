@@ -20,7 +20,6 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -41,14 +40,13 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.tenderloinhousing.apps.R;
-import com.tenderloinhousing.apps.adapter.MapCaseAdapter;
+import com.tenderloinhousing.apps.adapter.MapBuildingAdapter;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
-import com.tenderloinhousing.apps.model.Case;
 
 public class MapActivity extends FragmentActivity implements
 	GooglePlayServicesClient.ConnectionCallbacks,
@@ -71,13 +69,12 @@ public class MapActivity extends FragmentActivity implements
     private SupportMapFragment mapFragment;
     private GoogleMap map;
     private LocationClient mLocationClient;
-    private HashMap<Marker, String> caseMarkerMap;
+    private HashMap<Marker, String> buildingMarkerMap;
     private LatLngBounds.Builder bounds;
     private MenuItem searchItem;
     private SearchView mSearchView;
-    private List<Case> mapCases;
-    private ArrayList<Case> caseList;
-    private MapCaseAdapter caseListAdapter;
+    private List <Building> buildingList;
+    private MapBuildingAdapter buildingListAdapter;
 
     private LatLng latLng;
     /*
@@ -89,9 +86,7 @@ public class MapActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
-	caseMarkerMap = new HashMap<Marker, String>();
-	// geoCodeBuildings();
-	BuildingList buildingList = BuildingList.getInstance();
+	buildingMarkerMap = new HashMap<Marker, String>();
 
 	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
@@ -119,17 +114,17 @@ public class MapActivity extends FragmentActivity implements
 	mSpaceView = mTransparentHeaderView.findViewById(R.id.space);
 
 	mListView.addHeaderView(mTransparentHeaderView);
-	caseList = new ArrayList<Case>();
-	caseListAdapter = new MapCaseAdapter(this, caseList);
-	mListView.setAdapter(caseListAdapter);
+	buildingList = new ArrayList<Building>();
+	buildingListAdapter = new MapBuildingAdapter(this, buildingList);
+	mListView.setAdapter(buildingListAdapter);
 	mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
 	{
 	    @Override
 	    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	    {
 		mSlidingUpPanelLayout.collapsePane();
-		String caseId = ((TextView) view.findViewById(R.id.tvCaseId)).getText().toString();
-		openCaseDetailIntent(caseId);
+		String buildingId = (String) view.getTag();
+		doCasesByBuilding(buildingId);
 	    }
 	});
 
@@ -173,11 +168,12 @@ public class MapActivity extends FragmentActivity implements
     }
 
     @Override
-    protected void onResume()
-    {
-	super.onStart();
-	geoCodeCases();
-	map.setOnMarkerClickListener(this);
+    protected void onResume(){
+		super.onStart();
+		buildingList = BuildingList.getInstance();
+		Toast.makeText(this, "Building size" + buildingList.size(), Toast.LENGTH_SHORT).show();
+		geoCodeAddBuildings();
+		map.setOnMarkerClickListener(this);
     }
 
     /*
@@ -290,7 +286,6 @@ public class MapActivity extends FragmentActivity implements
 	getMenuInflater().inflate(R.menu.menu_login, menu);
 	getMenuInflater().inflate(R.menu.menu_report, menu);
 	getMenuInflater().inflate(R.menu.menu_case, menu);
-	getMenuInflater().inflate(R.menu.menu_building_cases, menu);
 	return true;
     }
 
@@ -324,9 +319,6 @@ public class MapActivity extends FragmentActivity implements
 	case R.id.miCase:
 	    doCases();
 	    return true;
-	case R.id.miCaseByBuilding:
-	    doCasesByBuilding();
-	    return true;
 	default:
 	    return super.onOptionsItemSelected(item);
 	}
@@ -356,9 +348,10 @@ public class MapActivity extends FragmentActivity implements
 	startActivity(intent);
     }
 
-    private void doCasesByBuilding()
+    private void doCasesByBuilding(String buildingId)
     {
 	Intent intent = new Intent(this, BuildingActivity.class);
+	intent.putExtra(BUILDING_ID_KEY, buildingId);
 	startActivity(intent);
     }
 
@@ -367,33 +360,33 @@ public class MapActivity extends FragmentActivity implements
 	map.clear();
     }
 
-    public void repopulateCasestoList(List<Case> caseList)
+    public void repopulateCasestoList(List<Building> buildingList)
     {
-	caseListAdapter.clear();
-	caseListAdapter.addAll(caseList);
-	caseListAdapter.notifyDataSetChanged();
+	buildingListAdapter.clear();
+	buildingListAdapter.addAll(buildingList);
+	buildingListAdapter.notifyDataSetChanged();
     }
 
-    public void addMarkers(List<Case> caseList)
+    public void addMarkers(List<Building> buildingList)
     {
 	bounds = new LatLngBounds.Builder();
-	for (Case inputCase : caseList)
+	for (Building building : buildingList)
 	{
 	    MarkerOptions markerOptions = new MarkerOptions();
-	    if (inputCase.getlatLng() != null)
+	    if (building.getlatLng() != null)
 	    {
-		markerOptions.position(inputCase.getBuilding().getlatLng());
-		markerOptions.title(inputCase.getCaseStatus());
+		markerOptions.position(building.getlatLng());
+		markerOptions.title(building.getName());
 		Marker m = map.addMarker(markerOptions);
-		caseMarkerMap.put(m, inputCase.getCaseId());
-		bounds.include(inputCase.getBuilding().getlatLng());
+		buildingMarkerMap.put(m, building.getBuildingId());
+		bounds.include(building.getlatLng());
 	    }
 
 	}
 
-	if (caseList.size() > 0)
+	if (buildingList.size() > 0)
 	{
-	    map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 300));
+	    map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 100));
 	}
 
     }
@@ -422,18 +415,18 @@ public class MapActivity extends FragmentActivity implements
 	});
     }
 
-    public void geoCodeCases()
+    public void geoCodeAddBuildings()
     {
-	ParseDAO.getAll(Case.class, new FindCallback<Case>()
+	ParseDAO.getAll(Building.class, new FindCallback<Building>()
 	{
 	    @Override
-	    public void done(List<Case> caseList, com.parse.ParseException e)
+	    public void done(List<Building> myBuildingList, com.parse.ParseException e)
 	    {
 		if (e == null)
 		{
-		    mapCases = caseList;
-		    addMarkers(caseList);
-		    repopulateCasestoList(caseList);
+			buildingList = myBuildingList;
+		    addMarkers(myBuildingList);
+		    repopulateCasestoList(myBuildingList);
 
 		}
 		else
@@ -447,12 +440,12 @@ public class MapActivity extends FragmentActivity implements
     @Override
     public boolean onMarkerClick(final Marker marker)
     {
-	populateCasebyId(caseMarkerMap.get(marker));
+    doCasesByBuilding(buildingMarkerMap.get(marker));
 	mSlidingUpPanelLayout.collapsePane();
 	return true;
     }
 
-    private void openCaseDetailIntent(String caseId)
+    private void openBuildingDetailIntent(String caseId)
     {
 	Intent intent = new Intent(this, CaseActivity.class);
 	intent.putExtra(CASE_ID_KEY, caseId);
@@ -464,38 +457,38 @@ public class MapActivity extends FragmentActivity implements
     @Override
     public boolean onQueryTextSubmit(String query)
     {
-	populateCasebyId(query);
+//	populateCasebyId(query);
 	return true;
     }
 
-    private void populateCasebyId(String caseId)
-    {
-	ParseDAO.getCaseById(caseId, new GetCallback<Case>()
-	{
-	    @Override
-	    public void done(Case foundCase, ParseException e)
-	    {
-		if (e == null)
-		{
-		    if (foundCase != null)
-		    {
-			Log.d(DEBUG, " foundCase " + foundCase.getBuilding().getAddress());
-			List<Case> caseList = new ArrayList<Case>();
-			caseList.add(foundCase);
-			clearMarkers();
-			addMarkers(caseList);
-			repopulateCasestoList(caseList);
-		    }
-		}
-		else
-		{
-		    Toast.makeText(getApplicationContext(), "No case with that id", Toast.LENGTH_LONG).show();
-		    Log.d(ERROR, "Error: " + e.getMessage());
-		}
-
-	    }
-	});
-    }
+//    private void populateCasebyId(String caseId)
+//    {
+//	ParseDAO.getCaseById(caseId, new GetCallback<Case>()
+//	{
+//	    @Override
+//	    public void done(Case foundCase, ParseException e)
+//	    {
+//		if (e == null)
+//		{
+//		    if (foundCase != null)
+//		    {
+//			Log.d(DEBUG, " foundCase " + foundCase.getBuilding().getAddress());
+//			List<Case> caseList = new ArrayList<Case>();
+//			caseList.add(foundCase);
+//			clearMarkers();
+//			addMarkers(caseList);
+//			repopulateCasestoList(caseList);
+//		    }
+//		}
+//		else
+//		{
+//		    Toast.makeText(getApplicationContext(), "No case with that id", Toast.LENGTH_LONG).show();
+//		    Log.d(ERROR, "Error: " + e.getMessage());
+//		}
+//
+//	    }
+//	});
+//    }
 
     private void collapseMap()
     {

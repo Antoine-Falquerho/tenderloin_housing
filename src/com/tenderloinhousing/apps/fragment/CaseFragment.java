@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -219,7 +220,16 @@ public class CaseFragment extends Fragment implements IConstants
 		    if (e == null)
 		    {
 			Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
-			getActivity().finish();
+//			getActivity().finish();
+				FragmentTransaction transaction = getFragmentManager().beginTransaction();		
+	
+				Bundle bundle = new Bundle();
+				bundle.putSerializable(CASE_KEY, myCase);
+				CaseDetailsFragment caseDetailsFragment = CaseDetailsFragment.newInstance(bundle);
+								
+				transaction.setCustomAnimations(R.anim.slide_up_in, R.anim.slide_up_out);
+				transaction.replace(R.id.flCase, caseDetailsFragment);	
+				transaction.commit();
 		    }
 		    else
 		    {

@@ -28,7 +28,6 @@ public class BuildingActivity extends BaseFragmentActivity implements BuildingCa
 	setContentView(R.layout.activity_building);
 
 	String buildingId = (String) getIntent().getSerializableExtra(BUILDING_ID_KEY);
-	buildingId ="eC53xf5qDw";
 	building =  BuildingList.getBuildingById(buildingId);
 	populateBuildingHeader(building);
 
