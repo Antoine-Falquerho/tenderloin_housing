@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps.fragment;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -16,6 +17,9 @@ public class BuildingCaseListFragment extends CaseListBaseFragment
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);	
+	
+	ActionBar actionBar = getActivity().getActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
 	
     }  
    

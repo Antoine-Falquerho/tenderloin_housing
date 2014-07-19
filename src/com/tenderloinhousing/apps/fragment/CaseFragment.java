@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -82,6 +83,9 @@ public class CaseFragment extends Fragment implements IConstants
 	super.onCreate(savedInstanceState);
 	laglng = getArguments().getParcelable(LATLNG_KEY);
 	caseForEdit = (Case) getArguments().getSerializable(CASE_KEY);
+	
+	ActionBar actionBar = getActivity().getActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 

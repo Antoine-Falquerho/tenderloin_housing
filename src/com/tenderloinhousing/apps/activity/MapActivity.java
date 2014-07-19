@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -35,9 +36,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseAnalytics;
-import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.tenderloinhousing.apps.R;
@@ -86,13 +85,14 @@ public class MapActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-	super.onCreate(savedInstanceState);
+	super.onCreate(savedInstanceState);	
+    
 	buildingMarkerMap = new HashMap<Marker, String>();
 
 	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
 	setContentView(R.layout.activity_map);
-	ParseAnalytics.trackAppOpened(getIntent());
+	ParseAnalytics.trackAppOpened(getIntent());	
 
 	mListView = (ListView) findViewById(R.id.list);
 	mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
