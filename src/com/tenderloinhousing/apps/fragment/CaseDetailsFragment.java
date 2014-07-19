@@ -2,11 +2,15 @@ package com.tenderloinhousing.apps.fragment;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.util.Log;
@@ -57,7 +61,11 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		myCase = (Case) getArguments().getSerializable(CASE_KEY);
+		
+		ActionBar actionBar = getActivity().getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
 	}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -185,6 +193,7 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	public static CaseDetailsFragment newInstance(Bundle args) {		
 		CaseDetailsFragment fragment = new CaseDetailsFragment();   	
 	   	fragment.setArguments(args);
+	   	
 	   	return fragment;
 	}
 	

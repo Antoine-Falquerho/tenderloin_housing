@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps.activity;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -38,8 +39,7 @@ public class CaseActivity extends BaseFragmentActivity
 	        	default:
 	        		showCreateCaseFragment();        	    
 	        		break;
-		}
-
+		}		
 
     }
 

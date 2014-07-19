@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -34,6 +35,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -82,6 +84,9 @@ public class CaseFragment extends Fragment implements IConstants
 	super.onCreate(savedInstanceState);
 	laglng = getArguments().getParcelable(LATLNG_KEY);
 	caseForEdit = (Case) getArguments().getSerializable(CASE_KEY);
+	
+	ActionBar actionBar = getActivity().getActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -219,7 +224,34 @@ public class CaseFragment extends Fragment implements IConstants
 		    if (e == null)
 		    {
 			Toast.makeText(getActivity(), "Case is submitted successfully. ", Toast.LENGTH_SHORT).show();
-			getActivity().finish();
+//			getActivity().finish();
+			
+			
+			ParseDAO.getCaseById(caseToSave.getCaseId(), new GetCallback<Case>() {
+		           @Override
+					public void done(Case foundCase, ParseException e) {
+						if (e == null) {
+	                                	                    if (foundCase!=null){
+	                                	                    	     
+	                                	        	            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+	                                
+	                                	        	    		Bundle bundle = new Bundle();
+	                                	        	    		bundle.putSerializable(CASE_KEY, foundCase);	        	    		
+	                                	        	    		CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle);
+	                                	        	    		
+	                                	        	    		transaction.setCustomAnimations(R.anim.slide_up_in, R.anim.slide_up_out);
+	                                	        	    		transaction.replace(R.id.flCase, detailsFragment);	
+	                                	        	    		transaction.commit();
+	                                	                    }
+	                                	                } else {	
+	                                	                	
+	                                	                }                                                         	
+						
+					}
+		        });
+			
+			
+			
 //				FragmentTransaction transaction = getFragmentManager().beginTransaction();		
 //	
 //				Bundle bundle = new Bundle();
