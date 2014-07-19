@@ -2,19 +2,19 @@
 <resources>
 	<string-array name="issueType_array">
 		<item>[Select Violation Type]</item>
-		<item>mold</item>
-		<item>pests (mice)</item>
-		<item>pests (roaches)</item>
-		<item>pests (bed bugs)</item>
-		<item>no working heater</item>
-		<item>non-functioning elevator</item>
-		<item>no hot water</item>
-		<item>broken windows/doors/walls</item>
-		<item>obstruction of egress</item>
-		<item>general maintenance</item>
-		<item>security</item>
-		<item>fire detector</item>
-		<item>carbon monoxide detector</item>
-		<item>other</item>
+		<item>Mold</item>
+		<item>Pests (mice)</item>
+		<item>Pests (roaches)</item>
+		<item>Pests (bed bugs)</item>
+		<item>No Working Heater</item>
+		<item>Non-Functioning Elevator</item>
+		<item>No Hot Water</item>
+		<item>Broken Windows/Doors/Walls</item>
+		<item>Obstruction of Egress</item>
+		<item>General Maintenance</item>
+		<item>Security</item>
+		<item>Fire Detector</item>
+		<item>Carbon Monoxide Detector</item>
+		<item>Other</item>
 	</string-array>
 </resources>
