@@ -35,8 +35,10 @@
            <item name="android:textStyle">bold</item> 
 		</style>
 
-	<style name="myCustomMenuTextApearance" parent="@android:style/TextAppearance.Widget.TextView.PopupMenu">
+	<style name="ThcCustomMenuTextApearance" parent="@android:style/TextAppearance.Widget.TextView.PopupMenu">
         <item name="android:textColor">@color/ThcThemeColor</item>
+         <item name="android:textSize">16sp</item> 
+           <item name="android:textStyle">bold</item> 
     </style>
 
    <style name="ThcTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">

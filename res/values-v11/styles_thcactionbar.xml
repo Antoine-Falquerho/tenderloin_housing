@@ -29,7 +29,7 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_thcactionbar</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_thcactionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Thcactionbar</item>
-        
+         <item name="android:itemTextAppearance">@style/ThcCustomMenuTextApearance</item>
         
     </style>
 
@@ -41,7 +41,6 @@
         <item name="android:actionMenuTextColor">@color/ThcThemeColor</item> 
         <item name="android:titleTextStyle">@style/ThcTheme.ActionBar.TitleTextStyle</item>      
         <item name="android:attr/actionBarTabTextStyle">@style/ThcActionBarTabText</item>
-         <item name="android:itemTextAppearance">@style/myCustomMenuTextApearance</item>
     </style>
 
     <style name="ActionBar.Transparent.Thcactionbar" parent="@android:style/Widget.Holo.Light.ActionBar">

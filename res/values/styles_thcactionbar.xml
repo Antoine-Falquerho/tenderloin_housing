@@ -19,7 +19,7 @@
 
 <resources>
 
-    <style name="_ThcTheme" parent="@style/componentStyles">
+     <style name="_ThcTheme" parent="@style/componentStyles">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_thcactionbar</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Thcactionbar</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Thcactionbar</item>
@@ -29,7 +29,7 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_thcactionbar</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_thcactionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Thcactionbar</item>
-        
+         <item name="android:itemTextAppearance">@style/ThcCustomMenuTextApearance</item>
         
     </style>
 
