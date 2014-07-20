@@ -226,20 +226,17 @@
 				android:id="@+id/btnSubmit"				
 				android:layout_height="40dp"
 				android:layout_width="100dp"
-                android:background="@drawable/green_button"
-                android:textStyle="bold"
-                android:textColor="#fff"
+                style="@style/ThcButtonStyle"
                 android:layout_marginRight="20dp"
 				android:text="@string/submit" />
+<!--                 android:background="@drawable/green_button" /> -->
 			<Button
 				android:id="@+id/btnCancel"				
 				android:layout_height="40dp"
 				android:layout_width="100dp"
-                android:background="@drawable/green_button"
-                android:textStyle="bold"
-                android:textColor="#fff"
-				android:text="@string/cancel"
-				 />
+                style="@style/ThcButtonStyle"
+				android:text="@string/cancel"/>
+<!--                 android:background="@drawable/green_button" /> -->
 		</LinearLayout>
 	</RelativeLayout>
 </ScrollView>

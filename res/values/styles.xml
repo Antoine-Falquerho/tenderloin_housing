@@ -22,8 +22,8 @@
 	</style>
 	
 	<style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name='android:background'>@color/ThcThemeColor</item>		  <!-- grey -->      
-        <item name="android:actionMenuTextColor">@color/ThcMenuTextColor</item> <!-- orange -->
+        <item name='android:background'>@color/ThcThemeColor</item>		  <!-- orange -->      
+        <item name="android:actionMenuTextColor">@color/ThcMenuTextColor</item> <!-- white -->
         <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>  
        	<item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
         </style>
@@ -36,6 +36,11 @@
    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
 	    <item name="android:textColor">@color/ThcMenuTextColor</item>
 	  </style>
+	  
+    <style name="ThcButtonStyle" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ThcMenuTextColor</item> <!-- white -->
+      </style>
     
 <!--     <style name="THCBackgroundColor" > -->
 <!--         <item name="android:background">#6fa844</item> -->

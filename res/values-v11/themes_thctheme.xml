@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="ThcTheme" parent="@style/_ThcTheme"/>
+
+  <style name="_ThcTheme" parent="android:Theme.Holo.Light">
+<item name="android:actionBarStyle">@style/MyActionBar</item> 
+    <item name="android:editTextBackground">@drawable/thctheme_edit_text_holo_light</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/thctheme_btn_check_holo_light</item>
+
+    <item name="android:buttonStyle">@style/ButtonThcTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonThcTheme</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/SpinnerThcTheme</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/thctheme_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/thctheme_activated_background_holo_light</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/thctheme_fastscroll_thumb_holo</item>
+
+  </style>
+
+</resources>

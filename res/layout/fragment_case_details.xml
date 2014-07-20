@@ -450,18 +450,16 @@
                 android:layout_height="40dp"
                 android:shadowColor="#33b5fa"
                 android:text="@string/edit"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/green_button" />
+                style="@style/ThcButtonStyle"
+                android:layout_marginRight="20dp"/>
+<!--                 android:background="@drawable/green_button" /> -->
             <Button                
                 android:id="@+id/btnShare"                
                 android:layout_height="40dp"
-                android:layout_width="100dp"
-                android:background="@drawable/green_button"
-                android:textStyle="bold"
-                android:textColor="#fff"             
+                android:layout_width="100dp"               
+                style="@style/ThcButtonStyle"      
                 android:text="@string/share" />
+<!--                 android:background="@drawable/green_button" /> -->
         </LinearLayout> 	
         
    

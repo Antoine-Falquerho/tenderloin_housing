@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="ThcTheme" parent="@style/_ThcTheme"/>
+
+  <style name="_ThcTheme" parent="android:Theme.Holo.Light">
+  	
+  	<item name="android:actionBarStyle">@style/MyActionBar</item> 
+
+    <item name="android:editTextStyle">@style/EditTextThcTheme</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxThcTheme</item>
+
+    <item name="android:buttonStyle">@style/ButtonThcTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonThcTheme</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerThcTheme</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemThcTheme</item>
+
+    <item name="android:listViewStyle">@style/ListViewThcTheme</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewThcTheme.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemThcTheme</item>
+
+  </style>
+
+</resources>
