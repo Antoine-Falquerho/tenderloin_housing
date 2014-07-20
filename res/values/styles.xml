@@ -48,12 +48,12 @@
 	  
     <style name="ThcButtonStyle" >
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ThcMenuTextColor</item> <!-- white -->
+        <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- Darkgrey -->
       </style>
       
      <style name="FormLabelStyle" >
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/ThcLabelColor</item> <!-- grey -->
+        <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- grey -->
       </style>
       
       <style name="FormValueStyle" >
@@ -68,6 +68,15 @@
      <style name="ThcSpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
         <item name="android:textColor">@color/ThcDefaultTextColor</item>
          <item name="android:textSize">14sp</item>
+     </style>
+     
+    <style name="ThcSectionStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+         <item name="android:background">@color/ThcThemeColor</item>
+         <item name="android:textSize">12sp</item>
+          <item name="android:textColor">@color/ThcLabelColor</item>
      </style>
      
 <!--     <style name="THCBackgroundColor" > -->

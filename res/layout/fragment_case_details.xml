@@ -107,7 +107,7 @@
             </RelativeLayout>
             
             <!-- Right Box -->   <!-- Case Status -->
-    <RelativeLayout
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" 
                      android:layout_weight="1" >
@@ -130,6 +130,190 @@
                        android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
            </RelativeLayout>
         </LinearLayout>
+       
+        <!-- =====================================Divider =================================-->
+        <TextView
+            android:id="@+id/tvDividerViolationInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+             android:layout_marginTop="15dp"
+             style="@style/ThcSectionStyle"
+            android:text="Violation Information" />
+        
+         <!--  ============================== Row ===>  Violation Type ==================================== -->      
+       <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="10dp" >
+                <TextView
+                    android:id="@+id/labelType"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/issueType"
+                    style="@style/FormLabelStyle" />
+                <TextView
+                    android:id="@+id/tvViolationType"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"                  
+                    style="?android:attr/listSeparatorTextViewStyle"     
+                    android:layout_below="@+id/labelType"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/issueType"
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+       </RelativeLayout>
+         
+         <!--  ============================== Row ===> Description ==================================== -->
+       <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                 android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/labelDesc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/caseDesc"
+                   style="@style/FormLabelStyle" />
+                <TextView
+                    android:id="@+id/tvViolDesc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"              
+                    style="?android:attr/listSeparatorTextViewStyle"                    
+                    android:layout_below="@+id/labelDesc"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/caseDesc"
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+       </RelativeLayout>
+       
+         <!--  ============================== Row ===> Hotel / Unit ==================================== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:divider="@drawable/divider"
+            android:gravity="center"
+            android:orientation="horizontal" 
+           android:baselineAligned="false">
+            
+            <!-- Left Box -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:layout_weight="1">
+                <!-- Hotel -->
+                <TextView
+                    android:id="@+id/labelHotel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/building"
+                   style="@style/FormLabelStyle" />
+                <TextView
+                    android:id="@+id/tvHotel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"               
+                    style="?android:attr/listSeparatorTextViewStyle"                    
+                    android:layout_below="@+id/labelHotel"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/building"
+                   android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+            </RelativeLayout>
+            
+            <!-- Right Box -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:layout_weight="1">
+                <!-- Unit -->
+                <TextView
+                    android:id="@+id/labelUnit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/unitNumber"
+                    style="@style/FormLabelStyle" />
+                <TextView
+                    android:id="@+id/tvUnit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"           
+                    style="?android:attr/listSeparatorTextViewStyle"    
+                    android:layout_below="@+id/labelUnit"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/unitNumber"
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+            </RelativeLayout>
+        </LinearLayout>
+          
+         <!--  ============================== Row ===>  Multi-Unit ==================================== -->     
+         <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                 android:layout_marginTop="10dp" >
+                <TextView
+                    android:id="@+id/labelMulti"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/isMultiUnit"
+                    style="@style/FormLabelStyle" />
+                <TextView
+                    android:id="@+id/tvMulti"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"                   
+                    style="?android:attr/listSeparatorTextViewStyle"
+                    android:layout_below="@+id/labelMulti"
+                    android:layout_marginTop="5dp"
+                    android:text="No"
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+      </RelativeLayout>
+      
+    
+      <!--  ============================== Row ===> Photos ==================================== -->
+            
+      <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                 android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/tvPhoto"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+               android:gravity="left"
+                style="?android:attr/listSeparatorTextViewStyle"  
+                android:text="@string/addPhotos"
+                android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+            
+            <HorizontalScrollView
+                android:id="@+id/hvPhotoScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPhoto"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp">
+                <LinearLayout
+                    android:id="@+id/photoContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+            </HorizontalScrollView>
+    </RelativeLayout>
+        
+       <!--============================== Divider ===========================-->
+        <TextView
+            android:id="@+id/tvDividerPeronInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" 
+             android:layout_marginTop="15dp"  
+             style="@style/ThcSectionStyle"
+            android:text="Tenant Information" />
+        
         
 		<!--  ============================== Row ====>  Name / Language ==================================== -->
 		<LinearLayout
@@ -249,169 +433,8 @@
 	                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
 	       </RelativeLayout>
         </LinearLayout>
-       <!--  ============================== Row ===> Hotel / Unit ==================================== -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:divider="@drawable/divider"
-            android:gravity="center"
-            android:orientation="horizontal" 
-           android:baselineAligned="false">
-            
-            <!-- Left Box -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" 
-                android:layout_weight="1">
-                <!-- Hotel -->
-                <TextView
-                    android:id="@+id/labelHotel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="@string/building"
-                   style="@style/FormLabelStyle" />
-                <TextView
-                    android:id="@+id/tvHotel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"               
-                    style="?android:attr/listSeparatorTextViewStyle"                    
-                    android:layout_below="@+id/labelHotel"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/building"
-                   android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
-            </RelativeLayout>
-            
-            <!-- Right Box -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" 
-                android:layout_weight="1">
-                <!-- Unit -->
-                <TextView
-                    android:id="@+id/labelUnit"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="@string/unitNumber"
-                    style="@style/FormLabelStyle" />
-                <TextView
-                    android:id="@+id/tvUnit"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"           
-                    style="?android:attr/listSeparatorTextViewStyle"    
-                    android:layout_below="@+id/labelUnit"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/unitNumber"
-                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
-            </RelativeLayout>
-        </LinearLayout>
-          
-         <!--  ============================== Row ===>  Multi-Unit ==================================== -->     
-         <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" 
-                 android:layout_marginTop="10dp" >
-                <TextView
-                    android:id="@+id/labelMulti"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="@string/isMultiUnit"
-                    style="@style/FormLabelStyle" />
-                <TextView
-                    android:id="@+id/tvMulti"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"                   
-                    style="?android:attr/listSeparatorTextViewStyle"
-                    android:layout_below="@+id/labelMulti"
-                    android:layout_marginTop="5dp"
-                    android:text="No"
-                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
-      </RelativeLayout>
-      
-      <!--  ============================== Row ===>  Violation Type ==================================== -->      
-       <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:layout_marginTop="10dp" >
-                <TextView
-                    android:id="@+id/labelType"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="@string/issueType"
-                    style="@style/FormLabelStyle" />
-                <TextView
-                    android:id="@+id/tvViolationType"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"                  
-                    style="?android:attr/listSeparatorTextViewStyle"     
-                    android:layout_below="@+id/labelType"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/issueType"
-                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
-       </RelativeLayout>
-         
-         <!--  ============================== Row ===> Description ==================================== -->
-       <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                 android:layout_marginTop="10dp">
-                <TextView
-                    android:id="@+id/labelDesc"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="@string/caseDesc"
-                   style="@style/FormLabelStyle" />
-                <TextView
-                    android:id="@+id/tvViolDesc"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"              
-                    style="?android:attr/listSeparatorTextViewStyle"                    
-                    android:layout_below="@+id/labelDesc"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/caseDesc"
-                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
-       </RelativeLayout>
-	
-      <!--  ============================== Row ===> Photos ==================================== -->
-            
-      <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                 android:layout_marginTop="10dp">
-	        <TextView
-	            android:id="@+id/tvPhoto"
-	            android:layout_width="fill_parent"
-	            android:layout_height="wrap_content"
-	           android:gravity="left"
-	            style="?android:attr/listSeparatorTextViewStyle"  
-	            android:text="@string/addPhotos"
-	            android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
-	        
-	        <HorizontalScrollView
-	            android:id="@+id/hvPhotoScroll"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_below="@+id/tvPhoto"
-	            android:layout_marginTop="5dp"
-	            android:layout_marginLeft="10dp">
-	            <LinearLayout
-	                android:id="@+id/photoContainer"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:orientation="horizontal" >
-	            </LinearLayout>
-	        </HorizontalScrollView>
-    </RelativeLayout>
+     
+     
          
            <!--  ============================== Row ===> Action Buttons ==================================== --> 
         <LinearLayout

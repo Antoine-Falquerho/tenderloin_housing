@@ -1,8 +1,11 @@
 package com.tenderloinhousing.apps.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -84,5 +87,32 @@ public class CaseActivity extends BaseFragmentActivity
 				}
 	        });
     	
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+	getMenuInflater().inflate(R.menu.menu_explore, menu);
+	return true;
+    }
+    
+    // Respond to ActionBar icon click
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+	switch (item.getItemId())
+	{
+	case R.id.miExplore:
+	    doExplore();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+    
+
+    private void doExplore()
+    {
+	Intent intent = new Intent(this, MapActivity.class);	
+	startActivity(intent);
     }
 }

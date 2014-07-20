@@ -6,5 +6,7 @@
 	<color name="ThcMenuTextColor">#ffffff</color>  <!-- white  -->
 	<color name="ThcLabelColor">#7e7e7e</color>   <!-- light grey  -->
 	<color name="ThcHintColor">#CCCCCC</color> <!-- very light grey -->
+	<color name="LightOrangeColor">#FFD455</color> <!-- very light grey -->
+	
 	
 </resources>

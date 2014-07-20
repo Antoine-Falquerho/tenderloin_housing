@@ -7,6 +7,173 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content">
 		
+		<!-- Divider -->
+		<TextView
+            android:id="@+id/tvDividerViolationInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true"          
+            android:layout_centerHorizontal="true"
+            style="@style/ThcSectionStyle"
+            android:text="Violation Information" />
+		   
+		   
+		<!-- Issue Type -->
+        <Spinner
+            android:id="@+id/spIssueType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tvDividerViolationInfo"
+            android:layout_marginTop="15dp"
+            android:entries="@array/issueType_array"
+            android:gravity="right"
+            android:prompt="@string/issueType"
+            android:textSize="12sp" 
+            android:textColor="#7e7e7e"/>
+        
+        <!-- Description -->
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/spIssueType"
+            android:ems="10"
+            android:layout_marginTop="15dp"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:textColor="@color/ThcDefaultTextColor"
+            android:textColorHint="@color/ThcHintColor"
+            android:hint="@string/caseDesc"
+            android:inputType="text" />
+        <requestFocus />
+        
+        <LinearLayout
+            android:id="@+id/llhotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/etDescription"
+            android:divider="@drawable/divider"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal" >
+            <!-- Building/Hotel -->
+            <Spinner
+                android:id="@+id/spBuilding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:entries="@array/building_array"             
+                android:prompt="@string/building"
+                android:textColor="@color/ThcDefaultTextColor"
+                android:textSize="12sp" />
+            <!-- Unit -->
+            <EditText
+                android:id="@+id/etUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:textColor="@color/ThcDefaultTextColor"
+                android:textColorHint="@color/ThcHintColor"
+                android:hint="@string/unitNumber"
+                android:inputType="number" />
+        </LinearLayout>
+        
+        <!-- Address -->
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/llhotel"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:textColor="@color/ThcDefaultTextColor"
+            android:textColorHint="@color/ThcHintColor"
+            android:hint="@string/address"
+            android:inputType="text" />
+        
+        <!-- Is Multi unit -->
+        <RelativeLayout 
+            android:id="@+id/checkboxContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/etAddress"
+            android:layout_marginTop="15dp">
+            <TextView
+                android:id="@+id/tvMultiUnit" 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:text="@string/isMultiUnit" 
+                android:textColor="#7e7e7e"/>
+            <CheckBox
+                android:id="@+id/cbMultiUnit" 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tvMultiUnit"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:checked="false"
+                android:paddingLeft="30dp" />
+        </RelativeLayout>
+        
+        <!-- Photo -->
+        <TextView
+            android:id="@+id/tvPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/checkboxContainer"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/addPhotos"
+            android:textColor="@color/ThcDefaultTextColor"
+            android:textColorHint="@color/ThcHintColor"/>
+        <HorizontalScrollView
+            android:id="@+id/hvPhotoScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPhoto"
+            android:layout_marginTop="15dp" 
+            android:layout_marginLeft="10dp">
+            <LinearLayout
+                android:id="@+id/photoContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <ImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/photo_placeholder" />
+            </LinearLayout>
+        </HorizontalScrollView>
+        
+      <!-- Divider -->
+        <TextView
+            android:id="@+id/tvDividerPeronInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/hvPhotoScroll"  
+             android:layout_marginTop="15dp"   
+            android:layout_centerHorizontal="true"
+              style="@style/ThcSectionStyle"
+            android:text="Personal Information" />
+           
+        
 		<!-- Full Name -->
 		<EditText
 			android:id="@+id/etName"
@@ -14,7 +181,7 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
-			android:layout_alignParentTop="true"
+			android:layout_below="@+id/tvDividerPeronInfo"
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
@@ -39,84 +206,7 @@
 			android:hint="@string/language"
 			android:inputType="text" />
 		
-		<LinearLayout
-			android:id="@+id/llhotel"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true"
-			android:layout_below="@+id/etLanguage"
-			android:divider="@drawable/divider"
-			android:gravity="center"
-			android:layout_marginTop="15dp"
-			android:orientation="horizontal" >
-			<!-- Building/Hotel -->
-			<Spinner
-				android:id="@+id/spBuilding"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"				
-                android:layout_marginRight="10dp"
-				android:layout_weight="1"
-				android:entries="@array/building_array"				
-				android:prompt="@string/building"
-				android:textColor="@color/ThcDefaultTextColor"
-				android:textSize="12sp" />
-			<!-- Unit -->
-			<EditText
-				android:id="@+id/etUnit"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:ems="10"
-				style="?android:attr/listSeparatorTextViewStyle"
-				android:textColor="@color/ThcDefaultTextColor"
-				android:textColorHint="@color/ThcHintColor"
-				android:hint="@string/unitNumber"
-				android:inputType="number" />
-		</LinearLayout>
-		
-		<!-- Address -->
-		<EditText
-			android:id="@+id/etAddress"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true"
-			android:layout_below="@+id/llhotel"
-			android:layout_marginTop="15dp"
-			android:ems="10"
-			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="@color/ThcDefaultTextColor"
-			android:textColorHint="@color/ThcHintColor"
-			android:hint="@string/address"
-			android:inputType="text" />
-		
-		<!-- Is Multi unit -->
-		<RelativeLayout 
-			android:id="@+id/checkboxContainer"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/etAddress"
-            android:layout_marginTop="15dp">
-		    <TextView
-		        android:id="@+id/tvMultiUnit" 
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        style="?android:attr/listSeparatorTextViewStyle"
-		        android:text="@string/isMultiUnit" 
-		        android:textColor="#7e7e7e"/>
-		    <CheckBox
-		        android:id="@+id/cbMultiUnit" 
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@+id/tvMultiUnit"
-		        style="?android:attr/listSeparatorTextViewStyle"
-		        android:checked="false"
-		        android:paddingLeft="30dp" />
-		</RelativeLayout>
-		
+	
 		
 		<!-- Phone -->
 		<EditText
@@ -125,7 +215,7 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
-			android:layout_below="@+id/checkboxContainer"
+			android:layout_below="@+id/etLanguage"
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
@@ -150,71 +240,9 @@
 			android:hint="@string/emailOptional"
 			android:inputType="textEmailAddress" />
 		
-		<!-- Issue Type -->
-		<Spinner
-			android:id="@+id/spIssueType"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true"
-			android:layout_below="@+id/etEmail"
-			android:layout_marginTop="15dp"
-			android:entries="@array/issueType_array"
-			android:gravity="right"
-			android:prompt="@string/issueType"
-			android:textSize="12sp" 
-			android:textColor="#7e7e7e"/>
 		
-		<!-- Description -->
-		<EditText
-			android:id="@+id/etDescription"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true"
-			android:layout_below="@+id/spIssueType"
-			android:ems="10"
-			android:layout_marginTop="15dp"
-			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="@color/ThcDefaultTextColor"
-			android:textColorHint="@color/ThcHintColor"
-			android:hint="@string/caseDesc"
-			android:inputType="text" />
-		<requestFocus />
 		
-		<!-- Photo -->
-		<TextView
-			android:id="@+id/tvPhoto"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignParentRight="true"
-			android:layout_below="@+id/etDescription"
-			android:layout_marginTop="15dp"
-			android:layout_marginLeft="10dp"
-			android:text="@string/addPhotos"
-			android:textColor="@color/ThcDefaultTextColor"
-			android:textColorHint="@color/ThcHintColor"/>
-		<HorizontalScrollView
-			android:id="@+id/hvPhotoScroll"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_below="@+id/tvPhoto"
-			android:layout_marginTop="15dp" 
-			android:layout_marginLeft="10dp">
-			<LinearLayout
-				android:id="@+id/photoContainer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:orientation="horizontal" >
-				<ImageView
-                android:id="@+id/ivPhoto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/photo_placeholder" />
-			</LinearLayout>
-		</HorizontalScrollView>
+		
 		
 		<!-- Action Buttons -->
 		<LinearLayout
@@ -223,7 +251,7 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentRight="true"
-			android:layout_below="@+id/hvPhotoScroll"
+			android:layout_below="@+id/etEmail"
 			android:layout_marginTop="15dp"
 			android:layout_marginBottom="15dp"
 			android:gravity="center"
