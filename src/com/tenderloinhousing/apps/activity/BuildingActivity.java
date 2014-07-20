@@ -1,7 +1,10 @@
 package com.tenderloinhousing.apps.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -34,6 +37,43 @@ public class BuildingActivity extends BaseFragmentActivity implements BuildingCa
 	displayCaseListFragment();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+	getMenuInflater().inflate(R.menu.menu_report, menu);
+	getMenuInflater().inflate(R.menu.menu_explore, menu);
+	return true;
+    }
+    
+    // Respond to ActionBar icon click
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+	switch (item.getItemId())
+	{
+	case R.id.miReport:
+	    doReport();
+	    return true;
+	case R.id.miExplore:
+	    doExplore();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+    
+    private void doReport()
+    {
+	//Use DispatchActivity to guard the gate to CaseActivity and prompt for sign in
+	Intent intent = new Intent(this, CreateCaseDispatchActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);	
+	startActivity(intent);
+    }
+
+    private void doExplore()
+    {
+	Intent intent = new Intent(this, MapActivity.class);	
+	startActivity(intent);
+    }
     private void displayCaseListFragment()
     {
 	FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

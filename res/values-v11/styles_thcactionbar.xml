@@ -38,6 +38,10 @@
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_thcactionbar</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_thcactionbar</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Thcactionbar</item>
+        <item name="android:actionMenuTextColor">@color/ThcThemeColor</item> 
+        <item name="android:titleTextStyle">@style/ThcTheme.ActionBar.TitleTextStyle</item>      
+        <item name="android:attr/actionBarTabTextStyle">@style/ThcActionBarTabText</item>
+         <item name="android:itemTextAppearance">@style/myCustomMenuTextApearance</item>
     </style>
 
     <style name="ActionBar.Transparent.Thcactionbar" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -47,6 +51,7 @@
 
     <style name="PopupMenu.Thcactionbar" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_thcactionbar</item>	
+         <item name="android:popupBackground">@drawable/menu_dropdown_panel_thcactionbar</item> 
     </style>
 
     <style name="DropDownListView.Thcactionbar" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
@@ -54,7 +59,7 @@
     </style>
 
     <style name="ActionBarTabStyle.Thcactionbar" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
-        <item name="android:background">@drawable/tab_indicator_ab_thcactionbar</item>
+        <item name="android:background">@drawable/tab_indicator_ab_thcactionbar</item>       
     </style>
 
     <style name="DropDownNav.Thcactionbar" parent="@android:style/Widget.Holo.Light.Spinner">

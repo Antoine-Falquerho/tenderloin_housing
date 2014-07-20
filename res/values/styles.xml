@@ -24,14 +24,25 @@
 <!--        	<item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item> -->
 <!--         </style> -->
         
-<!--      <style name="MyActionBarTabText" parent="@android:style/Widget.ActionBar.TabText"> -->
-<!--         <item name="android:textColor">#55ACEE</item> -->
-<!--         The textColor property is backward compatible with the Support Library -->
+<!--      <style name="ThcActionBarTabText" parent="@android:style/Widget.ActionBar.TabText"> -->
+<!--             <item name="android:textColor">@color/ThcThemeColor</item> -->
+<!--             <item name="android:textSize">16sp</item> -->
+<!--             <item name="android:textStyle">bold</item> -->
 <!--     </style> -->
-    
-<!--    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"> -->
-<!-- 	    <item name="android:textColor">@color/ThcMenuTextColor</item> -->
-<!-- 	  </style> -->
+		<style name="ThcActionBarTabText" parent="android:Widget.Holo.Light.ActionBar.TabText">
+		      <item name="android:textColor">@color/ThcThemeColor</item>
+		      <item name="android:textSize">16sp</item> 
+           <item name="android:textStyle">bold</item> 
+		</style>
+
+	<style name="myCustomMenuTextApearance" parent="@android:style/TextAppearance.Widget.TextView.PopupMenu">
+        <item name="android:textColor">@color/ThcThemeColor</item>
+    </style>
+
+   <style name="ThcTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+	    <item name="android:textColor">@color/ThcThemeColor</item>
+	     <item name="android:textStyle">bold</item>
+	  </style>
 	  
     <style name="ThcButtonStyle" >
         <item name="android:textStyle">bold</item>
@@ -101,7 +112,7 @@
     </style>
 
     <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
-        <item name="android:background">@drawable/custom_tab_indicator</item>
+        <item name="android:background">@drawable/tab_indicator_ab_thcactionbar</item>
         <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
         <item name="android:textColor">#FF555555</item>
         <item name="android:textSize">16sp</item>
@@ -119,7 +130,7 @@
     </style>
 
     <style name="CustomUnderlinePageIndicator">
-        <item name="selectedColor">#FFCC0000</item>
+        <item name="selectedColor">@color/ThcThemeColor</item>
         <item name="android:background">#FFCCCCCC</item>
         <item name="fadeLength">1000</item>
         <item name="fadeDelay">1000</item>

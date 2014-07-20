@@ -1,6 +1,5 @@
 package com.tenderloinhousing.apps.activity;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -25,7 +24,7 @@ public class CaseActivity extends BaseFragmentActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_case);
 	
-		String method = getIntent().getStringExtra(METHOD_KEY);			
+		int method = getIntent().getIntExtra(METHOD_KEY, METHOD_CODE_CREATE);	//default to create		
 		laglng = getIntent().getParcelableExtra(LATLNG_KEY);
 		
 		switch (method)
@@ -43,6 +42,7 @@ public class CaseActivity extends BaseFragmentActivity
 
     }
 
+ 
     private void showCreateCaseFragment()
     {
 	   Log.d("showCreateCaseFragment", "##");	   

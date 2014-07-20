@@ -3,5 +3,5 @@
     android:layout_gravity="center"    
     android:layout_width="180dp"
     android:layout_height="160dp"
-    android:src="@drawable/thc_icon"
+    android:src="@color/ThcThemeColor"
     android:contentDescription="@string/com_parse_ui_logo_content_description" />

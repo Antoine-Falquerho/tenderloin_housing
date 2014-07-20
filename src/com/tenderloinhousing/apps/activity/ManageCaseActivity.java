@@ -1,25 +1,37 @@
 package com.tenderloinhousing.apps.activity;
 
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
 
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.CasePagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
-public class ManageCaseActivity extends FragmentActivity
+public class ManageCaseActivity extends FragmentActivity  implements ActionBar.TabListener
 {
     ViewPager vpPager;
     CasePagerAdapter adapter;
     OnPageChangeListener mPageChangeListener;
+    
+    private ActionBar actionBar;
+    // Tab titles
+    private String[] tabs = { "All Cases", "My Cases" };
+ 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
+	requestWindowFeature(Window.FEATURE_ACTION_BAR);
 	setContentView(R.layout.activity_manage_case);
 
 	mPageChangeListener = getPageChangeListener();
@@ -27,40 +39,97 @@ public class ManageCaseActivity extends FragmentActivity
 	vpPager = (ViewPager) findViewById(R.id.vpPager);
 	adapter = new CasePagerAdapter(getSupportFragmentManager());
 	vpPager.setAdapter(adapter);
-	// vpPager.setOnPageChangeListener(mPageChangeListener);
+	vpPager.setOnPageChangeListener(mPageChangeListener);
 
 	// Bind the title indicator to the adapter
-	TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
-	indicator.setViewPager(vpPager);
-
-	indicator.setOnPageChangeListener(mPageChangeListener);
+	//TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+	//indicator.setViewPager(vpPager);
+	//indicator.setOnPageChangeListener(mPageChangeListener);
+	
+        actionBar = getActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
+ 
+        // Adding Tabs
+        for (String tab_name : tabs) {
+            actionBar.addTab(actionBar.newTab().setText(tab_name)
+                    .setTabListener(this));
+        }
+ 
     }
 
     private OnPageChangeListener getPageChangeListener()
     {
 	return new OnPageChangeListener()
 	{
-	    // This method will be invoked when a new page becomes selected.
 	    @Override
-	    public void onPageSelected(int position)
-	    {
-		Toast.makeText(ManageCaseActivity.this, "Selected page position: " + position, Toast.LENGTH_SHORT).show();
-	    }
-
-	    // This method will be invoked when the current page is scrolled
-	    @Override
-	    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels)
-	    {
-		// Code goes here
-	    }
-
-	    // Called when the scroll state changes:
-	    // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
-	    @Override
-	    public void onPageScrollStateChanged(int state)
-	    {
-		// Code goes here
-	    }
+            public void onPageSelected(int position) {
+                // on changing the page
+                // make respected tab selected
+                actionBar.setSelectedNavigationItem(position);
+            }
+ 
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+ 
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+            }
 	};
     }
+    
+    @Override
+    public void onTabReselected(Tab tab, FragmentTransaction ft) {
+    }
+ 
+    @Override
+    public void onTabSelected(Tab tab, FragmentTransaction ft) {
+        // on tab selected show respected fragment view
+        vpPager.setCurrentItem(tab.getPosition());
+    }
+ 
+    @Override
+    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+    }
+ 
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+	getMenuInflater().inflate(R.menu.menu_report, menu);
+	getMenuInflater().inflate(R.menu.menu_explore, menu);
+	return true;
+    }
+    
+    // Respond to ActionBar icon click
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+	switch (item.getItemId())
+	{
+	case R.id.miReport:
+	    doReport();
+	    return true;
+	case R.id.miExplore:
+	    doExplore();
+	    return true;
+	default:
+	    return super.onOptionsItemSelected(item);
+	}
+    }
+    
+    private void doReport()
+    {
+	//Use DispatchActivity to guard the gate to CaseActivity and prompt for sign in
+	Intent intent = new Intent(this, CreateCaseDispatchActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);	
+	startActivity(intent);
+    }
+
+    private void doExplore()
+    {
+	Intent intent = new Intent(this, MapActivity.class);	
+	startActivity(intent);
+    }
+
 }

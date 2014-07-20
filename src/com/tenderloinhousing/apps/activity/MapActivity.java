@@ -90,7 +90,7 @@ public class MapActivity extends FragmentActivity implements
 	buildingMarkerMap = new HashMap<Marker, String>();
 
 	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
+	
 	setContentView(R.layout.activity_map);
 	ParseAnalytics.trackAppOpened(getIntent());	
 
@@ -335,11 +335,11 @@ public class MapActivity extends FragmentActivity implements
     private void doReport()
     {
 	//Use DispatchActivity to guard the gate to CaseActivity and prompt for sign in
-	//Intent intent = new Intent(this, CreateCaseDispatchActivity.class);
-	//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);
-	Intent intent = new Intent(this, CaseActivity.class);
-	intent.putExtra(METHOD_KEY, METHOD_CODE_CREATE);
-	intent.putExtra(LATLNG_KEY, latLng);
+	Intent intent = new Intent(this, CreateCaseDispatchActivity.class);
+	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK	| Intent.FLAG_ACTIVITY_NEW_TASK);
+	//Intent intent = new Intent(this, CaseActivity.class);
+	//intent.putExtra(METHOD_KEY, METHOD_CODE_CREATE); //Don't need this because default to create
+	//intent.putExtra(LATLNG_KEY, latLng);
 	startActivity(intent);
     }
 

@@ -19,8 +19,8 @@ public interface IConstants
     public static final String CASE_ID_KEY = "caseId";
     public static final String LATLNG_KEY = "latlng";
 
-    public static final String METHOD_CODE_DETAIL = "10";
-    public static final String METHOD_CODE_CREATE = "20";
+    public static final int METHOD_CODE_DETAIL = 10;
+    public static final int METHOD_CODE_CREATE = 20;
 
     // For camera
     public final String APP_TAG = "THC";

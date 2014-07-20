@@ -33,11 +33,11 @@ public class CasePagerAdapter extends FragmentPagerAdapter
 	}
     }
 
-    @Override
-    public CharSequence getPageTitle(int position)
-    {
-	return CONTENT[position % CONTENT.length];
-    }
+//    @Override
+//    public CharSequence getPageTitle(int position)
+//    {
+//	return CONTENT[position % CONTENT.length];
+//    }
 
     @Override
     public int getCount()

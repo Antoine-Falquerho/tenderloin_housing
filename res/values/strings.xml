@@ -55,7 +55,7 @@
 	<string name="submit">Submit</string>
 	<string name="cancel">Cancel</string>
 	<string name="edit">Edit</string>
-	<string name="share">Share</string>
+	<string name="share">Email</string>
 	<string name="viewDetails">View Violation Details</string>
 	<string name="title_activity_case_list">Browse Cases</string>
 	<string name="searchById">Enter Case Number to search</string>
