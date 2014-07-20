@@ -52,7 +52,8 @@
             android:id="@+id/labelSubmitDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/tvSubmitDate"            
+            android:layout_toLeftOf="@+id/tvSubmitDate"  
+            android:layout_centerHorizontal="true"          
             android:layout_alignBottom="@+id/tvSubmitDate"
             android:text="@string/submitDate"
             android:textSize="12sp" />
@@ -61,7 +62,7 @@
             android:id="@+id/tvSubmitDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
             android:layout_below="@+id/tvAddress"     
             android:layout_marginTop="10dp"       
             android:layout_marginLeft="3dp"

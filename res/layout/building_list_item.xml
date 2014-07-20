@@ -14,8 +14,9 @@
         android:id="@+id/ivBuildingImg"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-         android:layout_width="50dp"
-        android:layout_height="50dp"
+         android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_margin="5dp"
         android:scaleType="fitXY"
         android:src="@drawable/thc_hotel"
        />
@@ -42,12 +43,23 @@
             android:id="@+id/tvBuildingAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/caseNumber"
+            android:text="@string/address"
             android:layout_marginLeft="10dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/darker_gray"
             android:fontFamily="sans-serif-bold"/>
-
+         
+            <!-- Violation Count --> 
+         
+         <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"  
+            android:layout_marginTop="10dp"       
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="5dp"
+            android:text="5 Violations"
+            android:textSize="12sp" />
         
 	</LinearLayout>
 

@@ -39,7 +39,7 @@
 	  
     <style name="ThcButtonStyle" >
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ThcMenuTextColor</item> <!-- white -->
+        <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- white -->
       </style>
     
 <!--     <style name="THCBackgroundColor" > -->
