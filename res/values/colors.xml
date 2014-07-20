@@ -1,3 +1,7 @@
 <resources>
 	<color name="black_overlay">#66000000</color>
+	<color name="ActionBarBackgroundColor">#cccccc</color> <!-- grey -->
+	<color name="ThcThemeColor">#ff763c</color> <!-- orange  -->
+	<color name="ThcDefaultTextColor">#444444</color>  <!-- dark grey  -->
+	<color name="ThcMenuTextColor">#ffffff</color>  <!-- white  -->
 </resources>

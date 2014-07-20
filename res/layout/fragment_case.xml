@@ -18,7 +18,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#000000"
+			android:textColor="#444444"
 			android:hint="@string/fullName"
 			android:inputType="textPersonName" />
 		
@@ -33,7 +33,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#000000"
+			android:textColor="#444444"
 			android:hint="@string/language"
 			android:inputType="text" />
 		
@@ -58,7 +58,7 @@
 				style="?android:attr/listSeparatorTextViewStyle"
 				android:entries="@array/building_array"				
 				android:prompt="@string/building"
-				android:textColor="#000000"
+				android:textColor="#444444"
 				android:textSize="12sp" />
 			<!-- Unit -->
 			<EditText
@@ -68,7 +68,7 @@
 				android:layout_weight="1"
 				android:ems="10"
 				style="?android:attr/listSeparatorTextViewStyle"
-				android:textColor="#000000"
+				android:textColor="#444444"
 				android:hint="@string/unitNumber"
 				android:inputType="number" />
 		</LinearLayout>
@@ -84,7 +84,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#000000"
+			android:textColor="#444444"
 			android:hint="@string/address"
 			android:inputType="text" />
 		
@@ -126,7 +126,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#000000"
+			android:textColor="#444444"
 			android:hint="@string/phone"
 			android:inputType="phone" />
 		
@@ -171,7 +171,7 @@
 			android:ems="10"
 			android:layout_marginTop="15dp"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#000000"
+			android:textColor="#444444"
 			android:hint="@string/caseDesc"
 			android:inputType="text" />
 		<requestFocus />
@@ -203,8 +203,8 @@
 				android:orientation="horizontal" >
 				<ImageView
                 android:id="@+id/ivPhoto"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/photo_placeholder" />
 			</LinearLayout>

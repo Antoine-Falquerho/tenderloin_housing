@@ -19,7 +19,7 @@
         <com.parse.ParseImageView
             android:id="@+id/ivBuildingImage"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="200dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:scaleType="fitXY"
@@ -33,7 +33,7 @@
             android:layout_below="@+id/ivBuildingImage"
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="#444444"
             android:text="Hotel Name"
             android:textSize="14sp" />
         <TextView
@@ -103,7 +103,7 @@
                     android:layout_marginTop="5dp"
                     style="?android:attr/listSeparatorTextViewStyle"
                     android:text="@string/caseNumber"
-                    android:textColor="#000000"
+                    android:textColor="#444444"
                     android:textSize="14sp" />
             </RelativeLayout>
             
@@ -129,7 +129,7 @@
                         android:layout_below="@+id/labelCaseStatus"
                         android:layout_marginTop="5dp"
                         android:text="@string/caseStatus"
-                        android:textColor="#000000"
+                        android:textColor="#444444"
                         android:textSize="14sp" />
            </RelativeLayout>
         </LinearLayout>
@@ -167,7 +167,7 @@
 					android:layout_below="@+id/labelL"
 					android:layout_marginTop="5dp"
 					android:text="@string/tenantName"
-					android:textColor="#000000"
+					android:textColor="#444444"
 					android:textSize="14sp" />
 			</RelativeLayout>
 			
@@ -194,7 +194,7 @@
 					android:layout_below="@+id/labelR"
 					android:layout_marginTop="5dp"
 					android:text="English"
-					android:textColor="#000000"
+					android:textColor="#444444"
 					android:textSize="14sp" />
 			</RelativeLayout>
 		</LinearLayout>
@@ -231,7 +231,7 @@
 	                    android:layout_below="@+id/labelPhone"
 	                    android:layout_marginTop="5dp"
 	                    android:text="@string/tenantPhone"
-	                    android:textColor="#000000"
+	                    android:textColor="#444444"
 	                    android:textSize="14sp" />
 	       </RelativeLayout>
 	 
@@ -256,7 +256,7 @@
 	                    android:layout_below="@+id/labelEmail"
 	                    android:layout_marginTop="5dp"
 	                    android:text="@string/tenentEmail"
-	                    android:textColor="#000000"
+	                    android:textColor="#444444"
 	                    android:textSize="14sp" />
 	       </RelativeLayout>
         </LinearLayout>
@@ -293,7 +293,7 @@
                     android:layout_below="@+id/labelHotel"
                     android:layout_marginTop="5dp"
                     android:text="@string/building"
-                    android:textColor="#000000"
+                    android:textColor="#444444"
                     android:textSize="14sp" />
             </RelativeLayout>
             
@@ -320,7 +320,7 @@
                     android:layout_below="@+id/labelUnit"
                     android:layout_marginTop="5dp"
                     android:text="@string/unitNumber"
-                    android:textColor="#000000"
+                    android:textColor="#444444"
                     android:textSize="14sp" />
             </RelativeLayout>
         </LinearLayout>
@@ -347,7 +347,7 @@
                     android:layout_below="@+id/labelMulti"
                     android:layout_marginTop="5dp"
                     android:text="No"
-                    android:textColor="#000000"
+                    android:textColor="#444444"
                     android:textSize="14sp" />
       </RelativeLayout>
       
@@ -373,7 +373,7 @@
                     android:layout_below="@+id/labelType"
                     android:layout_marginTop="5dp"
                     android:text="@string/issueType"
-                    android:textColor="#000000"
+                    android:textColor="#444444"
                     android:textSize="14sp" />
        </RelativeLayout>
          
@@ -399,7 +399,7 @@
                     android:layout_below="@+id/labelDesc"
                     android:layout_marginTop="5dp"
                     android:text="@string/caseDesc"
-                    android:textColor="#000000"
+                    android:textColor="#444444"
                     android:textSize="14sp" />
        </RelativeLayout>
 	
