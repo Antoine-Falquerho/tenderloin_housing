@@ -1,47 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 	<!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 	-->
-	<style name="AppBaseTheme" parent="android:Theme.Holo">		<!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-		-->
-	</style>
+<!-- 	<style name="AppBaseTheme" parent="android:Theme.Holo">		 -->
+<!-- 	</style> -->
 	
 	<!-- Application theme. -->
-	<style name="AppTheme" parent="AppBaseTheme">		<!-- All customizations that are NOT specific to a particular API-level can go here. -->
-	    <item name="android:actionBarStyle">@style/MyActionBar</item>  
-	</style>
+<!-- 	<style name="AppTheme" parent="AppBaseTheme">		 -->
+<!-- 	    <item name="android:actionBarStyle">@style/MyActionBar</item>   -->
+<!-- 	</style> -->
 	
 	<style name="ParseLoginUI.EditText" parent="@android:style/Widget.EditText">
 		<item name="android:textColorHint">@android:color/white</item>
 		<item name="android:singleLine">true</item>
 	</style>
 	
-	<style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name='android:background'>@color/ThcThemeColor</item>		  <!-- orange -->      
-        <item name="android:actionMenuTextColor">@color/ThcMenuTextColor</item> <!-- white -->
-        <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>  
-       	<item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
-        </style>
+<!-- 	<style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar"> -->
+<!--         <item name='android:background'>@color/ThcThemeColor</item>		  orange       -->
+<!--         <item name="android:actionMenuTextColor">@color/ThcMenuTextColor</item> white -->
+<!--         <item name="android:titleTextStyle">@style/MyTheme.ActionBar.TitleTextStyle</item>   -->
+<!--        	<item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item> -->
+<!--         </style> -->
         
-     <style name="MyActionBarTabText" parent="@android:style/Widget.ActionBar.TabText">
-        <item name="android:textColor">#55ACEE</item>
-        <!-- The textColor property is backward compatible with the Support Library -->
-    </style>
+<!--      <style name="MyActionBarTabText" parent="@android:style/Widget.ActionBar.TabText"> -->
+<!--         <item name="android:textColor">#55ACEE</item> -->
+<!--         The textColor property is backward compatible with the Support Library -->
+<!--     </style> -->
     
-   <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-	    <item name="android:textColor">@color/ThcMenuTextColor</item>
-	  </style>
+<!--    <style name="MyTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"> -->
+<!-- 	    <item name="android:textColor">@color/ThcMenuTextColor</item> -->
+<!-- 	  </style> -->
 	  
     <style name="ThcButtonStyle" >
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- white -->
+        <item name="android:textColor">@color/ThcMenuTextColor</item> <!-- white -->
       </style>
-    
+      
+     <style name="FormLabelStyle" >
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/ThcLabelColor</item> <!-- grey -->
+      </style>
+      
+      <style name="FormValueStyle" >
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- dark grey -->
+      </style>
+      
+      <style name="FormValueStyle.Bold" >
+        <item name="android:textStyle">bold</item>
+      </style>
+      
+     <style name="ThcSpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/ThcDefaultTextColor</item>
+         <item name="android:textSize">14sp</item>
+     </style>
+     
 <!--     <style name="THCBackgroundColor" > -->
 <!--         <item name="android:background">#6fa844</item> -->
 <!--     </style> -->

@@ -32,10 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivBuildingImage"
             android:layout_centerHorizontal="true"
-            android:textStyle="bold"
-            android:textColor="#444444"
-            android:text="Hotel Name"
-            android:textSize="14sp" />
+            style="@style/FormValueStyle.Bold"
+            android:text="Hotel Name" />
+        
         <TextView
             android:id="@+id/tvAddress"
             android:layout_width="wrap_content"
@@ -56,7 +55,7 @@
             android:layout_centerHorizontal="true"          
             android:layout_alignBottom="@+id/tvSubmitDate"
             android:text="@string/submitDate"
-            android:textSize="12sp" />
+            style="@style/FormLabelStyle"/>
          
          <TextView
             android:id="@+id/tvSubmitDate"
@@ -68,7 +67,7 @@
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:text="@string/submitDate"
-            android:textSize="12sp" />
+            style="@style/FormLabelStyle" />
         </RelativeLayout>
         
 		<!--  ============================== Row === Case Number / Case Status ==================================== -->
@@ -93,8 +92,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="@string/caseNumber"
-                    android:textColor="#7e7e7e"
-                    android:textSize="12sp" />
+                   style="@style/FormLabelStyle" />
                 <TextView
                     android:id="@+id/tvCaseNumber"
                     android:layout_width="fill_parent"
@@ -104,8 +102,8 @@
                     android:layout_marginTop="5dp"
                     style="?android:attr/listSeparatorTextViewStyle"
                     android:text="@string/caseNumber"
-                    android:textColor="#444444"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/ThcDefaultTextColor" />
             </RelativeLayout>
             
             <!-- Right Box -->   <!-- Case Status -->
@@ -119,8 +117,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:text="@string/caseStatus"
-                        android:textColor="#7e7e7e"
-                        android:textSize="12sp" />
+                        style="@style/FormLabelStyle"/>
                     <TextView
                         android:id="@+id/tvCaseStatus"
                         android:layout_width="fill_parent"
@@ -130,8 +127,7 @@
                         android:layout_below="@+id/labelCaseStatus"
                         android:layout_marginTop="5dp"
                         android:text="@string/caseStatus"
-                        android:textColor="#444444"
-                        android:textSize="14sp" />
+                       android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
            </RelativeLayout>
         </LinearLayout>
         
@@ -157,8 +153,7 @@
 					android:layout_height="wrap_content"
 					android:gravity="left"
 					android:text="@string/tenantName"
-					android:textColor="#7e7e7e"
-					android:textSize="12sp" />
+					style="@style/FormLabelStyle"/>
 				<TextView
 					android:id="@+id/tvFullName"
 					android:layout_width="fill_parent"
@@ -168,8 +163,7 @@
 					android:layout_below="@+id/labelL"
 					android:layout_marginTop="5dp"
 					android:text="@string/tenantName"
-					android:textColor="#444444"
-					android:textSize="14sp" />
+					android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
 			</RelativeLayout>
 			
 			<!-- Right Box -->
@@ -184,8 +178,7 @@
 					android:layout_height="wrap_content"
 					android:gravity="left"
 					android:text="@string/language"
-					android:textColor="#7e7e7e"
-					android:textSize="12sp" />
+					style="@style/FormLabelStyle"/>
 				<TextView
 					android:id="@+id/tvLanguageSpoken"
 					android:layout_width="fill_parent"
@@ -195,8 +188,7 @@
 					android:layout_below="@+id/labelR"
 					android:layout_marginTop="5dp"
 					android:text="English"
-					android:textColor="#444444"
-					android:textSize="14sp" />
+					android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
 			</RelativeLayout>
 		</LinearLayout>
 		
@@ -221,8 +213,7 @@
 	                    android:layout_height="wrap_content"
 	                    android:gravity="left"
 	                    android:text="@string/tenantPhone"
-	                    android:textColor="#7e7e7e"
-	                    android:textSize="12sp" />
+	                    style="@style/FormLabelStyle"/>
 	                <TextView
 	                    android:id="@+id/tvPhone"
 	                    android:layout_width="fill_parent"
@@ -232,8 +223,7 @@
 	                    android:layout_below="@+id/labelPhone"
 	                    android:layout_marginTop="5dp"
 	                    android:text="@string/tenantPhone"
-	                    android:textColor="#444444"
-	                    android:textSize="14sp" />
+	                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
 	       </RelativeLayout>
 	 
 	       <RelativeLayout
@@ -246,8 +236,7 @@
 	                    android:layout_height="wrap_content"
 	                    android:gravity="left"
 	                    android:text="@string/tenentEmail"
-	                    android:textColor="#7e7e7e"
-	                    android:textSize="12sp" />
+	                    style="@style/FormLabelStyle" />
 	                <TextView
 	                    android:id="@+id/tvEmail"
 	                    android:layout_width="fill_parent"
@@ -257,8 +246,7 @@
 	                    android:layout_below="@+id/labelEmail"
 	                    android:layout_marginTop="5dp"
 	                    android:text="@string/tenentEmail"
-	                    android:textColor="#444444"
-	                    android:textSize="14sp" />
+	                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
 	       </RelativeLayout>
         </LinearLayout>
        <!--  ============================== Row ===> Hotel / Unit ==================================== -->
@@ -283,8 +271,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="@string/building"
-                    android:textColor="#7e7e7e"
-                    android:textSize="12sp" />
+                   style="@style/FormLabelStyle" />
                 <TextView
                     android:id="@+id/tvHotel"
                     android:layout_width="fill_parent"
@@ -294,8 +281,7 @@
                     android:layout_below="@+id/labelHotel"
                     android:layout_marginTop="5dp"
                     android:text="@string/building"
-                    android:textColor="#444444"
-                    android:textSize="14sp" />
+                   android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
             </RelativeLayout>
             
             <!-- Right Box -->
@@ -310,8 +296,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="@string/unitNumber"
-                    android:textColor="#7e7e7e"
-                    android:textSize="12sp" />
+                    style="@style/FormLabelStyle" />
                 <TextView
                     android:id="@+id/tvUnit"
                     android:layout_width="fill_parent"
@@ -321,8 +306,7 @@
                     android:layout_below="@+id/labelUnit"
                     android:layout_marginTop="5dp"
                     android:text="@string/unitNumber"
-                    android:textColor="#444444"
-                    android:textSize="14sp" />
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
             </RelativeLayout>
         </LinearLayout>
           
@@ -337,8 +321,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="@string/isMultiUnit"
-                    android:textColor="#7e7e7e"
-                    android:textSize="12sp" />
+                    style="@style/FormLabelStyle" />
                 <TextView
                     android:id="@+id/tvMulti"
                     android:layout_width="fill_parent"
@@ -348,8 +331,7 @@
                     android:layout_below="@+id/labelMulti"
                     android:layout_marginTop="5dp"
                     android:text="No"
-                    android:textColor="#444444"
-                    android:textSize="14sp" />
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
       </RelativeLayout>
       
       <!--  ============================== Row ===>  Violation Type ==================================== -->      
@@ -363,8 +345,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="@string/issueType"
-                    android:textColor="#7e7e7e"
-                    android:textSize="12sp" />
+                    style="@style/FormLabelStyle" />
                 <TextView
                     android:id="@+id/tvViolationType"
                     android:layout_width="fill_parent"
@@ -374,8 +355,7 @@
                     android:layout_below="@+id/labelType"
                     android:layout_marginTop="5dp"
                     android:text="@string/issueType"
-                    android:textColor="#444444"
-                    android:textSize="14sp" />
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
        </RelativeLayout>
          
          <!--  ============================== Row ===> Description ==================================== -->
@@ -389,8 +369,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:text="@string/caseDesc"
-                    android:textColor="#7e7e7e"
-                    android:textSize="12sp" />
+                   style="@style/FormLabelStyle" />
                 <TextView
                     android:id="@+id/tvViolDesc"
                     android:layout_width="fill_parent"
@@ -400,8 +379,7 @@
                     android:layout_below="@+id/labelDesc"
                     android:layout_marginTop="5dp"
                     android:text="@string/caseDesc"
-                    android:textColor="#444444"
-                    android:textSize="14sp" />
+                    android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
        </RelativeLayout>
 	
       <!--  ============================== Row ===> Photos ==================================== -->
@@ -417,8 +395,7 @@
 	           android:gravity="left"
 	            style="?android:attr/listSeparatorTextViewStyle"  
 	            android:text="@string/addPhotos"
-	            android:textColor="#7e7e7e"
-	            android:textSize="12sp" />
+	            android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
 	        
 	        <HorizontalScrollView
 	            android:id="@+id/hvPhotoScroll"

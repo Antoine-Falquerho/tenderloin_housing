@@ -1,7 +1,10 @@
 <resources>
 	<color name="black_overlay">#66000000</color>
-	<color name="ActionBarBackgroundColor">#cccccc</color> <!-- grey -->
+	<color name="ActionBarBackgroundColor">#cccccc</color> <!-- very light grey -->
 	<color name="ThcThemeColor">#ff763c</color> <!-- orange  -->
 	<color name="ThcDefaultTextColor">#444444</color>  <!-- dark grey  -->
 	<color name="ThcMenuTextColor">#ffffff</color>  <!-- white  -->
+	<color name="ThcLabelColor">#7e7e7e</color>   <!-- light grey  -->
+	<color name="ThcHintColor">#CCCCCC</color> <!-- very light grey -->
+	
 </resources>

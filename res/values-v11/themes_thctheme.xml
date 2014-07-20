@@ -6,7 +6,8 @@
   <style name="ThcTheme" parent="@style/_ThcTheme"/>
 
   <style name="componentStyles" parent="android:Theme.Holo.Light">
-<!--     <item name="android:actionBarStyle">@style/MyActionBar</item>  -->
+    <item name="android:spinnerDropDownItemStyle">@style/ThcSpinnerItemStyle</item>
+ 
     <item name="android:editTextBackground">@drawable/thctheme_edit_text_holo_light</item>
 
     <item name="android:listChoiceIndicatorMultiple">@drawable/thctheme_btn_check_holo_light</item>

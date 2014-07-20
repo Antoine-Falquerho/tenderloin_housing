@@ -30,6 +30,7 @@ public class THCApplication extends Application
 	ParseACL defaultACL = new ParseACL();
 	// If you would like all objects to be private by default, remove this line.
 	defaultACL.setPublicReadAccess(true);
+	defaultACL.setPublicWriteAccess(true);
 	ParseACL.setDefaultACL(defaultACL, true);
 
 	Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);

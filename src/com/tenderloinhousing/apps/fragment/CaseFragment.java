@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -486,7 +488,10 @@ public class CaseFragment extends Fragment implements IConstants
 	    @Override
 	    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
 	    {
-		// String value = parent.getItemAtPosition(position).toString();
+		//Style selected item
+		((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.ThcDefaultTextColor));
+		((TextView) parent.getChildAt(0)).setTextSize(14);
+		
 		String value = ((Spinner) parent).getSelectedItem().toString();
 		setSpinnerToValue(((Spinner) parent), value);
 

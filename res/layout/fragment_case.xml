@@ -18,7 +18,8 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#444444"
+			android:textColor="@color/ThcDefaultTextColor"
+			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/fullName"
 			android:inputType="textPersonName" />
 		
@@ -33,7 +34,8 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#444444"
+			android:textColor="@color/ThcDefaultTextColor"
+			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/language"
 			android:inputType="text" />
 		
@@ -55,10 +57,9 @@
 				android:layout_height="wrap_content"				
                 android:layout_marginRight="10dp"
 				android:layout_weight="1"
-				style="?android:attr/listSeparatorTextViewStyle"
 				android:entries="@array/building_array"				
 				android:prompt="@string/building"
-				android:textColor="#444444"
+				android:textColor="@color/ThcDefaultTextColor"
 				android:textSize="12sp" />
 			<!-- Unit -->
 			<EditText
@@ -68,7 +69,8 @@
 				android:layout_weight="1"
 				android:ems="10"
 				style="?android:attr/listSeparatorTextViewStyle"
-				android:textColor="#444444"
+				android:textColor="@color/ThcDefaultTextColor"
+				android:textColorHint="@color/ThcHintColor"
 				android:hint="@string/unitNumber"
 				android:inputType="number" />
 		</LinearLayout>
@@ -84,7 +86,8 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#444444"
+			android:textColor="@color/ThcDefaultTextColor"
+			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/address"
 			android:inputType="text" />
 		
@@ -126,7 +129,8 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#444444"
+			android:textColor="@color/ThcDefaultTextColor"
+			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/phone"
 			android:inputType="phone" />
 		
@@ -141,6 +145,8 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
+			android:textColor="@color/ThcDefaultTextColor"
+            android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/emailOptional"
 			android:inputType="textEmailAddress" />
 		
@@ -153,7 +159,6 @@
 			android:layout_alignParentRight="true"
 			android:layout_below="@+id/etEmail"
 			android:layout_marginTop="15dp"
-			style="?android:attr/listSeparatorTextViewStyle"
 			android:entries="@array/issueType_array"
 			android:gravity="right"
 			android:prompt="@string/issueType"
@@ -171,7 +176,8 @@
 			android:ems="10"
 			android:layout_marginTop="15dp"
 			style="?android:attr/listSeparatorTextViewStyle"
-			android:textColor="#444444"
+			android:textColor="@color/ThcDefaultTextColor"
+			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/caseDesc"
 			android:inputType="text" />
 		<requestFocus />
@@ -187,8 +193,8 @@
 			android:layout_marginTop="15dp"
 			android:layout_marginLeft="10dp"
 			android:text="@string/addPhotos"
-			android:textColor="#7e7e7e"
-			android:textAppearance="?android:attr/textAppearanceSmall" />
+			android:textColor="@color/ThcDefaultTextColor"
+			android:textColorHint="@color/ThcHintColor"/>
 		<HorizontalScrollView
 			android:id="@+id/hvPhotoScroll"
 			android:layout_width="wrap_content"
