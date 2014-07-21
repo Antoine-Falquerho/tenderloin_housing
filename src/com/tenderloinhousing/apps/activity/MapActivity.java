@@ -8,6 +8,11 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
+import android.graphics.drawable.NinePatchDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -86,7 +91,7 @@ public class MapActivity extends BaseFragmentActivity implements
     protected void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);	
-    
+	
 	buildingMarkerMap = new HashMap<Marker, String>();
 
 	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -137,6 +142,8 @@ public class MapActivity extends BaseFragmentActivity implements
 
 	showProgressBar();
 	mLocationClient = new LocationClient(this, this, this);
+	getActionBar().setHomeButtonEnabled(true);
+
     }
 
     /*
@@ -317,6 +324,9 @@ public class MapActivity extends BaseFragmentActivity implements
     {
 	switch (item.getItemId())
 	{
+	case android.R.id.home:
+		startActivity(new Intent(getApplicationContext(), MapActivity.class));
+		return true;
 	case R.id.miLogin:
 	    doSignIn();
 	    return true;
@@ -380,11 +390,14 @@ public class MapActivity extends BaseFragmentActivity implements
 	for (Building building : buildingList)
 	{
 	    MarkerOptions markerOptions = new MarkerOptions();
+	    Drawable icon = getResources().getDrawable(R.drawable.map_marker);
+        Bitmap b = ((BitmapDrawable) icon).getBitmap();
+	    Bitmap bhalfsize=Bitmap.createScaledBitmap(b, b.getWidth()/2,b.getHeight()/2, false);
+	    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bhalfsize));
 	    if (building.getlatLng() != null)
 	    {
 		markerOptions.position(building.getlatLng());
 		markerOptions.title(building.getName());
-		markerOptions.icon(BitmapDescriptorFactory.defaultMarker(92f));
 		Marker m = map.addMarker(markerOptions);
 		buildingMarkerMap.put(m, building.getBuildingId());
 		bounds.include(building.getlatLng());
