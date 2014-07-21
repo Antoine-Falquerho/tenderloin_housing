@@ -48,7 +48,7 @@ import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
 
-public class MapActivity extends FragmentActivity implements
+public class MapActivity extends BaseFragmentActivity implements
 	GooglePlayServicesClient.ConnectionCallbacks,
 	GooglePlayServicesClient.OnConnectionFailedListener,
 	SearchView.OnQueryTextListener,
@@ -94,6 +94,7 @@ public class MapActivity extends FragmentActivity implements
 	setContentView(R.layout.activity_map);
 	ParseAnalytics.trackAppOpened(getIntent());	
 
+	
 	mListView = (ListView) findViewById(R.id.list);
 	mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
 
@@ -134,6 +135,7 @@ public class MapActivity extends FragmentActivity implements
 	fragmentTransaction.add(R.id.mapContainer, mapFragment, "map");
 	fragmentTransaction.commit();
 
+	showProgressBar();
 	mLocationClient = new LocationClient(this, this, this);
     }
 
@@ -151,6 +153,7 @@ public class MapActivity extends FragmentActivity implements
 	}
 	if (mapFragment != null)
 	{
+	  hideProgressBar();
 	    map = mapFragment.getMap();
 	    if (map != null)
 	    {
@@ -161,9 +164,11 @@ public class MapActivity extends FragmentActivity implements
 	    {
 		Toast.makeText(this, "Error - Map was null!!", Toast.LENGTH_SHORT).show();
 	    }
+	    
 	}
 	else
 	{
+	    hideProgressBar();
 	    Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
 	}
     }
@@ -194,6 +199,7 @@ public class MapActivity extends FragmentActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+	showProgressBar();
 	// Decide what to do based on the original request code
 	switch (requestCode)
 	{

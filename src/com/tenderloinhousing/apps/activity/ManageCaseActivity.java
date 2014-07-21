@@ -5,7 +5,6 @@ import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
@@ -14,9 +13,8 @@ import android.view.Window;
 
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.adapter.CasePagerAdapter;
-import com.viewpagerindicator.TabPageIndicator;
 
-public class ManageCaseActivity extends FragmentActivity  implements ActionBar.TabListener
+public class ManageCaseActivity extends BaseFragmentActivity  implements ActionBar.TabListener
 {
     ViewPager vpPager;
     CasePagerAdapter adapter;
@@ -32,10 +30,11 @@ public class ManageCaseActivity extends FragmentActivity  implements ActionBar.T
     {
 	super.onCreate(savedInstanceState);
 	requestWindowFeature(Window.FEATURE_ACTION_BAR);
+	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);	
 	setContentView(R.layout.activity_manage_case);
 
 	mPageChangeListener = getPageChangeListener();
-
+	showProgressBar();
 	vpPager = (ViewPager) findViewById(R.id.vpPager);
 	adapter = new CasePagerAdapter(getSupportFragmentManager());
 	vpPager.setAdapter(adapter);

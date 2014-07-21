@@ -71,15 +71,15 @@
 
            <!-- Submitted Date -->
 
-           <TextView
-               android:id="@+id/labelSubmitDate"
-               style="@style/FormLabelStyle"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignBottom="@+id/tvSubmitDate"
-               android:layout_centerHorizontal="true"
-               android:layout_toLeftOf="@+id/tvSubmitDate"
-               android:text="@string/submitDate" />
+<!--            <TextView -->
+<!--                android:id="@+id/labelSubmitDate" -->
+<!--                style="@style/FormLabelStyle" -->
+<!--                android:layout_width="wrap_content" -->
+<!--                android:layout_height="wrap_content" -->
+<!--                android:layout_alignBottom="@+id/tvSubmitDate" -->
+<!--                android:layout_centerHorizontal="true" -->
+<!--                android:layout_toLeftOf="@+id/tvSubmitDate" -->
+<!--                android:text="@string/submitDate" /> -->
 
            <TextView
                android:id="@+id/tvSubmitDate"
@@ -325,6 +325,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
+                     <ImageView
+		                android:id="@+id/ivPhoto"
+		                android:layout_width="100dp"
+		                android:layout_height="100dp"
+		                android:layout_margin="5dp"
+		                android:src="@drawable/photo_placeholder" />
                 </LinearLayout>
             </HorizontalScrollView>
     </RelativeLayout>

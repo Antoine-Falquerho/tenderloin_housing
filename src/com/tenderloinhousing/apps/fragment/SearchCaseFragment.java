@@ -78,6 +78,8 @@ public class SearchCaseFragment extends Fragment implements IConstants
 	    @Override
 	    public void done(Case foundCase, ParseException e)
 	    {
+		hideProgressBar();
+		
 		if (e == null)
 		{
 		    if (foundCase != null)
@@ -106,6 +108,19 @@ public class SearchCaseFragment extends Fragment implements IConstants
 		.beginTransaction()
 		.add(R.id.flDetailContainer, detailsFragment)
 		.commit();
+	showProgressBar();
+    }
+    
+  // Should be called manually when an async task has started
+    public void showProgressBar()
+    {
+	getActivity().setProgressBarIndeterminateVisibility(true);
+    }
+
+    // Should be called when an async task has finished
+    public void hideProgressBar()
+    {
+	getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
 }

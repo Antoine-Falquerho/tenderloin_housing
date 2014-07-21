@@ -8,15 +8,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -37,6 +43,9 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
     protected ArrayAdapter<Case> caseListAdapter;
     protected OnItemSelectedListener listener;
     protected FindCallback<Case> callback;
+    protected EditText etCaseId;
+    protected String caseId;
+    protected ImageView ivRemove;
 
     @Override
     public void onAttach(Activity activity)
@@ -50,6 +59,7 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	super.onCreate(savedInstanceState);
 	caseListAdapter = new CaseArrayAdapter(getActivity(), caseList);
 	loadCases(getFindCallBack());
+	showProgressBar();
     }
 
     private OnItemClickListener getOnItemClickListener()
@@ -74,6 +84,7 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 		@Override
 		public void done(List<Case> caseList, com.parse.ParseException e)
 		{
+		    hideProgressBar();
 		    if (e == null)
 		    {
 			caseListAdapter.clear();
@@ -99,14 +110,15 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	    @Override
 	    public void done(Case foundCase, ParseException e)
 	    {
+		hideProgressBar();
+		
 		if (e == null)
 		{
 		    if (foundCase != null)
 		    {
 			Log.d(DEBUG, " foundCase " + foundCase.getBuilding().getAddress());
 			
-			List<Case> caseList = new ArrayList<Case>();
-			
+			List<Case> caseList = new ArrayList<Case>();			
 			caseList.add(foundCase);
 			caseListAdapter.clear();
 			caseListAdapter.addAll(caseList);
@@ -131,10 +143,92 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	lvCaseList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 	lvCaseList.setOnItemClickListener(getOnItemClickListener());
 	lvCaseList.setOnScrollListener(getOnScrollListener());
-
+	
+	etCaseId = (EditText) view.findViewById(R.id.etCaseId);
+	etCaseId.setOnEditorActionListener(getOnEditorActionListener());
+	
+	ivRemove = (ImageView) view.findViewById(R.id.ivRemove);
+	ivRemove.setOnClickListener(getOnClickListener());
 	return view;
     }
 
+    private OnClickListener getOnClickListener()
+    {
+	return new OnClickListener()
+	{
+	    @Override
+	    public void onClick(View v)
+	    {
+		etCaseId.setText(""); //clean up search text
+		loadCases(getFindCallBack());
+	    }
+	};
+    }
+
+    private OnEditorActionListener getOnEditorActionListener()
+    {
+	return new OnEditorActionListener()
+	{
+	    @Override
+	    public boolean onEditorAction(TextView view, int actionId, KeyEvent event)
+	    {
+		int result = actionId & EditorInfo.IME_MASK_ACTION;
+		switch (result)
+    		{
+        		case EditorInfo.IME_ACTION_DONE:
+        		    caseId = etCaseId.getText().toString();
+        		    filterCasebyId(caseId);
+        		    break;
+        		default:
+        		    caseId = etCaseId.getText().toString();
+        		    filterCasebyId(caseId);
+        		    break;
+		}
+		return false;
+	    }
+	};
+    }
+
+//    public void searchAndDisplay(String caseId)
+//    {
+//	ParseDAO.getCaseById(caseId, new GetCallback<Case>()
+//	{
+//	    @Override
+//	    public void done(Case foundCase, ParseException e)
+//	    {
+//		hideProgressBar();
+//		
+//		if (e == null)
+//		{
+//		    if (foundCase != null)
+//		    {
+//			Log.d(DEBUG, " foundCase " + foundCase.getBuilding().getAddress());
+//			loadCaseDetailFragment(foundCase);
+//		    }
+//		}
+//		else
+//		{
+//		    Toast.makeText(getActivity(), "No case with that id", Toast.LENGTH_LONG).show();
+//		    Log.d(ERROR, "Error: " + e.getMessage());
+//		}
+//
+//	    }
+//	});
+//    }
+
+    public void loadCaseDetailFragment(Case foundCase)
+    {
+	Bundle bundle = new Bundle();
+	bundle.putSerializable(CASE_KEY, foundCase);
+	CaseDetailsFragment detailsFragment = CaseDetailsFragment.newInstance(bundle);
+
+	getActivity().getSupportFragmentManager()
+		.beginTransaction()
+		.add(R.id.flDetailContainer, detailsFragment)
+		.commit();
+	showProgressBar();
+    }
+    
     //
     private void openCaseDetailIntent(String caseId)
     {
@@ -158,6 +252,18 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	};
     }
 
+    // Should be called manually when an async task has started
+    public void showProgressBar()
+    {
+	getActivity().setProgressBarIndeterminateVisibility(true);
+    }
+
+    // Should be called when an async task has finished
+    public void hideProgressBar()
+    {
+	getActivity().setProgressBarIndeterminateVisibility(false);
+    }
+    
     public abstract void loadCases(FindCallback<Case> callback);
 
 }

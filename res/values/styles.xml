@@ -56,7 +56,7 @@
 	  
     <style name="ThcButtonStyle" >
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ThcHintColor</item> <!-- light grey -->
+        <item name="android:textColor">@color/ThcLabelColor</item> <!-- light grey -->
       </style>
       
      <style name="FormLabelStyle" >

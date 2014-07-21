@@ -179,32 +179,37 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 		});
 	}
 
-	private void setPictures() {
-		try {
-			// Convert pictures to Bitmap
-			ArrayList<ParseFile> pictureList = myCase.getPictures();
-			if (pictureList != null && !pictureList.isEmpty())
-				for (ParseFile picture : pictureList) {
-					byte[] byteArray = picture.getData();
-					Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0,
-							byteArray.length);
-
-					// Add image to srolling view
-					ImageView imageView = new ImageView(getActivity()
-							.getApplicationContext());
-					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-							220, 220);
-					layoutParams.setMargins(8, 5, 8, 5);
-					imageView.setLayoutParams(layoutParams);
-					imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-					imageView.setImageBitmap(bmp);
-
-					photoContainer.addView(imageView);
-				}
-		} catch (ParseException e) {
-			e.printStackTrace();
-			Log.d(ERROR, "load image failure : " + e.getMessage());
-		}
+    private void setPictures()
+    {
+        	try
+        	{
+        	    // Convert pictures to Bitmap
+        	    ArrayList<ParseFile> pictureList = myCase.getPictures();
+        	    if (pictureList != null && !pictureList.isEmpty())
+        	    {
+        		photoContainer.removeAllViews();
+        		for (ParseFile picture : pictureList)
+        		{
+        		    byte[] byteArray = picture.getData();
+        		    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        
+        		    // Add image to srolling view
+        		    ImageView imageView = new ImageView(getActivity().getApplicationContext());
+        		    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(220, 220);
+        		    layoutParams.setMargins(8, 5, 8, 5);
+        		    imageView.setLayoutParams(layoutParams);
+        		    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        		    imageView.setImageBitmap(bmp);
+        
+        		    photoContainer.addView(imageView);
+        		}
+        	    }
+        	}
+        	catch (ParseException e)
+        	{
+        	    e.printStackTrace();
+        	    Log.d(ERROR, "load image failure : " + e.getMessage());
+        	}
 	}
 
 	public static CaseDetailsFragment newInstance(Bundle args) {
