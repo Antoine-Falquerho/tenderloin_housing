@@ -7,6 +7,7 @@ public interface IConstants
     public static final String ERROR = "ERROR";
 
     public static final String CASE_KEY = "case";
+    public static final String IS_NEW_CASE_KEY = "isNewCase";
     public static final String HINT_SELECT_VIOLATION_TYPE = "[Select Violation Type]";
     public static final String HINT_SELECT_HOTEL = "[Select Hotel]";
     public static final String SPINNER_HINT_PREFIX = "[";

@@ -51,152 +51,167 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 	private TextView tvCaseNumber;
 	private TextView tvCaseStatus;
 	private ImageView ivPhoto;
+	private LinearLayout llSuccess;
 	private LinearLayout photoContainer;
 	private Button btnShare;
-	private Button btnEdit;	
+	private Button btnEdit;
 	private CasePictureAdatper casePictureAdapter;
 	private TextView tvSubmitDate;
+	private boolean isNewCase;
 
-	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		myCase = (Case) getArguments().getSerializable(CASE_KEY);
+		Log.d("DEBUG", getArguments() + "-------");
+		if( (Boolean) getArguments().containsKey(IS_NEW_CASE_KEY) ){
+			isNewCase = (Boolean) getArguments().getSerializable(IS_NEW_CASE_KEY);
+		}else{
+			isNewCase = false;
+		}
 		
+
 		ActionBar actionBar = getActivity().getActionBar();
-	    actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
-	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_case_details, container, false);
-		user = (User) myCase.getTenant();		
-		
-	Log.d("DEBUG", myCase.getCaseId() + "------");
-	tvFullName = (TextView) view.findViewById(R.id.tvFullName);
-	tvFullName.setText(user.getName());
+		View view = inflater.inflate(R.layout.fragment_case_details, container,
+				false);
+		user = (User) myCase.getTenant();
 
-	tvLanguageSpoken = (TextView) view.findViewById(R.id.tvLanguageSpoken);
-	tvLanguageSpoken.setText(((User) user).getLanguage());
+		Log.d("DEBUG", myCase.getCaseId() + "------");
+		tvFullName = (TextView) view.findViewById(R.id.tvFullName);
+		tvFullName.setText(user.getName());
 
-	tvEmail = (TextView) view.findViewById(R.id.tvEmail);
-	tvEmail.setText(user.getEmail());
+		tvLanguageSpoken = (TextView) view.findViewById(R.id.tvLanguageSpoken);
+		tvLanguageSpoken.setText(((User) user).getLanguage());
 
-	tvPhone = (TextView) view.findViewById(R.id.tvPhone);
-	tvPhone.setText(((User) user).getPhone());
+		tvEmail = (TextView) view.findViewById(R.id.tvEmail);
+		tvEmail.setText(user.getEmail());
 
-	tvDesc = (TextView) view.findViewById(R.id.tvViolDesc);
-	tvDesc.setText(myCase.getDescription());
+		tvPhone = (TextView) view.findViewById(R.id.tvPhone);
+		tvPhone.setText(((User) user).getPhone());
 
-	tvUnit = (TextView) view.findViewById(R.id.tvUnit);
-	tvUnit.setText(myCase.getUnit());
+		tvDesc = (TextView) view.findViewById(R.id.tvViolDesc);
+		tvDesc.setText(myCase.getDescription());
 
-	tvViolationType = (TextView) view.findViewById(R.id.tvViolationType);
-	tvViolationType.setText(myCase.getIssueType());
+		tvUnit = (TextView) view.findViewById(R.id.tvUnit);
+		tvUnit.setText(myCase.getUnit());
 
-	tvMulti = (TextView) view.findViewById(R.id.tvMulti);
-	tvMulti.setText(myCase.getIsMultiUnitPetition() ? "Yes" : "No");
+		tvViolationType = (TextView) view.findViewById(R.id.tvViolationType);
+		tvViolationType.setText(myCase.getIssueType());
 
-	tvBuildingName = (TextView) view.findViewById(R.id.tvBuildingName);
-	tvBuildingName.setText(myCase.getBuilding().getName());
+		tvMulti = (TextView) view.findViewById(R.id.tvMulti);
+		tvMulti.setText(myCase.getIsMultiUnitPetition() ? "Yes" : "No");
 
-	tvAddress = (TextView) view.findViewById(R.id.tvAddress);
-	tvAddress.setText(myCase.getBuilding().getAddress());
+		tvBuildingName = (TextView) view.findViewById(R.id.tvBuildingName);
+		tvBuildingName.setText(myCase.getBuilding().getName());
 
-	tvCaseNumber = (TextView) view.findViewById(R.id.tvCaseNumber);
-	tvCaseNumber.setText(myCase.getCaseId());
+		tvAddress = (TextView) view.findViewById(R.id.tvAddress);
+		tvAddress.setText(myCase.getBuilding().getAddress());
 
-	tvCaseStatus = (TextView) view.findViewById(R.id.tvCaseStatus);
-	tvCaseStatus.setText(myCase.getCaseStatus());
+		tvCaseNumber = (TextView) view.findViewById(R.id.tvCaseNumber);
+		tvCaseNumber.setText(myCase.getCaseId());
 
-	tvSubmitDate = (TextView) view.findViewById(R.id.tvSubmitDate);
-	tvSubmitDate.setText(CommonUtil.getStringFromDate(myCase.getCreatedAt()));
+		tvCaseStatus = (TextView) view.findViewById(R.id.tvCaseStatus);
+		tvCaseStatus.setText(myCase.getCaseStatus());
 
-	ivBuildingImage = (ParseImageView) view.findViewById(R.id.ivBuildingImage);
-	ivBuildingImage.setParseFile(myCase.getBuilding().getImage());
-	ivBuildingImage.loadInBackground();	  
+		tvSubmitDate = (TextView) view.findViewById(R.id.tvSubmitDate);
+		tvSubmitDate
+				.setText(CommonUtil.getStringFromDate(myCase.getCreatedAt()));
 
-	photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
-	setPictures();
-    		
-	// Action Buttons
-	btnShare = (Button) view.findViewById(R.id.btnShare);
-	btnEdit = (Button) view.findViewById(R.id.btnEdit);
-	setButtons();
-	return view;
-    }
+		ivBuildingImage = (ParseImageView) view
+				.findViewById(R.id.ivBuildingImage);
+		ivBuildingImage.setParseFile(myCase.getBuilding().getImage());
+		ivBuildingImage.loadInBackground();
 
-   private void setButtons()
-   {
-	btnShare.setOnClickListener(new OnClickListener() {
+		photoContainer = (LinearLayout) view.findViewById(R.id.photoContainer);
 
-	    @Override
-		public void onClick(View v) {
-		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-		sharingIntent.setType("text/html");
-		sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT,
-			Html.fromHtml("<h1> Case id #" + myCase.getCaseId() + "</h1>" +
-				"<p>Unit" + myCase.getUnit() + "</p>" +
-				"<p>Issue type" + myCase.getIssueType() + "</p>" +
-				"<p>" + myCase.getDescription() + "</p>"));
-		startActivity(Intent.createChooser(sharingIntent, "Share using"));
-	    }
-	});
-
-	btnEdit.setOnClickListener(new OnClickListener() {		
-	    @Override
-		public void onClick(View v) {			
-		FragmentTransaction transaction = getFragmentManager().beginTransaction();		
-
-		Bundle bundle = new Bundle();
-		bundle.putSerializable(CASE_KEY, myCase);
-		CaseFragment caseFragment = CaseFragment.newInstance(bundle);
-		
-		transaction.setCustomAnimations(R.anim.slide_down_in, R.anim.slide_down_out);
-		transaction.replace(R.id.flCase, caseFragment);	
-		transaction.commit();			
+		llSuccess = (LinearLayout) view.findViewById(R.id.llSuccess);
+		if (isNewCase) {
+			llSuccess.setVisibility(1);
 		}
-	});	
-   }
-   
-    private void setPictures()
-    {
-	try
-	{
-	    // Convert pictures to Bitmap
-	    ArrayList<ParseFile> pictureList = myCase.getPictures();
-	    if (pictureList != null && !pictureList.isEmpty())
-		for (ParseFile picture : pictureList)
-		{
-		    byte[] byteArray = picture.getData();
-		    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+		setPictures();
 
-		    // Add image to srolling view
-		    ImageView imageView = new ImageView(getActivity().getApplicationContext());
-		    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(220, 220);
-		    layoutParams.setMargins(8, 5, 8, 5);
-		    imageView.setLayoutParams(layoutParams);
-		    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		    imageView.setImageBitmap(bmp);
+		// Action Buttons
+		btnShare = (Button) view.findViewById(R.id.btnShare);
+		btnEdit = (Button) view.findViewById(R.id.btnEdit);
+		setButtons();
+		return view;
+	}
 
-		    photoContainer.addView(imageView);
+	private void setButtons() {
+		btnShare.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+				sharingIntent.setType("text/html");
+				sharingIntent.putExtra(
+						android.content.Intent.EXTRA_TEXT,
+						Html.fromHtml("<h1> Case id #" + myCase.getCaseId()
+								+ "</h1>" + "<p>Unit" + myCase.getUnit()
+								+ "</p>" + "<p>Issue type"
+								+ myCase.getIssueType() + "</p>" + "<p>"
+								+ myCase.getDescription() + "</p>"));
+				startActivity(Intent
+						.createChooser(sharingIntent, "Share using"));
+			}
+		});
+
+		btnEdit.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				FragmentTransaction transaction = getFragmentManager()
+						.beginTransaction();
+
+				Bundle bundle = new Bundle();
+				bundle.putSerializable(CASE_KEY, myCase);
+				CaseFragment caseFragment = CaseFragment.newInstance(bundle);
+
+				transaction.setCustomAnimations(R.anim.slide_down_in,
+						R.anim.slide_down_out);
+				transaction.replace(R.id.flCase, caseFragment);
+				transaction.commit();
+			}
+		});
+	}
+
+	private void setPictures() {
+		try {
+			// Convert pictures to Bitmap
+			ArrayList<ParseFile> pictureList = myCase.getPictures();
+			if (pictureList != null && !pictureList.isEmpty())
+				for (ParseFile picture : pictureList) {
+					byte[] byteArray = picture.getData();
+					Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0,
+							byteArray.length);
+
+					// Add image to srolling view
+					ImageView imageView = new ImageView(getActivity()
+							.getApplicationContext());
+					LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+							220, 220);
+					layoutParams.setMargins(8, 5, 8, 5);
+					imageView.setLayoutParams(layoutParams);
+					imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+					imageView.setImageBitmap(bmp);
+
+					photoContainer.addView(imageView);
+				}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Log.d(ERROR, "load image failure : " + e.getMessage());
 		}
 	}
-	catch (ParseException e)
-	{
-	    e.printStackTrace();
-	    Log.d(ERROR, "load image failure : " + e.getMessage());
-	}
-    }
 
-	public static CaseDetailsFragment newInstance(Bundle args) {		
-		CaseDetailsFragment fragment = new CaseDetailsFragment();   	
-	   	fragment.setArguments(args);
-	   	
-	   	return fragment;
+	public static CaseDetailsFragment newInstance(Bundle args) {
+		CaseDetailsFragment fragment = new CaseDetailsFragment();
+		fragment.setArguments(args);
+
+		return fragment;
 	}
-	
-	
 
 }

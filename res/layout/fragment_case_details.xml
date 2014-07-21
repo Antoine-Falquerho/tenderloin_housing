@@ -11,64 +11,88 @@
 		android:orientation="vertical" >		
 		  
     <!--  ============================== Row ===  Header (Building Profile) ==================================== -->
+
        <RelativeLayout
-        android:id="@+id/rlHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
-        <com.parse.ParseImageView
-            android:id="@+id/ivBuildingImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:src="@drawable/photo_placeholder" />
-        
-        <TextView
-            android:id="@+id/tvBuildingName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivBuildingImage"
-            android:layout_centerHorizontal="true"
-            style="@style/FormValueStyle.Bold"
-            android:text="Hotel Name" />
-        
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvBuildingName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Address"
-            android:textSize="12sp" />
-        
-        <!-- Submitted Date -->
-         <TextView
-            android:id="@+id/labelSubmitDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/tvSubmitDate"  
-            android:layout_centerHorizontal="true"          
-            android:layout_alignBottom="@+id/tvSubmitDate"
-            android:text="@string/submitDate"
-            style="@style/FormLabelStyle"/>
-         
-         <TextView
-            android:id="@+id/tvSubmitDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tvAddress"     
-            android:layout_marginTop="10dp"       
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:text="@string/submitDate"
-            style="@style/FormLabelStyle" />
-        </RelativeLayout>
+           android:id="@+id/rlHeader"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content" >
+
+           <com.parse.ParseImageView
+               android:id="@+id/ivBuildingImage"
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:layout_alignParentTop="true"
+               android:layout_centerHorizontal="true"
+               android:adjustViewBounds="true"
+               android:scaleType="fitXY"
+               android:src="@drawable/photo_placeholder" />
+
+           <LinearLayout
+               android:id="@+id/llSuccess"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:divider="@drawable/divider"
+               android:layout_centerHorizontal="true"
+               android:visibility="invisible"
+               android:layout_marginTop="20dp"
+               android:orientation="vertical" >
+
+               <com.parse.ParseImageView
+                   android:id="@+id/ivNewCase"
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:layout_alignParentTop="true"
+                   android:layout_centerHorizontal="true"
+                   android:adjustViewBounds="true"
+                   android:scaleType="fitXY"
+                   android:src="@drawable/ic_success"/>
+               
+           </LinearLayout>
+
+           <TextView
+               android:id="@+id/tvBuildingName"
+               style="@style/FormValueStyle.Bold"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/ivBuildingImage"
+               android:layout_centerHorizontal="true"
+               android:text="Hotel Name" />
+
+           <TextView
+               android:id="@+id/tvAddress"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/tvBuildingName"
+               android:layout_centerHorizontal="true"
+               android:layout_marginLeft="10dp"
+               android:layout_marginRight="10dp"
+               android:text="Address"
+               android:textSize="12sp" />
+
+           <!-- Submitted Date -->
+
+           <TextView
+               android:id="@+id/labelSubmitDate"
+               style="@style/FormLabelStyle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignBottom="@+id/tvSubmitDate"
+               android:layout_centerHorizontal="true"
+               android:layout_toLeftOf="@+id/tvSubmitDate"
+               android:text="@string/submitDate" />
+
+           <TextView
+               android:id="@+id/tvSubmitDate"
+               style="@style/FormLabelStyle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/tvAddress"
+               android:layout_centerHorizontal="true"
+               android:layout_marginLeft="3dp"
+               android:layout_marginRight="3dp"
+               android:layout_marginTop="10dp"
+               android:text="@string/submitDate" />           
+       </RelativeLayout>
         
 		<!--  ============================== Row === Case Number / Case Status ==================================== -->
         <LinearLayout
