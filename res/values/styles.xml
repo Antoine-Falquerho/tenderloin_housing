@@ -17,6 +17,14 @@
 		<item name="android:singleLine">true</item>
 	</style>
 	
+	 <style name="ParseLoginUI.HelpButton" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/com_parse_ui_parse_login_help_button_label_selector</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+	
 <!-- 	<style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar"> -->
 <!--         <item name='android:background'>@color/ThcThemeColor</item>		  orange       -->
 <!--         <item name="android:actionMenuTextColor">@color/ThcMenuTextColor</item> white -->
@@ -48,7 +56,7 @@
 	  
     <style name="ThcButtonStyle" >
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- Darkgrey -->
+        <item name="android:textColor">@color/ThcHintColor</item> <!-- light grey -->
       </style>
       
      <style name="FormLabelStyle" >
