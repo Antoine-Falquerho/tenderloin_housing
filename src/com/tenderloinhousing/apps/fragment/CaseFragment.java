@@ -126,6 +126,7 @@ public class CaseFragment extends Fragment implements IConstants
 	    User user = (User) caseForEdit.getTenant();
 	    etName.setText(user.getName());
 	    etPhone.setText(user.getPhone());
+	    etEmail.setText(user.getEmail());
 	    etLanguage.setText(user.getLanguage());
 	    setSpinnerToValue(spIssueType, caseForEdit.getIssueType());
 	    etDescription.setText(caseForEdit.getDescription());
@@ -135,6 +136,17 @@ public class CaseFragment extends Fragment implements IConstants
 	    cbMultiUnit.setChecked(caseForEdit.getIsMultiUnitPetition());
 
 	    setPictures();
+	}
+	else  //auto-populate with currentUser info
+	{
+	    User user = (User) ParseUser.getCurrentUser();
+	    if(user!=null)
+	    {
+        	    etName.setText(user.getName());
+        	    etPhone.setText(user.getPhone());
+        	    etEmail.setText(user.getEmail());
+        	    etLanguage.setText(user.getLanguage());
+	    }
 	}
 
 	return view;
