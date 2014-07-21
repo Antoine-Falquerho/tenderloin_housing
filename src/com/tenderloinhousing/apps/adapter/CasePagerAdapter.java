@@ -7,11 +7,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.fragment.AllCaseListFragment;
 import com.tenderloinhousing.apps.fragment.MyCaseListFragment;
+import com.tenderloinhousing.apps.fragment.NewCaseListFragment;
 import com.tenderloinhousing.apps.model.User;
 
 public class CasePagerAdapter extends FragmentPagerAdapter
 {
-    private static final String[] CONTENT = new String[] { "All Cases", "My Cases"};
+    private static final String[] CONTENT = new String[] { "My Cases", "New Cases", "All Cases"};
 
     public CasePagerAdapter(FragmentManager fragmentManager)
     {
@@ -25,9 +26,11 @@ public class CasePagerAdapter extends FragmentPagerAdapter
 	switch (position)
 	{
 	case 0: // Fragment # 0
-	    return new AllCaseListFragment();
-	case 1: // Fragment # 1
 	    return MyCaseListFragment.newInstance((User) ParseUser.getCurrentUser());
+	case 1: // Fragment # 1
+	    return new NewCaseListFragment();
+	case 2: // Fragment # 2
+	    return new AllCaseListFragment();
 	default:
 	    return null;
 	}

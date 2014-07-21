@@ -15,6 +15,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.tenderloinhousing.apps.constant.CaseStatus;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.constant.IssueType;
 import com.tenderloinhousing.apps.model.Building;
@@ -74,6 +75,18 @@ public class ParseDAO implements IConstants
 
 	query.findInBackground(callBack);
     }
+    
+    public static void getNewCases(FindCallback<Case> callBack)
+    {
+	ParseQuery<Case> query = ParseQuery.getQuery("Case");
+	query.whereEqualTo("caseStatus", CaseStatus.SUBMITTED.toString());
+	query.include("staff");
+	query.include("tenant");
+	query.include("building");
+
+	query.findInBackground(callBack);
+    }
+
 
     public static void createCase(Case newCase, SaveCallback callback)
     {

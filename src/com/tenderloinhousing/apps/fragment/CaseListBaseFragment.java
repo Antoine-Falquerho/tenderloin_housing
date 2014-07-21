@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -146,9 +148,11 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	
 	etCaseId = (EditText) view.findViewById(R.id.etCaseId);
 	etCaseId.setOnEditorActionListener(getOnEditorActionListener());
+	etCaseId.addTextChangedListener(getTextChangedListener());
 	
 	ivRemove = (ImageView) view.findViewById(R.id.ivRemove);
 	ivRemove.setOnClickListener(getOnClickListener());
+	ivRemove.setVisibility(View.GONE);
 	return view;
     }
 
@@ -160,6 +164,7 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	    public void onClick(View v)
 	    {
 		etCaseId.setText(""); //clean up search text
+		ivRemove.setVisibility(View.GONE);
 		loadCases(getFindCallBack());
 	    }
 	};
@@ -178,10 +183,12 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
         		case EditorInfo.IME_ACTION_DONE:
         		    caseId = etCaseId.getText().toString();
         		    filterCasebyId(caseId);
+        		    ivRemove.setVisibility(View.GONE);
         		    break;
         		default:
         		    caseId = etCaseId.getText().toString();
         		    filterCasebyId(caseId);
+        		    ivRemove.setVisibility(View.GONE);
         		    break;
 		}
 		return false;
@@ -189,6 +196,31 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	};
     }
 
+    private TextWatcher getTextChangedListener()
+    {
+	return new TextWatcher() {
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			// Fires right as the text is being changed (even supplies the range of text)
+		    ivRemove.setVisibility(View.VISIBLE);
+		}
+		
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			// Fires right before text is changing
+		}
+		
+		@Override
+		public void afterTextChanged(Editable s) {
+			// Fires right after the text has changed
+		       
+			
+		}
+	};
+    }
+    
+    
 //    public void searchAndDisplay(String caseId)
 //    {
 //	ParseDAO.getCaseById(caseId, new GetCallback<Case>()
