@@ -166,7 +166,6 @@ public class MapActivity extends BaseFragmentActivity implements
 	    map = mapFragment.getMap();
 	    if (map != null)
 	    {
-		Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
 		map.setMyLocationEnabled(true);
 	    }
 	    else
@@ -186,7 +185,6 @@ public class MapActivity extends BaseFragmentActivity implements
     protected void onResume(){
 		super.onStart();
 		buildingList = BuildingList.getInstance();
-		Toast.makeText(this, "Building size" + buildingList.size(), Toast.LENGTH_SHORT).show();
 		geoCodeAddBuildings();
 		map.setOnMarkerClickListener(this);
     }
@@ -237,7 +235,6 @@ public class MapActivity extends BaseFragmentActivity implements
 	Location location = mLocationClient.getLastLocation();
 	if (location != null)
 	{
-	    Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
 	    latLng = new LatLng(location.getLatitude(), location.getLongitude());
 	    // CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
 	    // map.animateCamera(cameraUpdate);
