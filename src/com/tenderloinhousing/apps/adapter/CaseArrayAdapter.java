@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.constant.CaseStatus;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.model.Case;
 
@@ -26,6 +27,7 @@ public class CaseArrayAdapter extends ArrayAdapter<Case> implements IConstants
     TextView tvBuildingName;
     TextView tvIssueType;
     TextView tvCaseId;
+    TextView tvCaseStatus;
 
     public CaseArrayAdapter(Context context, List<Case> cases)
     {
@@ -53,14 +55,28 @@ public class CaseArrayAdapter extends ArrayAdapter<Case> implements IConstants
 	tvBuildingName = (TextView) view.findViewById(R.id.tvBuildingName);
 	tvIssueType = (TextView) view.findViewById(R.id.tvIssueType);
 	caseImage = (ParseImageView) view.findViewById(R.id.ivCaseImg);
+	tvCaseStatus= (TextView) view.findViewById(R.id.tvCaseStatus);
 
-	tvCaseId.setText(inputCase.getCaseId());
+	tvCaseId.setText("Case #"+inputCase.getCaseId());
 	tvBuildingName.setText(inputCase.getBuilding().getName());
 	tvIssueType.setText(inputCase.getIssueType());
+	tvCaseStatus.setText(inputCase.getCaseStatus());	
 
+	styleCaseStatus();
+	
 	loadBuildingImage();
 
 	return view;
+    } 
+
+    private void styleCaseStatus()
+    {
+	if(CaseStatus.SUBMITTED.toString().equals(inputCase.getCaseStatus()))
+	    tvCaseStatus.setBackgroundColor(context.getResources().getColor(R.color.CaseSubmittedColor));
+	else if(CaseStatus.IN_REVIEW.toString().equals(inputCase.getCaseStatus()))
+	    tvCaseStatus.setBackgroundColor(context.getResources().getColor(R.color.CaseInProgressColor));
+	else if(CaseStatus.VERIFIED.toString().equals(inputCase.getCaseStatus()))
+	    tvCaseStatus.setBackgroundColor(context.getResources().getColor(R.color.CaseVerifiedColor));	
     }
 
     private void loadBuildingImage()

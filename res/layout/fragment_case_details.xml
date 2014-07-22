@@ -1,7 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:layout_margin="10dp" >	
+	>	
 	
 	<!-- List View -->
 	<LinearLayout
@@ -39,10 +39,8 @@
 
                <com.parse.ParseImageView
                    android:id="@+id/ivNewCase"
-                   android:layout_width="150dp"
-                   android:layout_height="150dp"
-                   android:layout_alignParentTop="true"
-                   android:layout_centerHorizontal="true"
+                   android:layout_width="120dp"
+                   android:layout_height="120dp"
                    android:adjustViewBounds="true"
                    android:scaleType="fitXY"
                    android:src="@drawable/ic_success"/>
@@ -309,9 +307,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                android:gravity="left"
-                style="?android:attr/listSeparatorTextViewStyle"  
+               style="@style/FormLabelStyle"
                 android:text="@string/addPhotos"
-                android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+                />
             
             <HorizontalScrollView
                 android:id="@+id/hvPhotoScroll"

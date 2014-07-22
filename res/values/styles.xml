@@ -62,6 +62,7 @@
      <style name="FormLabelStyle" >
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- grey -->
+        <item name="android:paddingLeft">6dp</item>
       </style>
       
       <style name="FormValueStyle" >
@@ -79,7 +80,7 @@
      </style>
      
     <style name="ThcSectionStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
-        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingLeft">7dp</item>
         <item name="android:paddingTop">3dp</item>
         <item name="android:paddingBottom">3dp</item>
          <item name="android:background">@color/ThcThemeColor</item>
@@ -87,6 +88,28 @@
           <item name="android:textColor">@color/ThcLabelColor</item>
      </style>
      
+    <style name="ListItemLabelBold" >
+       <item name="android:textSize">14sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- dark grey -->
+       <item name="android:fontFamily">sans-serif-bold</item>
+    </style>      
+    
+     <style name="ListItemLabelLight" >
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/ThcHintColor</item>
+    </style> 
+    
+       <style name="ListItemLabelDefault" >
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/ThcLabelColor</item>
+    </style> 
+    
+    <style name="ListItemLabelWhite" >
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>    
+            
 <!--     <style name="THCBackgroundColor" > -->
 <!--         <item name="android:background">#6fa844</item> -->
 <!--     </style> -->

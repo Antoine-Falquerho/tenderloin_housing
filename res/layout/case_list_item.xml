@@ -1,69 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@android:id/text1"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@android:color/white"
-          android:gravity="center_vertical"
-          android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-          android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-          android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    >
-    
- <com.parse.ParseImageView
-        android:id="@+id/ivCaseImg"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-         android:layout_width="90dp"
-        android:layout_height="70dp"
-         android:layout_marginTop="15dp"
-        android:layout_marginRight="15dp"
-         android:layout_marginBottom="15dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/thc_hotel"
-       />
- 
- <LinearLayout
-        	android:id="@+id/tvIssueDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivCaseImg"
-            android:layout_marginTop="15dp"
-               android:layout_marginRight="15dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true">
-            
-        <TextView
-            android:id="@+id/tvBuildingName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/building"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-bold"/>
-        
-         <TextView
-            android:id="@+id/tvCaseId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/caseNumber"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@android:color/darker_gray"
-            android:fontFamily="sans-serif-bold"/>
-
-        <TextView
-            android:id="@+id/tvIssueType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/issueType"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@android:color/darker_gray"
-            android:fontFamily="sans-serif"/>
-        
+	android:id="@android:id/text1"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@android:color/white"
+	android:gravity="center_vertical"
+	android:minHeight="?android:attr/listPreferredItemHeightSmall"
+	android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+	android:paddingStart="?android:attr/listPreferredItemPaddingStart" >
+	<com.parse.ParseImageView
+		android:id="@+id/ivCaseImg"
+		android:layout_width="100dp"
+		android:layout_height="80dp"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		android:layout_marginBottom="15dp"
+		android:layout_marginRight="15dp"
+		android:layout_marginTop="15dp"
+		android:scaleType="fitXY"
+		android:src="@drawable/thc_hotel" />
+	<LinearLayout
+		android:id="@+id/tvIssueDetails"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"
+		android:layout_marginRight="10dp"
+		android:layout_marginTop="15dp"
+		android:layout_toRightOf="@+id/ivCaseImg"
+		android:orientation="vertical" >
+		<TextView
+			android:id="@+id/tvBuildingName"
+			style="@style/ListItemLabelBold"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/building" />
+		<TextView
+			android:id="@+id/tvCaseId"
+			style="@style/ListItemLabelLight"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4sp"
+			android:text="@string/caseNumber" />
+		<TextView
+			android:id="@+id/tvIssueType"
+			style="@style/ListItemLabelDefault"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4sp"
+			android:text="@string/issueType" />
+		<TextView
+			android:id="@+id/tvCaseStatus"
+			style="@style/ListItemLabelWhite"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="4sp"
+			android:paddingLeft="6sp"
+			android:paddingRight="6sp"
+			android:paddingBottom="4sp"
+			android:text="@string/caseStatus" />
 	</LinearLayout>
-
-
 </RelativeLayout>
-    
