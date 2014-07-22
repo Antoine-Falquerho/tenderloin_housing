@@ -3,6 +3,7 @@ package com.tenderloinhousing.apps.activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -40,6 +41,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.ui.IconGenerator;
 import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
@@ -143,7 +145,7 @@ public class MapActivity extends BaseFragmentActivity implements
 	showProgressBar();
 	mLocationClient = new LocationClient(this, this, this);
 	getActionBar().setHomeButtonEnabled(true);
-
+	mSlidingUpPanelLayout.collapsePane();
     }
 
     /*
@@ -387,11 +389,16 @@ public class MapActivity extends BaseFragmentActivity implements
     public void addMarkers(List<Building> buildingList)
     {
 	bounds = new LatLngBounds.Builder();
+    Random r = new Random();
+    IconGenerator tc = new IconGenerator(this);
+    Drawable icon = getResources().getDrawable(R.drawable.map_marker);
+    tc.setContentPadding(30, 30,30,30);
+    tc.setBackground(icon);
 	for (Building building : buildingList)
 	{
 	    MarkerOptions markerOptions = new MarkerOptions();
-	    Drawable icon = getResources().getDrawable(R.drawable.map_marker);
-        Bitmap b = ((BitmapDrawable) icon).getBitmap();
+	    int caseCount = r.nextInt(50 - 30) + 30;
+	    Bitmap b = tc.makeIcon(String.valueOf(caseCount)); 
 	    Bitmap bhalfsize=Bitmap.createScaledBitmap(b, b.getWidth()/2,b.getHeight()/2, false);
 	    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bhalfsize));
 	    if (building.getlatLng() != null)

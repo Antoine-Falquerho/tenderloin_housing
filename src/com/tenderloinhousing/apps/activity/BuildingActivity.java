@@ -35,6 +35,7 @@ public class BuildingActivity extends BaseFragmentActivity implements BuildingCa
 	populateBuildingHeader(building);
 
 	displayCaseListFragment();
+	getActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -50,6 +51,8 @@ public class BuildingActivity extends BaseFragmentActivity implements BuildingCa
     {
 	switch (item.getItemId())
 	{
+	case android.R.id.home:
+		startActivity(new Intent(getApplicationContext(), MapActivity.class));
 	case R.id.miReport:
 	    doReport();
 	    return true;

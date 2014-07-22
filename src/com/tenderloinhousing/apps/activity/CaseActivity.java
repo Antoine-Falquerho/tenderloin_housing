@@ -29,7 +29,7 @@ public class CaseActivity extends BaseFragmentActivity
 	
 		int method = getIntent().getIntExtra(METHOD_KEY, METHOD_CODE_CREATE);	//default to create		
 		laglng = getIntent().getParcelableExtra(LATLNG_KEY);
-		
+		getActionBar().setHomeButtonEnabled(true);
 		switch (method)
 		{
 	        	case METHOD_CODE_DETAIL:
@@ -101,6 +101,8 @@ public class CaseActivity extends BaseFragmentActivity
     {
 	switch (item.getItemId())
 	{
+	case android.R.id.home:
+		startActivity(new Intent(getApplicationContext(), MapActivity.class));
 	case R.id.miExplore:
 	    doExplore();
 	    return true;

@@ -54,6 +54,7 @@ public class ManageCaseActivity extends BaseFragmentActivity  implements ActionB
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
+        getActionBar().setHomeButtonEnabled(true);  
  
     }
 
@@ -109,6 +110,8 @@ public class ManageCaseActivity extends BaseFragmentActivity  implements ActionB
 	case R.id.miReport:
 	    doReport();
 	    return true;
+	case android.R.id.home:
+		startActivity(new Intent(getApplicationContext(), MapActivity.class));
 	case R.id.miExplore:
 	    doExplore();
 	    return true;
