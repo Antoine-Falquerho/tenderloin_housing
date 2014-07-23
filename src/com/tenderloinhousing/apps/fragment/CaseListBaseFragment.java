@@ -3,6 +3,8 @@ package com.tenderloinhousing.apps.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -72,6 +74,7 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	    {
 		String caseId = ((TextView) view.findViewById(R.id.tvCaseId)).getText().toString();
+		caseId =  StringUtils.substringAfter(caseId, "#");
 		openCaseDetailIntent(caseId);
 	    }
 	};
@@ -107,6 +110,8 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
     //Use by search
     private void filterCasebyId(String caseId)
     {
+	caseId =  StringUtils.substringAfter(caseId, "#");
+	
 	ParseDAO.getCaseById(caseId, new GetCallback<Case>()
 	{
 	    @Override

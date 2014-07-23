@@ -52,12 +52,14 @@
 		<TextView
 			android:id="@+id/tvCaseStatus"
 			style="@style/ListItemLabelWhite"
-			android:layout_width="wrap_content"
+			android:layout_width="100dp"
 			android:layout_height="wrap_content"
-			android:paddingTop="4sp"
+			android:layout_marginTop="4sp"
+			android:gravity="center"
+			android:paddingTop="3sp"
 			android:paddingLeft="6sp"
 			android:paddingRight="6sp"
-			android:paddingBottom="4sp"
+			android:paddingBottom="3sp"
 			android:text="@string/caseStatus" />
 	</LinearLayout>
 </RelativeLayout>

@@ -11,6 +11,7 @@
     
     <item name="android:editTextStyle">@style/EditTextThcTheme</item>
 
+<item name="android:textColorHighlight">#99ff763c</item>
     <item name="android:checkboxStyle">@style/CheckBoxThcTheme</item>
 
     <item name="android:buttonStyle">@style/ButtonThcTheme</item>
@@ -20,6 +21,8 @@
     <item name="android:spinnerStyle">@style/SpinnerThcTheme</item>
 
     <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemThcTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarThcTheme</item>
 
     <item name="android:listViewStyle">@style/ListViewThcTheme</item>
 

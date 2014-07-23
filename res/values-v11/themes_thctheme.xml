@@ -8,7 +8,14 @@
   <style name="componentStyles" parent="android:Theme.Holo.Light">
     <item name="android:spinnerDropDownItemStyle">@style/ThcSpinnerItemStyle</item>
  
+
     <item name="android:editTextBackground">@drawable/thctheme_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#99ff763c</item>
+    <item name="android:textSelectHandleLeft">@drawable/thctheme_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/thctheme_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/thctheme_text_select_handle_middle</item>
+
 
     <item name="android:listChoiceIndicatorMultiple">@drawable/thctheme_btn_check_holo_light</item>
 
@@ -17,6 +24,8 @@
     <item name="android:imageButtonStyle">@style/ImageButtonThcTheme</item>
 
     <item name="android:dropDownSpinnerStyle">@style/SpinnerThcTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarThcTheme</item>
 
     <item name="android:listChoiceBackgroundIndicator">@drawable/thctheme_list_selector_holo_light</item>
 

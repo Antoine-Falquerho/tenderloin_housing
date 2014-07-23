@@ -122,6 +122,7 @@ public class MapActivity extends BaseFragmentActivity implements
 	mTransparentHeaderView = LayoutInflater.from(this).inflate(R.layout.transparent_header_view, null, false);
 	mSpaceView = mTransparentHeaderView.findViewById(R.id.space);
 
+	//Build Building List
 	mListView.addHeaderView(mTransparentHeaderView);
 	buildingList = new ArrayList<Building>();
 	buildingListAdapter = new MapBuildingAdapter(this, buildingList);

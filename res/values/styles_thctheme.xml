@@ -31,6 +31,33 @@
   <style name="SpinnerDropDownItemThcTheme" parent="android:Widget.DropDownItem.Spinner">
       <item name="android:checkMark">@drawable/thctheme_btn_radio_holo_light</item>
   </style>
+  <style name="TabThcTheme">
+      <item name="android:gravity">center_horizontal</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+      <item name="android:background">@drawable/thctheme_tab_indicator_holo</item>
+      <item name="android:layout_width">0dip</item>
+      <item name="android:layout_weight">1</item>
+      <item name="android:minWidth">80dip</item>
+  </style>
+
+  <style name="TabTextThcTheme">
+	  <item name="android:textColor">@color/ThcThemeColor</item>
+      <item name="android:textSize">12sp</item>
+      <item name="android:textStyle">bold</item>
+      <!-- v14 <item name="android:textAllCaps">true</item> -->
+      <item name="android:ellipsize">marquee</item>
+      <item name="android:maxLines">2</item>
+      <item name="android:maxWidth">180dip</item>
+  </style>
+
+  <style name="ProgressBarThcTheme" parent="android:Widget.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/thctheme_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/thctheme_progress_indeterminate_horizontal_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
   <style name="ListViewThcTheme" parent="android:Widget.ListView">
       <item name="android:listSelector">@drawable/thctheme_list_selector_holo_light</item>
   </style>

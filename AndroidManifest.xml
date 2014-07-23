@@ -84,8 +84,8 @@
 		<activity
 			android:name="com.tenderloinhousing.apps.activity.ManageCaseActivity"
 			android:parentActivityName="com.tenderloinhousing.apps.activity.MapActivity" 
-			android:label="@string/title_activity_case_list" 
-			android:theme="@style/StyledIndicators">
+			android:label="@string/title_activity_case_list" >
+<!-- 			android:theme="@style/StyledIndicators"> -->
 		</activity>
 		<activity
             android:name="com.tenderloinhousing.apps.activity.ManageCaseDispatchActivity"

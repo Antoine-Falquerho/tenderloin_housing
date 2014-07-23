@@ -44,14 +44,14 @@
 			style="@style/ListItemLabelDefault"
 			android:text="@string/address" />
 		<!-- Violation Count -->
-		<!-- <TextView -->
-		<!-- android:id="@+id/tvCount" -->
-		<!-- android:layout_width="wrap_content" -->
-		<!-- android:layout_height="wrap_content" -->
-		<!-- android:layout_marginTop="10dp" -->
-		<!-- android:layout_marginLeft="3dp" -->
-		<!-- android:layout_marginRight="5dp" -->
-		<!-- android:text="5 Violations" -->
-		<!-- android:textSize="12sp" /> -->
+		<TextView
+		android:id="@+id/tvCount"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:layout_marginLeft="3dp"
+		android:layout_marginRight="5dp"
+		android:text="5 Violations"
+		android:textSize="12sp" />
 	</LinearLayout>
 </RelativeLayout>

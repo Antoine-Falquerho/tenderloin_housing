@@ -16,4 +16,9 @@
       <item name="android:dropDownSelector">@drawable/thctheme_list_selector_holo_light</item>
   </style>
 
+  <style name="ProgressBarThcTheme" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/thctheme_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/thctheme_progress_indeterminate_horizontal_holo_light</item>
+  </style>
+
 </resources>
