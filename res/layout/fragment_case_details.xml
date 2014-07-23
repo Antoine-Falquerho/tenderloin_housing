@@ -469,13 +469,13 @@
             android:id="@+id/llButtonContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:gravity="center"
             android:orientation="horizontal" >
             <Button
                 android:id="@+id/btnEdit"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="40dp"
                 android:shadowColor="#33b5fa"
                 android:text="@string/edit"
@@ -485,7 +485,7 @@
             <Button                
                 android:id="@+id/btnShare"                
                 android:layout_height="40dp"
-                android:layout_width="100dp"                              
+                android:layout_width="120dp"                              
                 style="@style/ThcButtonStyle"     
                 android:drawableLeft="@drawable/email" 
                 android:text="@string/share" />
