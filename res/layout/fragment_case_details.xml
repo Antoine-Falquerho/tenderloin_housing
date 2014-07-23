@@ -480,15 +480,15 @@
                 android:shadowColor="#33b5fa"
                 android:text="@string/edit"
                 style="@style/ThcButtonStyle"
+                android:drawableLeft="@drawable/edit"
                 android:layout_marginRight="20dp"/>
-<!--                 android:background="@drawable/green_button" /> -->
             <Button                
                 android:id="@+id/btnShare"                
                 android:layout_height="40dp"
-                android:layout_width="100dp"               
-                style="@style/ThcButtonStyle"      
+                android:layout_width="100dp"                              
+                style="@style/ThcButtonStyle"     
+                android:drawableLeft="@drawable/email" 
                 android:text="@string/share" />
-<!--                 android:background="@drawable/green_button" /> -->
         </LinearLayout> 	
         
    

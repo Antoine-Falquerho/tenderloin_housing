@@ -151,11 +151,11 @@ public class CaseDetailsFragment extends Fragment implements IConstants {
 				sharingIntent.setType("text/html");
 				sharingIntent.putExtra(
 						android.content.Intent.EXTRA_TEXT,
-						Html.fromHtml("<h1> Case id #" + myCase.getCaseId()
-								+ "</h1>" + "<p>Unit" + myCase.getUnit()
-								+ "</p>" + "<p>Issue type"
-								+ myCase.getIssueType() + "</p>" + "<p>"
-								+ myCase.getDescription() + "</p>"));
+						Html.fromHtml("<h1> Case #" + myCase.getCaseId() + "</h1>"
+							       + "<p>Hotel Name: " + myCase.getBuilding().getName() + "</p>" 
+								+ "<p>Unit: " + myCase.getUnit() + "</p>" 
+							        + "<p>Issue type: " + myCase.getIssueType() + "</p>" 
+								+ "<p>" + myCase.getDescription() + "</p>"));
 				startActivity(Intent
 						.createChooser(sharingIntent, "Share using"));
 			}

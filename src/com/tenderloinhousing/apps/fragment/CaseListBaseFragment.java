@@ -110,7 +110,7 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
     //Use by search
     private void filterCasebyId(String caseId)
     {
-	caseId =  StringUtils.substringAfter(caseId, "#");
+	//caseId =  StringUtils.substringAfter(caseId, "#");
 	
 	ParseDAO.getCaseById(caseId, new GetCallback<Case>()
 	{
