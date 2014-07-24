@@ -52,7 +52,7 @@
             android:layout_marginTop="10dp"       
             android:layout_marginLeft="3dp"
             android:layout_marginRight="5dp"
-            android:text="30 Violations"
+            android:text="3 Violations"
             android:textSize="12sp" />
         </RelativeLayout>
         
