@@ -181,5 +181,11 @@
 <!--         <item name="fadeLength">1000</item> -->
 <!--         <item name="fadeDelay">1000</item> -->
 <!--     </style> -->
+    <style name="MarkerText" parent="@android:style/TextAppearance.Medium">
+       <item name="android:textSize">18sp</item>
+       <item name="android:textStyle">bold</item>
+       <item name="android:textColor">#FF6e6b6b</item> <!-- dark grey -->
+       <item name="android:fontFamily">sans-serif-bold</item>
+    </style>
 
 </resources>

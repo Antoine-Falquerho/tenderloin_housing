@@ -392,6 +392,7 @@ public class MapActivity extends BaseFragmentActivity implements
     Drawable icon = getResources().getDrawable(R.drawable.map_marker);
     tc.setContentPadding(30, 30,30,30);
     tc.setBackground(icon);
+    tc.setTextAppearance(getApplicationContext(),R.style.MarkerText);
 	for (Building building : buildingList)
 	{
 	    MarkerOptions markerOptions = new MarkerOptions();
