@@ -6,9 +6,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.parse.ParseImageView;
@@ -26,6 +27,7 @@ public class BuildingActivity extends BaseFragmentActivity //implements Building
     private Button btnCreateReport;
     Building building;
     String caseCount;
+    ImageView ivClose;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -95,8 +97,7 @@ public class BuildingActivity extends BaseFragmentActivity //implements Building
 
     public void populateBuildingHeader(Building building, String caseCount)
     {
-	ivBuildingImage = (ParseImageView) findViewById(R.id.ivBuildingImage);
-	
+	ivBuildingImage = (ParseImageView) findViewById(R.id.ivBuildingImage);	
 	ivBuildingImage.setParseFile(building.getImage());
 	ivBuildingImage.loadInBackground();	   
 
@@ -108,6 +109,16 @@ public class BuildingActivity extends BaseFragmentActivity //implements Building
 	
 	btnCreateReport = (Button) findViewById(R.id.btnCreateReport);	
 	btnCreateReport.setOnClickListener(getOnClickListener());
+	
+	ivClose = (ImageView) findViewById(R.id.ivClose);	
+	ivClose.setOnClickListener(new OnClickListener()
+	{
+	    @Override
+	    public void onClick(View v)
+	    {
+		doExplore();		
+	    }	    
+	});
     }
 
     public OnClickListener getOnClickListener()

@@ -20,14 +20,15 @@
 			android:scaleType="fitXY"
 			android:src="@drawable/ic_camera_add" />
 		
-<!-- 		<LinearLayout -->
-<!-- 			android:id="@+id/llCreateReport" -->
-<!-- 			android:layout_width="wrap_content" -->
-<!-- 			android:layout_height="wrap_content" -->
-<!-- 			android:layout_centerHorizontal="true" -->
-<!-- 			android:layout_marginTop="150dp" -->
-<!-- 			android:divider="@drawable/divider" -->
-<!-- 			android:orientation="vertical" > -->
+		<RelativeLayout
+			android:id="@+id/llHeader"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentLeft="true" 
+			android:layout_alignParentRight="true"
+			android:background="@color/TransparentGreyColor">
 			
 			<!-- Icon Close -->
             <ImageView
@@ -52,6 +53,7 @@
 				android:textColor="#ffffff"
 				android:textSize="18sp"
 				android:textStyle="bold" />
+		</RelativeLayout>
 			
 			<!-- Create Report button -->
 			<Button
