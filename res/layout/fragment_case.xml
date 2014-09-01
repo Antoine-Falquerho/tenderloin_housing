@@ -45,6 +45,7 @@
             android:ems="10"
             android:layout_marginTop="15dp"
             style="?android:attr/listSeparatorTextViewStyle"
+            android:drawableLeft="@drawable/ic_reports_violation_text"
             android:textColor="@color/ThcDefaultTextColor"
             android:textColorHint="@color/ThcHintColor"
             android:hint="@string/caseDesc"
@@ -81,6 +82,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 style="?android:attr/listSeparatorTextViewStyle"
+                android:drawableLeft="@drawable/ic_reports_unit"
                 android:textColor="@color/ThcDefaultTextColor"
                 android:textColorHint="@color/ThcHintColor"
                 android:hint="@string/unitNumber"
@@ -98,6 +100,7 @@
             android:layout_marginTop="15dp"
             android:ems="10"
             style="?android:attr/listSeparatorTextViewStyle"
+            android:drawableLeft="@drawable/ic_reports_hotel"
             android:textColor="@color/ThcDefaultTextColor"
             android:textColorHint="@color/ThcHintColor"
             android:hint="@string/address"
@@ -117,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="?android:attr/listSeparatorTextViewStyle"
+                android:drawableLeft="@drawable/ic_reports_violation_multi_unit"
                 android:text="@string/isMultiUnit" 
                 android:textColor="#7e7e7e"/>
             <CheckBox
@@ -139,6 +143,7 @@
             android:layout_below="@+id/checkboxContainer"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/ic_reports_violation_photos"
             android:text="@string/addPhotos"
             android:textColor="@color/ThcDefaultTextColor"
             android:textColorHint="@color/ThcHintColor"/>
@@ -159,7 +164,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
-                android:src="@drawable/photo_placeholder" />
+                android:src="@drawable/ic_camera_add" />
             </LinearLayout>
         </HorizontalScrollView>
         
@@ -186,6 +191,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
+			android:drawableLeft="@drawable/ic_reports_fullname"
 			android:textColor="@color/ThcDefaultTextColor"
 			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/fullName"
@@ -202,6 +208,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
+			android:drawableLeft="@drawable/ic_reports_language"
 			android:textColor="@color/ThcDefaultTextColor"
 			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/language"
@@ -220,6 +227,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
+			android:drawableLeft="@drawable/ic_reports_phone"
 			android:textColor="@color/ThcDefaultTextColor"
 			android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/phone"
@@ -236,6 +244,7 @@
 			android:layout_marginTop="15dp"
 			android:ems="10"
 			style="?android:attr/listSeparatorTextViewStyle"
+			android:drawableLeft="@drawable/ic_reports_email"
 			android:textColor="@color/ThcDefaultTextColor"
             android:textColorHint="@color/ThcHintColor"
 			android:hint="@string/emailOptional"
@@ -270,7 +279,7 @@
 				android:layout_height="40dp"
 				android:layout_width="120dp"
                 style="@style/ThcButtonStyle"
-                android:drawableLeft="@drawable/image_remove_btn" 
+                android:drawableLeft="@drawable/btn_selected_remove_normal" 
 				android:text="@string/cancel"/>
 		</LinearLayout>
 	</RelativeLayout>

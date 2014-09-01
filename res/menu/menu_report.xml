@@ -3,7 +3,7 @@
 	
 	 <item
         android:id="@+id/miReport"
-        android:icon="@drawable/ic_report"
+        android:icon="@drawable/btn_create_normal"
         android:showAsAction="always"
         android:title="@string/report" >
     </item>

@@ -31,6 +31,7 @@ public class ParseDAO implements IConstants
 	if (classObj.getName().equals(Case.class.getName()))
 	{
 	    query.include("tenant");
+	    query.include("staff");
 	    query.include("building");
 	}
 	query.findInBackground(callback);
@@ -39,8 +40,7 @@ public class ParseDAO implements IConstants
     public static void getCaseById(final String caseId, GetCallback<Case> callBack)
     {
 	ParseQuery<Case> query = ParseQuery.getQuery("Case");
-	query.include("tenant");
-	query.include("building");
+	includeObjects(query);
 
 	query.getInBackground(caseId, callBack);
     }
@@ -49,8 +49,7 @@ public class ParseDAO implements IConstants
     {
 	ParseQuery<Case> query = ParseQuery.getQuery("Case");
 	query.whereEqualTo("building", building);
-	query.include("tenant");
-	query.include("building");
+	includeObjects(query);
 
 	query.findInBackground(callBack);
     }
@@ -59,8 +58,7 @@ public class ParseDAO implements IConstants
     {
 	ParseQuery<Case> query = ParseQuery.getQuery("Case");
 	query.whereEqualTo("tenant", tenant);
-	query.include("tenant");
-	query.include("building");
+	includeObjects(query);
 
 	query.findInBackground(callBack);
     }
@@ -69,9 +67,7 @@ public class ParseDAO implements IConstants
     {
 	ParseQuery<Case> query = ParseQuery.getQuery("Case");
 	query.whereEqualTo("staff", staff);
-	query.include("staff");
-	query.include("tenant");
-	query.include("building");
+	includeObjects(query);
 
 	query.findInBackground(callBack);
     }
@@ -79,14 +75,18 @@ public class ParseDAO implements IConstants
     public static void getNewCases(FindCallback<Case> callBack)
     {
 	ParseQuery<Case> query = ParseQuery.getQuery("Case");
-	query.whereEqualTo("caseStatus", CaseStatus.SUBMITTED.toString());
-	query.include("staff");
-	query.include("tenant");
-	query.include("building");
+	query.whereEqualTo("caseStatus", CaseStatus.CREATED.toString());	
+	includeObjects(query);
 
 	query.findInBackground(callBack);
     }
 
+    private static void includeObjects(ParseQuery<Case> query)
+    {
+	query.include("staff");
+	query.include("tenant");
+	query.include("building");
+    }
 
     public static void createCase(Case newCase, SaveCallback callback)
     {

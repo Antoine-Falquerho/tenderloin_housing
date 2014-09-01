@@ -14,7 +14,7 @@
 	<string name="profile_login_button_label">Log in</string>
 	<!-- =========================== Labels =========================== -->
 	<string name="app_name">Tenderloin Housing Clinic</string>
-	<string name="title_activity_report">Report Violation</string>
+	<string name="title_activity_report">Create New Report</string>
 	<string name="title_activity_map">Explore</string>
 	   <string name="title_activity_building">Hotel Violations </string>
 	
@@ -29,8 +29,8 @@
 	
 	
 	<!-- Submit a Case -->
-	<string name="createReport">Create Report</string>
-	<string name="violationDetails">Violation Details</string>
+	<string name="createReport">Create New Report</string>
+	<string name="violationDetails">Report Details</string>
 	<string name="personalInfo">Personal Information</string>
 	<string name="issueType">Violation Type </string>
 	<string name="building">Hotel </string>
@@ -48,7 +48,7 @@
 	<string name="addPhotos">Violation Pictures (Optional)</string>
 	<string name="caseStatus">Case Status</string>
 	<string name="caseNumber">Case Number </string>
-	<string name="caseManager">Case Manager </string>
+	<string name="caseManager">Case Manager</string>
 	<string name="submitDate">Submitted</string>
 	
 	<!-- Action Buttons -->
@@ -56,8 +56,8 @@
 	<string name="cancel">Cancel</string>
 	<string name="edit">Edit</string>
 	<string name="share">Email</string>
-	<string name="viewDetails">View Violation Details</string>
-	<string name="title_activity_case_list">Browse Cases</string>
+	<string name="viewDetails">View Report Details</string>
+	<string name="title_activity_case_list">Manage Cases</string>
 	<string name="searchById">Enter Case Number to search</string>
 
 </resources>

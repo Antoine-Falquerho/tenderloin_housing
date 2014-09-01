@@ -3,7 +3,7 @@
    
 	 <item
         android:id="@+id/miCase"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="withText"
         android:title="@string/cases" >
     </item>
     

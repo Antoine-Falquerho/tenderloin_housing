@@ -33,14 +33,14 @@ public class BuildingCaseListFragment extends CaseListBaseFragment
    {
 	super.onAttach(activity);
 	
-	if(activity instanceof OnCaseLoadedListener)
-	{
-	    listener = (OnCaseLoadedListener) activity;
-	}
-	else
-	{
-	    throw new ClassCastException(activity.toString() + " must implement BuildingCaseListFragment.OnCaseLoadedListener.");
-	}
+//	if(activity instanceof OnCaseLoadedListener)
+//	{
+//	    listener = (OnCaseLoadedListener) activity;
+//	}
+//	else
+//	{
+//	    throw new ClassCastException(activity.toString() + " must implement BuildingCaseListFragment.OnCaseLoadedListener.");
+//	}
    }
 
     @Override

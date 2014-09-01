@@ -307,7 +307,7 @@ public class CaseFragment extends Fragment implements IConstants
 	    newCase.setUnit(etUnit.getText().toString());
 	    newCase.setIsMultiUnitPetition(cbMultiUnit.isChecked());
 	    //newCase.setGeoLocation(laglng.latitude, laglng.longitude);
-	    newCase.setCaseStatus(CaseStatus.SUBMITTED.toString());
+	    newCase.setCaseStatus(CaseStatus.CREATED.toString());
 	}
 	//return newCase;
     }

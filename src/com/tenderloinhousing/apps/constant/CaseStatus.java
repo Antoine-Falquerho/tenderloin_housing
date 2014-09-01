@@ -2,9 +2,10 @@ package com.tenderloinhousing.apps.constant;
 
 public enum CaseStatus 
 {
-    SUBMITTED("Submitted"),
+    CREATED("Created"),
     IN_REVIEW("In Review"),
-    VERIFIED("Verified");
+    VERIFIED("Verified"),
+    CLOSED("Closed");
 
 
     private final String value;

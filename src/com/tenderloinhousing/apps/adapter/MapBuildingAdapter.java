@@ -10,9 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.makeramen.RoundedImageView;
 import com.parse.ParseFile;
-import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.R;
+import com.tenderloinhousing.apps.helper.CommonUtil;
 import com.tenderloinhousing.apps.model.Building;
 
 public class MapBuildingAdapter extends ArrayAdapter<Building>
@@ -50,12 +51,13 @@ public class MapBuildingAdapter extends ArrayAdapter<Building>
 	int caseCount = r.nextInt(50 - 30) + 30;
 	tvCount.setText(String.valueOf(caseCount) + " Violations");
 
-	ParseImageView buildingImage = (ParseImageView) v.findViewById(R.id.ivBuildingImg);
-	ParseFile picture = building.getImage();
-	if (picture != null)
+	RoundedImageView buildingImage = (RoundedImageView) v.findViewById(R.id.ivBuildingImg);
+	ParseFile pictureFile = building.getImage();
+	if (pictureFile != null)
 	{
-	    buildingImage.setParseFile(picture);
-	    buildingImage.loadInBackground();
+//	    buildingImage.setParseFile(picture);
+//	    buildingImage.loadInBackground();
+	    buildingImage.setImageBitmap(CommonUtil.convertParseImageFile(pictureFile));
 	}
 	v.setTag(building.getBuildingId());
 	return v;

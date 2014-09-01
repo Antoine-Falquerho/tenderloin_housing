@@ -22,7 +22,7 @@ public class ManageCaseActivity extends BaseFragmentActivity  implements ActionB
     
     private ActionBar actionBar;
     // Tab titles
-    private String[] tabs = { "My Cases", "New Cases", "All Cases"};
+    private String[] tabs = { "All", "New", "My Cases" };
  
 
     @Override

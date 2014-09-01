@@ -12,6 +12,7 @@ public interface IConstants
     public static final String HINT_SELECT_HOTEL = "[Select Hotel]";
     public static final String SPINNER_HINT_PREFIX = "[";
     public static final String BUILDING_ID_KEY = "buildingId";
+    public static final String CASE_COUNT_KEY = "caseCount";
     public static final String BUILDING_OBJ_KEY = "building";
     public static final String TENANT_OBJ_KEY = "tenant";
     public static final String STAFF_OBJ_KEY = "staff";

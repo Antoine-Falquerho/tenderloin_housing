@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.ParseImageView;
@@ -14,14 +17,15 @@ import com.tenderloinhousing.apps.fragment.BuildingCaseListFragment;
 import com.tenderloinhousing.apps.helper.BuildingList;
 import com.tenderloinhousing.apps.model.Building;
 
-public class BuildingActivity extends BaseFragmentActivity implements BuildingCaseListFragment.OnCaseLoadedListener
+public class BuildingActivity extends BaseFragmentActivity //implements BuildingCaseListFragment.OnCaseLoadedListener
 {
     BuildingCaseListFragment caseListFragment;
     private ParseImageView ivBuildingImage;
     private TextView tvBuildingName;
-    private TextView tvAddress;
     private TextView tvCount;
+    private Button btnCreateReport;
     Building building;
+    String caseCount;
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,9 +34,11 @@ public class BuildingActivity extends BaseFragmentActivity implements BuildingCa
 	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 	setContentView(R.layout.activity_building);
 
+	caseCount = (String) getIntent().getStringExtra(CASE_COUNT_KEY);
 	String buildingId = (String) getIntent().getSerializableExtra(BUILDING_ID_KEY);
 	building =  BuildingList.getBuildingById(buildingId);
-	populateBuildingHeader(building);
+	
+	populateBuildingHeader(building,caseCount);
 
 	displayCaseListFragment();
 	getActionBar().setHomeButtonEnabled(true);
@@ -87,7 +93,7 @@ public class BuildingActivity extends BaseFragmentActivity implements BuildingCa
 	transaction.commit();
     }
 
-    public void populateBuildingHeader(Building building)
+    public void populateBuildingHeader(Building building, String caseCount)
     {
 	ivBuildingImage = (ParseImageView) findViewById(R.id.ivBuildingImage);
 	
@@ -96,19 +102,30 @@ public class BuildingActivity extends BaseFragmentActivity implements BuildingCa
 
 	tvBuildingName = (TextView) findViewById(R.id.tvBuildingName);
 	tvBuildingName.setText(building.getName());
-
-	tvAddress = (TextView) findViewById(R.id.tvAddress);
-	tvAddress.setText(building.getAddress());
 	
 	tvCount = (TextView) findViewById(R.id.tvCount);
+	tvCount.setText("Reported Violations ("  + caseCount +")");
 	
+	btnCreateReport = (Button) findViewById(R.id.btnCreateReport);	
+	btnCreateReport.setOnClickListener(getOnClickListener());
     }
 
-    @Override
-    public void onCaseLoaded(int caseCount)
+    public OnClickListener getOnClickListener()
     {
-	tvCount.setText(caseCount +" Violoations");
-	
+	return new OnClickListener()
+	{
+	    @Override
+	    public void onClick(View v)
+	    {
+		doReport();
+	    }
+	};
     }
-
-}
+    
+//    @Override
+//    public void onCaseLoaded(int caseCount)
+//    {
+//	tvCount.setText(caseCount +" Violoations");
+//	
+//    }
+    }

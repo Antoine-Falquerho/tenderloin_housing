@@ -2,6 +2,7 @@ package com.tenderloinhousing.apps.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.util.Log;
 
@@ -123,7 +124,7 @@ public class Case extends ParseObject implements Serializable
 	put("staff", staff);
     }
     
-    // One-To-Mange
+    // One-To-Many
     public ArrayList<ParseFile> getPictures()
     {
         return (ArrayList<ParseFile>) get("pictures");
@@ -134,7 +135,7 @@ public class Case extends ParseObject implements Serializable
 	put("pictures", pictures);
     }
     
-	public LatLng getlatLng(){
+    public LatLng getlatLng(){
 		 ParseGeoPoint point = getGeoLocation();
 		 if (point !=null){
 			 return new LatLng(point.getLatitude(), point.getLongitude());
@@ -142,5 +143,5 @@ public class Case extends ParseObject implements Serializable
 			 return null;
 		 }
      }
-    
+       
 }

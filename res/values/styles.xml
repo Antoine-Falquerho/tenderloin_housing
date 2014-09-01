@@ -44,7 +44,7 @@
 		</style>
 
 	<style name="ThcCustomMenuTextApearance" parent="@android:style/TextAppearance.Widget.TextView.PopupMenu">
-        <item name="android:textColor">@color/ThcThemeColor</item>
+        <item name="android:textColor">@color/ThcDefaultTextColor</item>
          <item name="android:textSize">16sp</item> 
            <item name="android:textStyle">bold</item> 
     </style>
@@ -93,7 +93,7 @@
      </style>
      
     <style name="ListItemLabelBold" >
-       <item name="android:textSize">14sp</item>
+       <item name="android:textSize">16sp</item>
        <item name="android:textStyle">bold</item>
        <item name="android:textColor">@color/ThcDefaultTextColor</item> <!-- dark grey -->
        <item name="android:fontFamily">sans-serif-bold</item>
@@ -184,7 +184,7 @@
     <style name="MarkerText" parent="@android:style/TextAppearance.Medium">
        <item name="android:textSize">18sp</item>
        <item name="android:textStyle">bold</item>
-       <item name="android:textColor">#FF6e6b6b</item> <!-- dark grey -->
+       <item name="android:textColor">@android:color/white</item> 
        <item name="android:fontFamily">sans-serif-bold</item>
     </style>
 

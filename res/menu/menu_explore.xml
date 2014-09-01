@@ -4,7 +4,7 @@
 	 <item
         android:id="@+id/miExplore"
         android:icon="@drawable/ic_map"
-        android:showAsAction="always"
+        android:showAsAction="always|withText"
         android:title="@string/title_activity_map" >
     </item>
      

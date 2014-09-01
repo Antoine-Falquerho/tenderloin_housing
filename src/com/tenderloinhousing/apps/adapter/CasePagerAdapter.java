@@ -12,7 +12,7 @@ import com.tenderloinhousing.apps.model.User;
 
 public class CasePagerAdapter extends FragmentPagerAdapter
 {
-    private static final String[] CONTENT = new String[] { "My Cases", "New Cases", "All Cases"};
+    private static final String[] CONTENT = new String[] { "All", "New", "My Cases" };
 
     public CasePagerAdapter(FragmentManager fragmentManager)
     {
@@ -25,11 +25,11 @@ public class CasePagerAdapter extends FragmentPagerAdapter
     {
 	switch (position)
 	{
-	case 0: // Fragment # 0
-	    return MyCaseListFragment.newInstance((User) ParseUser.getCurrentUser());
+	case 2: // Fragment # 2
+	    return new MyCaseListFragment();
 	case 1: // Fragment # 1
 	    return new NewCaseListFragment();
-	case 2: // Fragment # 2
+	case 0: // Fragment # 0
 	    return new AllCaseListFragment();
 	default:
 	    return null;

@@ -22,6 +22,7 @@
 			android:ems="10"
 			android:hint="@string/searchById"
 			android:inputType="text"
+			android:drawableLeft="@drawable/ic_search"
 			style="@style/FormValueStyle" />
 		
 		  <ImageView
@@ -31,7 +32,7 @@
 	            android:clickable="true"
 	            android:paddingLeft="3dp"
 	            android:paddingTop="5dp" 
-	            android:src="@drawable/image_remove_btn" />
+	            android:src="@drawable/btn_selected_remove_normal" />
 	</LinearLayout>
 	
 	<ListView

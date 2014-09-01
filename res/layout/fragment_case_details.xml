@@ -20,13 +20,14 @@
            <com.parse.ParseImageView
                android:id="@+id/ivBuildingImage"
                android:layout_width="match_parent"
-               android:layout_height="200dp"
+               android:layout_height="220dp"
                android:layout_alignParentTop="true"
                android:layout_centerHorizontal="true"
                android:adjustViewBounds="true"
                android:scaleType="fitXY"
-               android:src="@drawable/photo_placeholder" />
+               android:src="@drawable/ic_camera_add" />
 
+           <!-- Success icon -->
            <LinearLayout
                android:id="@+id/llSuccess"
                android:layout_width="wrap_content"
@@ -43,9 +44,9 @@
                    android:layout_height="120dp"
                    android:adjustViewBounds="true"
                    android:scaleType="fitXY"
-                   android:src="@drawable/ic_success"/>
-               
+                   android:src="@drawable/ic_success"/>               
            </LinearLayout>
+            <!-- Success icon -->
 
            <TextView
                android:id="@+id/tvBuildingName"
@@ -328,7 +329,7 @@
 		                android:layout_width="100dp"
 		                android:layout_height="100dp"
 		                android:layout_margin="5dp"
-		                android:src="@drawable/photo_placeholder" />
+		                android:src="@drawable/ic_camera_add" />
                 </LinearLayout>
             </HorizontalScrollView>
     </RelativeLayout>

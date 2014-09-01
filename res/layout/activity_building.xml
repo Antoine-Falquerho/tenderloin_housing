@@ -3,62 +3,87 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="#FFFFFF"
-	android:orientation="vertical" 
+	android:orientation="vertical"
 	tools:context="${packageName}.${activityClass}" >
-	    <!--  ============================== Row ===  Header (Building Profile) ==================================== -->
-       <RelativeLayout
-        android:id="@+id/rlHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
-        <com.parse.ParseImageView
-            android:id="@+id/ivBuildingImage"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/photo_placeholder" />
-        <TextView
-            android:id="@+id/tvBuildingName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ivBuildingImage"
-            android:layout_centerHorizontal="true"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:text="Hotel Name"
-            android:textSize="14sp" />
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvBuildingName"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Address"
-            android:textSize="12sp" />
-        
-        <!-- Violation Count --> 
-         
-         <TextView
-            android:id="@+id/tvCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvAddress"  
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"       
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="5dp"
-            android:text="3 Violations"
-            android:textSize="12sp" />
-        </RelativeLayout>
-        
-		<FrameLayout
-			android:id="@+id/listContainer"
+	<!-- ============================== Row ===  Header (Building Profile) ==================================== -->
+	<RelativeLayout
+		android:id="@+id/rlHeader"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" >
+		<com.parse.ParseImageView
+			android:id="@+id/ivBuildingImage"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-		</FrameLayout>
+			android:layout_height="250dp"
+			android:layout_alignParentTop="true"
+			android:layout_centerHorizontal="true"
+			android:adjustViewBounds="true"
+			android:scaleType="fitXY"
+			android:src="@drawable/ic_camera_add" />
+		
+<!-- 		<LinearLayout -->
+<!-- 			android:id="@+id/llCreateReport" -->
+<!-- 			android:layout_width="wrap_content" -->
+<!-- 			android:layout_height="wrap_content" -->
+<!-- 			android:layout_centerHorizontal="true" -->
+<!-- 			android:layout_marginTop="150dp" -->
+<!-- 			android:divider="@drawable/divider" -->
+<!-- 			android:orientation="vertical" > -->
+			
+			<!-- Icon Close -->
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_nav_close_normal" />
+            
+			<!-- Building Name -->
+			<TextView
+				android:id="@+id/tvBuildingName"
+				android:layout_width="match_parent"
+				android:layout_height="50dp"
+				android:layout_alignParentTop="true"
+				android:layout_centerHorizontal="true"
+				android:layout_toRightOf="@id/ivClose"
+				android:gravity="center"
+				android:text="Hotel Name"
+				android:textColor="#ffffff"
+				android:textSize="18sp"
+				android:textStyle="bold" />
+			
+			<!-- Create Report button -->
+			<Button
+				android:id="@+id/btnCreateReport"
+				android:layout_width="220dp"
+				android:layout_height="40dp"
+				android:layout_marginTop="150dp"
+				android:layout_centerHorizontal="true"
+				android:background="@drawable/create_report_button_shape"
+				android:drawableLeft="@drawable/btn_create_normal"
+				android:text="@string/createReport"
+				android:textColor="@color/ThcThemeColor"
+				android:textSize="14sp" />
+			
+			<!-- Violation Count -->
+	        <TextView
+	            android:id="@+id/tvCount"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/btnCreateReport"
+	            android:layout_marginLeft="10dp"
+	            android:layout_marginTop="20dp"
+	            android:text="Reported Violations (7)"
+	            android:textColor="#ffffff"
+	            android:textSize="14sp" />
+			
+	
+	</RelativeLayout>
+	
+	<FrameLayout
+		android:id="@+id/listContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" >
+	</FrameLayout>
 </LinearLayout>

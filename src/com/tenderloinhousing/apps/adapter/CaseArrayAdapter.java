@@ -11,23 +11,26 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.makeramen.RoundedImageView;
 import com.parse.ParseFile;
-import com.parse.ParseImageView;
 import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.constant.CaseStatus;
 import com.tenderloinhousing.apps.constant.IConstants;
+import com.tenderloinhousing.apps.helper.CommonUtil;
 import com.tenderloinhousing.apps.model.Case;
+import com.tenderloinhousing.apps.model.User;
 
 public class CaseArrayAdapter extends ArrayAdapter<Case> implements IConstants
 {
     Context context;
     Case inputCase;
     ListView lvCaseList;
-    ParseImageView caseImage;
+    RoundedImageView caseImage;
     TextView tvBuildingName;
     TextView tvIssueType;
     TextView tvCaseId;
     TextView tvCaseStatus;
+    TextView tvCaseManager;
 
     public CaseArrayAdapter(Context context, List<Case> cases)
     {
@@ -54,13 +57,22 @@ public class CaseArrayAdapter extends ArrayAdapter<Case> implements IConstants
 	tvCaseId = (TextView) view.findViewById(R.id.tvCaseId);
 	tvBuildingName = (TextView) view.findViewById(R.id.tvBuildingName);
 	tvIssueType = (TextView) view.findViewById(R.id.tvIssueType);
-	caseImage = (ParseImageView) view.findViewById(R.id.ivCaseImg);
+	caseImage = (RoundedImageView) view.findViewById(R.id.ivCaseImg);
 	tvCaseStatus= (TextView) view.findViewById(R.id.tvCaseStatus);
+	tvCaseManager = (TextView) view.findViewById(R.id.tvCaseManager);
 
 	tvCaseId.setText("Case #"+inputCase.getCaseId());
 	tvBuildingName.setText(inputCase.getBuilding().getName());
 	tvIssueType.setText(inputCase.getIssueType());
-	tvCaseStatus.setText(inputCase.getCaseStatus());	
+	tvCaseManager.setText(inputCase.getStaff()==null ? ": <NO ONE>" : ": " + ((User)inputCase.getStaff()).getName());
+	
+	if(CaseStatus.CREATED.toString().equals(inputCase.getCaseStatus()))
+	{
+        	String timeAgo = CommonUtil.getRelativeTimeAgo(inputCase.getCreatedAt());
+        	tvCaseStatus.setText(inputCase.getCaseStatus() + "  " +  timeAgo);	
+	}
+	else
+	    tvCaseStatus.setText(inputCase.getCaseStatus());
 
 	styleCaseStatus();
 	
@@ -71,28 +83,30 @@ public class CaseArrayAdapter extends ArrayAdapter<Case> implements IConstants
 
     private void styleCaseStatus()
     {
-	if(CaseStatus.SUBMITTED.toString().equals(inputCase.getCaseStatus()))
-	    tvCaseStatus.setBackgroundColor(context.getResources().getColor(R.color.CaseSubmittedColor));
+	if(CaseStatus.CREATED.toString().equals(inputCase.getCaseStatus()))
+	    tvCaseStatus.setBackground(context.getResources().getDrawable(R.drawable.case_status_created_shape));
 	else if(CaseStatus.IN_REVIEW.toString().equals(inputCase.getCaseStatus()))
-	    tvCaseStatus.setBackgroundColor(context.getResources().getColor(R.color.CaseInProgressColor));
-	else if(CaseStatus.VERIFIED.toString().equals(inputCase.getCaseStatus()))
-	    tvCaseStatus.setBackgroundColor(context.getResources().getColor(R.color.CaseVerifiedColor));	
+	    tvCaseStatus.setBackground(context.getResources().getDrawable(R.drawable.case_status_inreview_shape));
+	else if(CaseStatus.CLOSED.toString().equals(inputCase.getCaseStatus()))
+	    tvCaseStatus.setBackground(context.getResources().getDrawable(R.drawable.case_status_closed_shape));
     }
 
     private void loadBuildingImage()
     {
-	ParseFile picture = null;
+	ParseFile pictureFile = null;
 	ArrayList<ParseFile> pictureList = inputCase.getPictures();
 
 	if (pictureList != null && !pictureList.isEmpty())
-	    picture = pictureList.get(0);
+	    pictureFile = pictureList.get(0);
 	else
-	    picture = inputCase.getBuilding().getImage(); // If the case doesn't have any pictures, display building picture
+	    pictureFile = inputCase.getBuilding().getImage(); // If the case doesn't have any pictures, display building picture
 
-	if (picture != null)
+	if (pictureFile != null)
 	{
-	    caseImage.setParseFile(picture);
-	    caseImage.loadInBackground();
+//	    caseImage.setParseFile(pictureFile);
+//	    caseImage.loadInBackground();	    
+
+	    caseImage.setImageBitmap(CommonUtil.convertParseImageFile(pictureFile));
 	}
     }  
 }

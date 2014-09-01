@@ -10,8 +10,9 @@
 	<color name="ThcHintColor">#CCCCCC</color> <!-- very light grey -->
 	<color name="LightOrangeColor">#FFD455</color> 
 	
-	<color name="CaseSubmittedColor">#ff763c</color> 
-	<color name="CaseInProgressColor">#0079ff</color> 
+	<color name="CaseCreatedColor">#ff763c</color> 
+	<color name="CaseInReviewColor">#00c306</color> 
 	<color name="CaseVerifiedColor">#00c306</color> 
+	<color name="CaseClosedColor">#0079ff</color> 
 	
 </resources>

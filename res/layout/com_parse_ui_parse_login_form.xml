@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/ParseLoginUI.EditText"
+         android:drawableLeft="@drawable/ic_signin_password"
         android:hint="@string/com_parse_ui_username_input_hint" />
 
     <EditText
@@ -28,6 +29,7 @@
         android:fontFamily="sans-serif"
         android:hint="@string/com_parse_ui_password_input_hint"
         android:inputType="textPassword"
+        android:drawableLeft="@drawable/ic_signin_password"
         android:selectAllOnFocus="true" />
 
     <LinearLayout
@@ -40,6 +42,7 @@
             android:id="@+id/parse_login_button"
             style="@style/ParseLoginUI.Button"
             android:layout_weight="0.5"
+            android:drawableLeft="@drawable/btn_admin_login_normal"
             android:text="@string/com_parse_ui_parse_login_button_label" />
 
         <Button
@@ -47,6 +50,7 @@
             style="@style/ParseLoginUI.Button"
             android:layout_marginLeft="@dimen/com_parse_ui_small_horizontal_spacing"
             android:layout_weight="0.5"
+             android:drawableLeft="@drawable/btn_admin_login_normal"
             android:text="@string/com_parse_ui_parse_signup_button_label" />
     </LinearLayout>
 

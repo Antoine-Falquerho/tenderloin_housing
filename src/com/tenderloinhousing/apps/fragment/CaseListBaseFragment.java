@@ -207,7 +207,10 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			// Fires right as the text is being changed (even supplies the range of text)
-		    ivRemove.setVisibility(View.VISIBLE);
+		    if(s.length()>0)
+			ivRemove.setVisibility(View.VISIBLE);
+		    else
+			 ivRemove.setVisibility(View.GONE);
 		}
 		
 		@Override
@@ -219,7 +222,10 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 		@Override
 		public void afterTextChanged(Editable s) {
 			// Fires right after the text has changed
-		       
+		    if(s.length()>0)
+			ivRemove.setVisibility(View.VISIBLE);
+		    else
+			 ivRemove.setVisibility(View.GONE);
 			
 		}
 	};
