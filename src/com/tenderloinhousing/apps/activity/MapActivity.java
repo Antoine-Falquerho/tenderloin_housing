@@ -11,13 +11,14 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Html;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.SearchView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,23 +26,25 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
+import com.makeramen.RoundedImageView;
 import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.tenderloinhousing.apps.R;
-import com.tenderloinhousing.apps.adapter.MapBuildingAdapter;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.helper.BuildingList;
+import com.tenderloinhousing.apps.helper.CommonUtil;
 import com.tenderloinhousing.apps.helper.GeocoderTask;
 import com.tenderloinhousing.apps.helper.GoogleServiceUtil;
 import com.tenderloinhousing.apps.model.Building;
@@ -50,15 +53,51 @@ import com.tenderloinhousing.apps.model.Case;
 public class MapActivity extends BaseFragmentActivity implements
 	GooglePlayServicesClient.ConnectionCallbacks,
 	GooglePlayServicesClient.OnConnectionFailedListener,
-	IConstants//,OnMarkerClickListener
+	OnInfoWindowClickListener,
+	IConstants// ,OnMarkerClickListener
 {
+    class MyInfoWindowAdapter implements InfoWindowAdapter
+    {
+	private final View myContentsView;
+
+	MyInfoWindowAdapter()
+	{
+	    myContentsView = getLayoutInflater().inflate(R.layout.map_info_window_contents, null);
+	}
+
+	@Override
+	public View getInfoContents(Marker marker)
+	{
+	    TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.title));
+	    tvTitle.setText(marker.getTitle());
+
+	    TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.snippet));
+	    tvSnippet.setText(marker.getSnippet());
+
+	    RoundedImageView ivIcon = ((RoundedImageView) myContentsView.findViewById(R.id.icon));
+	    ParseFile pictureFile = (ParseFile) buildingMarkerMap.get(marker)[2];
+	    if (pictureFile != null)
+	    {
+		ivIcon.setImageBitmap(CommonUtil.convertParseImageFile(pictureFile));
+	    }
+
+	    return myContentsView;
+	}
+
+	@Override
+	public View getInfoWindow(Marker marker)
+	{
+
+	    return null;
+	}
+
+    }
 
     ParseUser user;
-
     private SupportMapFragment mapFragment;
     GoogleMap map;
     private LocationClient mLocationClient;
-    HashMap<Marker, String[]> buildingMarkerMap;
+    HashMap<Marker, Object[]> buildingMarkerMap = new HashMap<Marker, Object[]>();
     LatLngBounds.Builder boundsBuilder;
     List<Building> buildingList;
     IconGenerator iconGenerator;
@@ -72,8 +111,6 @@ public class MapActivity extends BaseFragmentActivity implements
     protected void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
-
-	buildingMarkerMap = new HashMap<Marker, String[]>();
 
 	requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
@@ -111,6 +148,16 @@ public class MapActivity extends BaseFragmentActivity implements
 	    if (map != null)
 	    {
 		map.setMyLocationEnabled(true);
+		map.setOnInfoWindowClickListener(this);
+		map.setInfoWindowAdapter(new MyInfoWindowAdapter());
+
+		map.getUiSettings().setZoomControlsEnabled(true);
+		map.getUiSettings().setCompassEnabled(true);
+		map.getUiSettings().setMyLocationButtonEnabled(true);
+		map.getUiSettings().setRotateGesturesEnabled(true);
+		map.getUiSettings().setScrollGesturesEnabled(true);
+		map.getUiSettings().setTiltGesturesEnabled(true);
+		map.getUiSettings().setZoomGesturesEnabled(true);
 	    }
 	    else
 	    {
@@ -131,7 +178,7 @@ public class MapActivity extends BaseFragmentActivity implements
 	super.onStart();
 	buildingList = BuildingList.getInstance();
 	geoCodeAddBuildings();
-	//map.setOnMarkerClickListener(this);
+	// map.setOnMarkerClickListener(this);
     }
 
     /*
@@ -145,6 +192,13 @@ public class MapActivity extends BaseFragmentActivity implements
 	super.onStop();
     }
 
+    @Override
+    public void onInfoWindowClick(Marker marker)
+    {
+	loadCasesForBuilding((String) buildingMarkerMap.get(marker)[0],
+		(String) buildingMarkerMap.get(marker)[1]);
+    }
+
     /*
      * Handle results returned to the FragmentActivity by Google Play services
      */
@@ -155,7 +209,6 @@ public class MapActivity extends BaseFragmentActivity implements
 	// Decide what to do based on the original request code
 	switch (requestCode)
 	{
-
 	case CONNECTION_FAILURE_RESOLUTION_REQUEST:
 	    /*
 	     * If the result code is Activity.RESULT_OK, try to connect again
@@ -285,7 +338,7 @@ public class MapActivity extends BaseFragmentActivity implements
 	startActivity(intent);
     }
 
-    void doCasesByBuilding(String buildingId, String caseCount)
+    void loadCasesForBuilding(String buildingId, String caseCount)
     {
 	Intent intent = new Intent(this, BuildingActivity.class);
 	intent.putExtra(BUILDING_ID_KEY, buildingId);
@@ -324,15 +377,18 @@ public class MapActivity extends BaseFragmentActivity implements
 			Bitmap bitmap = iconGenerator.makeIcon(String.valueOf(caseCount));
 			Bitmap bitmapHalfSize = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / 2, bitmap.getHeight() / 2, false);
 
-			//make marker options
+			// make marker options
 			MarkerOptions markerOptions = new MarkerOptions();
 			markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmapHalfSize));
 			markerOptions.position(building.getlatLng());
 			markerOptions.title(building.getName());
-			markerOptions.snippet(String.valueOf(caseCount) + " Cases");
-			
+
+			String snippetString = Html.fromHtml("<p>" + building.getAddress() + "</p></br>"
+				+ String.valueOf(caseCount) + " Cases").toString();
+			markerOptions.snippet(snippetString);
+
 			Marker marker = map.addMarker(markerOptions);
-			buildingMarkerMap.put(marker, new String[] {building.getBuildingId(), String.valueOf(caseCount)});
+			buildingMarkerMap.put(marker, new Object[] { building.getBuildingId(), String.valueOf(caseCount), building.getImage() });
 			boundsBuilder.include(building.getlatLng());
 			map.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 100));
 		    }
@@ -397,13 +453,13 @@ public class MapActivity extends BaseFragmentActivity implements
 	});
     }
 
-//    @Override
-//    public boolean onMarkerClick(final Marker marker)
-//    {
-//	doCasesByBuilding(buildingMarkerMap.get(marker)[0],
-//		          buildingMarkerMap.get(marker)[1]);
-//	return true;
-//    }
+    // @Override
+    // public boolean onMarkerClick(final Marker marker)
+    // {
+    // loadCasesForBuilding(buildingMarkerMap.get(marker)[0],
+    // buildingMarkerMap.get(marker)[1]);
+    // return true;
+    // }
 
     //
     // private void openBuildingDetailIntent(String caseId)
