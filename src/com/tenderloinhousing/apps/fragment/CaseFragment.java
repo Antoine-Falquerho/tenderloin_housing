@@ -88,8 +88,9 @@ public class CaseFragment extends Fragment implements IConstants
 	caseForEdit = (Case) getArguments().getSerializable(CASE_KEY);
 	
 	ActionBar actionBar = getActivity().getActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
-
+	actionBar.setHomeButtonEnabled(true);
+	actionBar.setDisplayHomeAsUpEnabled(true);
+	actionBar.setTitle(R.string.title_activity_report);
     }
 
     @Override
@@ -231,7 +232,7 @@ public class CaseFragment extends Fragment implements IConstants
 	    //Have to make a "final" case
 	    final Case caseToSaveFinal = caseToSave;
 	    // Save the post and return
-	    ParseDAO.createCase(caseToSave, new SaveCallback()
+	    ParseDAO.saveCase(caseToSave, new SaveCallback()
 	    {
 		@Override
 		public void done(ParseException e)

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,6 +65,11 @@ public abstract class CaseListBaseFragment extends Fragment implements IConstant
 	caseListAdapter = new CaseArrayAdapter(getActivity(), caseList);
 	loadCases(getFindCallBack());
 	showProgressBar();
+	
+	ActionBar actionBar = getActivity().getActionBar();
+	actionBar.setHomeButtonEnabled(true);
+	actionBar.setDisplayHomeAsUpEnabled(true);
+	actionBar.setTitle(R.string.title_activity_case_management);
     }
 
     private OnItemClickListener getOnItemClickListener()

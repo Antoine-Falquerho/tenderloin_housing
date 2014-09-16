@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.parse.FindCallback;
+import com.tenderloinhousing.apps.R;
 import com.tenderloinhousing.apps.dao.ParseDAO;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
@@ -19,7 +20,9 @@ public class BuildingCaseListFragment extends CaseListBaseFragment
 	super.onCreate(savedInstanceState);	
 	
 	ActionBar actionBar = getActivity().getActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
+	actionBar.setHomeButtonEnabled(true);
+	actionBar.setDisplayHomeAsUpEnabled(true);
+	actionBar.setTitle(R.string.title_activity_building);
 	
     }  
    

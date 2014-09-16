@@ -38,7 +38,7 @@ public class GeocoderTask extends AsyncTask<Object, Void, Address>{
         }
         
         Address address = (Address) addresses.get(0);
-        //inputCase.setAddressLocation(address.getLatitude(), address.getLongitude());
+        //staff.setAddressLocation(address.getLatitude(), address.getLongitude());
         Log.d("geocode", "Geocoded: " +building.getAddress() + "to"+ address.getLatitude()+","+address.getLongitude());
         return address;
     }

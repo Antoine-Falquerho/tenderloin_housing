@@ -27,9 +27,13 @@ public class CaseActivity extends BaseFragmentActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_case);
 	
-		int method = getIntent().getIntExtra(METHOD_KEY, METHOD_CODE_CREATE);	//default to create		
-		laglng = getIntent().getParcelableExtra(LATLNG_KEY);
+			
+		//laglng = getIntent().getParcelableExtra(LATLNG_KEY);
+		
 		getActionBar().setHomeButtonEnabled(true);
+		getActionBar().setDisplayHomeAsUpEnabled(true); 
+		
+		int method = getIntent().getIntExtra(METHOD_KEY, METHOD_CODE_CREATE);	//default to create	
 		switch (method)
 		{
 	        	case METHOD_CODE_DETAIL:

@@ -1,5 +1,6 @@
 package com.tenderloinhousing.apps.activity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -43,7 +44,8 @@ public class BuildingActivity extends BaseFragmentActivity //implements Building
 	populateBuildingHeader(building,caseCount);
 
 	displayCaseListFragment();
-	getActionBar().setHomeButtonEnabled(true);
+	getActionBar().setHomeButtonEnabled(true);  
+	getActionBar().setDisplayHomeAsUpEnabled(true); 
     }
 
     @Override

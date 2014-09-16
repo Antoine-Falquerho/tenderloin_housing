@@ -5,13 +5,14 @@
 
   <style name="ThcTheme" parent="@style/_ThcTheme"/>
 
+  <!-- _ThcTheme extends from componentStyles -->
   <style name="componentStyles" parent="android:Theme.Holo.Light">
   	
     <item name="android:spinnerDropDownItemStyle">@style/ThcSpinnerItemStyle</item>
     
     <item name="android:editTextStyle">@style/EditTextThcTheme</item>
 
-<item name="android:textColorHighlight">#99ff763c</item>
+    <item name="android:textColorHighlight">#99ff763c</item>
     <item name="android:checkboxStyle">@style/CheckBoxThcTheme</item>
 
     <item name="android:buttonStyle">@style/ButtonThcTheme</item>
@@ -29,6 +30,9 @@
     <item name="android:listViewWhiteStyle">@style/ListViewThcTheme.White</item>
 
     <item name="android:spinnerItemStyle">@style/SpinnerItemThcTheme</item>
+    
+    <item name="android:alertDialogTheme">@style/ThcAlertDialogTheme</item>
+     <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>  
 
   </style>
 

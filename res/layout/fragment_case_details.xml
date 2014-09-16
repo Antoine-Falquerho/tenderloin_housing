@@ -93,7 +93,7 @@
                android:text="@string/submitDate" />           
        </RelativeLayout>
         
-		<!--  ============================== Row === Case Number / Case Status ==================================== -->
+		<!--  ============================== Row === Case Number / Case Status / Case Manager ==================================== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -129,7 +129,7 @@
                     android:textColor="@color/ThcDefaultTextColor" />
             </RelativeLayout>
             
-            <!-- Right Box -->   <!-- Case Status -->
+            <!-- Middle Box -->   <!-- Case Status -->
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" 
@@ -150,6 +150,30 @@
                         android:layout_below="@+id/labelCaseStatus"
                         android:layout_marginTop="5dp"
                         android:text="@string/caseStatus"
+                       android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
+           </RelativeLayout>
+           
+             <!-- Right Box -->   <!-- Case Manager -->
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" 
+                     android:layout_weight="1" >
+                    <TextView
+                        android:id="@+id/labelCaseManager"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="@string/caseManager"
+                        style="@style/FormLabelStyle"/>
+                    <TextView
+                        android:id="@+id/tvCaseManager"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"                 
+                        style="?android:attr/listSeparatorTextViewStyle"                       
+                        android:gravity="left"
+                        android:layout_below="@+id/labelCaseManager"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/caseManager"
                        android:textSize="14sp" android:textColor="@color/ThcDefaultTextColor"  />
            </RelativeLayout>
         </LinearLayout>
@@ -476,20 +500,29 @@
             android:orientation="horizontal" >
             <Button
                 android:id="@+id/btnEdit"
-                android:layout_width="120dp"
+                android:layout_width="97dp"
                 android:layout_height="40dp"
                 android:shadowColor="#33b5fa"
                 android:text="@string/edit"
                 style="@style/ThcButtonStyle"
                 android:drawableLeft="@drawable/edit"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="10dp"/>
             <Button                
                 android:id="@+id/btnShare"                
                 android:layout_height="40dp"
-                android:layout_width="120dp"                              
+                android:layout_width="97dp"                              
                 style="@style/ThcButtonStyle"     
                 android:drawableLeft="@drawable/email" 
-                android:text="@string/share" />
+                android:text="@string/share" 
+                android:layout_marginRight="10dp"/>
+            <Button
+                android:id="@+id/btnAssign"
+                android:layout_width="97dp"
+                android:layout_height="40dp"
+                android:shadowColor="#33b5fa"
+                android:text="@string/assign"
+                style="@style/ThcButtonStyle"
+                />
         </LinearLayout> 	
         
    

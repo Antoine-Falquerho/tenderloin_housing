@@ -18,6 +18,7 @@ import com.parse.SaveCallback;
 import com.tenderloinhousing.apps.constant.CaseStatus;
 import com.tenderloinhousing.apps.constant.IConstants;
 import com.tenderloinhousing.apps.constant.IssueType;
+import com.tenderloinhousing.apps.constant.UserType;
 import com.tenderloinhousing.apps.model.Building;
 import com.tenderloinhousing.apps.model.Case;
 import com.tenderloinhousing.apps.model.User;
@@ -80,6 +81,14 @@ public class ParseDAO implements IConstants
 
 	query.findInBackground(callBack);
     }
+    
+    public static void getAllStaff(FindCallback<User> callBack)
+    {
+	ParseQuery<User> query = ParseQuery.getQuery("User");
+	query.whereEqualTo("userType", UserType.STAFF.toString());
+	query.findInBackground(callBack);
+    }
+
 
     private static void includeObjects(ParseQuery<Case> query)
     {
@@ -88,7 +97,7 @@ public class ParseDAO implements IConstants
 	query.include("building");
     }
 
-    public static void createCase(Case newCase, SaveCallback callback)
+    public static void saveCase(Case newCase, SaveCallback callback)
     {
 	newCase.saveInBackground(callback);
     }

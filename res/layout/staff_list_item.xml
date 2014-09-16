@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@android:id/text1"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"
+	android:minHeight="?android:attr/listPreferredItemHeightSmall"
+	android:orientation="vertical"
+	android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+	android:paddingStart="?android:attr/listPreferredItemPaddingStart" >
+	<TextView
+		android:id="@+id/tvStaffName"
+		style="@style/ListItemLabelBold"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:text="first name, Last name" />
+</LinearLayout>

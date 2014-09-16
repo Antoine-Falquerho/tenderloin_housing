@@ -88,7 +88,7 @@
 		<activity
 			android:name="com.tenderloinhousing.apps.activity.ManageCaseActivity"
 			android:parentActivityName="com.tenderloinhousing.apps.activity.MapActivity" 
-			android:label="@string/title_activity_case_list"
+			android:label="@string/title_activity_case_management"
 			android:windowSoftInputMode="stateHidden" >
 <!-- 			android:theme="@style/StyledIndicators"> -->
 		</activity>

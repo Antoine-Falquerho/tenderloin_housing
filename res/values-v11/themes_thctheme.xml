@@ -33,6 +33,11 @@
 
     <item name="android:fastScrollThumbDrawable">@drawable/thctheme_fastscroll_thumb_holo</item>
 
+    
+      <item name="android:alertDialogTheme">@style/ThcAlertDialogTheme</item>
+     <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>  
+
+    
   </style>
 
 </resources>
